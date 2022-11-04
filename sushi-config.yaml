@@ -2,12 +2,12 @@
 # ───────────────────────────────────────────────────
 # the id should be lowercase made up of "ihe." + {domain acronym} + "." + {profile acronym/short-name}
 # e.g. ihe.iti.mhds, or ihe.iti.basicaudit
-id: ihe.domain.profile
-canonical: https://profiles.ihe.net/Domain/Profile
+id: ihe.iti.pcf
+canonical: https://profiles.ihe.net/ITI/PCF
 version: 0.1.1
-name: IHE_Domain_Profile
-title: "spelled out name of the IHE Profile"
-description: put the short description of the profile here. it should explain what problem is being solved
+name: IHE_ITI_PCF
+title: "Privacy Consent on FHIR"
+description: Supports Patient Privacy Consents in HIE scope
 releaseLabel: ci-build
 #releaseLabel: Trial-Implementation
 #date: 2022-01-02
