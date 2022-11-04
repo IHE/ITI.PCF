@@ -1,17 +1,17 @@
-Instance: IHE.FooBar.client
+Instance: IHE.PCF.capture
 InstanceOf: CapabilityStatement
-Title: "FooBar Actor"
+Title: "PCF Actor"
 Usage: #definition
 * description = """
-CapabilityStatement for Client Actor 
+CapabilityStatement for capture Actor 
 
 Explain
 - blah
 - blah
 """
-* url = "https://profiles.ihe.net/Domain/Profile/CapabilityStatement/IHE.FooBar.client"
-* name = "IHE_FooBar_client"
-* title = "IHE FooBar client"
+* url = "https://profiles.ihe.net/ITI/PCF/CapabilityStatement/IHE.PCF.capture"
+* name = "IHE_PCF_capture"
+* title = "IHE PCF capture"
 * status = #active
 * experimental = false
 * date = "2022-10-27"
@@ -21,13 +21,13 @@ Explain
 * format[+] = #application/fhir+json
 * rest
   * mode = #client
-  * documentation = "FooBar Client provides capability to blah blah."
+  * documentation = "PCF capture provides capability to blah blah."
   * security
     * description = "Recommend [ATNA](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html), encouraged [IHE-IUA](https://profiles.ihe.net/ITI/IUA/index.html) or [SMART-app-launch](http://www.hl7.org/fhir/smart-app-launch/)"
   * resource[+]
-    * type = #Patient
+    * type = #Consent
     * documentation = """
-FooBar transaction [ITI-00]
+PCF transaction [ITI-Y1]
 """
     * interaction[+].code = #read
     * interaction[+].code = #search-type
@@ -42,69 +42,28 @@ FooBar transaction [ITI-00]
     * searchParam[+]
       * name = "active"
       * type = #token
-      * documentation = "Whether the patient record is active"
+      * documentation = "Whether the Consent record is active"
     * searchParam[+]
-      * name = "family"
-      * type = #string
-      * documentation = "A portion of the family name of the patient"
-    * searchParam[+]
-      * name = "given"
-      * type = #string
-      * documentation = "A portion of the given name of the patient"
-    * searchParam[+]
-      * name = "identifier"
-      * type = #token
-      * documentation = "A patient identifier"
-    * searchParam[+]
-      * name = "telecom"
-      * type = #token
-      * documentation = "The value in any kind of telecom details of the patient"
-    * searchParam[+]
-      * name = "birthdate"
-      * type = #date
-      * documentation = "The patient's date of birth"
-    * searchParam[+]
-      * name = "address-city"
-      * type = #string
-      * documentation = "A city specified in an address"
-    * searchParam[+]
-      * name = "address-country"
-      * type = #string
-      * documentation = "A country specified in an address"
-    * searchParam[+]
-      * name = "address-postalcode"
-      * type = #string
-      * documentation = "A postalCode specified in an address"
-    * searchParam[+]
-      * name = "address-state"
-      * type = #string
-      * documentation = "A state specified in an address"
-    * searchParam[+]
-      * name = "gender"
-      * type = #token
-      * documentation = "Gender of the patient"
-    * searchParam[+]
-      * name = "mothersMaidenName"
-      * definition = "http://hl7.org/fhir/SearchParameter/patient-extensions-Patient-mothersMaidenName"
-      * type = #string
-      * documentation = "Mother's maiden (unmarried) name, commonly collected to help verify patient identity."
+      * name = "patient"
+      * type = #reference
+      * documentation = "The Patient"
   * interaction.code = #search-system
 
 
-Instance: IHE.FooBar.server
+Instance: IHE.PCF.registry
 InstanceOf: CapabilityStatement
-Title: "FooBar Server Actor"
+Title: "PCF registry Actor"
 Usage: #definition
 * description = """
-CapabilityStatement for Server Actor.
+CapabilityStatement for registry Actor.
 
 Explain
 - blah
 - blah
 """
-* url = "https://profiles.ihe.net/Domain/Profile/CapabilityStatement/IHE.FooBar.server"
-* name = "IHE_FooBar_supplier"
-* title = "IHE FooBar Server"
+* url = "https://profiles.ihe.net/ITI/PCF/CapabilityStatement/IHE.PCF.registry"
+* name = "IHE_PCF_supplier"
+* title = "IHE PCF registry"
 * status = #active
 * experimental = false
 * date = "2022-10-27"
@@ -114,13 +73,13 @@ Explain
 * format[+] = #application/fhir+json
 * rest
   * mode = #server
-  * documentation = "FooBar Client provides capability to blah blah."
+  * documentation = "PCF capture provides capability to blah blah."
   * security
     * description = "Recommend [ATNA](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html), encouraged [IHE-IUA](https://profiles.ihe.net/ITI/IUA/index.html) or [SMART-app-launch](http://www.hl7.org/fhir/smart-app-launch/)"
   * resource[+]
-    * type = #Patient
+    * type = #Consent
     * documentation = """
-FooBar transaction [ITI-00]
+PCF transaction [ITI-Y1]
 """
     * interaction[+].code = #read
     * interaction[+].code = #search-type
@@ -135,51 +94,10 @@ FooBar transaction [ITI-00]
     * searchParam[+]
       * name = "active"
       * type = #token
-      * documentation = "Whether the patient record is active"
+      * documentation = "Whether the Consent record is active"
     * searchParam[+]
-      * name = "family"
-      * type = #string
-      * documentation = "A portion of the family name of the patient"
-    * searchParam[+]
-      * name = "given"
-      * type = #string
-      * documentation = "A portion of the given name of the patient"
-    * searchParam[+]
-      * name = "identifier"
-      * type = #token
-      * documentation = "A patient identifier"
-    * searchParam[+]
-      * name = "telecom"
-      * type = #token
-      * documentation = "The value in any kind of telecom details of the patient"
-    * searchParam[+]
-      * name = "birthdate"
-      * type = #date
-      * documentation = "The patient's date of birth"
-    * searchParam[+]
-      * name = "address-city"
-      * type = #string
-      * documentation = "A city specified in an address"
-    * searchParam[+]
-      * name = "address-country"
-      * type = #string
-      * documentation = "A country specified in an address"
-    * searchParam[+]
-      * name = "address-postalcode"
-      * type = #string
-      * documentation = "A postalCode specified in an address"
-    * searchParam[+]
-      * name = "address-state"
-      * type = #string
-      * documentation = "A state specified in an address"
-    * searchParam[+]
-      * name = "gender"
-      * type = #token
-      * documentation = "Gender of the patient"
-    * searchParam[+]
-      * name = "mothersMaidenName"
-      * definition = "http://hl7.org/fhir/SearchParameter/patient-extensions-Patient-mothersMaidenName"
-      * type = #string
-      * documentation = "Mother's maiden (unmarried) name, commonly collected to help verify patient identity."
+      * name = "patient"
+      * type = #reference
+      * documentation = "The Patient"
   * interaction.code = #search-system
 

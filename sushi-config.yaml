@@ -54,13 +54,16 @@ resources:
 pages:
 # itemize here each narrative page. Include assigned section numbers when appropriate
   index.md:
-    title: 1:XX. Profile Home
+    title: 1:XX. Privacy Consent on FHIR Home
     generation: markdown
   volume-1.md:
-    title: 1:XX. Profile Volume 1
+    title: 1:XX. Privacy Consent on FHIR Volume 1
     generation: markdown
-  domain-YY.md:
-    title: 2:3.YY Transaction one [Domain-YY]
+  ITI-Y1.md:
+    title: 2:3.Y1 Access Consent [ITI-Y1]
+    generation: markdown
+  ITI-Y2.md:
+    title: 2:3.Y2 Request Consent Authorization Decision [ITI-Y2]
     generation: markdown
   testplan.md:
     title: "Test Plan"
@@ -73,7 +76,7 @@ pages:
     generation: markdown
     
 menu:
-  FooBar Home: index.html
+  PCF Home: index.html
   Volume 1:
     Introduction: volume-1.html
     Actors and Transactions: volume-1.html#actors-and-transactions
@@ -83,7 +86,8 @@ menu:
     Security Considerations: volume-1.html#security-considerations
     Cross-Profile Considerations: volume-1.html#other-grouping
   Volume 2:
-    "Transaction one [Domain-YY]": domain-YY.html
+    "Access Consent [ITI-Y1]": ITI-Y1.html
+    "Request Consent Authorization Decision [ITI-Y2]": ITI-Y2.html
   Test Plan: testplan.html
   Artifacts: artifacts.html
   Other: other.html

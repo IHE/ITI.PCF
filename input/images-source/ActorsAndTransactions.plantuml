@@ -1,5 +1,9 @@
 @startuml
-agent "Client" as Client
-agent "Server" as Server
-Client -- Server : "go [domain-YY] ↓"
+agent "[[#consentcapture Consent Capture]]" as capture
+agent "[[#consentregistry Consent Registry]]" as registry
+capture -down-> registry : "Access Consent (CRUDS) [[ITI-Y1.html ITI-Y1]]"
+agent "[[#consentenforce Consent Enforcement]]" as enforce
+agent "[[#consentdecision Consent Decision]]" as decision
+enforce <-down- decision : "Enforce Decision [[ITI-Y2.html ITI-Y2]]"
+decision -left-> registry: "Access Consent (SR) [[ITI-Y1.html ITI-Y1]]"
 @enduml

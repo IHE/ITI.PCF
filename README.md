@@ -2,6 +2,16 @@
 
 http://build.fhir.org/ig/IHE/ITI.PCF/branches/master/index.html
 
+# Questions
+
+
+1. Do we profile Questionnaire/QuestionaireResponse? (What generation?) For now I informatively indicate that the capture event could be enabled using Questionnaire.
+2. Do we profile Consent Policy retrieval? For now I presume NPFS can be used for this, should it be required / recommmended / encouraged? Should that happen in MHDS, not here?
+3. Should auditEvent be required?
+4. Should FHIR resource version support be required?
+5. Should FHIR Provenance be required / recommended / encouraged?
+
+
 # Proposed Scope
 
 Much like BPPC + APPC does for XDS community. This Implementation Guide (IG) would do for FHIR community. This IG could be used with MHDS, which already has some of the framework for more specific Consents, but BPPCm would be more complete than what is [indicated in MHDS](https://profiles.ihe.net/ITI/MHDS/volume-1.html#1504-mhds-overview). This IG could also be used for organization use or community use beyond MHD/XDS, which would include use-cases like QEDm, and IPA. This would leverage BasicAudit to record access control decisions and recording of consents.

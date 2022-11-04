@@ -1,45 +1,47 @@
 
-# 1:XX Profile name
+Supports Patient Privacy Consents in HIE scope.
 
-**TODO: Provide an end-user friendly overview of what the profile does for them. Keep it brief (a paragraph or two, up to a page). If extensive detail is needed, it should be included in Section XX.4- Use Cases.**
+## 1:X.1 PCF Actors, Transactions, and Content Modules <a name="actors-and-transactions"> </a>
 
-**TODO: Explicitly state whether this is a Workflow, Transport, or Content Module (or combination) profile. See the IHE Technical Frameworks General Introduction for definitions of these profile types. The IHE Technical Frameworks [General Introduction](https://profiles.ihe.net/GeneralIntro/). **
-
-## 1:X.1 FooBar Actors, Transactions, and Content Modules <a name="actors-and-transactions"> </a>
-
-* Actors
-
-  - [Client](#client)
-
-  - [Server](#server)
-
-* Transactions
-
-  - [do domain-Y](domain-YY.html)
-
-Actors and transactions are used to achieve this use-case...
-
-<div>
-{%include usecase1-processflow.svg%}
-</div>
-<br clear="all">
-
-**Figure: Use Case 1 Process Flow**
-
-This section defines the actors and transactions in this implementation guide.
-
-Figure below shows the actors directly
-involved in the FooBar 
-Profile and the relevant transactions between them.
 
 <div>
 {%include ActorsAndTransactions.svg%}
 </div>
 <br clear="all">
 
-**Figure: FooBar Actor Diagram**
+**Figure: PCF Actor Diagram**
 
-Table XX.1-1: Profile Acronym Profile - Actors and Transactions
+Actors and transactions are used to achieve these use-cases...
+
+<div>
+{%include usecase1-processflow.svg%}
+</div>
+<br clear="all">
+
+**Figure: Use Case 1 Create New Consent Flow**
+
+<div>
+{%include usecase2-processflow.svg%}
+</div>
+<br clear="all">
+
+**Figure: Use Case 2 Update Consent Flow**
+
+<div>
+{%include usecase3-processflow.svg%}
+</div>
+<br clear="all">
+
+**Figure: Use Case 3 Enforce Consent Flow**
+
+This section defines the actors and transactions in this implementation guide.
+
+Figure below shows the actors directly
+involved in the PCF
+Profile and the relevant transactions between them.
+
+
+Table XX.1-1: PCF Profile - Actors and Transactions
 
 |         |               |                        |                 |                                   |
 |---------|---------------|------------------------|-----------------|-----------------------------------|
@@ -67,26 +69,44 @@ if Actor B supports XYZ Option, see Section XX.3.X.*
 ### XX.1.1 Actors
 The actors in this profile are described in more detail in the sections below.
 
-#### XX.1.1.1 Client <a name="client"> </a>
+#### XX.1.1.1 Consent Capture <a name="consentcapture"> </a>
 
-The Client queries for blah meeting certain criteria and may retrieve selected blah.
+The Consent Capture actor is responsible for the capturing of consent from the Patient given policies available.
 
-FHIR Capability Statement for [Client]{CapabilityStatement-IHE.FooBar.client.html}
+FHIR Capability Statement for [Consent Capture]{CapabilityStatement-IHE.PCF.capture.html}
 
-#### XX.1.1.2 Server <a name="server"> </a>
+#### XX.1.1.2 Consent Registry <a name="consentregistry"> </a>
 
-The Sever processes query request from the Client actor.
+The Consent Registry actor holds Consent resources. This includes active, inactive, and expired Consents.
 
-FHIR Capability Statement for [Server](CapabilityStatement-IHE.FooBar.server.html)
+FHIR Capability Statement for [Consent Registry](CapabilityStatement-IHE.PCF.registry.html)
 
-### Transaction Descriptions
+#### XX.1.1.2 Consent Decision <a name="consentdecision"> </a>
+
+The Consent Decision actor makes authorization decisions based on a given access context requested, organizational policies, and current active Consent resources.
+
+FHIR Capability Statement for [Consent Decision](CapabilityStatement-IHE.PCF.decision.html)
+
+#### XX.1.1.2 Consent Enforcement <a name="consentenforce"> </a>
+
+The Consent Enforcement actor enforces consent decisions made by the Consent Decision actor. This includes deny, permit, and permit with filtering of results.
+
+FHIR Capability Statement for [Consent Enforce](CapabilityStatement-IHE.PCF.enforce.html)
+
+### XX.1.2 Transaction Descriptions
 The transactions in this profile are summarized in the sections below.
 
-#### FooBar do transaction
+#### XX.1.2.1 ITI-Y1 Access Consent transaction
 
-This transaction is used to **do things**
+This transaction is used to Create, Read, Update, Delete, and Search on Consent resources.
 
-For more details see the detailed [transaction description](domain-YY.html)
+For more details see the detailed [Access Consent](ITI-Y1.html)
+
+#### XX.1.2.2 ITI-Y2 Request for Consent Authorization transaction
+
+This transaction is used to request an authorization decision based on Consents.
+
+For more details see the detailed [Request for Consent Authorization](ITI-Y2.html)
 
 ## XX.2 FooBar Actor Options <a name="actor-options"> </a>
 

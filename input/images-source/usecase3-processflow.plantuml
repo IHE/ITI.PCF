@@ -1,0 +1,41 @@
+@startuml
+skinparam svgDimensionStyle false
+hide footbox
+autonumber
+title "Authorization Decision based on Consent"
+participant "Some Client" as client
+participant "Consent Decision" as decision
+box "Server"
+participant "Some Server" as server
+participant "Consent Enforcement" as enforce
+end box
+participant "Consent Registry" as registry
+activate client
+client ->o decision : IUA / SeR Request for Authorization
+activate decision
+activate registry
+decision ->o registry : [[ITI-Y1.html ITI-Y1]] - Query for existing Consent
+registry --> decision : Some Found
+note over registry : Record AuditEvent
+deactivate registry
+
+decision -> decision : Match provisions to request context
+decision -> decision : Make Access Control Decision and encode in oAuth token
+note over decision : Record AuditEvent
+
+decision -->o enforce : [[ITI-Y2.html ITI-Y2]] - Decision to be Enforced
+group Decision to Enforcement (may be by use of [[https://profiles.ihe.net/ITI/SeR/index.html SeR]])
+    client <- decision : IUA Pass oAuth token to client
+    client -> server : IUA Pass oAuth token to server
+    server -> enforce : Enforce token claims
+end group
+client <- server : Returned authoried results
+deactivate decision 
+
+note over server, enforce : Record AuditEvent
+deactivate enforce  
+deactivate server
+
+note over client : Record AuditEvent
+deactivate client 
+@enduml
