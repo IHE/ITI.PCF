@@ -1,3 +1,7 @@
+# CI Build
+
+http://build.fhir.org/ig/IHE/ITI.PCF/branches/master/index.html
+
 # Proposed Scope
 
 Much like BPPC + APPC does for XDS community. This Implementation Guide (IG) would do for FHIR community. This IG could be used with MHDS, which already has some of the framework for more specific Consents, but BPPCm would be more complete than what is [indicated in MHDS](https://profiles.ihe.net/ITI/MHDS/volume-1.html#1504-mhds-overview). This IG could also be used for organization use or community use beyond MHD/XDS, which would include use-cases like QEDm, and IPA. This would leverage BasicAudit to record access control decisions and recording of consents.
