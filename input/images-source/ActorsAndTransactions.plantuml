@@ -2,8 +2,14 @@
 agent "[[#consentcapture Consent Capture]]" as capture
 agent "[[#consentregistry Consent Registry]]" as registry
 capture -down-> registry : "Access Consent (CRUDS) [[ITI-Y1.html ITI-Y1]]"
-agent "[[#consentenforce Consent Enforcement]]" as enforce
+agent "ANY Client" as client 
 agent "[[#consentdecision Consent Decision]]" as decision
-enforce <-down- decision : "Enforce Decision [[ITI-Y2.html ITI-Y2]]"
-decision -left-> registry: "Access Consent (SR) [[ITI-Y1.html ITI-Y1]]"
+agent "ANY Server" as server 
+agent "[[#consentenforce Consent Enforcement]]" as enforce
+client -down-> decision : "RESTful request [[ITI-Y2.html ITI-Y2]]"
+decision -right-> registry: "Access Consent (SR) [[ITI-Y1.html ITI-Y1]]"
+decision -down-> server : "RESTful request with token [[ITI-Y2.html ITI-Y2]]"
+decision --left--> enforce : "token  [[ITI-Y2.html ITI-Y2]]"
+server -up-> enforce : "Full results with token [[ITI-Y2.html ITI-Y2]]"
+enforce -up-> client : "Decision Enforced [[ITI-Y2.html ITI-Y2]]"
 @enduml
