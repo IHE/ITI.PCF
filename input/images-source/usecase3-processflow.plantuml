@@ -4,7 +4,7 @@ hide footbox
 autonumber
 title "Authorization Decision based on Consent"
 participant "Some Client" as client
-participant "Consent Decision" as decision
+participant "Consent Decider" as decision
 box "Server"
 participant "Some Server" as server
 participant "Consent Enforcement" as enforce

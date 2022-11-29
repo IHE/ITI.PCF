@@ -3,7 +3,7 @@ agent "[[#consentcapture Consent Capture]]" as capture
 agent "[[#consentregistry Consent Registry]]" as registry
 capture -down-> registry : "Access Consent (CRUDS) [[ITI-Y1.html ITI-Y1]]"
 agent "ANY Client" as client 
-agent "[[#consentdecision Consent Decision]]" as decision
+agent "[[#consentdecision Consent Decider]]" as decision
 agent "ANY Server" as server 
 agent "[[#consentenforce Consent Enforcement]]" as enforce
 client -down-> decision : "RESTful request [[ITI-Y2.html ITI-Y2]]"

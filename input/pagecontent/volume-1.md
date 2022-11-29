@@ -1,8 +1,15 @@
 
-Supports Patient Privacy Consents in HIE scope.
+Supports Patient Privacy Consents in HIE scope. The Privacy Consent on FHIR builds upon a basic Identity and Authorization model such as IUA or SMART-on-FHIR to provide basic access control. The Privacy Consents on FHIR is thus focused only on Access Control decisions regarding the parameters of the data subject (patient) privacy consent. The Privacy Consents on FHIR leverages these basic Identity and Authorization decisions as context setting for the request, using a cascading authorization model. For example a user that would never be allowed access, would have been denied access at this level.
+
+TODO: Need help explaining cascading oauth. I seem to recall that to the client this looks just like normal oAuth, but at the Authorization Service it may call out to predicate authorization decisions like Open-ID-Connect. Thus there might be the Consent Authorization -> RBAC Authorization -> Open-ID-Connect. But I am not sure...
 
 ## 1:X.1 PCF Actors, Transactions, and Content Modules <a name="actors-and-transactions"> </a>
 
+This section defines the actors and transactions in this implementation guide.
+
+Figure below shows the actors directly
+involved in the PCF
+Profile and the relevant transactions between them.
 
 <div>
 {%include ActorsAndTransactions.svg%}
@@ -34,62 +41,47 @@ Actors and transactions are used to achieve these use-cases...
 
 **Figure: Use Case 3 Enforce Consent Flow**
 
-This section defines the actors and transactions in this implementation guide.
-
-Figure below shows the actors directly
-involved in the PCF
-Profile and the relevant transactions between them.
+TODO: not sure how to model the Consent Decider / Consent Enforcement
 
 
-Table XX.1-1: PCF Profile - Actors and Transactions
+**Table XX.1-1: PCF Profile - Actors and Transactions**
 
-|         |               |                        |                 |                                   |
-|---------|---------------|------------------------|-----------------|-----------------------------------|
-| Actors  | Transactions  | Initiator or Responder | Optionality     | Reference                         |
-| Actor A | Transaction 1 |                        | R               | Domain Acronym TF-2: 3.Y1 |
-|         | Transaction 2 |                        | R               | Domain Acronym TF-2: 3.Y2 |
-| Actor F | Transaction 1 |                        | R               | Domain Acronym TF-2: 3.Y1 |
-|         | Transaction 2 |                        | R               | Domain Acronym TF-2: 3.Y2 |
-| Actor D | Transaction 1 |                        | R               | Domain Acronym TF-2: 3.Y1 |
-| Actor E | Transaction 2 |                        | R               | Domain Acronym TF-2: 3.Y2 |
-|         | Transaction 3 |                        | O ( See Note 1) | Domain Acronym TF-2: 3.Y3 |
-|         | Transaction 4 |                        | O ( See Note 1) | Domain Acronym TF-2: 3.Y4 |
-| Actor B | Transaction 3 |                        | R               | Domain Acronym TF-2: 3.Y3 |
-|         | Transaction 4 |                        | O ( See Note 2) | Domain Acronym TF-2: 3.Y4 |
+| Actors              | Transactions     | Direction | Optionality | Reference      |
+|---------------------|------------------|-----------|-------------|----------------|
+| Consent Capture     | Access Consent   | Initiator | R           | ITI TF-2: 3.Y1 |
+| Consent Registry    | Access Consent   | Responder | R           | ITI TF-2: 3.Y1 |
+| Consent Decider     | Access Consent   | Initiator | R           | ITI TF-2: 3.Y1 |
+|                     | Authorize Access | Responder | R           | ITI TF-2: 3.Y2 |
+| Consent Enforcement | Authorize Access | Responder | R           | ITI TF-2: 3.Y2 |
 {: .grid}
 
-Note 1: *For example, a note could specify that at least one of the
-transactions shall be supported by an actor or other variations. For
-example: Note: Either Transaction Y3 or Transaction Y4 shall be
-implemented for Actor E. *
-
-Note 2: *For example, could specify that Transaction Y4 is required
-if Actor B supports XYZ Option, see Section XX.3.X.*
 
 ### XX.1.1 Actors
 The actors in this profile are described in more detail in the sections below.
 
 #### XX.1.1.1 Consent Capture <a name="consentcapture"> </a>
 
-The Consent Capture actor is responsible for the capturing of consent from the Patient given policies available.
+The Consent Capture actor is responsible for the capturing of consent from the Patient given policies available. This actor is responsible for assuring that the Patient fully understood the terms of the Consent, and also assures that the Consent terms agreed to are acceptable to the organization responsible and the abilities of the Consent Decider and Consent Enforcement Actors.
+
+The Consent Capture may utalize other resources to interact with the Patient, and to capture the evidence of the Consent ceremony. Such as use of a FHIR Questionnaire or a DocumentReference / Binary. Where a DocumentReference and Binary are used to capture the Consent ceremony, the preservation should utalize the [MHD](https://profiles.ihe.net/ITI/MHD) implementation guide.
 
 FHIR Capability Statement for [Consent Capture]{CapabilityStatement-IHE.PCF.capture.html}
 
 #### XX.1.1.2 Consent Registry <a name="consentregistry"> </a>
 
-The Consent Registry actor holds Consent resources. This includes active, inactive, and expired Consents.
+The Consent Registry actor holds Consent resources. This includes active, inactive, and expired Consents. The Consent Registry does not have special understanding of the Consent other than as a FHIR Consent Resource. It thus is not responsible for assuring that the Consent terms are acceptable or enforceable, this is the responsibility of the Consent Capture Actor.
 
 FHIR Capability Statement for [Consent Registry](CapabilityStatement-IHE.PCF.registry.html)
 
-#### XX.1.1.2 Consent Decision <a name="consentdecision"> </a>
+#### XX.1.1.2 Consent Decider <a name="consentdecider"> </a>
 
-The Consent Decision actor makes authorization decisions based on a given access context requested, organizational policies, and current active Consent resources.
+The Consent Decider actor makes authorization decisions based on a given access requested context (e.g. oAuth), organizational policies, and current active Consent resources. The Consent Decider is often implemented as a cascaded oAuth, taking input from the user identity (e.g. Open-ID-Connect), and application identity and authorization (e.g. client token). These cascaded oAuth provide the security context upon which the Privacy Consent constraints are applied. The result of the cascade oAuth is a token used to request access resources, and is used by the Consent Enforcement actor.
 
-FHIR Capability Statement for [Consent Decision](CapabilityStatement-IHE.PCF.decision.html)
+FHIR Capability Statement for [Consent Decider](CapabilityStatement-IHE.PCF.decider.html)
 
 #### XX.1.1.2 Consent Enforcement <a name="consentenforce"> </a>
 
-The Consent Enforcement actor enforces consent decisions made by the Consent Decision actor. This includes deny, permit, and permit with filtering of results.
+The Consent Enforcement actor enforces consent decisions made by the Consent Decider actor. This includes deny, permit, and permit with filtering of results.
 
 FHIR Capability Statement for [Consent Enforce](CapabilityStatement-IHE.PCF.enforce.html)
 
@@ -108,23 +100,72 @@ This transaction is used to request an authorization decision based on Consents.
 
 For more details see the detailed [Request for Consent Authorization](ITI-Y2.html)
 
-## XX.2 FooBar Actor Options <a name="actor-options"> </a>
+## XX.2 PCF Actor Options <a name="actor-options"> </a>
 
 Options that may be selected for each actor in this implementation guide, are listed in Table 3.2-1 below. Dependencies 
 between options when applicable are specified in notes.
 
-|         |             |
-|---------|-------------|
-| Actor   | Option Name |
-| Actor A | Option AB  |
-| Actor B | none |
+| Actor               | Option Name |
+|---------------------|-------------|
+| Consent Capture     | Implicit  |
+| Consent Capture     | Explicit Basic |
+| Consent Capture     | Explicit Intermediate |
+| Consent Capture     | Explicit Advanced |
+| Consent Registry    | none |
+| Consent Decider     | Implicit  |
+| Consent Decider     | Explicit Basic |
+| Consent Decider     | Explicit Intermediate |
+| Consent Decider     | Explicit Advanced |
+| Consent Enforcement | Implicit  |
+| Consent Enforcement | Explicit Basic |
+| Consent Enforcement | Explicit Intermediate |
+| Consent Enforcement | Explicit Advanced |
 {: .grid}
 
-#### XX.2.1 AB Option
+There are three levels of maturity in incrementally more difficult to implement defined:
+Support for these Basic, Intermediate, and Advanced policies is support for the ability to provide these capabilties. The actual policy provided to the Patient would be some subset of this support that the data custodian is willing to enforce.
 
-**TODO: describe this option and the Volume 1 requirements for this option
+The Privacy Consent on FHIR builds upon a basic Identity and Authorization model such as IUA or SMART-on-FHIR to provide basic access control. The Privacy Consents on FHIR is thus focused only on Access Control decisions regarding the parameters of the data subject (patient) privacy consent.
+
+#### XX.2.1 Implicit Option
+
+The Implicit Policy Option indicates that there is a default policy that is used when there is no Consent found on file. This Implicit Policy shall support the following policies:
+
+1. Permit for authorized clinicians to have access for Treatment use, but does not authorize other access. This presumes that basic user access control can differentiate legitimate clinical users.
+2. Permit for all authorized users. This presumes that basic user access control will only allow authorized users and purpose of use.
+3. Deny for all authorized users, except when the user is a clinician with authorization to declare a medical patient-safety override (aka Break-Glass).
+4. Deny all.
+
+Implicit Option has no ability to have Patient specific parameters. When Patient specific parameters are needed, then Explicit options are required.
+
+Note that the patient accessing their own records is not a Consent consideration, but Explicit Basic Option may be useful to enable use-cases where the patient themselves should be denied access, or where a delegate are to be permitted some access.
+
+When the Implicit Option is not declared to be implemented, then default Deny all requests is presumed.
+
+#### XX.2.2 Explicit Basic Option
+
+The Explicit Basic Option indicates that there is support for a basic set of patient specific parameters. The following set of patient specific parameters may be used to permit or deny:
+
+1. Who is permitted/denied: This may be a device, relatedPerson, Practitioner, or Organization. This parameter enables the naming of agents that should be allowed access or denied access. This presumes that the identified agent is appropriately identified (provisioned) and authorized to make the request; typically through some application authorization and role-based-access-control (see cascased oAuth). The user identity is mapped to a FHIR agent type Resource using the agent type Resource `.identifier` element (e.g. Practitioner.identifier would hold the user id).
+2. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explitally identified as an authorized purposeOfUse or denied purposeOfuse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Decider is not determining if the user/client is authorized to make the purposeOfUse declaration, this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, Operations, and Break-Glass
+3. Timeframe within which data authored or last updated.
+4. Explicit FHIR Resources can be identified using their `.id` value.
+
+#### XX.2.3 Explicit Intermediate Option
+
+The Explicit Intermediate Option indicates that there is support for an intermediate set of patient specific parameters. The following set of patient specific parameters may be used to permit or deny:
+
+1. Named Research projects
+2. Specific author of data 
+3. data relationship to explicit data object permitted/denied (e.g. data involved in a given Encounter, or CarePlan)
+
+#### XX.2.4 Explicit Advanced Option
+
+The Explicit Advanced Option indicates that there is support for an advanced set of patient specific parameters. The Advanced policies allow for Patient specific permit/deny parameters on sensitive health topics and requires the use of a **Security Labeling Service** that is not defined here. This is required to support sensitive health topic segmentation such as substance abuse, mental health, sexuality and reproductive health, etc.
 
 ## XX.3 FooBar Required Actor Groupings <a name="required-groupings"> </a>
+
+TODO
 
 *Describe any requirements for actors in this profile to be grouped
 with other actors.*
@@ -381,6 +422,8 @@ Guidance on using the “Grouping Condition” column:
 
 ## XX.4 FooBar Overview <a name="overview"> </a>
 
+TODO: Move the use-cases here
+
 This section shows how the transactions/content modules of the profile
 are combined to address the use cases.
 
@@ -469,6 +512,8 @@ examples of potential next steps.
 
 ## XX.5 FooBar Security Considerations <a name="security-considerations"> </a>
 
+TODO
+
 See ITI TF-2x: [Appendix Z.8 “Mobile Security Considerations”](https://profiles.ihe.net/ITI/TF/Volume2/ch-Z.html#z.8-mobile-security-considerations)
 
 The following is instructions to the editor and this text is not to be included in a publication. 
@@ -555,6 +600,8 @@ This section also include specific considerations regarding Digital Signatures, 
 Where audit logging is specified, a StructureDefinition profile(s) should be included, and Examples of those logs might be included.
 
 ## XX.6 FooBar Cross-Profile Considerations <a name="other-grouping"> </a>
+
+TODO
 
 This section is informative, not normative. It is intended to put
 this profile in context with other profiles. Any required groupings

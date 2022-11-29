@@ -1,3 +1,5 @@
+**Privacy Consent on FHIR (PCF)**
+
 # CI Build
 
 http://build.fhir.org/ig/IHE/ITI.PCF/branches/master/index.html
@@ -23,7 +25,7 @@ This IG would
 1. Define actors for creation/update of Consent: ???? 
    - Consent Creator/Reader/Updater/Deleter actor,
    - Consent Registry actor, 
-   - Consent Decision actor, and 
+   - Consent Decider actor, and 
    - Consent Enforcement actor.
 
 Much of the details are already fleshed out in these two articles: 
@@ -175,4 +177,5 @@ Privacy Consent:
   - [Explaining FHIR Consent examples](https://healthcaresecprivacy.blogspot.com/2022/05/explaining-fhir-consent-examples.html)
   - [FHIR Consent mapped to BPPC](https://healthcaresecprivacy.blogspot.com/2019/11/fhir-consent-mapped-with-bppc.html)
   - [Security Labeling Service](https://healthcaresecprivacy.blogspot.com/2022/09/security-labeling-service.html)
+  - [Consent with Segmented Data](http://build.fhir.org/ig/JohnMoehrke/ConsentWithSegmentation/branches/main/index.html)
   
