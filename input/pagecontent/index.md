@@ -9,6 +9,7 @@ This Implementation Guide provides support for Patient Privacy Consents for Heal
 </div>
 
 ### Organization of This Guide
+
 This guide is organized into the following sections:
 
 1. Volume 1:
@@ -22,19 +23,22 @@ This guide is organized into the following sections:
 
 2. Volume 2: Transaction Detail
    1. [Access Consent \[ITI-Y1\]](ITI-Y1.html)
-   1. [Enforce Consent \[ITI-Y2\]](ITI-Y2.html)
+   1. [Get Access Token \[ITI-Y2\]](ITI-Y2.html)
+   1. [Introspect Token \[ITI-Y3\]](ITI-Y3.html)
 
 3. Volume 3: Metadata and Content
-  - **TODO: point to your content profiles if you have them**
+   1. [Basic Consent](ITI-Z1.html)
+   2. [Intermediate Consent](ITI-Z2.html)
+   3. [Advanced Consent](ITI-Z3.html)
 
-5. Test Plan
-  - [Test Plan](testplan.html)
-    - **TODO: point to your appendix if you have them**
-6. Other
-  - [Changes to Other Profiles](other.html)
-    - **TODO: Actor and transaction definitions, new glossary terms.**
-    - **TODO: Any changes needed to other specifications.**
+4. Test Plan
+   - [Test Plan](testplan.html)
+     - **TODO: point to your appendix if you have them**
 
+5. Other
+   - [Changes to Other Profiles](other.html)
+     - **TODO: Actor and transaction definitions, new glossary terms.**
+     - **TODO: Any changes needed to other specifications.**
 
 See also the [Table of Contents](toc.html) and
 the index of [Artifacts](artifacts.html) defined as part of this implementation guide.
@@ -47,17 +51,17 @@ IHE uses the normative words: Shall, Should, and May according to [standards con
 
 The use of ```mustSupport``` in StructureDefinition profiles equivalent to the IHE use of **R2** as defined in [Appendix Z](https://profiles.ihe.net/ITI/TF/Volume2/ch-Z.html#z.10-profiling-conventions-for-constraints-on-fhir).
 
-mustSupport of true - only has a meaning on items that are minimal cardinality of zero (0), and applies only to the source actor populating the data. The source actor shall populate the elements marked with MustSupport, if the concept is supported by the actor, a value exists, and security and consent rules permit. 
-The consuming actors should handle these elements being populated or being absent/empty. 
+mustSupport of true - only has a meaning on items that are minimal cardinality of zero (0), and applies only to the source actor populating the data. The source actor shall populate the elements marked with MustSupport, if the concept is supported by the actor, a value exists, and security and consent rules permit.
+The consuming actors should handle these elements being populated or being absent/empty.
 Note that sometimes mustSupport will appear on elements with a minimal cardinality greater than zero (0), this is due to inheritance from a less constrained profile.
 
-### Download 
+### Download
 
 You can also download:
 
-* [this entire guide](full-ig.zip),
-* the definition resources in [json](definitions.json.zip), [xml](definitions.xml.zip), [ttl](definitions.ttl.zip), or [csv](csvs.zip) format, or
-* the example resources in [json](examples.json.zip), [xml](examples.xml.zip) or [ttl](examples.ttl.zip) format.
+- [this entire guide](full-ig.zip),
+- the definition resources in [json](definitions.json.zip), [xml](definitions.xml.zip), [ttl](definitions.ttl.zip), or [csv](csvs.zip) format, or
+- the example resources in [json](examples.json.zip), [xml](examples.xml.zip) or [ttl](examples.ttl.zip) format.
 
 The source code for this Implementation Guide can be found on **TODO: Put your github repo here**
 

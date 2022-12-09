@@ -63,29 +63,33 @@ The actors in this profile are described in more detail in the sections below.
 
 #### XX.1.1.1 Consent Capture <a name="consentcapture"> </a>
 
-The Consent Capture actor is responsible for the capturing of consent from the Patient given policies available. This actor is responsible for assuring that the Patient fully understood the terms of the Consent, and also assures that the Consent terms agreed to are acceptable to the organization responsible and the abilities of the Consent Decider and Consent Enforcement Actors.
+The **Consent Capture** actor is responsible for the capturing of consent from the Patient given policies available. This actor is responsible for assuring that the Patient fully understood the terms of the Consent, and also assures that the Consent terms agreed to are acceptable to the organization responsible and the abilities of the **Consent Authorization Server** and **Consent Enforcement Resource Server** Actors.
 
-The Consent Capture may utalize other resources to interact with the Patient, and to capture the evidence of the Consent ceremony. Such as use of a FHIR Questionnaire or a DocumentReference / Binary. Where a DocumentReference and Binary are used to capture the Consent ceremony, the preservation should utalize the [MHD](https://profiles.ihe.net/ITI/MHD) implementation guide.
+The **Consent Capture** may utalize other resources to interact with the Patient, and to capture the evidence of the Consent ceremony. Such as use of a FHIR Questionnaire or a DocumentReference / Binary. Where a DocumentReference and Binary are used to capture the Consent ceremony, the preservation should utalize the [MHD](https://profiles.ihe.net/ITI/MHD) implementation guide.
 
-FHIR Capability Statement for [Consent Capture]{CapabilityStatement-IHE.PCF.capture.html}
+FHIR Capability Statement for [Consent Capture](CapabilityStatement-IHE.PCF.capture.html)
 
 #### XX.1.1.2 Consent Registry <a name="consentregistry"> </a>
 
-The Consent Registry actor holds Consent resources. This includes active, inactive, and expired Consents. The Consent Registry does not have special understanding of the Consent other than as a FHIR Consent Resource. It thus is not responsible for assuring that the Consent terms are acceptable or enforceable, this is the responsibility of the Consent Capture Actor.
+The **Consent Registry** actor holds Consent resources. This includes active, inactive, and expired Consents. The **Consent Registry** does not have special understanding of the Consent other than as a FHIR `Consent` Resource. It thus is not responsible for assuring that the Consent terms are acceptable or enforceable, this is the responsibility of the **Consent Capture** Actor.
 
 FHIR Capability Statement for [Consent Registry](CapabilityStatement-IHE.PCF.registry.html)
 
-#### XX.1.1.2 Consent Decider <a name="consentdecider"> </a>
+#### XX.1.1.3 Consent Authorization Client <a name="consentclient"> </a>
 
-The Consent Decider actor makes authorization decisions based on a given access requested context (e.g. oAuth), organizational policies, and current active Consent resources. The Consent Decider is often implemented as a cascaded oAuth, taking input from the user identity (e.g. Open-ID-Connect), and application identity and authorization (e.g. client token). These cascaded oAuth provide the security context upon which the Privacy Consent constraints are applied. The result of the cascade oAuth is a token used to request access resources, and is used by the Consent Enforcement actor.
+The **Consent Authorization Client** actor makes use of the **Consent Authorization Server** to get authorization token to use with FHIR REST and Operation requests made to a Resource Server by way of the **Consent Enforcement Resource Server**.
 
-FHIR Capability Statement for [Consent Decider](CapabilityStatement-IHE.PCF.decider.html)
+#### XX.1.1.4 Consent Authorization Server <a name="consentdecision"> </a>
 
-#### XX.1.1.2 Consent Enforcement <a name="consentenforce"> </a>
+The **Consent Authorization Server** actor makes authorization decisions based on a given access requested context (e.g. oAuth), organizational policies, and current active `Consent` resources. The Consent Decider is often implemented utalizing other authorization services, taking input from the user identity (e.g. Open-ID-Connect), and application identity and authorization (e.g. IUA). These predicate authorizations provide the security context upon which the Privacy `Consent` constraints are applied. The result is an authorization token used to request access resources, and is used by the **Consent Enforcement Resource Server** actor.
 
-The Consent Enforcement actor enforces consent decisions made by the Consent Decider actor. This includes deny, permit, and permit with filtering of results.
+FHIR Capability Statement for [Consent Authorization Server](CapabilityStatement-IHE.PCF.decider.html)
 
-FHIR Capability Statement for [Consent Enforce](CapabilityStatement-IHE.PCF.enforce.html)
+#### XX.1.1.5 Consent Enforcement Resource Server <a name="consentenforce"> </a>
+
+The **Consent Enforcement Resource Server** actor enforces consent decisions made by the **Consent Authorizatino Server** actor. This includes deny, permit, and permit with filtering of results.
+
+FHIR Capability Statement for [Consent Enforcement Resource Server](CapabilityStatement-IHE.PCF.enforce.html)
 
 ### XX.1.2 Transaction Descriptions
 The transactions in this profile are summarized in the sections below.
@@ -96,11 +100,17 @@ This transaction is used to Create, Read, Update, Delete, and Search on Consent 
 
 For more details see the detailed [Access Consent](ITI-Y1.html)
 
-#### XX.1.2.2 ITI-Y2 Request for Consent Authorization transaction
+#### XX.1.2.2 ITI-Y2 Get Access Token transaction
 
-This transaction is used to request an authorization decision based on Consents.
+This transaction is used to request an authorization decision based on Consents. This transaction is a refinement of the [IUA Get Access Token \[ITI-71\]](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71).
 
-For more details see the detailed [Request for Consent Authorization](ITI-Y2.html)
+For more details see the detailed [Get Access Token](ITI-Y2.html)
+
+#### XX.1.2.3 ITI-Y3 Introspect Token transaction
+
+This transaction is used to query the **Consent Authorization Server** to determine the set of claims for a given token. This transaction is a refinement of the [IUA Introspect Token \[ITI-102\]](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102).
+
+For more details see the detailed [Introspect Token](ITI-Y3.html)
 
 ## XX.2 PCF Actor Options <a name="actor-options"> </a>
 
@@ -129,7 +139,7 @@ Support for these Basic, Intermediate, and Advanced policies is support for the 
 
 The Privacy Consent on FHIR builds upon a basic Identity and Authorization model such as IUA or SMART-on-FHIR to provide basic access control. The Privacy Consents on FHIR is thus focused only on Access Control decisions regarding the parameters of the data subject (patient) privacy consent.
 
-#### XX.2.1 Implicit Option
+### XX.2.1 Implicit Option
 
 The Implicit Policy Option indicates that there is a default policy that is used when there is no Consent found on file. This Implicit Policy shall support the following policies:
 
@@ -144,7 +154,7 @@ Note that the patient accessing their own records is not a Consent consideration
 
 When the Implicit Option is not declared to be implemented, then default Deny all requests is presumed.
 
-#### XX.2.2 Explicit Basic Option
+### XX.2.2 Explicit Basic Option
 
 The Explicit Basic Option indicates that there is support for a basic set of patient specific parameters. The following set of patient specific parameters may be used to permit or deny:
 
@@ -153,7 +163,9 @@ The Explicit Basic Option indicates that there is support for a basic set of pat
 3. Timeframe within which data authored or last updated.
 4. Explicit FHIR Resources can be identified using their `.id` value.
 
-#### XX.2.3 Explicit Intermediate Option
+See [Basic Consent](ITI-Z1.html) Content Profile
+
+### XX.2.3 Explicit Intermediate Option
 
 The Explicit Intermediate Option indicates that there is support for an intermediate set of patient specific parameters. The following set of patient specific parameters may be used to permit or deny:
 
@@ -161,9 +173,13 @@ The Explicit Intermediate Option indicates that there is support for an intermed
 2. Specific author of data 
 3. data relationship to explicit data object permitted/denied (e.g. data involved in a given Encounter, or CarePlan)
 
-#### XX.2.4 Explicit Advanced Option
+See [Intermediate Consent](ITI-Z2.html) Content Profile
+
+### XX.2.4 Explicit Advanced Option
 
 The Explicit Advanced Option indicates that there is support for an advanced set of patient specific parameters. The Advanced policies allow for Patient specific permit/deny parameters on sensitive health topics and requires the use of a **Security Labeling Service** that is not defined here. This is required to support sensitive health topic segmentation such as substance abuse, mental health, sexuality and reproductive health, etc.
+
+See [Advanced Consent](ITI-Z3.html) Content Profile
 
 ## XX.3 PCF Required Actor Groupings <a name="required-groupings"> </a>
 
@@ -171,8 +187,6 @@ The Explicit Advanced Option indicates that there is support for an advanced set
 with other actors. Possibilities**
 * ATNA because Audit Logging is so critical to Privacy
 * IUA or SMART? or is this not manditory, so would be later in XX.6?
-
-
 
 ## XX.4 PCF Overview <a name="overview"> </a>
 

@@ -22,7 +22,8 @@ contact:
       - system: email
         value: iti@ihe.net
 license:  CC-BY-4.0
-fhirVersion: 4.0.1
+#fhirVersion: 4.0.1
+fhirVersion: 4.3.0
 jurisdiction: 'http://unstats.un.org/unsd/methods/m49/m49.htm#001'
 #copyright: IHE http://www.ihe.net/Governance/#Intellectual_Property
 copyrightYear: 2021+
@@ -63,7 +64,19 @@ pages:
     title: 2:3.Y1 Access Consent [ITI-Y1]
     generation: markdown
   ITI-Y2.md:
-    title: 2:3.Y2 Request Consent Authorization Decision [ITI-Y2]
+    title: 2:3.Y2 Get Access Token [ITI-Y2]
+    generation: markdown
+  ITI-Y3.md:
+    title: 2:3.Y3 Introspect Token [ITI-Y3]
+    generation: markdown
+  ITI-Z1.md:
+    title: 3:5.Z1 Basic Consent [ITI-Z1]
+    generation: markdown
+  ITI-Z2.md:
+    title: 3:5.Z2 Intermediate Consent [ITI-Z2]
+    generation: markdown
+  ITI-Z3.md:
+    title: 3:5.Z3 Advanced Consent [ITI-Z3]
     generation: markdown
   testplan.md:
     title: "Test Plan"
@@ -88,6 +101,11 @@ menu:
   Volume 2:
     "Access Consent [ITI-Y1]": ITI-Y1.html
     "Request Consent Authorization Decision [ITI-Y2]": ITI-Y2.html
+    "Introspect Token [ITI-Y3]": ITI-Y3.html
+  Volume 3:
+    "Basic Consent": ITI-Z1.html
+    "Intermediate Consent": ITI-Z2.html
+    "Advanced Consent": ITI-Z3.html
   Test Plan: testplan.html
   Artifacts: artifacts.html
   Other: other.html

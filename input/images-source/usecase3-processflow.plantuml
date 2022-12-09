@@ -2,17 +2,23 @@
 skinparam svgDimensionStyle false
 hide footbox
 autonumber
-title "Authorization Decision based on Consent"
-participant "Some Client" as client
-participant "Consent Decider" as decision
-box "Server"
-participant "Some Server" as server
-participant "Consent Enforcement" as enforce
+title "FHIR Request mediated by\nAuthorization Decision based on Consent"
+participant "[[#consentclient Consent\nAuthorization Client]]" as client
+participant "[[#consentdecision Consent\nAuthorization Server]]" as decision
+box "Other Authorization Services"
+participant "Open-ID-Connect" as oidc
+participant "IUA Authorization Server" as IUA
 end box
-participant "Consent Registry" as registry
+box "Server"
+participant "[[#consentenforce Consent Enforcement\nResource Server]]" as server
+participant "FHIR Server" as fhir
+end box
+participant "[[#consentregistry Consent Registry]]" as registry
 activate client
-client ->o decision : IUA / SeR Request for Authorization
+client ->o decision : Get Access Token [[ITI-Y2.html ITI-Y2]]
 activate decision
+decision --> oidc : Get authorized user using Open-ID-Connect
+decision --> IUA : Get Access Token [ITI-71]
 activate registry
 decision ->o registry : [[ITI-Y1.html ITI-Y1]] - Query for existing Consent
 registry --> decision : Some Found
@@ -23,17 +29,18 @@ decision -> decision : Match provisions to request context
 decision -> decision : Make Access Control Decision and encode in oAuth token
 note over decision : Record AuditEvent
 
-decision -->o enforce : [[ITI-Y2.html ITI-Y2]] - Decision to be Enforced
-group Decision to Enforcement (may be by use of [[https://profiles.ihe.net/ITI/SeR/index.html SeR]])
-    client <- decision : IUA Pass oAuth token to client
-    client -> server : IUA Pass oAuth token to server
-    server -> enforce : Enforce token claims
-end group
+decision --> client:  Decision to be Enforced
+client ->o server : "IUA: Incorporate Access Token [[https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72 ITI-72]]"
+activate server
+server -->o decision : "Introspect Token [[ITI-Y3.html ITI-Y3]]"
+server -> server: Enforce authorization decision
+server --> fhir : execute request
+server -> server: Enforce authorization decision
 client <- server : Returned authoried results
+deactivate server
 deactivate decision 
 
-note over server, enforce : Record AuditEvent
-deactivate enforce  
+note over server : Record AuditEvent
 deactivate server
 
 note over client : Record AuditEvent

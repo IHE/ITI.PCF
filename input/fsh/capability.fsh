@@ -1,6 +1,6 @@
 Instance: IHE.PCF.capture
 InstanceOf: CapabilityStatement
-Title: "PCF Actor"
+Title: "PCF Consent Capture Actor"
 Usage: #definition
 * description = """
 CapabilityStatement for capture Actor 
@@ -52,7 +52,7 @@ PCF transaction [ITI-Y1]
 
 Instance: IHE.PCF.registry
 InstanceOf: CapabilityStatement
-Title: "PCF registry Actor"
+Title: "PCF Consent Registry Actor"
 Usage: #definition
 * description = """
 CapabilityStatement for registry Actor.
