@@ -1,5 +1,5 @@
 | Editor replace existing Volume 1 Appendix P with the following |
-| ------ |
+|--------|
 {:.grid}
 
 This Appendix provides information about when consent could be automated and consequently when the BPPC Profile could be used. Privacy consent can be summarized as: "I agree on my personal data being disclosed to someone under specific conditions".
@@ -51,6 +51,7 @@ Each instance of the matrix results in a single Patient Privacy Policy. This voc
 | Sensitive Information | May be accessed by direct or emergency care providers, the patient or their legal representative.
 | Research Information | May be accessed by researchers.
 | Mediated by Direct Care Provider | May be accessed by direct or emergency care providers.
+{:.grid}
 
 Other divisions of the access control matrix are possible, so long as a Patient Privacy Policy covers each layout of the matrix.
 
