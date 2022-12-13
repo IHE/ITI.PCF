@@ -127,6 +127,8 @@ Privacy Consent:
   - [FHIR Consent mapped to BPPC](https://healthcaresecprivacy.blogspot.com/2019/11/fhir-consent-mapped-with-bppc.html)
   - [Security Labeling Service](https://healthcaresecprivacy.blogspot.com/2022/09/security-labeling-service.html)
   - [Consent with Segmented Data](http://build.fhir.org/ig/JohnMoehrke/ConsentWithSegmentation/branches/main/index.html)
+- Mohammad Jafari blog
+  - [Consent Overarching Policy](https://jafarim.net/consent-overarching-policy)
 
 ### IG Name
 
