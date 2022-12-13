@@ -87,6 +87,9 @@ pages:
   other.md:
     title: Changes to Other Profiles
     generation: markdown
+  ch-P.md:
+    title: "Appendix P: Privacy Access Policies (Informative)"
+    generation: markdown
     
 menu:
   PCF Home: index.html
@@ -98,6 +101,7 @@ menu:
     Overview: volume-1.html#overview
     Security Considerations: volume-1.html#security-considerations
     Cross-Profile Considerations: volume-1.html#other-grouping
+    Appendix P: ch-P.html
   Volume 2:
     "Access Consent [ITI-Y1]": ITI-Y1.html
     "Request Consent Authorization Decision [ITI-Y2]": ITI-Y2.html
