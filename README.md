@@ -129,7 +129,10 @@ Privacy Consent:
   - [Consent with Segmented Data](http://build.fhir.org/ig/JohnMoehrke/ConsentWithSegmentation/branches/main/index.html)
 - Mohammad Jafari blog
   - [Consent Overarching Policy](https://jafarim.net/consent-overarching-policy)
-
+- ONC LEAP Computable Consent Project 
+  - [High-Level Architecture](https://sdhealthconnect.github.io/leap/blog/2021/09/30/architecture.html)
+  - [Scalability in Consent Management](https://sdhealthconnect.github.io/leap/blog/2021/12/23/scalability.html)
+  - [Future Directions for the LEAP Consent Project](https://sdhealthconnect.github.io/leap/blog/2021/10/04/leap-future.html)
 ### IG Name
 
 Chosen Name - **Privacy Consent on FHIR (PCF)**
