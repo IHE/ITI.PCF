@@ -55,61 +55,68 @@ resources:
 pages:
 # itemize here each narrative page. Include assigned section numbers when appropriate
   index.md:
-    title: 1:XX. Privacy Consent on FHIR Home
+    title: "1:XX Privacy Consent on FHIR Home"
     generation: markdown
   volume-1.md:
-    title: 1:XX. Privacy Consent on FHIR Volume 1
+    title: "1:XX Privacy Consent on FHIR Volume 1"
+    generation: markdown
+  ch-P.md:
+    title: "1:P. Privacy Access Policies (Informative)"
     generation: markdown
   ITI-Y1.md:
-    title: 2:3.Y1 Access Consent [ITI-Y1]
+    title: "2:3.Y1 Access Consent [ITI-Y1]"
     generation: markdown
   ITI-Y2.md:
-    title: 2:3.Y2 Get Access Token [ITI-Y2]
+    title: "2:3.Y2 Get Access Token [ITI-Y2]"
     generation: markdown
   ITI-Y3.md:
-    title: 2:3.Y3 Introspect Token [ITI-Y3]
+    title: "2:3.Y3 Introspect Token [ITI-Y3]"
     generation: markdown
   ITI-Z1.md:
-    title: 3:5.Z1 Basic Consent [ITI-Z1]
+    title: "3:5.Z1 Basic Consent [ITI-Z1]"
     generation: markdown
   ITI-Z2.md:
-    title: 3:5.Z2 Intermediate Consent [ITI-Z2]
+    title: "3:5.Z2 Intermediate Consent [ITI-Z2]"
     generation: markdown
   ITI-Z3.md:
-    title: 3:5.Z3 Advanced Consent [ITI-Z3]
+    title: "3:5.Z3 Advanced Consent [ITI-Z3]"
+    generation: markdown
+  other.md:
+    title: "Changes to Other Profiles"
+    generation: markdown
+  download.md:
+    title: "Download and analysis"
     generation: markdown
   testplan.md:
     title: "Test Plan"
     generation: markdown
   issues.md:
-    title: Open and Closed issues
-    generation: markdown
-  other.md:
-    title: Changes to Other Profiles
-    generation: markdown
-  ch-P.md:
-    title: "Appendix P: Privacy Access Policies (Informative)"
+    title: "Open and Closed issues"
     generation: markdown
     
 menu:
   PCF Home: index.html
   Volume 1:
-    Introduction: volume-1.html
-    Actors and Transactions: volume-1.html#actors-and-transactions
-    Actor Options: volume-1.html#actor-options
-    Required Groupings: volume-1.html#required-groupings
-    Overview: volume-1.html#overview
-    Security Considerations: volume-1.html#security-considerations
-    Cross-Profile Considerations: volume-1.html#other-grouping
-    Appendix P: ch-P.html
+    "Introduction" : volume-1.html
+    "Actors and Transactions" : volume-1.html#actors-and-transactions
+    "Actor Options" : volume-1.html#actor-options
+    "Required Groupings" : volume-1.html#required-groupings
+    "Overview" : volume-1.html#overview
+    "Security Considerations" : volume-1.html#security-considerations
+    "Cross-Profile Considerations" : volume-1.html#other-grouping
+    "Appendix P. Privacy Access Policies" : ch-P.html
   Volume 2:
-    "Access Consent [ITI-Y1]": ITI-Y1.html
-    "Request Consent Authorization Decision [ITI-Y2]": ITI-Y2.html
-    "Introspect Token [ITI-Y3]": ITI-Y3.html
+    "Access Consent [ITI-Y1]" : ITI-Y1.html
+    "Request Consent Authorization Decision [ITI-Y2]" : ITI-Y2.html
+    "Introspect Token [ITI-Y3]" : ITI-Y3.html
   Volume 3:
-    "Basic Consent": ITI-Z1.html
-    "Intermediate Consent": ITI-Z2.html
-    "Advanced Consent": ITI-Z3.html
-  Test Plan: testplan.html
+    "Basic Consent" : ITI-Z1.html
+    "Intermediate Consent" : ITI-Z2.html
+    "Advanced Consent" : ITI-Z3.html
   Artifacts: artifacts.html
-  Other: other.html
+  Other: 
+    "Changes to Other IHE specifications" : other.html
+    "Download" : download.html
+    "Test Plan" : testplan.html
+
+

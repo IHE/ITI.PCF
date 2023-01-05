@@ -20,6 +20,7 @@ This guide is organized into the following sections:
    1. [Overview](volume-1.html#overview)
    1. [Security Considerations](volume-1.html#security-considerations)
    1. [Cross Profile Considerations](volume-1.html#other-grouping)
+   1. [Appendix P: Privacy Access Policies](ch-P.html)
 
 2. Volume 2: Transaction Detail
    1. [Access Consent \[ITI-Y1\]](ITI-Y1.html)
@@ -28,17 +29,13 @@ This guide is organized into the following sections:
 
 3. Volume 3: Metadata and Content
    1. [Basic Consent](ITI-Z1.html)
-   2. [Intermediate Consent](ITI-Z2.html)
-   3. [Advanced Consent](ITI-Z3.html)
+   1. [Intermediate Consent](ITI-Z2.html)
+   1. [Advanced Consent](ITI-Z3.html)
 
-4. Test Plan
-   - [Test Plan](testplan.html)
-     - **TODO: point to your appendix if you have them**
-
-5. Other
-   - [Changes to Other Profiles](other.html)
-     - **TODO: Actor and transaction definitions, new glossary terms.**
-     - **TODO: Any changes needed to other specifications.**
+4. Other
+   1. [Changes to Other Profiles](other.html)
+   1. [Download and analysis](download.html)
+   1. [Test Plan](testplan.html)
 
 See also the [Table of Contents](toc.html) and
 the index of [Artifacts](artifacts.html) defined as part of this implementation guide.
@@ -54,29 +51,3 @@ The use of ```mustSupport``` in StructureDefinition profiles equivalent to the I
 mustSupport of true - only has a meaning on items that are minimal cardinality of zero (0), and applies only to the source actor populating the data. The source actor shall populate the elements marked with MustSupport, if the concept is supported by the actor, a value exists, and security and consent rules permit.
 The consuming actors should handle these elements being populated or being absent/empty.
 Note that sometimes mustSupport will appear on elements with a minimal cardinality greater than zero (0), this is due to inheritance from a less constrained profile.
-
-### Download
-
-You can also download:
-
-- [this entire guide](full-ig.zip),
-- the definition resources in [json](definitions.json.zip), [xml](definitions.xml.zip), [ttl](definitions.ttl.zip), or [csv](csvs.zip) format, or
-- the example resources in [json](examples.json.zip), [xml](examples.xml.zip) or [ttl](examples.ttl.zip) format.
-
-The source code for this Implementation Guide can be found on **TODO: Put your github repo here**
-
-#### Cross Version Analysis
-
-{% include cross-version-analysis.xhtml %}
-
-#### Dependency Table
-
-{% include dependency-table.xhtml %}
-
-#### Globals Table
-
-{% include globals-table.xhtml %}
-
-#### IP Statements
-
-{% include ip-statements.xhtml %}

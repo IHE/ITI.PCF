@@ -63,15 +63,16 @@ Likely constraints (back of the envelop):
 ### Some patient specific provisions
 
 Authorizing or Denying access to:
-* who by a given Practitioner, CareTeam, RelatedPerson
-* why by a given Purpose Of Event codes 
-  * why by a given named Research projects
-* data by Confidentiality class (Normal, but not Restricted) -- presumes a mature SLS
-  * data by sensitivity class -- presumes a mature SLS
-* data by authored timeframe
-* data by authorship (authored by someone in organization XYZ)
-* data by identifier (explicit reference)
-* when specific period of time data can be accessed
+
+- who by a given Practitioner, CareTeam, RelatedPerson
+- why by a given Purpose Of Event codes 
+  - why by a given named Research projects
+- data by Confidentiality class (Normal, but not Restricted) -- presumes a mature SLS
+  - data by sensitivity class -- presumes a mature SLS
+- data by authored timeframe
+- data by authorship (authored by someone in organization XYZ)
+- data by identifier (explicit reference)
+- when specific period of time data can be accessed
 
 what others are needed in real-life (vs theory)?
 
@@ -79,18 +80,19 @@ what others are needed in real-life (vs theory)?
 
 These seem to be possible with Consent resource in R4, but not clear they are priority or even possible.
 
-* Use of Consent besides Privacy (consent to treat, advanced directives)
-* .action -- this is not well enough defined in Consent 
-* applied obligations or refrains -- no clear place where these go in Consent
-* .class -- this is not well enough defined in Consent
-* data related to an identified data resource (e.g. all data related to this Encounter)
-* use of types of Resources -- not clear how this is useful (e.g. all Observations but not other types of Resources)
-* Consent enforcement within an organization. We focus on Cross-Enterprise/Community access.
-* Use of FHIR Consent for XDS/XCA environments
+- Use of Consent besides Privacy (consent to treat, advanced directives)
+- .action -- this is not well enough defined in Consent 
+- applied obligations or refrains -- no clear place where these go in Consent
+- .class -- this is not well enough defined in Consent
+- data related to an identified data resource (e.g. all data related to this Encounter)
+- use of types of Resources -- not clear how this is useful (e.g. all Observations but not other types of Resources)
+- Consent enforcement within an organization. We focus on Cross-Enterprise/Community access.
+- Use of FHIR Consent for XDS/XCA environments
+- Use-case where the patient revoking authorized access is expected to also stop all downstream disclosures that were originally authorized. Thus only supporting authorization decisions at the time the data request is made with no ramifications placed upon the data released and no ability to recind what was authorized.
 
 ## Multi-Generation Plan?
 
-I suspect that everyone sees a different scope to this general problem. Consent is often very complex as one digs deeper. So I present a plan of attack that starts with a well defined "Community", the MHDS community; and a well defined object-to-be-controlled, the document. 
+I suspect that everyone sees a different scope to this general problem. Consent is often very complex as one digs deeper. So I present a plan of attack that starts with a well defined "Community", the MHDS community; and a well defined object-to-be-controlled, the document.
 
 1. MHDS -- The Central MHDS Document Registry enforcing Consents, just controlling Document Consumer actor. I think this will need to call upon the new SeR to provide tokens that a distributed repository would be expected to enforce. Note that Consent would be recorded in the central FHIR server (adding a Consent Registry actor), there would not be a distributed Consent Registry. Likely one Consent per patient with rules for the whole Community.
 2. MHDS + mXDE/QEDm -- adding access rules around resources derived from Documents
@@ -133,11 +135,12 @@ Privacy Consent:
   - [High-Level Architecture](https://sdhealthconnect.github.io/leap/blog/2021/09/30/architecture.html)
   - [Scalability in Consent Management](https://sdhealthconnect.github.io/leap/blog/2021/12/23/scalability.html)
   - [Future Directions for the LEAP Consent Project](https://sdhealthconnect.github.io/leap/blog/2021/10/04/leap-future.html)
+
 ### IG Name
 
 Chosen Name - **Privacy Consent on FHIR (PCF)**
 
-**Discussed but not chosen:**
+**IG names that were discussed but not chosen:**
 
 - Basic Mobile Consent (BMC)
 - Privacy Mobile Consent (PMC)
