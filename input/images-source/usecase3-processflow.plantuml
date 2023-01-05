@@ -2,15 +2,15 @@
 skinparam svgDimensionStyle false
 hide footbox
 autonumber
-title "FHIR Request mediated by\nAuthorization Decision based on Consent"
-participant "[[#consentclient Consent\nAuthorization Client]]" as client
-participant "[[#consentdecision Consent\nAuthorization Server]]" as decision
+title "Consent Access Control"
+participant "[[#consentclient Consent Authorized]]" as client
+participant "[[#consentdecider Consent Decider]]" as decision
 box "Other Authorization Services"
 participant "Open-ID-Connect" as oidc
 participant "IUA Authorization Server" as IUA
 end box
 box "Server"
-participant "[[#consentenforce Consent Enforcement\nResource Server]]" as server
+participant "[[#consentenforce Consent Enforcer]]" as server
 participant "FHIR Server" as fhir
 end box
 participant "[[#consentregistry Consent Registry]]" as registry
@@ -21,12 +21,14 @@ decision --> oidc : Get authorized user using Open-ID-Connect
 decision --> IUA : Get Access Token [ITI-71]
 activate registry
 decision ->o registry : [[ITI-Y1.html ITI-Y1]] - Query for existing Consent
-registry --> decision : Some Found
+registry --> decision : Return the Consents found
 note over registry : Record AuditEvent
 deactivate registry
 
 decision -> decision : Match provisions to request context
-decision -> decision : Make Access Control Decision and encode in oAuth token
+decision -> decision : Make Consent focused Access Control Decision
+decision -> decision : Combine Access Control decisions (2+3+7)
+decision -> decision : Encode combined decision in oAuth token
 note over decision : Record AuditEvent
 
 decision --> client:  Decision to be Enforced

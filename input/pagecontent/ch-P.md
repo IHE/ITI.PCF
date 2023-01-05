@@ -3,6 +3,8 @@
 | Editor replace existing Volume 1 Appendix P with the following |
 {:.grid .bg-info}
 
+TODO: add section on Security-Labeling-Service possibile implementations.
+
 This Appendix provides information about when consent could be automated and consequently when the BPPC Profile could be used. Privacy consent can be summarized as: "I agree on my personal data being disclosed to someone under specific conditions".
 
 Conditions are based on various factor(s) for example:
