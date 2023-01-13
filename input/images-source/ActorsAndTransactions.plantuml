@@ -1,9 +1,9 @@
 @startuml
 agent "[[#consentcapture Consent Capture]]" as capture
 agent "[[#consentregistry Consent Registry]]" as registry
-capture -down-> registry : "Access Consent (CRUDS) [[ITI-Y1.html ITI-Y1]]"
+capture -down--> registry : "Access Consent (CRUDS) [[ITI-Y1.html ITI-Y1]]"
 
-frame "Grouped Client" {
+frame "Grouped Client" {7y6
 agent "Other FHIR client" as otherClient
 agent "[[#consentclient Consent Authorized]]" as client 
 }
