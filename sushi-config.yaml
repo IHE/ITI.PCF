@@ -4,7 +4,7 @@
 # e.g. ihe.iti.mhds, or ihe.iti.basicaudit
 id: ihe.iti.pcf
 canonical: https://profiles.ihe.net/ITI/PCF
-version: 0.1.1
+version: 0.1.1-current
 name: IHE_ITI_PCF
 title: "Privacy Consent on FHIR"
 description: Supports Patient Privacy Consents in HIE scope
@@ -22,6 +22,7 @@ contact:
       - system: email
         value: iti@ihe.net
 license:  CC-BY-4.0
+# using R4B as the consent resource had a technical correction to eliminate a build error
 #fhirVersion: 4.0.1
 fhirVersion: 4.3.0
 jurisdiction: 'http://unstats.un.org/unsd/methods/m49/m49.htm#001'

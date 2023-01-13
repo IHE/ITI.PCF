@@ -1,0 +1,15 @@
+{
+    "package-id" : "ihe.iti.pcf",
+    "version" : "1.0.0-comment",
+    "path" : "https://profiles.ihe.net/ITI/PCF/1.0.0-comment",
+    "milestone" : true,
+    "status" : "ballot",
+    "sequence" : "Releases",
+    "desc" : "Initial Public-Comment",
+    "descmd" : "Initial Public-Comment",
+    "changes" : "Initial Draft for public comment",
+    "title" : "Privacy Consent on FHIR",
+    "ci-build" : "http://build.fhir.org/ig/IHE/ITI.PCF/branches/master/index.html",
+    "category" : "Privacy / Security",
+    "introduction" : "This Implementation Guide, Privacy Consents on FHIR (PCF), provides support for patient privacy consents for Health Information Exchanges using FHIR."
+  }

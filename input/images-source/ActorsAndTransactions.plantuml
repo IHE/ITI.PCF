@@ -2,11 +2,22 @@
 agent "[[#consentcapture Consent Capture]]" as capture
 agent "[[#consentregistry Consent Registry]]" as registry
 capture -down-> registry : "Access Consent (CRUDS) [[ITI-Y1.html ITI-Y1]]"
+
+frame "Grouped Client" {
+agent "Other FHIR client" as otherClient
 agent "[[#consentclient Consent Authorized]]" as client 
+}
 agent "[[#consentdecider Consent Decider]]" as decider
+frame "Grouped Server" {
 agent "[[#consentenforce Consent Enforcer]]" as enforcer
+agent "Other FHIR server" as otherServer
+}
+
+otherClient -down-> client: "other"
 client -down-> decider : "Get Access Token [[ITI-Y2.html ITI-Y2]]\nIUA: Get Authorization Server Metadata [[https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103 ITI-103]]"
+
 decider -left-> registry: "Access Consent (SR) [[ITI-Y1.html ITI-Y1]]"
-client -> enforcer : "IUA: Incorporate Access Token [[https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72 ITI-72]]"
-enforcer -left-> decider : "Introspect Token [[ITI-Y3.html ITI-Y3]]\nIUA: Get Authorization Server Metadata [[https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103 ITI-103]]"
+client -down-> enforcer : "IUA: Incorporate Access Token [[https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72 ITI-72]]"
+decider -right-> enforcer : "Introspect Token [[ITI-Y3.html ITI-Y3]]\nIUA: Get Authorization Server Metadata [[https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103 ITI-103]]"
+enforcer -down-> otherServer : "other"
 @enduml

@@ -109,19 +109,33 @@ between options when applicable are specified in notes.
 |--------------------|-------------|
 | Consent Capture    | Implicit  |
 | Consent Capture    | Explicit Basic |
-| Consent Capture    | Explicit Intermediate |
+| Consent Capture    | Explicit Intermediate Data Timeframe |
+| Consent Capture    | Explicit Intermediate Data by id |
+| Consent Capture    | Explicit Intermediate Data Author |
+| Consent Capture    | Explicit Intermediate Data Relationship |
+| Consent Capture    | Explicit Intermediate Additional PurposeOfUse |
 | Consent Capture    | Explicit Advanced |
 | Consent Registry   | none |
 | Consent Authorized | none |
 | Consent Decider    | Implicit  |
 | Consent Decider    | Explicit Basic |
-| Consent Decider    | Explicit Intermediate |
+| Consent Decider    | Explicit Intermediate Data Timeframe |
+| Consent Decider    | Explicit Intermediate Data by id |
+| Consent Decider    | Explicit Intermediate Data Author |
+| Consent Decider    | Explicit Intermediate Data Relationship |
+| Consent Decider    | Explicit Intermediate Additional PurposeOfUse |
 | Consent Decider    | Explicit Advanced |
 | Consent Enforcer   | Implicit  |
 | Consent Enforcer   | Explicit Basic |
-| Consent Enforcer   | Explicit Intermediate |
+| Consent Enforcer   | Explicit Intermediate Data Timeframe |
+| Consent Enforcer   | Explicit Intermediate Data by id |
+| Consent Enforcer   | Explicit Intermediate Data Author |
+| Consent Enforcer   | Explicit Intermediate Data Relationship |
+| Consent Enforcer   | Explicit Intermediate Additional PurposeOfUse |
 | Consent Enforcer   | Explicit Advanced |
 {: .grid}
+
+Note 1: Explicit Intermediate options and Explicit Advanced option require that Explicit Basic Option is selected
 
 There are three levels of maturity, in incrementally more difficult to implement steps, defined:
 Support for these Basic, Intermediate, and Advanced policies is support for the ability to provide these capabilties. The actual policy provided to the Patient would be some subset of this support that the data custodian is willing to enforce.
@@ -135,7 +149,7 @@ The Implicit Policy Option indicates that there is a default policy that is used
 3. Deny for all authorized users, except when the user is a clinician with authorization to declare a medical patient-safety override (aka Break-Glass).
 4. Deny all.
 
-Other overarching policies may also be implemented, but their behaviour is not defined in PCF. 
+Other overarching policies may also be implemented, but their behaviour is not defined in PCF.
 
 The operational environment chooses which of these policies they will use, so in operational use only one of these is in effect.
 
@@ -152,23 +166,35 @@ The Explicit Basic Option indicates that there is support for a basic set of pat
 1. The overarching policy that the patient and organization have agreed upon. Where there are a defined set of behavour defined overarching policies as defined in the Implicit Option.
 2. The timeframe for which the consent applies. Enabling consents that have a time limit.
 3. Who is permitted/denied: This may be a device, relatedPerson, Practitioner, or Organization. This parameter enables the naming of agents that should be allowed access or denied access. This presumes that the identified agent is appropriately identified (provisioned) and authorized to make the request; typically through some application authorization and role-based-access-control. The user identity is mapped to a FHIR agent type Resource using the agent type Resource `.identifier` element (e.g. Practitioner.identifier would hold the user id).
-4. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explitally identified as an authorized purposeOfUse or denied purposeOfuse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Decider is not determining if the user/client is authorized to make the purposeOfUse declaration, this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, Operations, and Break-Glass
-5. Timeframe within which data authored or last updated.
-6. Explicit FHIR Resources can be identified using their `.id` value.
+4. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explitally identified as an authorized purposeOfUse or denied purposeOfuse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Decider is not determining if the user/client is authorized to make the purposeOfUse declaration, this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, Operations, and Break-Glass.
 
 See [Basic Consent](ITI-Z1.html) Content Profile
 
-### XX.2.3 Explicit Intermediate Option
+### XX.2.3 Explicit Intermediate options
 
-The Explicit Intermediate Option indicates that there is support for an intermediate set of patient specific parameters. The following set of patient specific parameters may be used to permit or deny:
-
-1. Named Research projects. This is beyond the HL7 purposeOfUse codes.
-2. Specific author of data.
-3. Data relationship to explicit data object permitted/denied (e.g. data involved in a given Encounter, or CarePlan)
-
-The Explicit Intermediate Option supports use-cases where the Access Control decision impacts more fine grain filtering of results based on context or data attributes.
+The following Options shall be used in conjunction with **Explicit Basic Option**, and may be used with **Explicit Advanced Option**. The Intermediate Options can be implemented and/or used individually or combined. When combined within one parameter the logic provided by each option is combined. The data scoping intermediate options are not expected to be found combined on one parameter, but may be combined within a Consent providing different data scoping capabilitiy. For example: A consent that indicates that a data timeframe is used to deny insurance access, with a different parameter indicting that a data relationship is allowed access to a research project.
 
 See [Intermediate Consent](ITI-Z2.html) Content Profile
+
+#### XX.2.3.1 Explicit Intermediate Data Timeframe Option
+
+This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates a timeframe within which data authored or last updated.
+
+#### XX.2.3.2 Explicit Intermediate Data by id Option
+
+This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates a FHIR Resources by `.id` value.
+
+#### XX.2.3.3 Explicit Intermediate Data Author Option
+
+This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates data subject to the rule by way of an indicated author. This option is useful when the consent provision is limiting access to data that was authorized by a given doctor.
+
+#### XX.2.3.4 Explicit Intermediate Data Relationship Option
+
+This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates data subject to the rule by way of that data being related in a given way to a given identified data object. This option is useful for indicating a consent provision that is limiting/authorizing access to data that was created as part of an encounter, care plan, or episode of care. 
+
+#### XX.2.3.5 Explicit Intermediate Additional PurposeOfUse Option
+
+This option provides for the Consent to have one or more permit/deny parameter that indicates a purposeOfUse that is not listed in the **Explicit Basic Option** vocabulary. This would tend to be used with Clinical Research projects, where the purposeOfUse is a code assigned to a specific Clinical Research Project. This may be used for other purposeOfUse codes. Where **Explicit Basic Option** has some well-known purposeOfUse codes, this option is used for other codes.
 
 ### XX.2.4 Explicit Advanced Option
 
@@ -305,8 +331,7 @@ And the **Consent Enforcer** assures that only data authorized by the Consent Ac
 
 The Consent details are specific to the Patient Privacy Policy, the parameters agreed to in the ceremony, and the Consent profile (Basic, Intermediate, Advance) that was used.
 
-
-##### XX.4.2.3.2 simple name Process Flow
+##### XX.4.2.3.2 Consent Access Control Process Flow
 
 The following flow shows the activities involved in the Consent Access Control flow.
 
@@ -336,7 +361,122 @@ The diagrammed steps:
 15. The **Consent Enforcer** would inspect the results and further enforce the Consent Access Control decision. This might be to filter out specific resources that could not have been filtered out otherways.
 16. The **Consent Enforcer** returns the authorized data to the **Consent Authorized** actor. 
 
-#### XX.4.2.4 Basic Consent Content
+#### XX.4.2.4 Implicit Content
+
+These use-cases will outline the justification for the alternatives within the **Implicit Option**
+
+**Pre-conditions**:
+
+Given there is no consent for a given patient. This may be because:
+
+- no consent is available, or
+- that there is no mechanism to capture consent, or
+- that consent existance of a consent does not impact Access Control. Such as when consent is used to simply flag that this patient has been presented with the privacy policy.
+
+**Main Flow**:
+
+- The Business has chosen one of the **Implicit Consent Option** defined alternatives
+- There is no Access Control use of any Consent resource in **Implicit Consent Option**
+
+**Post-conditions**:
+
+- The alternative protects access
+
+##### XX.4.2.4.1 Permit Clinical Treatment
+
+Permit for clinicians that have authorization for Treatment use, but does not authorize other access. This presumes that basic user access control can differentiate legitimate clinical users.
+
+**Pre-conditions**:
+
+The controlling Organization has identified Clinical roles that would have access for Treatment, and has mechanisms in place to prevent any inappropriate use.
+
+**Main Flow**:
+
+- Business Access Control prevents inappropriate users, applications, purposes, and activitites. Allowing only Clinical users access under Treatment purpose.
+- There is no Access Control use of the Consent resource
+
+**Post-conditions**:
+
+Business Access Controls control appropirate access, thus clinical users get access for clinical treatment need.
+
+##### XX.4.2.4.2 Permit all Authorized
+
+Permit for all authorized users. This presumes that basic user access control will only allow authorized users and purpose of use.
+
+**Pre-conditions**:
+
+The controlling Organization has identified various roles that would have access for given purpose, and has mechanisms in place to prevent any in appropriate use. This is distinct from the previous use-case in that the roles and purpose are not limited to Clinical and Treatment.
+
+**Main Flow**:
+
+- Business Access Control prevents inappropriate users, applications, purposes, and activitites.
+- There is no Access Control use of the Consent resource
+
+**Post-conditions**:
+
+Business Access Controls control appropirate access.
+
+##### XX.4.2.4.3 Deny except for Break-Glass
+
+Deny for all uses except when explicit override reason is given by user that is authorized to use explicit override (aka Break-Glass).
+
+TODO: Is this out-of-scope of PCF as it is not really consent, and is an advanced policy? Might this be informationally described and not part of an option?
+
+**Pre-conditions**:
+
+The controlling Organization has identified various roles that would have the ability to declare a access override (aka Break-Glass), and has mechanisms in place to prevent any inappropriate use. There is no expectation that the Break-Glass is only for treatment, although the controlling Organization policy may be specific to treatment. In this way this option can be used for any purposeOfUse and override rational that the controllign Organization deems appropriate.
+
+**Main Flow**:
+
+- Business Access Control prevents inappropriate users, applicaitons, purposes, and activities.
+- User that is authorized to declare an explicit override provides reason for override
+- There is no Access Control use of the Consent resource
+
+**Post-conditions**:
+
+Business Access Controls control appropirate access.
+
+An explicit record of the declared break-glass reason is made for each allowed access.
+
+##### XX.4.2.4.4 Deny All
+
+**Pre-conditions**:
+
+Very briefly (typically one sentence) describe the conditions or
+timing when this content module would be used.
+
+**Main Flow**:
+
+Typically in an enumerated list, describe the clinical workflow
+when, where, and how this content module would be used.
+
+**Post-conditions**:
+
+Very briefly (typically one sentence) describe the state of the
+clinical scenario after this content module has been created including
+examples of potential next steps.
+
+#### XX.4.2.5 Basic Consent Content
+
+TODO: should this be a set of the patient focused use-cases that drive the set of Consent profile constraints. thus there is an XX.4.2.4.n for each real use-case driving each of the parameters within that Basic Consent option 
+
+**Pre-conditions**:
+
+Very briefly (typically one sentence) describe the conditions or
+timing when this content module would be used.
+
+**Main Flow**:
+
+Typically in an enumerated list, describe the clinical workflow
+when, where, and how this content module would be used.
+
+**Post-conditions:**
+
+Very briefly (typically one sentence) describe the state of the
+clinical scenario after this content module has been created including
+examples of potential next steps.
+
+#### XX.4.2.6 Intermediate Consent Content
 
 TODO
 
@@ -356,27 +496,7 @@ Very briefly (typically one sentence) describe the state of the
 clinical scenario after this content module has been created including
 examples of potential next steps.
 
-#### XX.4.2.5 Intermediate Consent Content
-
-TODO
-
-**Pre-conditions**:
-
-Very briefly (typically one sentence) describe the conditions or
-timing when this content module would be used.
-
-**Main Flow**:
-
-Typically in an enumerated list, describe the clinical workflow
-when, where, and how this content module would be used.
-
-**Post-conditions:**
-
-Very briefly (typically one sentence) describe the state of the
-clinical scenario after this content module has been created including
-examples of potential next steps.
-
-#### XX.4.2.6 Advanced Consent Content
+#### XX.4.2.7 Advanced Consent Content
 
 TODO
 
