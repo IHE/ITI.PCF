@@ -16,6 +16,14 @@ These are questions that are holding up progress now.
 
 - The Deny except for Break-Glass seems to be beyond foundational. Seems these use-cases are out-of-scope? The use-case as written is a possible base policy, but would not be a common one in healthcare and especially not in treatment.
 - is Volume 1 getting too long? Could split on H2 (actors, options, grouping, overview, security, xProfile) like what is done in MHD.
+- do we define deployment models that have the Privacy-Preferences external to a custodian, and/or the Consent Management outside the custodian. The initial round might be limited to cases where there is some overriding organization that encompasses all actors formally defined in PCF. Thus coordinating between possibly divergent or conflicting policies can be left to the Consent Creator actor.
+- Should PCF have a systems design discussion for the SLS? See [John's Consent with Segmentation page on SLS](http://build.fhir.org/ig/JohnMoehrke/ConsentWithSegmentation/branches/main/sls.html). This is important guidance to the reader that has been useful, but is not an interoperability specification itself.
+- There is partial documentation of Privacy-Preferences, which uses the FHIR Consent without a binding to a custodian. These Privacy-Preferences are statements by the Patient of their desired rules. These desired rules can be used during the consent interaction (ceremony) to pre-adjust the rules that the custodian is willing to support. Thus enabling a more friendly experience by the Patient. This is most useful when the Patient has complex desired rules that may be hard to capture during the consent ceremony.
+- the XX.4.2 section seems awkward given the pattern IHE has for content profiling. The detail is there, but it seems not as useful as it could be.
+  - would cucumber be more understandable?
+  - have I written this wrong? I have written these more from the access control logic, but possibly they should only be from the perspective of the content definition. The access control logic is in the option text above?
+- Are we going to support just one level of sub-provisions? 2 levels of sub-provisions? not limited? Seems one level of exceptions should be sufficient for most cases. Unclear what realistic use-cases need 2 levels. Recommend only one level of sub-provisions (This enables Permit with exceptions, and Deny with exceptions; but does not support exceptions to the exceptions). Given no combining rules, and concern to make implementable.
+  - I have written this as exhaustive search through sub-provisions. is this right?
 
 ### Important
 
