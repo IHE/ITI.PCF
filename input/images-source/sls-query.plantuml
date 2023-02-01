@@ -1,0 +1,16 @@
+@startuml
+title Real-Time sensitivty classification at Use/Query/Export
+
+database "EHR" as ehr 
+component "SLS" as sls 
+agent "App" as app 
+control "ACE" as ace
+
+
+app -down--> ehr : Queries/Uses/Export
+ehr -right--> sls : Query results
+sls -up--> ace : tagged results
+ace -left--> app : enforce rules
+
+@enduml
+

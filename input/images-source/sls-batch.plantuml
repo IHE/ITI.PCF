@@ -1,0 +1,11 @@
+
+@startuml
+title Pre categorize data within the EHR database
+
+database "EHR" as ehr 
+component "SLS" as sls 
+
+ehr -right--> sls : Batch/New/Update
+sls -left--> ehr : tagged results
+
+@enduml

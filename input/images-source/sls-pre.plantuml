@@ -1,0 +1,12 @@
+@startuml
+title Query/Use enforcement based on pre-calculated SLS 
+
+database "EHR" as ehr 
+agent "App" as app 
+control "ACE" as ace
+
+app -down--> ehr : Queries
+ehr -right--> ace : tagged results
+ace -left--> app : enforce rules
+
+@enduml
