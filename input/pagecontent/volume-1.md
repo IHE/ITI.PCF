@@ -475,9 +475,9 @@ The controlling Organization has controls in place to prevent all access.
 
 Business Access Controls control appropriate access.
 
-#### XX.4.2.5 Explicit Basic Consent Content
+#### XX.4.2.5 Basic Consent Content
 
-The **Explicit Basic Consent** content provides for recording that a Consent has been given and this option is the basis of all explicit consent options. The goal of a basic consent content is to express how a Consent is recorded, Updated, Removed, and Expired. The basic consent content also shows how one finds relevant Consent instances, and determines if they are still valid.
+The **Basic Consent** content provides for recording that a Consent has been given and this option is the basis of all explicit consent options. The goal of a basic consent content is to express how a Consent is recorded, Updated, Removed, and Expired. The basic consent content also shows how one finds relevant Consent instances, and determines if they are still valid.
 
 **Pre-conditions**:
 
@@ -488,7 +488,7 @@ The controlling Organization has identified various roles and the kinds of purpo
 - The Business Access Control prevents inappropriate users, applications, purposes, and activities
 - when a consent is found to apply to the user / application and purpose of use (given patient, organization, and policy)
   - And that consent has not expired
-    - When that consent is a Permit on the **Explicit Basic Consent**
+    - When that consent is a Permit of the access requested
       - Then Access Control allows access
     - When that consent is a Deny
       - Then Access Control enforces the deny policy
@@ -508,9 +508,9 @@ The following set of patient specific parameters may be used to permit or deny:
 3. Who is permitted/denied: This may be a device, relatedPerson, Practitioner, or Organization. This parameter enables the naming of agents that should be allowed access or denied access. This presumes that the identified agent is appropriately identified (provisioned) and authorized to make the request; typically through some application authorization and role-based-access-control. The user identity is mapped to a FHIR agent type Resource using the agent type Resource `.identifier` element (e.g. Practitioner.identifier would hold the user id).
 4. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explicably identified as an authorized purposeOfUse or denied purposeOfuse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Decider is not determining if the user/client is authorized to make the purposeOfUse declaration, this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, Operations, and Break-Glass.
 
-#### XX.4.2.6 Explicit Intermediate Consent Contents
+#### XX.4.2.6 Intermediate Consent Contents
 
-The **Explicit Intermediate Consent** contents shall be used in conjunction with **Explicit Basic Option**, and may be used with **Explicit Advanced Option**. Where as the **Explicit Basic Option** is used to record the fundamental aspects of the Consent ceremony. The **Explicit Intermediate Consent** contents can be used independently or together.
+The **Intermediate Consent** contents shall be used in conjunction with **Basic Consent** content, and may be used with **Advanced Consent** content. Where as the **Basic Consent** is used to record the fundamental aspects of the Consent ceremony. The **Intermediate Consent** contents can be used independently or together.
 
 **Pre-conditions**:
 
@@ -520,65 +520,95 @@ The controlling Organization has identified various roles and the kinds of purpo
 
 - Given The Business Access Control prevents inappropriate users, applications, purposes, and activities
   - And an appropriate user / application requests access for an appropriate purpose and activity
-- when a consent is found to apply to the user / application and purpose of use (given patient, organization, and policy)
-  - And that consent has not expired
-    - When that consent is a Permit
-      - And there are no sub-provisions that indicates a Deny of the request (exhaustive search for deny)
-        - Then Access Control allows access
-      - Any sub-provisions that indicate a Deny of the request
-        - Then Access Control denies access
-    - When that consent is a Deny
-      - And there are no sub-provisions that indicates a Permit of the request (exhaustive search for permit)
-        - Then Access Control denies access
-      - Any sub-provisions that indicate a Permit of the request
-        - Then Access Control permits access
-- When no consent is found or has expired
-  - Then Access Control enforces the chosen default policy
+  - And the data are tagged with appropriate sensitivity and confidentiality vocabulary
+- **Consent Decider**
+  - when a consent is found to apply to the user / application and purpose of use (given patient, organization, and policy)
+    - And that consent has not expired
+      - The Consent identified overall policy will be recognized relative to the overall Permit/Deny
+      - The provisions will be recognized for any applicability to the requested access
+  - decision of either Deny authorization, or return a Permit with appropriate scope restrictions. The scope restrictions may match the requested scope, or may have been impacted by the Consent parameters.
 
 **Post-conditions:**
 
-Appropriate use is allowed, in appropriate use is denied
+- **Consent Enforcer** assures only appropriate use is allowed, inappropriate use is denied
 
-##### XX.4.2.6.1 Explicit Intermediate Data Timeframe Content
+##### XX.4.2.6.1 Intermediate Data Timeframe Content
 
 This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates a timeframe within which data authored or last updated.
 
-#### XX.4.2.6.2 Explicit Intermediate Data by id Content
+The use-case would be where a patient knows that there was a period of time where they received care, and for which the patient indicates they want to segment out that data for permit or deny. The user interface is not defined here or constrained.
+
+#### XX.4.2.6.2 Intermediate Data by id Content
 
 This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates a FHIR Resources by `.id` value.
 
-#### XX.4.2.6.3 Explicit Intermediate Data Author Content
+The use-case would be where a patient knows specific data artifacts for which the patient indicates they want to segment those data for permit or deny. The user interface is not defined here or constrained.
+
+#### XX.4.2.6.3 Intermediate Data Author Content
 
 This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates data subject to the rule by way of an indicated author. This option is useful when the consent provision is limiting access to data that was authorized by a given doctor.
 
-#### XX.4.2.6.4 Explicit Intermediate Data Relationship Content
+The use-case would be where a patient knows that there is an author (organization or practitioner), and for which the patient indicates they want to segment out that data for permit or deny. Note that this capability is dependent on the data be properly attributed to the author. The user interface is not defined here or constrained.
+
+#### XX.4.2.6.4 Intermediate Data Relationship Content
 
 This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates data subject to the rule by way of that data being related in a given way to a given identified data object. This option is useful for indicating a consent provision that is limiting/authorizing access to data that was created as part of an encounter, care plan, or episode of care.
 
-#### XX.4.2.6.5 Explicit Intermediate Additional PurposeOfUse Content
+The use-case would be where a patient knows that there is an encounter, care plan, or episode of care that can be used to identify data for which the patient indicates they want to segment out that data for permit or deny. Note that this capability is dependent on the data be properly attributed to the encounter, care plan, or episode of care. The user interface is not defined here or constrained.
 
-This option provides for the Consent to have one or more permit/deny parameter that indicates a purposeOfUse that is not listed in the **Explicit Basic Option** vocabulary. This would tend to be used with Clinical Research projects, where the purposeOfUse is a code assigned to a specific Clinical Research Project. This may be used for other purposeOfUse codes. Where **Explicit Basic Option** has some well-known purposeOfUse codes, this option is used for other codes.
+#### XX.4.2.6.5 Intermediate Additional PurposeOfUse Content
+
+This option provides for the Consent to have one or more permit/deny parameter that indicates a purposeOfUse that is not listed in the **Basic Consent** vocabulary. This would tend to be used with Clinical Research projects, where the purposeOfUse is a code assigned to a specific Clinical Research Project. This may be used for other purposeOfUse codes. Where **Basic Consent** has some well-known purposeOfUse codes, this option is used for other codes.
+
+The use-case would be where a patient is authorizing purposeOfUse beyond those defined in the **Basic Consent**. An example would be a Privacy Consent to allow an identified clinical research project to have access to the patient data.
 
 #### XX.4.2.7 Advanced Consent Content
 
-TODO
+The **Advanced Consent** contents shall be used in conjunction with **Basic Consent** content, and may be used with **Intermediate Consent** content.  Where as the **Basic Consent** is used to record the fundamental aspects of the Consent ceremony. The **Advanced Consent** Content provides for parameters in a Consent that provide rules around data that are classified by sensitivity and confidentiality.
+
+Support for the Advanced Consent relies on the data being tagged with sensitivity codes and confidentiality codes. This data tagging is not defined in PCF. There are a few established ways to get the data tagged including using a Security Labeling Service, which has a few established architectures. The implementation of security tagging is a systems design requirement on the **Consent Enforcer** actor.
 
 **Pre-conditions**:
 
-Very briefly (typically one sentence) describe the conditions or
-timing when this content module would be used.
+The controlling Organization has identified various roles and the kinds of purpose of use those roles are authorized to participate in. The Controlling Organization defines the default policy to be used when no consent is found, possibly choosing from the **Implicit Options** policies. The Controlling Organization defines the policy to be used with the explicit basic consent, the policy that will be enforced when the patient has agreed to a consent. The controlling Organization provides for the patient to choose from the intermediate parameters that the controlling organization is willing to enforce, recognizing that some parameters may not be appropriate or allowed. The **Consent Capture** actor is responsible for assuring that the recorded Consent is enforceable an appropriate.
 
 **Main Flow**:
 
-Typically in an enumerated list, describe the clinical workflow
-when, where, and how this content module would be used.
+- Given The Business Access Control prevents inappropriate users, applications, purposes, and activities
+  - And an appropriate user / application requests access for an appropriate purpose and activity
+  - And the data are tagged with appropriate sensitivity and confidentiality vocabulary
+- **Consent Decider**
+  - when a consent is found to apply to the user / application and purpose of use (given patient, organization, and policy)
+    - And that consent has not expired
+      - The Consent identified overall policy will be recognized relative to the overall Permit/Deny
+      - The provisions will be recognized for any applicability to the requested access
+  - decision of either Deny authorization, or return a Permit with appropriate scope restrictions. The scope restrictions may match the requested scope, or may have been impacted by the Consent parameters.
 
 **Post-conditions:**
 
-Very briefly (typically one sentence) describe the state of the
-clinical scenario after this content module has been created including
-examples of potential next steps.
+- **Consent Enforcer** assures only appropriate use is allowed, inappropriate use is denied
 
+**Content:**
+
+The **Advanced Consent** content utilizes sensitivity codes and confidentiality codes. The Consent would include parameters that would indicate for a given sensitivity/confidentiality code the conditions on Permit or Deny. 
+
+The typical use-case would be where the patient will allow normal confidentiality data to be used for some purpose such as Treatment, but indicates that data that is tagged as restricted confidentiality not be used.
+
+At a minimum the following stigmatizing [Sensitivity](https://terminology.hl7.org/ValueSet-v3-InformationSensitivityPolicy.html) classifications shall be implemented as parameters:
+
+- `ETH` -- Substance Abuse including Alcohol
+  - `ETHUD` -- Alcohol substance abuse
+  - `OPIOIDUD` -- Opioid drug abuse
+- `PSY` -- Psychiatry Disorder
+- `SEX` -- Sexual Assault, Abuse, or Domestic Violence
+- `HIV` -- HIV/AIDS
+
+At a minimum the following [ConfidentialityCodes](https://terminology.hl7.org/ValueSet-v3-Confidentiality.html) shall be implemented as parameters:
+
+- `N` Normal and
+- `R` Restricted
+
+The ConfidentialityCode may be assigned to data by various ways. Where data have a sensitivity classification that is stigmatizing then the ConfidentialityCode shall be Restricted, otherwise the data are Normal. Other methods of determining the ConfidentialityCode for data are allowed.
 
 ## XX.5 PCF Security Considerations
 
@@ -596,6 +626,7 @@ A change to Overarching policy need to be carefully managed. A change to Overarc
 <a name="other-grouping"> </a>
 
 **TODO Possibilities**
+
 * MHDS - would explain how this is used vs the Consent method in MHDS
 * QEDm / IPA 
   
