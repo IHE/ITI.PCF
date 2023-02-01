@@ -3,29 +3,33 @@
 | Editor replace existing Volume 1 Appendix P with the following |
 {:.grid .bg-info}
 
+TODO: include defined terms.
+TODO: remove XDS specifics, Affinity Domain (privacy domain)
 
-This Appendix provides information about when consent could be automated and consequently when the BPPC Profile could be used. Privacy consent can be summarized as: "I agree on my personal data being disclosed to someone under specific conditions".
+This Appendix provides information about when consent could be automated and consequently when the BPPC, APPC, or PCF Profiles could be used. Privacy consent can be summarized as: "I agree on my personal data being disclosed to someone under specific conditions".
 
 Conditions are based on various factor(s) for example:
 
-- type of person the data is disclosed to;
+- role of person the data is disclosed to;
 - type of data disclosed;
-- type of access (normal access, emergency access...);
 - security level in which the disclosure takes place (weak authentication vs. strong authentication);
 - type of purpose for which the data is disclosed;
 - timeframe (period of validity of the consent, window of disclosure...);
-BPPC could be used when conditions can be described with a limited number of factors and when the factors can be defined and be easily interpreted by a Document Consumer implementing the Basic Patient Privacy Enforcement Option.
 
-The XDS Affinity Domain Privacy Consent Policies could result in various actions, for example:
+Some Consent needs require a more basic record, where as other intermediate or advanced needs require a more structured and coded consent record. The more advanced need must support both the recording of the patient specific parameters, and the ability to distinguish the accesses that would be impacted by those specific parameters. 
 
-- limitation of the display of the existence of specific documents to the users of a Document Consumer
-- limitation of the access to specific documents by the users of a Document Consumer
+A domain's Privacy Consent Policies could result in various actions, for example:
+
+- limitation of the fact that specific documents exist at all
+- limitation of the access to specific documents by specific users
 - display of a warning note (either concerning this access or to inform that further disclosure is not allowed, limited to some defined population, needed further consent...)
 - collection of new consent (oral consent, patient authentication, electronically signed consent, paper consent...)
 
 ## P.1 Consents in a sensitivity labeled and role based access control environment
 
-One possible implementation may have a collection of policies and sensitivity markers that would form an access control matrix. An example simple access control matrix is shown in the table below.
+TODO: make this more clear that this is defining a way of describing a overriding policy that might be accepted or rejected by the patient. This does not represent parameters that would be selected by the patient.
+
+One possible implementation may have a collection of policies and sensitivity markers that would form an access control matrix. An example simple access control matrix is shown in the table below, where an `X` indicates that the given role would have access to the given sensitivity of data.
 
 **Table P-1: Sample Access Control Policies**
 
@@ -40,7 +44,7 @@ One possible implementation may have a collection of policies and sensitivity ma
 | Patient or Legal Representative | X | X | X | X | X |   |   |
 {:.grid}
 
-Each instance of the matrix results in a single Patient Privacy Policy. This vocabulary must then be configured in the XDS Affinity Domain. Thus configuring each application in the XDS Affinity Domain to recognize for each Patient Privacy Policy identified, and which sensitivity (confidentialityCode); what types of accesses are allowed. Using the example above, the Patient Privacy Policy might look like.
+Within a deployment domain, they will define a similar matrix, and that matrix results in a single Patient Privacy Policy. This vocabulary must then be configured in the Access Control and Enforcement Points.  Using the example above, the Patient Privacy Policy might look like.
 
 **Table P-2: Patient Privacy Policies When Expressed by Document Sensitivity**
 
@@ -57,7 +61,7 @@ Each instance of the matrix results in a single Patient Privacy Policy. This voc
 
 Other divisions of the access control matrix are possible, so long as a Patient Privacy Policy covers each layout of the matrix.
 
-The following list of references is provided as good references to understand the terms and concepts presented here. These references are not required by this profile.
+The following list of references is provided as good references to understand the terms and concepts presented here. These references are not required by IHE.
 
 - ISO/TS 21298 "Health informatics – Functional and structural roles".
 - ISO/TS 22600 "Health Informatics – Privilege Management and Access Controls".
@@ -65,12 +69,14 @@ The following list of references is provided as good references to understand th
 
 ## P.2 Possible checklist for implementations
 
+The following is some steps that a domain implementing privacy should consider.
+
 ### General (before anything else)
 
-- Granularity of confidentiality implementation:
+- Granularity of classification of data:
   - Granularity of document: all documents, document type, each document.
   - Granularity of user: all users, user type, each type.
-- Depth of confidentiality implementation:
+- Depth of classification implementation:
   - Is the existence (metadata) about a document that can't be read by the user shown in a list of available documents for this patient?
   - Is the user informed there are / might be not shown documents and how much?
   - Is there the possibility to manage different depth of confidentiality depending on users or document type?
@@ -106,7 +112,7 @@ The following list of references is provided as good references to understand th
 
 ## P.3 Potential obligations
 
-Possible things that the BPPC policies might include are not fully known at this time. The following is a list that has been discovered through use by researchers, health information exchanges, and vendors. The following are some thoughts of things that might be orchestrated by BPPC Policies.
+The full scope of privacy policies is potentially infinite. The following is a list that has been discovered through use by researchers, health information exchanges, and vendors. The following are some thoughts of things that might be orchestrated by BPPC Policies.
 
 ### General
 
@@ -137,11 +143,7 @@ Possible things that the BPPC policies might include are not fully known at this
 - confidentialityCode that would indicate that the Document can only be viewed, it cannot be incorporated or copied.
 - use of this document shall result in an ATNA emergency access audit event
 
-## P.4 Dynamic Use Models
-
-It has also been suggested that documents should simply be published with the expected codes, and that only on use of a document that ALL current Patient Privacy Policy Acknowledgements are evaluated against with the code on the document. In this way revocation is more dynamic.
-
-## P.5 Security Labeling Service Models
+## P.4 Security Labeling Service Models
 
 Data may be "Normal" medical data or "Restricted" medical data. The distinction is for this IG focused purely on data classification for sensitive topics. 
 
@@ -206,5 +208,5 @@ One way to understand a very basic SLS is that it looks for clinical codes in th
 
 ### Example Data with tags
 
-- [Observation of Alcohol Use](Observation-ex-ObservationAlcoholUse.html) marked with `ETH`
+- [Observation of Alcohol Use](Observation-ex-ObservationAlcoholUse.html) marked with `ETHUD`
 - [Observation of a Blood Sugar](Observation-ex-bloodSugarB-0.html) not marked sensitive

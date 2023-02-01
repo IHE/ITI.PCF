@@ -7,10 +7,10 @@ Title: "Observation - SH: Alcohol Use"
 Description: """
 This example Observation resource to represent alcohol use assessment in a patient summary.
 
-- SLS assessed this as ETH
-- SLS added Restricted due to the ETH assessment
+- SLS assessed this as ETHUD
+- SLS added Restricted due to the ETHUD assessment
 """
-* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#ETH
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#ETHUD
 * meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#R
 * status = #final
 * code = http://loinc.org#74013-4
