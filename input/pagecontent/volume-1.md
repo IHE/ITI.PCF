@@ -15,9 +15,9 @@ But PCF enhances and relies upon these other Implementation Guides.
 
 TODO: Likely need a diagram that is more human workflow focused?
 
-## X.1 PCF Actors, Transactions, and Content Modules
-
 <a name="actors-and-transactions"> </a>
+
+## X.1 PCF Actors, Transactions, and Content Modules
 
 This section defines the actors and transactions in this implementation guide.
 
@@ -50,9 +50,9 @@ The actors participate in the following Transactions.
 
 The actors in this profile are described in more detail in the sections below.
 
-#### XX.1.1.1 Consent Capture
-
 <a name="consentcapture"> </a>
+
+#### XX.1.1.1 Consent Capture
 
 The **Consent Capture** actor is responsible for the capturing of consent from the Patient given policies available. This actor is responsible for assuring that the Patient fully understood the terms of the Consent, and also assures that the Consent terms agreed to are acceptable to the organization responsible and the abilities of the **Consent Decider** and **Consent Enforcer** Actors.
 
@@ -60,33 +60,33 @@ The **Consent Capture** may utilize other resources to interact with the Patient
 
 FHIR Capability Statement for [Consent Capture](CapabilityStatement-IHE.PCF.capture.html)
 
-#### XX.1.1.2 Consent Registry
-
 <a name="consentregistry"> </a>
+
+#### XX.1.1.2 Consent Registry
 
 The **Consent Registry** actor holds Consent resources. This includes active, inactive, and expired Consents. The **Consent Registry** does not have special understanding of the Consent other than as a FHIR `Consent` Resource. It thus is not responsible for assuring that the Consent terms are acceptable or enforceable, this is the responsibility of the **Consent Capture** Actor.
 
 FHIR Capability Statement for [Consent Registry](CapabilityStatement-IHE.PCF.registry.html)
 
-#### XX.1.1.3 Consent Authorized
-
 <a name="consentclient"> </a>
+
+#### XX.1.1.3 Consent Authorized
 
 The **Consent Authorized** actor is a client that makes use of the **Consent Decider** actor to get authorization token to use with various FHIR REST and Operation requests made to a Resource Server by way of the **Consent Enforcer** actor.
 
 TODO: The expectation is that the interaction is indistinguishable from an IUA or SMART interaction from the perspective of the Consent Authorization Client.
 
-#### XX.1.1.4 Consent Decider
-
 <a name="consentdecider"> </a>
+
+#### XX.1.1.4 Consent Decider
 
 The **Consent Decider** actor makes authorization decisions based on a given access requested context (e.g. oAuth, query/operation parameters), organizational policies, and current active `Consent` resources. The **Consent Decider** is often implemented utilizing other authorization services, taking input from the user identity (e.g. Open-ID-Connect), and application identity and authorization (e.g. IUA). These predicate authorizations provide the security context upon which the Privacy `Consent` constraints are applied. The result is an authorization token used to request access resources, and is used by the **Consent Enforcer** actor.
 
 FHIR Capability Statement for [Consent Authorization Server](CapabilityStatement-IHE.PCF.decider.html)
 
-#### XX.1.1.5 Consent Enforcer
-
 <a name="consentenforce"> </a>
+
+#### XX.1.1.5 Consent Enforcer
 
 The **Consent Enforcer** actor enforces consent decisions made by the **Consent Decider** actor. This includes deny, permit, and permit with filtering of results.
 
@@ -114,9 +114,9 @@ This transaction is used to query the **Consent Authorization Server** to determ
 
 For more details see the detailed [Introspect Token](ITI-Y3.html)
 
-## XX.2 PCF Actor Options
-
 <a name="actor-options"> </a>
+
+## XX.2 PCF Actor Options
 
 Options that may be selected for each actor in this implementation guide, are listed in Table 3.2-1 below. Dependencies
 between options when applicable are specified in notes.
@@ -218,9 +218,9 @@ The Explicit Advanced Option indicates that there is support for an advanced set
 
 See [Advanced Consent](ITI-Z3.html) Content Profile
 
-## XX.3 PCF Required Actor Groupings
-
 <a name="required-groupings"> </a>
+
+## XX.3 PCF Required Actor Groupings
 
 **TODO Describe any requirements for actors in this profile to be grouped
 with other actors. Possibilities**
@@ -228,9 +228,9 @@ with other actors. Possibilities**
 - ATNA because Audit Logging is so critical to Privacy
 - IUA or SMART? or is this not mandatory, so would be later in XX.6?
 
-## XX.4 PCF Overview
-
 <a name="overview"> </a>
+
+## XX.4 PCF Overview
 
 Use cases are informative, not normative, and “SHALL” language is
 not allowed in use cases.
@@ -240,26 +240,7 @@ The PCF Profile enables authorized access to data according to terms agreed by t
 
 ### XX.4.1 Concepts
 
-Consent is is a patient specific set of parameters that work within an overarching policy. For a discussion of policy, consent policy, and other concepts see [Appendix P: Privacy Access Policies](ch-P.html).
-
-TODO: Need to better harmonize the following with ch-P
-
-Concepts:
-
-- Data Holder - a controlling entity of some set of patient identifiable data.
-- Patient / Subject of data - the patient is the human-subject of health-related data. The use of the term patient is not to imply only subjects under current treatment.
-- Consent - Agreement between the Subject of the data and the Data Holder as to the appropriate use of data. The consent may include constraints and obligations.
-- Requests of the Data Holder - defined ways in which data are shared within a Trust Domain in keeping with the Consent terms
-- Authentic Requests -- requests that can be proven to be from within the trust domain. Authentic Requests carry well-defined parameters of the request including identity of data recipient, purpose of use the data will be used, and the data characteristics scope.
-- Data Classification -  Patient identifiable data is considered health information and is subject to a set of constraints as given to normal health information. Some patient identifiable data are considered more sensitive such as data that is deemed by the patient to be more sensitive, or by the nature of the data to be describing a sensitive health topic such as mental health, drug abuse, sexual health, or other.
-- Users - are an identifiable agent, usually human, that has some defined role within the Organization within which they operate. A User may be the Patient herself, a patient related party, clinician, researcher, billing clerk, etc. These different functional rules will have different needs to access data. For example registration clerks may need to be able to access patient demographics, billing, and contacts; but would not need access to clinical content.
-- Patient Privacy Policy - A Patient Privacy Policy explains appropriate use of data/documents in a way that provides choices to the patient. ~~The BPPC Profile places no requirements on the content of these policies nor the method used to develop these policies~~ (See [ITI TF-1 Appendix P](ch-P.html) for some guidance on developing these policies). A Patient Privacy Policy will identify who has access to information, and what information is governed by the policy (e.g., under what conditions will ~~a document~~ **data** be marked as containing that type of information). The Patient Privacy Policy may be a consent policy, dissent policy, authorization policy, etc.
-- Patient Privacy Policy - A Patient Privacy Policy will identify who has access to information, and what information is governed by the policy (e.g., under what conditions will a document be marked as containing that type of information). The policy may also describe the patient's rights to specify their consent preferences, notifications, complaints, or requests as well as the mechanism that allows them to do so.
-- Patient Privacy Consent Resource - (aka Consent) A FHIR Consent resource that follows the PCF profile and captures the act of the consent ceremony and the details. The Consent references the basis Patient Privacy Policy. The Consent may be agreement with the policy, dissent with the policy, or may contain further constraints and authorizations based on the Patient Privacy Policy.
-- Patient Privacy Policy Domain - The domain for which a Patient Privacy Policy applies. The Patient Privacy Policy Domain may cover an Organization, Health Information Exchange, or a defined set of Communities. The Patient Privacy Policy Domain is a Trust Domain.
-- Patient Privacy Policy Identifier - A Patient Privacy Policy Domain-assigned globally unique identifier that identifies the Patient Privacy Policy.
-
-Requests for data to leave the control of the Data Holder. Most requests will be from within a broader Trust Domain, but some requests may be to parties outside a Trust Domain.
+Consent is is a patient specific set of parameters that work within an overarching policy. For a discussion of policy, consent policy, and other concepts see [Appendix P: Privacy Access Policies](ch-P.html). The concepts outlined in [Appendix P: Privacy Access Policies](ch-P.html) are critical to understanding this implementation guide.
 
 ### XX.4.2 Use Cases
 
@@ -610,9 +591,9 @@ At a minimum the following [ConfidentialityCodes](https://terminology.hl7.org/Va
 
 The ConfidentialityCode may be assigned to data by various ways. Where data have a sensitivity classification that is stigmatizing then the ConfidentialityCode shall be Restricted, otherwise the data are Normal. Other methods of determining the ConfidentialityCode for data are allowed.
 
-## XX.5 PCF Security Considerations
-
 <a name="security-considerations"> </a>
+
+## XX.5 PCF Security Considerations
 
 **TODO** usually filled out after whole profile is written
 
@@ -620,10 +601,9 @@ See ITI TF-2x: [Appendix Z.8 “Mobile Security Considerations”](https://profi
 
 A change to Overarching policy need to be carefully managed. A change to Overarching policy may have no impact on the Consent, or may foundationally invalidate all Consents. The Overarching Policy identification is a foundational element of a Consent, and thus when the Overarching policy terms change, one can identify all Consents that were based on the prior Patient Privacy Policy Identifier. In some cases, such as jurisdictional rules backed by laws, the overarching policy may change, effectively changing the effect of the rules of a Consent based on that Overarching policy.
 
+<a name="other-grouping"> </a>
 
 ## XX.6 PCF Cross-Profile Considerations
-
-<a name="other-grouping"> </a>
 
 **TODO Possibilities**
 
