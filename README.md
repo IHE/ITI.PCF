@@ -29,7 +29,8 @@ questions to the ITI committee to aid with the development of the IG.
 1. The NOT likely in scope is open for discussion. I put some things here because of maturity of that concept, maturity of that element in the FHIR Consent, complexity, or unclear priority. Thus any feedback is welcome.
 1. Do we need to cover policies that would constrain Document Source based on a Consent rule? As in a Consent that would prevent Create/Update/Delete actions. This was included in XDS/BPPC, but there is no evidence that it was used.
 1. I expect that we could define some explicitly coded policies for MHDS environments that would have defined behavior. These would be definable in behaviors, but not in human language that would be used with the patient. Given that the Consent Capture is defined as not including the patient engagement on the consent terms, this may not be a problem that we can't provide human language. we could provide boilerplate human language, but we should be careful to not express legal terms.
-2. I defined a subset of ConfidentialityCodes (N, R), and Sensitivity codes (ETH, ETHUD, OPIOIDUD, PSY, SEX, and HIV). Is this enough? Is this too many? Is HIV/AIDS still a stigmatizing sensitivity topic? There is details on these in the [SLS sample](http://build.fhir.org/ig/JohnMoehrke/ConsentWithSegmentation/branches/main/sls.html)
+1. I defined a subset of ConfidentialityCodes (N, R), and Sensitivity codes (ETH, ETHUD, OPIOIDUD, PSY, SEX, and HIV). Is this enough? Is this too many? Is HIV/AIDS still a stigmatizing sensitivity topic? There is details on these in the [SLS sample](http://build.fhir.org/ig/JohnMoehrke/ConsentWithSegmentation/branches/main/sls.html)
+1. Should we include support for a Consent to have Obligations and Refrains on provisions? 
 
 ### Decided
 
