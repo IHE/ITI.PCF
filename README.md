@@ -10,14 +10,11 @@ http://build.fhir.org/ig/IHE/ITI.PCF/branches/master/index.html
 
 questions to the ITI committee to aid with the development of the IG.
 
-1. The Deny except for Break-Glass seems to be beyond foundational. Seems these use-cases are out-of-scope? The use-case as written is a possible base policy, but would not be a common one in healthcare and especially not in treatment.
-  - I think we thus need to remove Break-Glass
+1. The Deny except for Break-Glass seems to be beyond foundational. Seems these use-cases are out-of-scope? The use-case as written is a possible base policy, but would not be a common one in healthcare and especially not in treatment.  I think we thus need to remove Break-Glass
 1. is Volume 1 getting too long? Could split on H2 (actors, options, grouping, overview, security, xProfile) like what is done in MHD.
 1. do we define deployment models that have the Privacy-Preferences external to a custodian, and/or the Consent Management outside the custodian. The initial round might be limited to cases where there is some overriding organization that encompasses all actors formally defined in PCF. Thus coordinating between possibly divergent or conflicting policies can be left to the Consent Creator actor.
 1. There is partial documentation of Privacy-Preferences, which uses the FHIR Consent without a binding to a custodian. These Privacy-Preferences are statements by the Patient of their desired rules. These desired rules can be used during the consent interaction (ceremony) to pre-adjust the rules that the custodian is willing to support. Thus enabling a more friendly experience by the Patient. This is most useful when the Patient has complex desired rules that may be hard to capture during the consent ceremony.
-1. the XX.4.2 section seems awkward given the pattern IHE has for content profiling. The detail is there, but it seems not as useful as it could be.
-  - would cucumber be more understandable?
-  - have I written this wrong? I have written these more from the access control logic, but possibly they should only be from the perspective of the content definition. The access control logic is in the option text above?
+1. the XX.4.2 section seems awkward given the pattern IHE has for content profiling. The detail is there, but it seems not as useful as it could be. would cucumber be more understandable? have I written this wrong? I have written these more from the access control logic, but possibly they should only be from the perspective of the content definition. The access control logic is in the option text above?
 1. Are we going to support just one level of sub-provisions? 2 levels of sub-provisions? not limited? Seems one level of exceptions should be sufficient for most cases. Unclear what realistic use-cases need 2 levels. Recommend only one level of sub-provisions (This enables Permit with exceptions, and Deny with exceptions; but does not support exceptions to the exceptions). Given no combining rules, and concern to make implementable.
   - I have written this as exhaustive search through sub-provisions. is this right?
 1. Do we profile Questionnaire/QuestionnaireResponse? (What generation?) For now I informatively indicate that the capture event could be enabled using Questionnaire.
@@ -29,7 +26,8 @@ questions to the ITI committee to aid with the development of the IG.
 1. The NOT likely in scope is open for discussion. I put some things here because of maturity of that concept, maturity of that element in the FHIR Consent, complexity, or unclear priority. Thus any feedback is welcome.
 1. Do we need to cover policies that would constrain Document Source based on a Consent rule? As in a Consent that would prevent Create/Update/Delete actions. This was included in XDS/BPPC, but there is no evidence that it was used.
 1. I expect that we could define some explicitly coded policies for MHDS environments that would have defined behavior. These would be definable in behaviors, but not in human language that would be used with the patient. Given that the Consent Capture is defined as not including the patient engagement on the consent terms, this may not be a problem that we can't provide human language. we could provide boilerplate human language, but we should be careful to not express legal terms.
-2. I defined a subset of ConfidentialityCodes (N, R), and Sensitivity codes (ETH, ETHUD, OPIOIDUD, PSY, SEX, and HIV). Is this enough? Is this too many? Is HIV/AIDS still a stigmatizing sensitivity topic? There is details on these in the [SLS sample](http://build.fhir.org/ig/JohnMoehrke/ConsentWithSegmentation/branches/main/sls.html)
+1. I defined a subset of ConfidentialityCodes (N, R), and Sensitivity codes (ETH, ETHUD, OPIOIDUD, PSY, SEX, and HIV). Is this enough? Is this too many? There is details on these in the [SLS sample](http://build.fhir.org/ig/JohnMoehrke/ConsentWithSegmentation/branches/main/sls.html)
+2. Profile number, transaction numbers, and content profile numbers
 
 ### Decided
 
@@ -37,7 +35,10 @@ questions to the ITI committee to aid with the development of the IG.
    1. Each incremental parameter should be its own option. So we end up with Implicit, Explicit, and Advanced; mostly as they were. The following are incrementally built upon Basic: Data Timeframe, Data by id, Named research project, data author, and data relationship.
    2. I simply made the intermediate a set of options with these 5. So there is still use of 'intermediate'. The volume three profiling of Consent would then include the profiling for these 5 in one chapter.
 1. I did bring in SLS to Appendix P
-2. 
+2. HIV is still important internationally
+3. Female Health may be a sensitve topic (menstration cycle) - TODO
+4. SLS valueset management, might explain some modern terms as examplars of the continual maintenance. - TODO
+   
 ## Proposed Scope
 
 Much like BPPC + APPC does for XDS community, this Implementation Guide (IG) would do for FHIR community. This IG could be used with MHDS, which already has some of the framework for more specific Consents, but PCF would be more complete than what is [indicated in MHDS](https://profiles.ihe.net/ITI/MHDS/volume-1.html#1504-mhds-overview). This IG could also be used for organization use or community use beyond MHD/XDS, which would include use-cases like QEDm, and IPA. This would leverage BasicAudit to record access control decisions and recording of consents.

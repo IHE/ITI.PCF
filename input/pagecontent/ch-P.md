@@ -1,6 +1,6 @@
 
 |------------------------------------------------|
-| Editor replace existing Volume 1 Appendix P with the following\r\nThis Appendix exists in the Final Text Technical Framework but only covers BPPC. This version expands on the scope, and updates the details. |
+| Editor replace existing Volume 1 Appendix P with the following</br>This Appendix exists in the Final Text Technical Framework but only covers BPPC. This version expands on the scope, and updates the details. |
 {:.grid .bg-info}
 
 This Appendix provides information about when consent could be automated and consequently when the BPPC, APPC, or PCF Profiles could be used. Privacy consent can be summarized as: "I agree on my personal data being disclosed to someone under specific conditions".
