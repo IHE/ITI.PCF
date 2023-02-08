@@ -1,7 +1,7 @@
-name: "Bug report"
-description: "Thank you for reporting a bug!"
+name: Feature Request
+description: Thank you for submitting this feature request!
 title: "[Feature]: "
-labels: "["feature", "CP"]"
+labels: ["feature", "CP"]
 body:
   - type: markdown
     attributes:
