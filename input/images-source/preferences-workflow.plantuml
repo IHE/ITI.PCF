@@ -1,0 +1,20 @@
+
+@startuml
+title Preferences to Enforcement
+
+:Patient: --> (Pref)
+"Privacy Preferences" as (Pref)
+
+package "Patient Privacy Policy Domain" {
+"Consent Admin" as Admin
+"Clinical User" as Clin
+
+Admin <-- (Pref)
+Admin --> (Privacy Consent)
+note left of (Privacy Consent) : Patient Privacy Policy
+
+Clin <--> (Access Controlled)
+(Access Controlled) <-- (Privacy Consent)
+(Patient Identified Data) -up-> (Access Controlled)
+}
+@enduml
