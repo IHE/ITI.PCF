@@ -1,7 +1,7 @@
 name: Feature Request
 description: Thank you for submitting this feature request!
 title: "[Feature]: "
-labels: ["feature", "CP"]
+labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
