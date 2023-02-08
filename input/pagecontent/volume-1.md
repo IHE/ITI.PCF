@@ -518,25 +518,25 @@ This data scoping option provides for the Consent to have one or more permit/den
 
 The use-case would be where a patient knows that there was a period of time where they received care, and for which the patient indicates they want to segment out that data for permit or deny. The user interface is not defined here or constrained.
 
-#### XX.4.2.6.2 Intermediate Data by id Content
+##### XX.4.2.6.2 Intermediate Data by id Content
 
 This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates a FHIR Resources by `.id` value.
 
 The use-case would be where a patient knows specific data artifacts for which the patient indicates they want to segment those data for permit or deny. The user interface is not defined here or constrained.
 
-#### XX.4.2.6.3 Intermediate Data Author Content
+##### XX.4.2.6.3 Intermediate Data Author Content
 
 This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates data subject to the rule by way of an indicated author. This option is useful when the consent provision is limiting access to data that was authorized by a given doctor.
 
 The use-case would be where a patient knows that there is an author (organization or practitioner), and for which the patient indicates they want to segment out that data for permit or deny. Note that this capability is dependent on the data be properly attributed to the author. The user interface is not defined here or constrained.
 
-#### XX.4.2.6.4 Intermediate Data Relationship Content
+##### XX.4.2.6.4 Intermediate Data Relationship Content
 
 This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates data subject to the rule by way of that data being related in a given way to a given identified data object. This option is useful for indicating a consent provision that is limiting/authorizing access to data that was created as part of an encounter, care plan, or episode of care.
 
 The use-case would be where a patient knows that there is an encounter, care plan, or episode of care that can be used to identify data for which the patient indicates they want to segment out that data for permit or deny. Note that this capability is dependent on the data be properly attributed to the encounter, care plan, or episode of care. The user interface is not defined here or constrained.
 
-#### XX.4.2.6.5 Intermediate Additional PurposeOfUse Content
+##### XX.4.2.6.5 Intermediate Additional PurposeOfUse Content
 
 This option provides for the Consent to have one or more permit/deny parameter that indicates a purposeOfUse that is not listed in the **Basic Consent** vocabulary. This would tend to be used with Clinical Research projects, where the purposeOfUse is a code assigned to a specific Clinical Research Project. This may be used for other purposeOfUse codes. Where **Basic Consent** has some well-known purposeOfUse codes, this option is used for other codes.
 

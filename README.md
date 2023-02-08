@@ -4,24 +4,28 @@ Note where decisions are made and a concept is put into the IG, it is generally 
 
 ## CI Build
 
-http://build.fhir.org/ig/IHE/ITI.PCF/branches/master/index.html
+<http://build.fhir.org/ig/IHE/ITI.PCF/branches/master/index.html>
 
 ## Questions
 
 questions to the ITI committee to aid with the development of the IG.
 
 1. is Volume 1 getting too long? Could split on H2 (actors, options, grouping, overview, security, xProfile) like what is done in MHD.
-3. the XX.4.2 section seems awkward given the pattern IHE has for content profiling. The detail is there, but it seems not as useful as it could be. would cucumber be more understandable? have I written this wrong? I have written these more from the access control logic, but possibly they should only be from the perspective of the content definition. The access control logic is in the option text above?
-4. Are we going to support just one level of sub-provisions? 2 levels of sub-provisions? not limited? Seems one level of exceptions should be sufficient for most cases. Unclear what realistic use-cases need 2 levels. Recommend only one level of sub-provisions (This enables Permit with exceptions, and Deny with exceptions; but does not support exceptions to the exceptions). Given no combining rules, and concern to make implementable. I have written this as exhaustive search through sub-provisions. is this right?
-10. How to approach the overall solution which will be very complex? The thinking is that there will be both options within the IG of increasing complexity and building on the previous; but also that the initial version may be scope limited to make it achievable and measurable. One specific extension beyond what I have defined would be refinement on use of security tags, security labeling service, and other ABAC concepts. Initial proposal is focused on some high value sensitive topics.
-11. The NOT likely in scope is open for discussion. I put some things here because of maturity of that concept, maturity of that element in the FHIR Consent, complexity, or unclear priority. Thus any feedback is welcome.
-13. I expect that we could define some explicitly coded policies for MHDS environments that would have defined behavior. These would be definable in behaviors, but not in human language that would be used with the patient. Given that the Consent Capture is defined as not including the patient engagement on the consent terms, this may not be a problem that we can't provide human language. we could provide boilerplate human language, but we should be careful to not express legal terms.
-14. I defined a subset of ConfidentialityCodes (N, R), and Sensitivity codes (ETH, ETHUD, OPIOIDUD, PSY, SEX, and HIV). Is this enough? Is this too many? 
-15. Profile number, transaction numbers, and content profile numbers
+1. the XX.4.2 section seems awkward given the pattern IHE has for content profiling. The detail is there, but it seems not as useful as it could be. would cucumber be more understandable? have I written this wrong? I have written these more from the access control logic, but possibly they should only be from the perspective of the content definition. The access control logic is in the option text above?
+1. Are we going to support just one level of sub-provisions? 2 levels of sub-provisions? not limited? Seems one level of exceptions should be sufficient for most cases. Unclear what realistic use-cases need 2 levels. Recommend only one level of sub-provisions (This enables Permit with exceptions, and Deny with exceptions; but does not support exceptions to the exceptions). Given no combining rules, and concern to make implementable. I have written this as exhaustive search through sub-provisions. is this right?
+1. How to approach the overall solution which will be very complex? The thinking is that there will be both options within the IG of increasing complexity and building on the previous; but also that the initial version may be scope limited to make it achievable and measurable. One specific extension beyond what I have defined would be refinement on use of security tags, security labeling service, and other ABAC concepts. Initial proposal is focused on some high value sensitive topics.
+1. The NOT likely in scope is open for discussion. I put some things here because of maturity of that concept, maturity of that element in the FHIR Consent, complexity, or unclear priority. Thus any feedback is welcome.
+1. I expect that we could define some explicitly coded policies for MHDS environments that would have defined behavior. These would be definable in behaviors, but not in human language that would be used with the patient. Given that the Consent Capture is defined as not including the patient engagement on the consent terms, this may not be a problem that we can't provide human language. we could provide boilerplate human language, but we should be careful to not express legal terms.
+1. I defined a subset of ConfidentialityCodes (N, R), and Sensitivity codes (ETH, ETHUD, OPIOIDUD, PSY, SEX, and HIV). Is this enough? Is this too many?
 
 ### notes
 
-empty
+- switch to IUA actor names
+- switch Consent Capture to Consent Recorder
+- introspect second arrow with direction
+- transaction table does not have all transactions
+- link to SLS
+- Profile number, transaction numbers, and content profile numbers
 
 ### Decided
 
@@ -34,7 +38,7 @@ empty
 4. SLS valueset management, Explained ICD11 as some modern terms as exemplars of the continual maintenance.
 5. break-glass -- could support Deny All with break-glass. Thus all requests for treatment get Deny, but the deny is indicated as break-glass qualifying. Thus purposeOfUse break-glass is used.   harder to support that some data is returned, but not all. -- Open-Issue, request solutions
 6. Include Privacy Preference flow in Appendix P, but not within the normative text.
-7. We are not going to provide details on Questionnaire / QuestionnaireResponse use. There are mentions of the possibility, but no more is to be said. A future revision of this or a new IG could address this. 
+7. We are not going to provide details on Questionnaire / QuestionnaireResponse use. There are mentions of the possibility, but no more is to be said. A future revision of this or a new IG could address this.
 8. We are not going to profile how the Patient Privacy Policy could be retrieved other than the mention about use of MHD.
 9. Discussed the possibility of needing to do continued maintenance, including proving that historic access would have enforced the consent at that time, and thus the need for Consent versions, Provenance, and/or AuditEvent. -- Possible Open-Issue
 10. PCF is not addressing the use-case where a Consent (dissent) would forbid the data capture or recording. This was available in BPPC, but was not found to be used.
@@ -47,7 +51,7 @@ This IG would
 
 1. Define a set of privacy policies with canonical URI and/or code. These codes might be used in real-implementations, but would also aid with understanding of the concept. Much like most of the PurposeOfUse codes are usable, while others are too abstract in real-implementations.
 1. Define a set of Consent patterns that are foundational. These would be options of increasing complexity, building upon the previous. As IHE Profile options they indicate an ability to support the use-case. Real-Implementations would pick which actual policy(s) are used. So the ability to support an option does not mandate that that option is used in all settings.
-1. Define actors for creation/update of Consent: 
+1. Define actors for creation/update of Consent:
 
 ## Use-cases
 
@@ -80,7 +84,7 @@ Likely constraints (back of the envelop):
 Authorizing or Denying access to:
 
 - who by a given Practitioner, CareTeam, RelatedPerson
-- why by a given Purpose Of Event codes 
+- why by a given Purpose Of Event codes
   - why by a given named Research projects
 - data by Confidentiality class (Normal, but not Restricted) -- presumes a mature SLS
   - data by sensitivity class -- presumes a mature SLS
@@ -96,7 +100,7 @@ what others are needed in real-life (vs theory)?
 These seem to be possible with Consent resource in R4, but not clear they are priority or even possible.
 
 - Use of Consent besides Privacy (consent to treat, advanced directives)
-- .action -- this is not well enough defined in Consent 
+- .action -- this is not well enough defined in Consent
 - applied obligations or refrains -- no clear place where these go in Consent
 - .class -- this is not well enough defined in Consent
 - data related to an identified data resource (e.g. all data related to this Encounter)
@@ -150,7 +154,7 @@ Privacy Consent:
 - [Mohammad Jafari blog](https://jafarim.net/blog/)
   - [Consents Revocation and Redisclosure](https://jafarim.net/revocation-and-redisclosure/)
   - [Consent Overarching Policy](https://jafarim.net/consent-overarching-policy)
-- ONC LEAP Computable Consent Project 
+- ONC LEAP Computable Consent Project
   - [High-Level Architecture](https://sdhealthconnect.github.io/leap/blog/2021/09/30/architecture.html)
   - [Scalability in Consent Management](https://sdhealthconnect.github.io/leap/blog/2021/12/23/scalability.html)
   - [Future Directions for the LEAP Consent Project](https://sdhealthconnect.github.io/leap/blog/2021/10/04/leap-future.html)
@@ -170,4 +174,3 @@ Chosen Name - **Privacy Consent on FHIR (PCF)**
 - Privacy Consent on FHIR (PCoF)
 - Basic Advanced Privacy Consent (BAPC)
 - FHIR Privacy Consent (FPC)
-

@@ -1,9 +1,7 @@
-name: Bug Report
+name: Public Comment
 description: File a bug report
 title: "[Bug]: "
 labels: ["bug", "triage"]
-assignees:
-  - octocat
 body:
   - type: markdown
     attributes:
@@ -18,45 +16,44 @@ body:
     validations:
       required: false
   - type: textarea
+    id: where
+    attributes:
+      label: Section Number
+      description: Identify the most specific section number the issue occurs
+      placeholder:  e.g. 4.1.2
+  - type: textarea
     id: what-happened
     attributes:
-      label: What happened?
-      description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
-      value: "A bug happened!"
+      label: What is wrong?
+      description: Describe your issue. Don't write a book, but do include enough to indicate what you see as a problem.
     validations:
       required: true
-  - type: dropdown
-    id: version
+  - type: textarea
+    id: solution
     attributes:
-      label: Version
-      description: What version of our software are you running?
-      options:
-        - 1.0.2 (Default)
-        - 1.0.3 (Edge)
-    validations:
-      required: true
-  - type: dropdown
-    id: browsers
-    attributes:
-      label: What browsers are you seeing the problem on?
-      multiple: true
-      options:
-        - Firefox
-        - Chrome
-        - Safari
-        - Microsoft Edge
+      label: Describe the solution you'd like
+      description: A clear and concise description of what you want to happen.
   - type: textarea
     id: logs
     attributes:
       label: Relevant log output
       description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
       render: shell
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority?
+      multiple: false
+      options:
+        - High: Important issue where there is major issue to be resolved. Requires discussion and debate.
+        - Medium: Significant issue or clarification. Requires discussion, but should not lead to long debate.
+        - Low: Typo or other minor classification that an editor can manage. Requires no group discussion.
   - type: checkboxes
     id: terms
     attributes:
       label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+      description: By submitting this feature request, you agree to follow the IHE [Code of Conduct](https://github.com/IHE/.github/blob/main/CODE_OF_CONDUCT.md)
       options:
-        - label: I agree to follow this project's Code of Conduct
+        - label: I agree to follow IHE Code of Conduct
           required: true
+        
