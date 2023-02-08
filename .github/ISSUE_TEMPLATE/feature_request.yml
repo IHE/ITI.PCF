@@ -1,5 +1,5 @@
-name: "Feature request"
-description: "Suggest an idea for this project"
+name: "Bug report"
+description: "Thank you for reporting a bug!"
 title: "[Feature]: "
 labels: "["feature", "CP"]"
 body:
