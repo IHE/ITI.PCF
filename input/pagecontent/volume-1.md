@@ -275,7 +275,7 @@ The following flow shows the activities involved in the Capture new Consent flow
 The diagrammed steps:
 
 1. Query for existing Consent. This step may not be necessary but is important to establish the Capture New Consent use-case from the Update Existing Consent use-case.
-2. None is found. Given that no existing Consent exists, there are no preconditions, just default expectations for the workflow (TODO: This is where a Privacy Preferences could guide the flow).
+2. None is found. Given that no existing Consent exists, there are no preconditions, just default expectations for the workflow.
 3. Consult with the Patient. There is some interaction with the Patient. Within this interaction the patient needs to be appropriately informed of the details of the Patient Privacy Policy and the parameters the patient can control. This user Interface might use a FHIR Questionnaire resulting in a QuestionnaireResult as documentation of the ceremony. This User Interface might use some other technical means, or might be a paper process.  This User Interface is not constrained by the PCF.
 4. The results of the ceremony are captured to the satisfaction of the controlling Organization.  This might be a QuestionnaireResponse, or a scanned image of the signed paperwork recorded using a DocumentReference (See [MHD](https://profiles.ihe.net/ITI/MHD/index.html))
 5. The Consent resource constrained by the Consent constraints defined in Volume 3 is then saved to the **Consent Registry** actor using Transaction [ITI-Y1].
@@ -311,7 +311,7 @@ The following flow shows the activities involved in the Update Existing Consent 
 The diagrammed steps:
 
 1. Query for existing Consent. This step may not be necessary but is important to establish the Capture New Consent use-case from the Update Existing Consent use-case. This step is also useful to retrieve the current Consent parameters so that the User Interface can start with appropriate settings informed by the past.
-2. A Consent is found. More than one Consent may be found, for which the PCF does not address how to address this case. The overarching policy would need to be consulted. (TODO: This is where a Privacy Preferences could guide the flow).
+2. A Consent is found. More than one Consent may be found, for which the PCF does not address how to address this case. The overarching policy would need to be consulted.
 3. Consult with the Patient. There is some interaction with the Patient. Within this interaction the patient needs to be appropriately informed of the details of the Patient Privacy Policy and the parameters the patient can control. This user Interface might use a FHIR Questionnaire resulting in a QuestionnaireResult as documentation of the ceremony. This User Interface might use some other technical means, or might be a paper process.  This User Interface is not constrained by the PCF.
 4. The results of the ceremony are captured to the satisfaction of the controlling Organization.  This might be a QuestionnaireResponse, or a scanned image of the signed paperwork recorded using a DocumentReference (See [MHD](https://profiles.ihe.net/ITI/MHD/index.html))
 5. The Consent resource constrained by the Consent constraints defined in Volume 3 is then saved to the **Consent Registry** actor using Transaction [ITI-Y1]. This is typically a FHIR Update action so as to replace the previous Consent. It is also possible to delete the previous and save the Consent as a new instance.
@@ -421,8 +421,6 @@ Business Access Controls control appropriate access.
 
 Deny for all uses except when explicit override reason is given by user that is authorized to use explicit override (aka Break-Glass).
 
-TODO: Is this out-of-scope of PCF as it is not really consent? Might this be informationally described and not part of an option?
-
 **Pre-conditions**:
 
 The controlling Organization has identified various roles that would have the ability to declare an access override (aka Break-Glass), and has mechanisms in place to prevent any inappropriate use. There is no expectation that the Break-Glass is only for treatment, although the controlling Organization policy may be specific to treatment. In this way this option can be used for any purposeOfUse and override rational that the controlling Organization deems appropriate.
@@ -430,6 +428,7 @@ The controlling Organization has identified various roles that would have the ab
 **Main Flow**:
 
 - Business Access Control prevents inappropriate users, applications, purposes, and activities.
+  - The access denial will be indicated as either absolute, or potential to invoke break-glass
 - User that is authorized to declare an explicit override provides reason for override
 - There is no Access Control use of the Consent resource
 
@@ -600,6 +599,10 @@ The ConfidentialityCode may be assigned to data by various ways. Where data have
 See ITI TF-2x: [Appendix Z.8 “Mobile Security Considerations”](https://profiles.ihe.net/ITI/TF/Volume2/ch-Z.html#z.8-mobile-security-considerations)
 
 A change to Overarching policy need to be carefully managed. A change to Overarching policy may have no impact on the Consent, or may foundationally invalidate all Consents. The Overarching Policy identification is a foundational element of a Consent, and thus when the Overarching policy terms change, one can identify all Consents that were based on the prior Patient Privacy Policy Identifier. In some cases, such as jurisdictional rules backed by laws, the overarching policy may change, effectively changing the effect of the rules of a Consent based on that Overarching policy.
+
+Security office should monitor the audit log for uses of break-glass, and follow up to confirm it was a legitimate use of break-glass per policy.
+
+Security office should monitor audit log for access denied, and follow up to confirm that it was a legitimate denial of an access request. Possibly further investigating why the request was initiated.
 
 <a name="other-grouping"> </a>
 

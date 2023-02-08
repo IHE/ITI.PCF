@@ -37,7 +37,16 @@ Policy includes appropriate access rules that define conditions on various facto
 - type of purpose for which the data is disclosed;
 - timeframe of use (period of validity of the consent, window of disclosure...);
 
-Some Consent needs require a more basic record, where as other Consents require intermediate or advanced needs. The more advanced need must support both the recording of the patient specific parameters, and the ability to distinguish the accesses that would be impacted by those specific parameters.
+Some Privay Consent needs require a more basic record, where as other Consents require intermediate or advanced needs. The more advanced need must support both the recording of the patient specific parameters, and the ability to distinguish the accesses that would be impacted by those specific parameters.
+
+The Privacy Consent Ceremony and the development of the Privacy Policies is not constrained or described by IHE. The Privacy Preferences is a potential way to improve the Patient Experience, by allowing the Patient to express their desired privacy conditions and parameters. These Privacy Preferences would not be enforceable as they are as statement of desire, and not agreed to by a Data Holder. The Consent ceremony could take these preferences as input, and thus present the terms that the Data Holder is willing to enforce. Thus at the end of the Consent Ceremony there would be a Patient Privacy Consent Resource that expresses the terms that the Data Holder and Patient have agreed to.
+
+<div>
+{%include preferences-workflow.svg%}
+</div>
+<br clear="all">
+
+**Figure: Preferences to Enforcement possible workflow**
 
 A domain's Privacy Consent Policies could result in various actions, for example:
 
@@ -135,8 +144,13 @@ The following are some steps that a domain implementing privacy should consider.
   - Is the user informed that there are data they are not being shown?
   - What level of Consent parameters is allowed?
 - How to identify users, objects, and policy?
+- Obligations and Refrain policies:
+  - Are there actions that should be forbidden (Refrain) or mandated (Obligation)?
+    - Some examples: Do not Print, Do not Persist, Must encrypt before storing, Must get additional Consent before further disclosure, etc.
+  - Can these Obligations and Refrains be incorporated into the overall Policy, or the meaning of a Consent Policy
+  - Using Obligations or Refrains at the transactional level is not well implemented and often not necessary when it can be imposed at the policy level.
 - Trust Domain support:
-  - What capability do the members in a Trust Domain support transactional obligations?
+  - What capability do the members in a Trust Domain support?
 
 ### While implementing Consent Management
 
@@ -165,6 +179,15 @@ The following are some steps that a domain implementing privacy should consider.
   - break glass
 - What additional information should be given (general consent policy, patient' specific consent policy...)
 
+### Continued Management
+
+- Review of Access Denied to be sure that they are appropriate
+- Review of Break-Glass instances to be sure that they are appropriate
+- Mechanism to address complaints that access was allowed at some time in the past.
+  - This would need to address any changes in the Patient Consent record during that time
+    - Where the record changed, is there FHIR _history support to give access to older version?
+    - Where the record changed, is there AuditEvent or Provenance to indicate why it changed and when and by whom?
+  
 ## P.3 Potential obligations and refrains
 
 The full scope of privacy policies is potentially infinite. The following are some considerations of obligations and refrains that a Patient Privacy Policy may require of an Access Control Enforcement Point. Where Obligations are activities that must be done, and Refrains are activities that must not be done. Many of these obligations and refrains have been given codes in the HL7 Security Control ValueSets
@@ -236,6 +259,8 @@ One way to understand a very basic SLS is that it looks for clinical codes in th
 - [Set of codes that indicate HIV](ValueSet-SlsSensitiveHIV.html)
 
 Note these ValueSets are also focused on directly identifying codes. These ValueSets do not address when different objects may be normal sensitive alone, but when they appear in a patient record the combination is sensitive. These ValueSets also do not address narrative text that might indicate sensitivity.
+
+For example since these valueSets were originally authored ICD10 and ICD11 codeSystems have been published and are used. Thus the valueSets indicating codes in ICD9 may still find data in historic records, but to catch new data there would need to be codes from ICD10 or ICD11 defined.
 
 ### Example Data with tags
 
