@@ -11,5 +11,5 @@
     "title" : "Privacy Consent on FHIR",
     "ci-build" : "http://build.fhir.org/ig/IHE/ITI.PCF/branches/master/index.html",
     "category" : "Privacy / Security",
-    "introduction" : "This Implementation Guide, Privacy Consents on FHIR (PCF), provides support for patient privacy consents for Health Information Exchanges using FHIR."
+    "introduction" : "This Implementation Guide, Privacy Consent on FHIR (PCF), provides support for patient privacy consents for Health Information Exchanges using FHIR."
   }
