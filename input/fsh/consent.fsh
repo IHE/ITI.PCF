@@ -23,11 +23,12 @@ Description:    """
 * status 1..1
 * scope 1..1
 * scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
-* category 1..1
+* category 1..
+// TODO should we define a category for basic vs intermediary vs advanced
 * patient 1..1
 * dateTime 1..1
-* performer 1..1
-* organization 1..1
+* performer 1..
+* organization 1..
 * source[x] 1..1
 * policy.uri 1..1
 * provision.type 1..1
@@ -237,4 +238,7 @@ Title: "Binary example using Binary"
 Description: "Example of a binary ink signed document."
 * contentType = #image/png
 * data = "ig-loader-ink.png"
+
+
+// TODO -- might bring in a BPPC DocumentReference and possibly show a derived Consent off of that. Might this be a grouping behavior when PCF+MHD+BPPC?
 
