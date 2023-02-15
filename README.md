@@ -15,17 +15,12 @@ questions to the ITI committee to aid with the development of the IG.
 1. Are we going to support just one level of sub-provisions? 2 levels of sub-provisions? not limited? Seems one level of exceptions should be sufficient for most cases. Unclear what realistic use-cases need 2 levels. Recommend only one level of sub-provisions (This enables Permit with exceptions, and Deny with exceptions; but does not support exceptions to the exceptions). Given no combining rules, and concern to make implementable. I have written this as exhaustive search through sub-provisions. is this right?
 1. How to approach the overall solution which will be very complex? The thinking is that there will be both options within the IG of increasing complexity and building on the previous; but also that the initial version may be scope limited to make it achievable and measurable. One specific extension beyond what I have defined would be refinement on use of security tags, security labeling service, and other ABAC concepts. Initial proposal is focused on some high value sensitive topics.
 1. The NOT likely in scope is open for discussion. I put some things here because of maturity of that concept, maturity of that element in the FHIR Consent, complexity, or unclear priority. Thus any feedback is welcome.
-1. I expect that we could define some explicitly coded policies for MHDS environments that would have defined behavior. These would be definable in behaviors, but not in human language that would be used with the patient. Given that the Consent Capture is defined as not including the patient engagement on the consent terms, this may not be a problem that we can't provide human language. we could provide boilerplate human language, but we should be careful to not express legal terms.
+1. I expect that we could define some explicitly coded policies for MHDS environments that would have defined behavior. These would be definable in behaviors, but not in human language that would be used with the patient. Given that the Consent Recorder is defined as not including the patient engagement on the consent terms, this may not be a problem that we can't provide human language. we could provide boilerplate human language, but we should be careful to not express legal terms.
 1. I defined a subset of ConfidentialityCodes (N, R), and Sensitivity codes (ETH, ETHUD, OPIOIDUD, PSY, SEX, and HIV). Is this enough? Is this too many?
 
 ### notes
 
-- switch to IUA actor names
-- switch Consent Capture to Consent Recorder
-- introspect second arrow with direction
-- transaction table does not have all transactions
 - link to SLS
-- Profile number, transaction numbers, and content profile numbers
 
 ### Decided
 

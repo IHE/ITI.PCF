@@ -1,35 +1,38 @@
-Instance: IHE.PCF.capture
+Instance: IHE.PCF.consentRecorder
 InstanceOf: CapabilityStatement
-Title: "PCF Consent Capture Actor"
+Title: "PCF Consent Recorder Actor"
 Usage: #definition
 * description = """
-CapabilityStatement for capture Actor 
+CapabilityStatement for the Consent Recorder Actor 
 
 Explain
-- blah
+- uses [Access Consent \[ITI-110\]](ITI-110.html)
 - blah
 """
-* url = "https://profiles.ihe.net/ITI/PCF/CapabilityStatement/IHE.PCF.capture"
-* name = "IHE_PCF_capture"
-* title = "IHE PCF capture"
+* url = "https://profiles.ihe.net/ITI/PCF/CapabilityStatement/IHE.PCF.consentRecorder"
+* name = "IHE_PCF_consentRecorder"
+* title = "IHE PCF Consent Recorder"
 * status = #active
 * experimental = false
-* date = "2022-10-27"
+* date = "2023-02-14"
 * kind = #requirements
 * fhirVersion = #4.0.1
 * format[+] = #application/fhir+xml
 * format[+] = #application/fhir+json
 * rest
   * mode = #client
-  * documentation = "PCF capture provides capability to blah blah."
+  * documentation = "PCF Consent Recorder provides capability to record a Privacy Consent."
   * security
     * description = "Recommend [ATNA](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html), encouraged [IHE-IUA](https://profiles.ihe.net/ITI/IUA/index.html) or [SMART-app-launch](http://www.hl7.org/fhir/smart-app-launch/)"
   * resource[+]
     * type = #Consent
     * documentation = """
-PCF transaction [ITI-Y1]
+PCF transaction [Access Consent \[ITI-110\]](ITI-110.html)
 """
+    * interaction[+].code = #create
     * interaction[+].code = #read
+    * interaction[+].code = #update
+    * interaction[+].code = #delete
     * interaction[+].code = #search-type
     * searchParam[+]
       * name = "_lastUpdated"
@@ -50,38 +53,41 @@ PCF transaction [ITI-Y1]
   * interaction.code = #search-system
 
 
-Instance: IHE.PCF.registry
+Instance: IHE.PCF.consentRegistry
 InstanceOf: CapabilityStatement
 Title: "PCF Consent Registry Actor"
 Usage: #definition
 * description = """
-CapabilityStatement for registry Actor.
+CapabilityStatement for Consent Registry Actor.
 
 Explain
-- blah
+- provides [Access Consent \[ITI-110\]](ITI-110.html)
 - blah
 """
-* url = "https://profiles.ihe.net/ITI/PCF/CapabilityStatement/IHE.PCF.registry"
-* name = "IHE_PCF_supplier"
-* title = "IHE PCF registry"
+* url = "https://profiles.ihe.net/ITI/PCF/CapabilityStatement/IHE.PCF.consentRegistry"
+* name = "IHE_PCF_consentRegistry"
+* title = "IHE PCF Consent Registry"
 * status = #active
 * experimental = false
-* date = "2022-10-27"
+* date = "2023-02-14"
 * kind = #requirements
 * fhirVersion = #4.0.1
 * format[+] = #application/fhir+xml
 * format[+] = #application/fhir+json
 * rest
   * mode = #server
-  * documentation = "PCF capture provides capability to blah blah."
+  * documentation = "PCF Consent Registry actor provides capability to record, search, and manage Consents."
   * security
     * description = "Recommend [ATNA](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html), encouraged [IHE-IUA](https://profiles.ihe.net/ITI/IUA/index.html) or [SMART-app-launch](http://www.hl7.org/fhir/smart-app-launch/)"
   * resource[+]
     * type = #Consent
     * documentation = """
-PCF transaction [ITI-Y1]
+PCF transaction [Access Consent \[ITI-110\]](ITI-110.html)
 """
+    * interaction[+].code = #create
     * interaction[+].code = #read
+    * interaction[+].code = #update
+    * interaction[+].code = #delete
     * interaction[+].code = #search-type
     * searchParam[+]
       * name = "_lastUpdated"

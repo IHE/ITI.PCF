@@ -3,24 +3,24 @@ skinparam svgDimensionStyle false
 hide footbox
 autonumber
 title "Consent Access Control"
-participant "[[#consentclient Consent Authorized]]" as client
-participant "[[#consentdecider Consent Decider]]" as decision
+participant "[[#consentAuthorizationClient Consent Authorization Client]]" as client
+participant "[[#consentAuthorizationServer Consent Authorization Server]]" as decision
 box "Other Authorization Services"
 participant "Open-ID-Connect" as oidc
 participant "IUA Authorization Server" as IUA
 end box
 box "Server"
-participant "[[#consentenforce Consent Enforcer]]" as server
+participant "[[#consentEnforcementPoint Consent Enforcement Point]]" as server
 participant "FHIR Server" as fhir
 end box
-participant "[[#consentregistry Consent Registry]]" as registry
+participant "[[#consentRegistry Consent Registry]]" as registry
 activate client
-client ->o decision : Get Access Token [[ITI-Y2.html ITI-Y2]]
+client ->o decision : Get Consent Access Token [[ITI-108.html ITI-108]]
 activate decision
 decision --> oidc : Get authorized user using Open-ID-Connect
-decision --> IUA : Get Access Token [ITI-71]
+decision --> IUA : Get Consent Access Token [ITI-71]
 activate registry
-decision ->o registry : [[ITI-Y1.html ITI-Y1]] - Query for existing Consent
+decision ->o registry : [[ITI-110.html ITI-110]] - Query for existing Consent
 registry --> decision : Return the Consents found
 note over registry : Record AuditEvent
 deactivate registry
@@ -34,7 +34,7 @@ note over decision : Record AuditEvent
 decision --> client:  Decision to be Enforced
 client ->o server : "IUA: Incorporate Access Token [[https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72 ITI-72]]"
 activate server
-server -->o decision : "Introspect Token [[ITI-Y3.html ITI-Y3]]"
+server -->o decision : "Introspect Consent Token [[ITI-109.html ITI-109]]"
 server -> server: Enforce authorization decision
 server --> fhir : execute request
 server -> server: Enforce authorization decision

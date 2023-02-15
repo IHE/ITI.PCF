@@ -36,83 +36,81 @@ The actors participate in the following Transactions.
 
 **Table XX.1-1: PCF Profile - Actors and Transactions**
 
-| Actors              | Transactions     | Direction | Optionality | Reference      |
-|---------------------|------------------|-----------|-------------|----------------|
-| Consent Capture     | Access Consent   | Initiator | R           | ITI TF-2: 3.Y1 |
-| Consent Registry    | Access Consent   | Responder | R           | ITI TF-2: 3.Y1 |
-| Consent Authorized  | Access Consent   | Responder | R           | ITI TF-2: 3.Y1 |
-| Consent Decider     | Access Consent   | Initiator | R           | ITI TF-2: 3.Y1 |
-|                     | Authorize Access | Responder | R           | ITI TF-2: 3.Y2 |
-| Consent Enforcer    | Authorize Access | Responder | R           | ITI TF-2: 3.Y2 |
+| Actors                       | Transactions     | Direction | Optionality | Reference      |
+|------------------------------|------------------|-----------|-------------|----------------|
+| Consent Recorder             | Access Consent   | Initiator | R           | ITI TF-2: 3.110 |
+| Consent Registry             | Access Consent   | Responder | R           | ITI TF-2: 3.110 |
+| Consent Authorization Client | Access Consent   | Responder | R           | ITI TF-2: 3.110 |
+| Consent Authorization Server | Access Consent   | Initiator | R           | ITI TF-2: 3.110 |
+|                              | Authorize Access | Responder | R           | ITI TF-2: 3.108 |
+|                              | Introspect Consent Token | Responder | R           | ITI TF-2: 3.109 |
+| Consent Enforcement Point    | Authorize Access | Responder | R           | ITI TF-2: 3.108 |
+|                              | Introspect Consent Token | Initiator | R           | ITI TF-2: 3.109 |
 {: .grid}
 
 ### XX.1.1 Actors
 
 The actors in this profile are described in more detail in the sections below.
 
-<a name="consentcapture"> </a>
+<a name="consentRecorder"> </a>
 
-#### XX.1.1.1 Consent Capture
+#### XX.1.1.1 Consent Recorder
 
-The **Consent Capture** actor is responsible for the capturing of consent from the Patient given policies available. This actor is responsible for assuring that the Patient fully understood the terms of the Consent, and also assures that the Consent terms agreed to are acceptable to the organization responsible and the abilities of the **Consent Decider** and **Consent Enforcer** Actors.
+The **Consent Recorder** actor is responsible for the capturing of consent from the Patient given policies available. This actor is responsible for assuring that the Patient fully understood the terms of the Consent, and also assures that the Consent terms agreed to are acceptable to the organization responsible and the abilities of the **Consent Authorization Server** and **Consent Enforcement Point** Actors.
 
-The **Consent Capture** may utilize other resources to interact with the Patient, and to capture the evidence of the Consent ceremony. The interaction with the Patient can be a very complex system that utilizes applications, web user interface, and forms; but may also be a paper process that results in ink signatures on paperwork. The workflow leading up to the **Consent Capture** may also use FHIR Resources such as a FHIR Questionnaire or a DocumentReference / Binary. Where a DocumentReference and Binary are used to capture the Consent ceremony, the preservation should utilize the [MHD](https://profiles.ihe.net/ITI/MHD) implementation guide.
+The **Consent Recorder** may utilize other resources to interact with the Patient, and to capture the evidence of the Consent ceremony. The interaction with the Patient can be a very complex system that utilizes applications, web user interface, and forms; but may also be a paper process that results in ink signatures on paperwork. The workflow leading up to the **Consent Recorder** may also use FHIR Resources such as a FHIR Questionnaire or a DocumentReference / Binary. Where a DocumentReference and Binary are used to capture the Consent ceremony, the preservation should utilize the [MHD](https://profiles.ihe.net/ITI/MHD) implementation guide.
 
-FHIR Capability Statement for [Consent Capture](CapabilityStatement-IHE.PCF.capture.html)
+FHIR Capability Statement for [Consent Recorder](CapabilityStatement-IHE.PCF.consentRecorder.html)
 
-<a name="consentregistry"> </a>
+<a name="consentRegistry"> </a>
 
 #### XX.1.1.2 Consent Registry
 
-The **Consent Registry** actor holds Consent resources. This includes active, inactive, and expired Consents. The **Consent Registry** does not have special understanding of the Consent other than as a FHIR `Consent` Resource. It thus is not responsible for assuring that the Consent terms are acceptable or enforceable, this is the responsibility of the **Consent Capture** Actor.
+The **Consent Registry** actor holds Consent resources. This includes active, inactive, and expired Consents. The **Consent Registry** does not have special understanding of the Consent other than as a FHIR `Consent` Resource. It thus is not responsible for assuring that the Consent terms are acceptable or enforceable, this is the responsibility of the **Consent Recorder** Actor.
 
-FHIR Capability Statement for [Consent Registry](CapabilityStatement-IHE.PCF.registry.html)
+FHIR Capability Statement for [Consent Registry](CapabilityStatement-IHE.PCF.consentRegistry.html)
 
-<a name="consentclient"> </a>
+<a name="consentAuthorizationClient"> </a>
 
-#### XX.1.1.3 Consent Authorized
+#### XX.1.1.3 Consent Authorization Client
 
-The **Consent Authorized** actor is a client that makes use of the **Consent Decider** actor to get authorization token to use with various FHIR REST and Operation requests made to a Resource Server by way of the **Consent Enforcer** actor.
+The **Consent Authorization Client** actor is a client that makes use of the **Consent Authorization Server** actor to get authorization token to use with various FHIR REST and Operation requests made to a Resource Server by way of the **Consent Enforcement Point** actor.
 
 TODO: The expectation is that the interaction is indistinguishable from an IUA or SMART interaction from the perspective of the Consent Authorization Client.
 
-<a name="consentdecider"> </a>
+<a name="consentAuthorizationServer"> </a>
 
-#### XX.1.1.4 Consent Decider
+#### XX.1.1.4 Consent Authorization Server
 
-The **Consent Decider** actor makes authorization decisions based on a given access requested context (e.g. oAuth, query/operation parameters), organizational policies, and current active `Consent` resources. The **Consent Decider** is often implemented utilizing other authorization services, taking input from the user identity (e.g. Open-ID-Connect), and application identity and authorization (e.g. IUA). These predicate authorizations provide the security context upon which the Privacy `Consent` constraints are applied. The result is an authorization token used to request access resources, and is used by the **Consent Enforcer** actor.
+The **Consent Authorization Server** actor makes authorization decisions based on a given access requested context (e.g. oAuth, query/operation parameters), organizational policies, and current active `Consent` resources. The **Consent Authorization Server** is often implemented utilizing other authorization services, taking input from the user identity (e.g. Open-ID-Connect), and application identity and authorization (e.g. IUA). These predicate authorizations provide the security context upon which the Privacy `Consent` constraints are applied. The result is an authorization token used to request access resources, and is used by the **Consent Enforcement Point** actor.
 
-FHIR Capability Statement for [Consent Authorization Server](CapabilityStatement-IHE.PCF.decider.html)
+<a name="consentEnforcementPoint"> </a>
 
-<a name="consentenforce"> </a>
+#### XX.1.1.5 Consent Enforcement Point
 
-#### XX.1.1.5 Consent Enforcer
-
-The **Consent Enforcer** actor enforces consent decisions made by the **Consent Decider** actor. This includes deny, permit, and permit with filtering of results.
-
-FHIR Capability Statement for [Consent Enforcement Resource Server](CapabilityStatement-IHE.PCF.enforce.html)
+The **Consent Enforcement Point** actor enforces consent decisions made by the **Consent Authorization Server** actor. This includes deny, permit, and permit with filtering of results.
 
 ### XX.1.2 Transaction Descriptions
 
 The transactions in this profile are summarized in the sections below.
 
-#### XX.1.2.1 ITI-Y1 Access Consent transaction
+#### XX.1.2.1 ITI-110 Access Consent transaction
 
 This transaction is used to Create, Read, Update, Delete, and Search on Consent resources.
 
-For more details see the detailed [Access Consent](ITI-Y1.html)
+For more details see the detailed [Access Consent](ITI-110.html)
 
-#### XX.1.2.2 ITI-Y2 Get Access Token transaction
+#### XX.1.2.2 ITI-108 Get Consent Access Token transaction
 
-This transaction is used to request an authorization decision based on Consents. This transaction is a refinement of the [IUA Get Access Token \[ITI-71\]](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71).
+This transaction is used to request an authorization decision based on Consents. This transaction is a refinement of the [IUA Get Consent Access Token \[ITI-71\]](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71).
 
-For more details see the detailed [Get Access Token](ITI-Y2.html)
+For more details see the detailed [Get Consent Access Token](ITI-108.html)
 
-#### XX.1.2.3 ITI-Y3 Introspect Token transaction
+#### XX.1.2.3 ITI-109 Introspect Consent Token transaction
 
-This transaction is used to query the **Consent Authorization Server** to determine the set of claims for a given token. This transaction is a refinement of the [IUA Introspect Token \[ITI-102\]](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102).
+This transaction is used to query the **Consent Authorization Server** to determine the set of claims for a given token. This transaction is a refinement of the [IUA Introspect Consent Token \[ITI-102\]](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102).
 
-For more details see the detailed [Introspect Token](ITI-Y3.html)
+For more details see the detailed [Introspect Consent Token](ITI-109.html)
 
 <a name="actor-options"> </a>
 
@@ -123,32 +121,32 @@ between options when applicable are specified in notes.
 
 | Actor              | Option Name |
 |--------------------|-------------|
-| Consent Capture    | Implicit  |
-| Consent Capture    | Explicit Basic |
-| Consent Capture    | Explicit Intermediate Data Timeframe |
-| Consent Capture    | Explicit Intermediate Data by id |
-| Consent Capture    | Explicit Intermediate Data Author |
-| Consent Capture    | Explicit Intermediate Data Relationship |
-| Consent Capture    | Explicit Intermediate Additional PurposeOfUse |
-| Consent Capture    | Explicit Advanced |
+| Consent Recorder    | Implicit  |
+| Consent Recorder    | Explicit Basic |
+| Consent Recorder    | Explicit Intermediate Data Timeframe |
+| Consent Recorder    | Explicit Intermediate Data by id |
+| Consent Recorder    | Explicit Intermediate Data Author |
+| Consent Recorder    | Explicit Intermediate Data Relationship |
+| Consent Recorder    | Explicit Intermediate Additional PurposeOfUse |
+| Consent Recorder    | Explicit Advanced |
 | Consent Registry   | none |
-| Consent Authorized | none |
-| Consent Decider    | Implicit  |
-| Consent Decider    | Explicit Basic |
-| Consent Decider    | Explicit Intermediate Data Timeframe |
-| Consent Decider    | Explicit Intermediate Data by id |
-| Consent Decider    | Explicit Intermediate Data Author |
-| Consent Decider    | Explicit Intermediate Data Relationship |
-| Consent Decider    | Explicit Intermediate Additional PurposeOfUse |
-| Consent Decider    | Explicit Advanced |
-| Consent Enforcer   | Implicit  |
-| Consent Enforcer   | Explicit Basic |
-| Consent Enforcer   | Explicit Intermediate Data Timeframe |
-| Consent Enforcer   | Explicit Intermediate Data by id |
-| Consent Enforcer   | Explicit Intermediate Data Author |
-| Consent Enforcer   | Explicit Intermediate Data Relationship |
-| Consent Enforcer   | Explicit Intermediate Additional PurposeOfUse |
-| Consent Enforcer   | Explicit Advanced |
+| Consent Authorization Client | none |
+| Consent Authorization Server    | Implicit  |
+| Consent Authorization Server    | Explicit Basic |
+| Consent Authorization Server    | Explicit Intermediate Data Timeframe |
+| Consent Authorization Server    | Explicit Intermediate Data by id |
+| Consent Authorization Server    | Explicit Intermediate Data Author |
+| Consent Authorization Server    | Explicit Intermediate Data Relationship |
+| Consent Authorization Server    | Explicit Intermediate Additional PurposeOfUse |
+| Consent Authorization Server    | Explicit Advanced |
+| Consent Enforcement Point   | Implicit  |
+| Consent Enforcement Point   | Explicit Basic |
+| Consent Enforcement Point   | Explicit Intermediate Data Timeframe |
+| Consent Enforcement Point   | Explicit Intermediate Data by id |
+| Consent Enforcement Point   | Explicit Intermediate Data Author |
+| Consent Enforcement Point   | Explicit Intermediate Data Relationship |
+| Consent Enforcement Point   | Explicit Intermediate Additional PurposeOfUse |
+| Consent Enforcement Point   | Explicit Advanced |
 {: .grid}
 
 Note 1: Explicit Intermediate options and Explicit Advanced option require that Explicit Basic Option is selected
@@ -182,15 +180,15 @@ The Explicit Basic Option indicates that there is support for a basic set of pat
 1. The overarching policy that the patient and organization have agreed upon. Where there are a defined set of behavior defined overarching policies as defined in the Implicit Option.
 2. The timeframe for which the consent applies. Enabling consents that have a time limit.
 3. Who is permitted/denied: This may be a device, relatedPerson, Practitioner, or Organization. This parameter enables the naming of agents that should be allowed access or denied access. This presumes that the identified agent is appropriately identified (provisioned) and authorized to make the request; typically through some application authorization and role-based-access-control. The user identity is mapped to a FHIR agent type Resource using the agent type Resource `.identifier` element (e.g. Practitioner.identifier would hold the user id).
-4. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explicably identified as an authorized purposeOfUse or denied purposeOfuse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Decider is not determining if the user/client is authorized to make the purposeOfUse declaration, this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, Operations, and Break-Glass.
+4. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explicably identified as an authorized purposeOfUse or denied purposeOfuse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Authorization Server is not determining if the user/client is authorized to make the purposeOfUse declaration, this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, Operations, and Break-Glass.
 
-See [Basic Consent](ITI-Z1.html) Content Profile
+See [Basic Consent](content.html#basic) Content Profile
 
 ### XX.2.3 Explicit Intermediate options
 
 The following Options shall be used in conjunction with **Explicit Basic Option**, and may be used with **Explicit Advanced Option**. The Intermediate Options can be implemented and/or used individually or combined. When combined within one parameter the logic provided by each option is combined. The data scoping intermediate options are not expected to be found combined on one parameter, but may be combined within a Consent providing different data scoping capability. For example: A consent that indicates that a data timeframe is used to deny insurance access, with a different parameter indicting that a data relationship is allowed access to a research project.
 
-See [Intermediate Consent](ITI-Z2.html) Content Profile
+See [Intermediate Consent](content.html#intermediate) Content Profile
 
 #### XX.2.3.1 Explicit Intermediate Data Timeframe Option
 
@@ -216,7 +214,7 @@ This option provides for the Consent to have one or more permit/deny parameter t
 
 The Explicit Advanced Option indicates that there is support for an advanced set of patient specific parameters. The Advanced policies allow for Patient specific permit/deny parameters on sensitive health topics and requires the use of security tagged data. The security tagged data might be implemented using a **Security Labeling Service** that is not defined here; or other systems design. This option is required to support sensitive health topic segmentation such as substance abuse, mental health, sexuality and reproductive health, etc.
 
-See [Advanced Consent](ITI-Z3.html) Content Profile
+See [Advanced Consent](content.html#advanced) Content Profile
 
 <a name="required-groupings"> </a>
 
@@ -257,7 +255,7 @@ And they have written and published Patient Privacy Policies
 And there is no consent on file for a given Patient
 When they present their Patient Privacy Policies to a given Patient
 And the Patient either agrees, disagrees, or adds acceptable parameters
-Then a Consent is captured by the **Consent Capture** actor and stored in the **Consent Registry**
+Then a Consent is captured by the **Consent Recorder** actor and stored in the **Consent Registry**
 
 The Consent details are specific to the Patient Privacy Policy, the parameters agreed to in the ceremony, and the Consent profile (Basic, Intermediate, Advance) that was used.
 
@@ -278,8 +276,8 @@ The diagrammed steps:
 2. None is found. Given that no existing Consent exists, there are no preconditions, just default expectations for the workflow.
 3. Consult with the Patient. There is some interaction with the Patient. Within this interaction the patient needs to be appropriately informed of the details of the Patient Privacy Policy and the parameters the patient can control. This user Interface might use a FHIR Questionnaire resulting in a QuestionnaireResult as documentation of the ceremony. This User Interface might use some other technical means, or might be a paper process.  This User Interface is not constrained by the PCF.
 4. The results of the ceremony are captured to the satisfaction of the controlling Organization.  This might be a QuestionnaireResponse, or a scanned image of the signed paperwork recorded using a DocumentReference (See [MHD](https://profiles.ihe.net/ITI/MHD/index.html))
-5. The Consent resource constrained by the Consent constraints defined in Volume 3 is then saved to the **Consent Registry** actor using Transaction [ITI-Y1].
-6. An AuditEvent is recorded by both **Consent Capture** and **Consent Registry** actors.
+5. The Consent resource constrained by the Consent constraints defined in Volume 3 is then saved to the **Consent Registry** actor using Transaction [ITI-110].
+6. An AuditEvent is recorded by both **Consent Recorder** and **Consent Registry** actors.
 
 #### XX.4.2.2 Use Case \#2: Update Existing Consent
 
@@ -292,7 +290,7 @@ And they have written and published Patient Privacy Policies
 And there is a consent on file for a given Patient
 When they present their Patient Privacy Policies to a given Patient
 And the Patient either agrees, disagrees, or adds acceptable parameters
-Then a Consent is captured by the **Consent Capture** actor and stored in the **Consent Registry**
+Then a Consent is captured by the **Consent Recorder** actor and stored in the **Consent Registry**
 And the new Consent overwrites or invalidates the previous Consent
 
 The Consent details are specific to the Patient Privacy Policy, the parameters agreed to in the ceremony, and the Consent profile (Basic, Intermediate, Advance) that was used.
@@ -314,8 +312,8 @@ The diagrammed steps:
 2. A Consent is found. More than one Consent may be found, for which the PCF does not address how to address this case. The overarching policy would need to be consulted.
 3. Consult with the Patient. There is some interaction with the Patient. Within this interaction the patient needs to be appropriately informed of the details of the Patient Privacy Policy and the parameters the patient can control. This user Interface might use a FHIR Questionnaire resulting in a QuestionnaireResult as documentation of the ceremony. This User Interface might use some other technical means, or might be a paper process.  This User Interface is not constrained by the PCF.
 4. The results of the ceremony are captured to the satisfaction of the controlling Organization.  This might be a QuestionnaireResponse, or a scanned image of the signed paperwork recorded using a DocumentReference (See [MHD](https://profiles.ihe.net/ITI/MHD/index.html))
-5. The Consent resource constrained by the Consent constraints defined in Volume 3 is then saved to the **Consent Registry** actor using Transaction [ITI-Y1]. This is typically a FHIR Update action so as to replace the previous Consent. It is also possible to delete the previous and save the Consent as a new instance.
-6. An AuditEvent is recorded by both **Consent Capture** and **Consent Registry** actors.
+5. The Consent resource constrained by the Consent constraints defined in Volume 3 is then saved to the **Consent Registry** actor using Transaction [ITI-110]. This is typically a FHIR Update action so as to replace the previous Consent. It is also possible to delete the previous and save the Consent as a new instance.
+6. An AuditEvent is recorded by both **Consent Recorder** and **Consent Registry** actors.
 
 #### XX.4.2.3 Use Case \#3: Consent Access Control
 
@@ -327,8 +325,8 @@ Given an Organization controlling some Patient identifiable Data
 And they have written and published Patient Privacy Policies
 And there is a consent on file for a given Patient
 When a request for patient identifiable data is made
-Then the Consents are used by the **Consent Decider** actor as stored in the **Consent Registry** to make Access Control Decisions
-And the **Consent Enforcer** assures that only data authorized by the Consent Access Control Decision are allowed to be exposed.
+Then the Consents are used by the **Consent Authorization Server** actor as stored in the **Consent Registry** to make Access Control Decisions
+And the **Consent Enforcement Point** assures that only data authorized by the Consent Access Control Decision are allowed to be exposed.
 
 The Consent details are specific to the Patient Privacy Policy, the parameters agreed to in the ceremony, and the Consent profile (Basic, Intermediate, Advance) that was used.
 
@@ -345,22 +343,22 @@ The following flow shows the activities involved in the Consent Access Control f
 
 The diagrammed steps:
 
-1. a **Consent Authorized** actor, an abstraction of an app and possibly a user, requests an Access Token of the **Consent Decider** actor with some defined patient, user, app, and data parameters. This is the access request context that the **Consent Decider** will make Consent Access Control Decisions upon.
-2. The **Consent Decider** gets user identity information, if available. Such using one or more Open-ID Connect authority. Adding any details to the access request context --> Note that failure to identify a user may be a failure-mode.
-3. The **Consent Decider** gets access token, if available. Such as using IUA or SMART. Adding any details to the access request context --> Note that failure to get an authorization token may be a failure-mode.
-4. The **Consent Decider** looks for Patient Consents at the **Consent Registry** actor(s). The access request context may be used to limit the Consent resources returned.
-5. The **Consent Decider** receives the available consents. --> Note that failure to get a consent means that the default Implicit policy that is active is enforced. 
-6. The **Consent Decider** determines the best match or matches of Consents returned to the access control request context (patient, user, app, purposeOfUse, data parameters, etc).
-7. The **Consent Decider** makes the Access Control Decision based on the Consents
-8. The **Consent Decider** combines the Consent Access Control Decision with the decisions returned in step 2 and 3
-9. The **Consent Decider** encodes the combined Access Control Decision into an oAuth token. This is typically just associating the conditions of the Access Control Decision with the opaque oAuth token returned such that later in step 12 the ITI-Y3 transaction can be used to get the details. This combined Access Control decision indicates what is permitted, denied and any obligations or refrains that must be applied.
-10. The **Consent Decider** returns this combined token to the **Consent Authorized**. --> Note that failure-modes will not return a success token but rather an access denied.
-11. The **Consent Authorized** encapsulates the given oAuth token, using ITI-72, to indicate the authorization given where the grouped transaction is as defined by the data access implementation guide that is grouped. Meaning the transaction is otherwise as defined elsewhere. The **Consent Enforcer** receives the ITI-72 and extracts the oAuth token.
-12. The **Consent Enforcer** request introspection using [ITI-Y3]. ITI-Y3 is based on ITI-102, but communicates the Consent Access Control decision details.
-13. The **Consent Enforcer** may be able to enforce some of the Consent Access Control prior to retrieving the data requested. Such as where the Consent Access Control decision would forbid a kind of FHIR Resource.
-14. The **Consent Enforcer** would use undefined means to retrieve the requested data from the FHIR Server. This may be by executing the grouped transaction with privileged access.
-15. The **Consent Enforcer** would inspect the results and further enforce the Consent Access Control decision. This might be to filter out specific resources that could not have been filtered out other ways.
-16. The **Consent Enforcer** returns the authorized data to the **Consent Authorized** actor. 
+1. a **Consent Authorization Client** actor, an abstraction of an app and possibly a user, requests an Access Token of the **Consent Authorization Server** actor with some defined patient, user, app, and data parameters. This is the access request context that the **Consent Authorization Server** will make Consent Access Control Decisions upon.
+2. The **Consent Authorization Server** gets user identity information, if available. Such using one or more Open-ID Connect authority. Adding any details to the access request context --> Note that failure to identify a user may be a failure-mode.
+3. The **Consent Authorization Server** gets access token, if available. Such as using IUA or SMART. Adding any details to the access request context --> Note that failure to get an authorization token may be a failure-mode.
+4. The **Consent Authorization Server** looks for Patient Consents at the **Consent Registry** actor(s). The access request context may be used to limit the Consent resources returned.
+5. The **Consent Authorization Server** receives the available consents. --> Note that failure to get a consent means that the default Implicit policy that is active is enforced. 
+6. The **Consent Authorization Server** determines the best match or matches of Consents returned to the access control request context (patient, user, app, purposeOfUse, data parameters, etc).
+7. The **Consent Authorization Server** makes the Access Control Decision based on the Consents
+8. The **Consent Authorization Server** combines the Consent Access Control Decision with the decisions returned in step 2 and 3
+9. The **Consent Authorization Server** encodes the combined Access Control Decision into an oAuth token. This is typically just associating the conditions of the Access Control Decision with the opaque oAuth token returned such that later in step 12 the ITI-109 transaction can be used to get the details. This combined Access Control decision indicates what is permitted, denied and any obligations or refrains that must be applied.
+10. The **Consent Authorization Server** returns this combined token to the **Consent Authorization Client**. --> Note that failure-modes will not return a success token but rather an access denied.
+11. The **Consent Authorization Client** encapsulates the given oAuth token, using ITI-72, to indicate the authorization given where the grouped transaction is as defined by the data access implementation guide that is grouped. Meaning the transaction is otherwise as defined elsewhere. The **Consent Enforcement Point** receives the ITI-72 and extracts the oAuth token.
+12. The **Consent Enforcement Point** request introspection using [ITI-109]. ITI-109 is based on ITI-102, but communicates the Consent Access Control decision details.
+13. The **Consent Enforcement Point** may be able to enforce some of the Consent Access Control prior to retrieving the data requested. Such as where the Consent Access Control decision would forbid a kind of FHIR Resource.
+14. The **Consent Enforcement Point** would use undefined means to retrieve the requested data from the FHIR Server. This may be by executing the grouped transaction with privileged access.
+15. The **Consent Enforcement Point** would inspect the results and further enforce the Consent Access Control decision. This might be to filter out specific resources that could not have been filtered out other ways.
+16. The **Consent Enforcement Point** returns the authorized data to the **Consent Authorization Client** actor. 
 
 #### XX.4.2.4 Implicit Content
 
@@ -486,7 +484,7 @@ The following set of patient specific parameters may be used to permit or deny:
 1. The overarching policy that the patient and organization have agreed upon. Where there are a defined set of behavior defined overarching policies as defined in the Implicit Option.
 2. The timeframe for which the consent applies. Enabling consents that have a time limit.
 3. Who is permitted/denied: This may be a device, relatedPerson, Practitioner, or Organization. This parameter enables the naming of agents that should be allowed access or denied access. This presumes that the identified agent is appropriately identified (provisioned) and authorized to make the request; typically through some application authorization and role-based-access-control. The user identity is mapped to a FHIR agent type Resource using the agent type Resource `.identifier` element (e.g. Practitioner.identifier would hold the user id).
-4. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explicably identified as an authorized purposeOfUse or denied purposeOfuse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Decider is not determining if the user/client is authorized to make the purposeOfUse declaration, this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, Operations, and Break-Glass.
+4. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explicably identified as an authorized purposeOfUse or denied purposeOfuse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Authorization Server is not determining if the user/client is authorized to make the purposeOfUse declaration, this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, Operations, and Break-Glass.
 
 #### XX.4.2.6 Intermediate Consent Contents
 
@@ -494,14 +492,14 @@ The **Intermediate Consent** contents shall be used in conjunction with **Basic 
 
 **Pre-conditions**:
 
-The controlling Organization has identified various roles and the kinds of purpose of use those roles are authorized to participate in. The Controlling Organization defines the default policy to be used when no consent is found, possibly choosing from the **Implicit Options** policies. The Controlling Organization defines the policy to be used with the explicit basic consent, the policy that will be enforced when the patient has agreed to a consent. The controlling Organization provides for the patient to choose from the intermediate parameters that the controlling organization is willing to enforce, recognizing that some parameters may not be appropriate or allowed. The **Consent Capture** actor is responsible for assuring that the recorded Consent is enforceable an appropriate.
+The controlling Organization has identified various roles and the kinds of purpose of use those roles are authorized to participate in. The Controlling Organization defines the default policy to be used when no consent is found, possibly choosing from the **Implicit Options** policies. The Controlling Organization defines the policy to be used with the explicit basic consent, the policy that will be enforced when the patient has agreed to a consent. The controlling Organization provides for the patient to choose from the intermediate parameters that the controlling organization is willing to enforce, recognizing that some parameters may not be appropriate or allowed. The **Consent Recorder** actor is responsible for assuring that the recorded Consent is enforceable an appropriate.
 
 **Main Flow**:
 
 - Given The Business Access Control prevents inappropriate users, applications, purposes, and activities
   - And an appropriate user / application requests access for an appropriate purpose and activity
   - And the data are tagged with appropriate sensitivity and confidentiality vocabulary
-- **Consent Decider**
+- **Consent Authorization Server**
   - when a consent is found to apply to the user / application and purpose of use (given patient, organization, and policy)
     - And that consent has not expired
       - The Consent identified overall policy will be recognized relative to the overall Permit/Deny
@@ -510,7 +508,7 @@ The controlling Organization has identified various roles and the kinds of purpo
 
 **Post-conditions:**
 
-- **Consent Enforcer** assures only appropriate use is allowed, inappropriate use is denied
+- **Consent Enforcement Point** assures only appropriate use is allowed, inappropriate use is denied
 
 ##### XX.4.2.6.1 Intermediate Data Timeframe Content
 
@@ -546,18 +544,18 @@ The use-case would be where a patient is authorizing purposeOfUse beyond those d
 
 The **Advanced Consent** contents shall be used in conjunction with **Basic Consent** content, and may be used with **Intermediate Consent** content.  Where as the **Basic Consent** is used to record the fundamental aspects of the Consent ceremony. The **Advanced Consent** Content provides for parameters in a Consent that provide rules around data that are classified by sensitivity and confidentiality.
 
-Support for the Advanced Consent relies on the data being tagged with sensitivity codes and confidentiality codes. This data tagging is not defined in PCF. There are a few established ways to get the data tagged including using a Security Labeling Service, which has a few established architectures. The implementation of security tagging is a systems design requirement on the **Consent Enforcer** actor.
+Support for the Advanced Consent relies on the data being tagged with sensitivity codes and confidentiality codes. This data tagging is not defined in PCF. There are a few established ways to get the data tagged including using a Security Labeling Service, which has a few established architectures. The implementation of security tagging is a systems design requirement on the **Consent Enforcement Point** actor.
 
 **Pre-conditions**:
 
-The controlling Organization has identified various roles and the kinds of purpose of use those roles are authorized to participate in. The Controlling Organization defines the default policy to be used when no consent is found, possibly choosing from the **Implicit Options** policies. The Controlling Organization defines the policy to be used with the explicit basic consent, the policy that will be enforced when the patient has agreed to a consent. The controlling Organization provides for the patient to choose from the intermediate parameters that the controlling organization is willing to enforce, recognizing that some parameters may not be appropriate or allowed. The **Consent Capture** actor is responsible for assuring that the recorded Consent is enforceable an appropriate.
+The controlling Organization has identified various roles and the kinds of purpose of use those roles are authorized to participate in. The Controlling Organization defines the default policy to be used when no consent is found, possibly choosing from the **Implicit Options** policies. The Controlling Organization defines the policy to be used with the explicit basic consent, the policy that will be enforced when the patient has agreed to a consent. The controlling Organization provides for the patient to choose from the intermediate parameters that the controlling organization is willing to enforce, recognizing that some parameters may not be appropriate or allowed. The **Consent Recorder** actor is responsible for assuring that the recorded Consent is enforceable an appropriate.
 
 **Main Flow**:
 
 - Given The Business Access Control prevents inappropriate users, applications, purposes, and activities
   - And an appropriate user / application requests access for an appropriate purpose and activity
   - And the data are tagged with appropriate sensitivity and confidentiality vocabulary
-- **Consent Decider**
+- **Consent Authorization Server**
   - when a consent is found to apply to the user / application and purpose of use (given patient, organization, and policy)
     - And that consent has not expired
       - The Consent identified overall policy will be recognized relative to the overall Permit/Deny
@@ -566,7 +564,7 @@ The controlling Organization has identified various roles and the kinds of purpo
 
 **Post-conditions:**
 
-- **Consent Enforcer** assures only appropriate use is allowed, inappropriate use is denied
+- **Consent Enforcement Point** assures only appropriate use is allowed, inappropriate use is denied
 
 **Content:**
 

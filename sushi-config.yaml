@@ -69,23 +69,17 @@ pages:
   ch-P.md:
     title: "1:P. Privacy Access Policies (Informative)"
     generation: markdown
-  ITI-Y1.md:
-    title: "2:3.Y1 Access Consent [ITI-Y1]"
+  ITI-108.md:
+    title: "2:3.108 Get Consent Access Token [ITI-108]"
     generation: markdown
-  ITI-Y2.md:
-    title: "2:3.Y2 Get Access Token [ITI-Y2]"
+  ITI-109.md:
+    title: "2:3.109 Introspect Consent Token [ITI-109]"
     generation: markdown
-  ITI-Y3.md:
-    title: "2:3.Y3 Introspect Token [ITI-Y3]"
+  ITI-110.md:
+    title: "2:3.110 Access Consent [ITI-110]"
     generation: markdown
-  ITI-Z1.md:
-    title: "3:5.Z1 Basic Consent [ITI-Z1]"
-    generation: markdown
-  ITI-Z2.md:
-    title: "3:5.Z2 Intermediate Consent [ITI-Z2]"
-    generation: markdown
-  ITI-Z3.md:
-    title: "3:5.Z3 Advanced Consent [ITI-Z3]"
+  content.md:
+    title: "3:5.8 Privacy Consent Patterns"
     generation: markdown
   other.md:
     title: "Changes to Other Profiles"
@@ -112,13 +106,11 @@ menu:
     "Cross-Profile Considerations" : volume-1.html#other-grouping
     "Appendix P. Privacy Access Policies" : ch-P.html
   Volume 2:
-    "Access Consent [ITI-Y1]" : ITI-Y1.html
-    "Request Consent Authorization Decision [ITI-Y2]" : ITI-Y2.html
-    "Introspect Token [ITI-Y3]" : ITI-Y3.html
+    "Request Consent Authorization Decision [ITI-108]" : ITI-108.html
+    "Introspect Consent Token [ITI-109]" : ITI-109.html
+    "Access Consent [ITI-110]" : ITI-110.html
   Volume 3:
-    "Basic Consent" : ITI-Z1.html
-    "Intermediate Consent" : ITI-Z2.html
-    "Advanced Consent" : ITI-Z3.html
+    "Consent Patterns" : content.html
   Artifacts: artifacts.html
   Other: 
     "Changes to Other IHE specifications" : other.html

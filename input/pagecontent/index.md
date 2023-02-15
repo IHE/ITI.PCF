@@ -25,14 +25,12 @@ This guide is organized into the following sections:
    1. [Appendix P: Privacy Access Policies](ch-P.html)
 
 2. Volume 2: Transaction Detail
-   1. [Access Consent \[ITI-Y1\]](ITI-Y1.html)
-   1. [Get Access Token \[ITI-Y2\]](ITI-Y2.html)
-   1. [Introspect Token \[ITI-Y3\]](ITI-Y3.html)
+   1. [Get Consent Access Token \[ITI-108\]](ITI-108.html)
+   1. [Introspect Consent Token \[ITI-109\]](ITI-109.html)
+   1. [Access Consent \[ITI-110\]](ITI-110.html)
 
 3. Volume 3: Metadata and Content
-   1. [Basic Consent](ITI-Z1.html)
-   1. [Intermediate Consent](ITI-Z2.html)
-   1. [Advanced Consent](ITI-Z3.html)
+   1. [Privacy Consent Patterns](content.html)
 
 4. Other
    1. [Changes to Other Profiles](other.html)
