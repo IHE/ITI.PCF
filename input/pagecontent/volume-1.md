@@ -8,7 +8,7 @@ This is to say that PCF does not define:
 - how one identifies the patient, this is the role of other Implementation Guides like PDQm, PIXm, PIMR, etc;
 - how the patient experiences the ceremony of the consent act, this is systems design, user interface design, and policy language;
 - how one asks for data or communicates data, this is the role of other Implementation Guides like MHD, QEDm, MHDS, etc;
-- how one tags data with security/privacy sensitivity labels, this is the role of a systems design that might utilize a **Security labeling Service**; and
+- how one tags data with security/privacy sensitivity labels, this is the role of a systems design that might utilize a [Security labeling Service](ch-P.html#SLS); and
 - how users or applications are identified and foundationally authorized, this is the role of other Implementation Guides like IUA, and SMART.
 
 But PCF enhances and relies upon these other Implementation Guides.
@@ -212,7 +212,7 @@ This option provides for the Consent to have one or more permit/deny parameter t
 
 ### XX.2.4 Explicit Advanced Option
 
-The Explicit Advanced Option indicates that there is support for an advanced set of patient specific parameters. The Advanced policies allow for Patient specific permit/deny parameters on sensitive health topics and requires the use of security tagged data. The security tagged data might be implemented using a **Security Labeling Service** that is not defined here; or other systems design. This option is required to support sensitive health topic segmentation such as substance abuse, mental health, sexuality and reproductive health, etc.
+The Explicit Advanced Option indicates that there is support for an advanced set of patient specific parameters. The Advanced policies allow for Patient specific permit/deny parameters on sensitive health topics and requires the use of security tagged data. The security tagged data might be implemented using a [Security labeling Service](ch-P.html#SLS) that is not defined here; or other systems design. This option is required to support sensitive health topic segmentation such as substance abuse, mental health, sexuality and reproductive health, etc.
 
 See [Advanced Consent](content.html#advanced) Content Profile
 
@@ -544,7 +544,7 @@ The use-case would be where a patient is authorizing purposeOfUse beyond those d
 
 The **Advanced Consent** contents shall be used in conjunction with **Basic Consent** content, and may be used with **Intermediate Consent** content.  Where as the **Basic Consent** is used to record the fundamental aspects of the Consent ceremony. The **Advanced Consent** Content provides for parameters in a Consent that provide rules around data that are classified by sensitivity and confidentiality.
 
-Support for the Advanced Consent relies on the data being tagged with sensitivity codes and confidentiality codes. This data tagging is not defined in PCF. There are a few established ways to get the data tagged including using a Security Labeling Service, which has a few established architectures. The implementation of security tagging is a systems design requirement on the **Consent Enforcement Point** actor.
+Support for the Advanced Consent relies on the data being tagged with sensitivity codes and confidentiality codes. This data tagging is not defined in PCF. There are a few established ways to get the data tagged including using a [Security labeling Service](ch-P.html#SLS), which has a few established architectures. The implementation of security tagging is a systems design requirement on the **Consent Enforcement Point** actor.
 
 **Pre-conditions**:
 
