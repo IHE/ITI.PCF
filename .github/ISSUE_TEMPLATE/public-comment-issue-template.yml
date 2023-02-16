@@ -19,12 +19,12 @@ body:
     id: where
     attributes:
       label: Section Number
-      description: Identify the most specific section number the issue occurs
+      description: Identify the most specific section number the issue occurs.
       placeholder:  e.g. 4.1.2
   - type: textarea
     id: what-happened
     attributes:
-      label: What is wrong?
+      label: What is wrong
       description: Describe your issue. Don't write a book, but do include enough to indicate what you see as a problem.
     validations:
       required: true
@@ -42,7 +42,7 @@ body:
   - type: dropdown
     id: priority
     attributes:
-      label: Priority?
+      label: Priority
       multiple: false
       options:
         - High: Important issue where there is major issue to be resolved. Requires discussion and debate.
@@ -56,6 +56,6 @@ body:
       label: Code of Conduct
       description: By submitting this feature request, you agree to follow the IHE [Code of Conduct](https://github.com/IHE/.github/blob/main/CODE_OF_CONDUCT.md)
       options:
-        - label: I agree to follow IHE Code of Conduct
+        - label: I agree to follow the IHE Code of Conduct
           required: true
         
