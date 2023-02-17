@@ -61,10 +61,10 @@ resources:
 pages:
 # itemize here each narrative page. Include assigned section numbers when appropriate
   index.md:
-    title: "1:XX Privacy Consent on FHIR Home"
+    title: "Privacy Consent on FHIR Home"
     generation: markdown
   volume-1.md:
-    title: "1:XX Privacy Consent on FHIR Volume 1"
+    title: "1:53 Privacy Consent on FHIR Volume 1"
     generation: markdown
   ch-P.md:
     title: "1:P. Privacy Access Policies (Informative)"

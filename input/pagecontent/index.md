@@ -15,23 +15,20 @@ This includes refinement of the consent handling defined in [MHDS](https://profi
 This guide is organized into the following sections:
 
 1. Volume 1:
-   1. [Introduction](volume-1.html)
-   1. [Actors, Transactions, and Content](volume-1.html#actors-and-transactions)
-   1. [Actor Options](volume-1.html#actor-options)
-   1. [Actor Required Groupings](volume-1.html#required-groupings)
-   1. [Overview](volume-1.html#overview)
-   1. [Security Considerations](volume-1.html#security-considerations)
-   1. [Cross Profile Considerations](volume-1.html#other-grouping)
+   1. [53 Introduction](volume-1.html)
+   1. [53.1 Actors, Transactions, and Content](volume-1.html#actors-and-transactions)
+   1. [53.2 Actor Options](volume-1.html#actor-options)
+   1. [53.3 Actor Required Groupings](volume-1.html#required-groupings)
+   1. [53.4 Overview](volume-1.html#overview)
+   1. [53.5 Security Considerations](volume-1.html#security-considerations)
+   1. [53.6 Cross Profile Considerations](volume-1.html#other-grouping)
    1. [Appendix P: Privacy Access Policies](ch-P.html)
-
 2. Volume 2: Transaction Detail
-   1. [Get Consent Access Token \[ITI-108\]](ITI-108.html)
-   1. [Introspect Consent Token \[ITI-109\]](ITI-109.html)
-   1. [Access Consent \[ITI-110\]](ITI-110.html)
-
+   1. [3.108 Get Consent Access Token \[ITI-108\]](ITI-108.html)
+   1. [3.109 Introspect Consent Token \[ITI-109\]](ITI-109.html)
+   1. [3.110 Access Consent \[ITI-110\]](ITI-110.html)
 3. Volume 3: Metadata and Content
-   1. [Privacy Consent Patterns](content.html)
-
+   1. [5.8 Privacy Consent Patterns](content.html)
 4. Other
    1. [Changes to Other Profiles](other.html)
    1. [Download and analysis](download.html)
