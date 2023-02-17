@@ -4,9 +4,9 @@
 The following are the FHIR Consent profiling for the PCF profile.
 
 
-### 3:5.8.1 Base Policies
+### 3:5.8.1 Foundation Policies
 
-base policies blah blah
+The [Foundation Consent](StructureDefinition-IHE.PCF.consentBasic.html) Content Profile indicates the common constraints for all of PCF. There are no examples of this as there is no intended use of this profile.
 
 <a name="basic"> </a>
 
@@ -14,7 +14,8 @@ base policies blah blah
 
 Using [Basic Consent](StructureDefinition-IHE.PCF.consentBasic.html) Content Profile
 
-Examples for this Resource Profile: 
+Examples for this Resource Profile:
+
 - [Basic Consent to sharing for Treatment policy](Consent-ex-consent-basic-treat.html)
 - [Basic Consent with an Ink signature](Consent-ex-consent-basic-ink.html)
 - [Basic Consent that Rejects the base policy given](Consent-ex-consent-basic-reject.html)
@@ -25,6 +26,21 @@ Examples for this Resource Profile:
 <a name="intermediate"> </a>
 
 ### 3:5.8.3 Intermediate
+
+Using [Intermediate Consent](StructureDefinition-IHE.PCF.consentIntermediate.html) Content Profile
+
+Examples for this Resource Profile:
+
+- restricted Consent to data authored in a timeframe
+  - restricted **exception** to data authored in a timeframe
+- restricted consent to a named set of data
+  - restricted **exception** to data authored in a timeframe
+- restricted consent to data authored by a Practitioner
+  - restricted **exception** to data authored by a Practitioner
+- restricted consent to data related to an encounter
+  - restricted **exception** to data related to an encounter
+- restricted consent to specific purpose of use
+  - restricted **exception** to specific purpose of use
 
 <a name="advanced"> </a>
 

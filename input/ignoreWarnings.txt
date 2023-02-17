@@ -3,4 +3,5 @@
 # IHE valueset that is not yet a real valueset
 Code System URI 'urn:ihe:event-type-code' is unknown so the code cannot be validated
 
-
+# This is a foundational profile of comment constraints, so no examples are expected
+WARNING: StructureDefinition.where(url = 'https://profiles.ihe.net/ITI/PCF/StructureDefinition/IHE.PCF.consentFoundation'): The Implementation Guide contains no examples for this profile
