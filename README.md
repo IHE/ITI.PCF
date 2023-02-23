@@ -4,7 +4,7 @@ Note where decisions are made and a concept is put into the IG, it is generally 
 
 ## CI Build
 
-<http://build.fhir.org/ig/IHE/ITI.PCF/branches/master/index.html>
+http://build.fhir.org/ig/IHE/ITI.PCF/branches/master/index.html
 
 ## Questions
 
@@ -20,6 +20,11 @@ questions to the ITI committee to aid with the development of the IG.
 1. I defined a subset of ConfidentialityCodes (N, R), and Sensitivity codes (ETH, ETHUD, OPIOIDUD, PSY, SEX, and HIV). Is this enough? Is this too many?
 2. Added a base policy that forbids redisclosure. This is the only policy that places restrictions upon the recipient.
 
+### In development
+
+- adding examples to Volume 3
+- defining the profiles for those examples
+- 
 ### Decided
 
 1. Is Explicit Basic too advanced? If so, what should be moved to Intermediate?  I think that timeframe and resource by id should be in an option that is between basic and intermediate. They are more powerful than one would expect basic, but they are easy to implement without deep inspection (using fundamental Base Resource elements of .id and .meta.lastUpdated). Intermediate requires that the authorization enforcement do deeper (aka Resource type specific) inspection. Do we have four levels rather than the current three (basic, intermediate, advanced, expert)?
@@ -35,73 +40,6 @@ questions to the ITI committee to aid with the development of the IG.
 8. We are not going to profile how the Patient Privacy Policy could be retrieved other than the mention about use of MHD.
 9. Discussed the possibility of needing to do continued maintenance, including proving that historic access would have enforced the consent at that time, and thus the need for Consent versions, Provenance, and/or AuditEvent. -- Possible Open-Issue
 10. PCF is not addressing the use-case where a Consent (dissent) would forbid the data capture or recording. This was available in BPPC, but was not found to be used.
-
-## Proposed Scope
-
-Much like BPPC + APPC does for XDS community, this Implementation Guide (IG) would do for FHIR community. This IG could be used with MHDS, which already has some of the framework for more specific Consents, but PCF would be more complete than what is [indicated in MHDS](https://profiles.ihe.net/ITI/MHDS/volume-1.html#1504-mhds-overview). This IG could also be used for organization use or community use beyond MHD/XDS, which would include use-cases like QEDm, and IPA. This would leverage BasicAudit to record access control decisions and recording of consents.
-
-This IG would
-
-1. Define a set of privacy policies with canonical URI and/or code. These codes might be used in real-implementations, but would also aid with understanding of the concept. Much like most of the PurposeOfUse codes are usable, while others are too abstract in real-implementations.
-1. Define a set of Consent patterns that are foundational. These would be options of increasing complexity, building upon the previous. As IHE Profile options they indicate an ability to support the use-case. Real-Implementations would pick which actual policy(s) are used. So the ability to support an option does not mandate that that option is used in all settings.
-1. Define actors for creation/update of Consent:
-
-## Use-cases
-
-This section includes explanation of some example scenarios and points at example
-Consent resources for them.
-These example scenarios are provided for educational use only, they are not an
-endorsement of these scenarios.
-
-### basic
-
-Likely constraints (back of the envelop):
-
-- status 1..1 - would indicate active
-- scope 1..1 - #patient-privacy
-- category 1..1 - would indicate patient consent, specifically a delegation of authority
-- patient 1..1 - would indicate the Patient resource reference for the given patient
-- dateTime 1..1 - would indicate when the privacy policy was presented
-- performer 1..1 - would indicate the Patient resource if the patient was presented, a RelatedPerson for parent or guardian
-- organization 1..1 - would indicate the Organization that presented the privacy policy, and that is going to enforce that privacy policy
-- source 1..1 - would point at the specific signed consent by the patient
-- policy.uri 1..1 - would indicate the privacy policy that was presented. Usually, the url to the version-specific policy
-- provision.type 1..1 - permit - given there is no way to deny, this would be fixed at permit.
-- provision.agent 0..* - would indicate the those being authorized resource, if empty then all in the community
-- provision.agent.role - would indicate this agent is delegated authority
-- provision.purpose - would indicate some set of authorized purposeOfUse
-- provision.period MS - would indicate a sunset for the consent if applicable, empty means no expiration
-
-### Some patient specific provisions
-
-Authorizing or Denying access to:
-
-- who by a given Practitioner, CareTeam, RelatedPerson
-- why by a given Purpose Of Event codes
-  - why by a given named Research projects
-- data by Confidentiality class (Normal, but not Restricted) -- presumes a mature SLS
-  - data by sensitivity class -- presumes a mature SLS
-- data by authored timeframe
-- data by authorship (authored by someone in organization XYZ)
-- data by identifier (explicit reference)
-- when specific period of time the consent is valid
-
-what others are needed in real-life (vs theory)?
-
-### Not likely to be in scope
-
-These seem to be possible with Consent resource in R4, but not clear they are priority or even possible.
-
-- Use of Consent besides Privacy (consent to treat, advanced directives)
-- .action -- this is not well enough defined in Consent
-- applied obligations or refrains -- no clear place where these go in Consent
-- .class -- this is not well enough defined in Consent
-- data related to an identified data resource (e.g. all data related to this Encounter)
-- use of types of Resources -- not clear how this is useful (e.g. all Observations but not other types of Resources)
-- Consent enforcement within an organization. We focus on Cross-Enterprise/Community access.
-- Use of FHIR Consent for XDS/XCA environments
-- Use-case where the patient revoking authorized access is expected to also stop all downstream disclosures that were originally authorized. Thus only supporting authorization decisions at the time the data request is made with no ramifications placed upon the data released and no ability to recind what was authorized. see [Consents Revocation and Redisclosure](https://jafarim.net/revocation-and-redisclosure/)
-- Use-case that authorizes patient delegates. This could be done with Consent, but is considered a more advanced than supported in first generation of PCF. See [RelatedPerson Consent](https://healthcaresecprivacy.blogspot.com/2022/06/relatedperson-consent-how-to-record.html)
 
 ## Multi-Generation Plan?
 
@@ -152,18 +90,3 @@ Privacy Consent:
   - [Scalability in Consent Management](https://sdhealthconnect.github.io/leap/blog/2021/12/23/scalability.html)
   - [Future Directions for the LEAP Consent Project](https://sdhealthconnect.github.io/leap/blog/2021/10/04/leap-future.html)
 
-### IG Name
-
-Chosen Name - **Privacy Consent on FHIR (PCF)**
-
-**IG names that were discussed but not chosen:**
-
-- Basic Mobile Consent (BMC)
-- Privacy Mobile Consent (PMC)
-- Mobile Privacy Consent (MPC)
-- Privacy Consent (PC)
-- Privacy Consent for Mobile (PCM)
-- Privacy Consent for REST (PCR)
-- Privacy Consent on FHIR (PCoF)
-- Basic Advanced Privacy Consent (BAPC)
-- FHIR Privacy Consent (FPC)

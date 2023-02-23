@@ -270,5 +270,5 @@ For example since these valueSets were originally authored ICD10 and ICD11 codeS
 
 The following examples show where the sensitivity tag is maintained.
 
-- [Observation of Alcohol Use](Observation-ex-ObservationAlcoholUse.html) marked with `ETHUD`
-- [Observation of a Blood Sugar](Observation-ex-bloodSugarB-0.html) not marked sensitive
+- [Observation of Alcohol Use](Observation-ex-alcoholUse.html) marked with `ETHUD`
+- [Observation of a Blood Sugar](Observation-ex-bloodSugar.html) not marked sensitive

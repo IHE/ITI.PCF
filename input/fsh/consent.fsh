@@ -8,19 +8,31 @@ Foundation Consent - This is the common restrictions for all of PCF
 - status 1..1 - would indicate active
 - scope 1..1 - #patient-privacy
 - category 1..1 - would indicate patient consent, specifically a delegation of authority
+- identifier 0..1 - no defined use in PCF. This could carry business identifiers assigned to the consent instance
 - patient 1..1 - would indicate the Patient resource reference for the given patient
 - dateTime 1..1 - would indicate when the privacy policy was presented
-- performer 1..1 - would indicate the Patient resource if the patient was presented, a RelatedPerson for parent or guardian
-- organization 1..1 - would indicate the Organization that presented the privacy policy, and that is going to enforce that privacy policy
+- performer 1.. - would indicate the Patient resource if the patient was presented, a RelatedPerson for parent or guardian
+- organization 1.. - would indicate the Organization that presented the privacy policy, and that is going to enforce that privacy policy
 - source 1..1 - would point at the specific signed consent by the patient
 - policy.uri 1..1 - would indicate the privacy policy that was presented. Usually, the url to the version-specific policy
-- provision.type 1..1 - permit - given there is no way to deny, this would be fixed at permit.
-- provision.agent 0..* - would indicate the those being authorized resource, if empty then all in the community
-- provision.agent.role - would indicate this agent is delegated authority
+- provision.type 1..1 - permit indicates agreement with the policy, deny would indicate rejection.
+- provision.actor 0..* - would indicate those being granted permit / denied access, if empty then all in the community
+- provision.actor.role - fixed value IRCP to indicate information recipient.
 - provision.purpose - would indicate some set of authorized purposeOfUse
 - provision.period MS - would indicate a sunset for the consent if applicable, empty means no expiration
 - provision.provisions are allowed
-- provision.provision.provisions are NOT allowed
+
+Not allowed in PCF
+- provision.provision.provisions - **NOT allowed**, no clear use-case need and would add complexity
+- policy.authority - **not used** in PCF, unclear the use-case need
+- policyRule - **not used** in PCF, unclear the use-case need
+- verification - **not used** in PCF, unclear the use-case need
+- provision.action - **not used** in PCF. The purpose is sufficient.
+- provision.class - **not used** in PCF, unclear the use-case need
+- provision.code - **not used** in PCF, unclear the use-case need
+
+Not constrained here as constrained by derived profiles (basic, intermediate, advanced)
+- securityLabel
 """
 * status 1..1
 * scope 1..1
@@ -33,9 +45,14 @@ Foundation Consent - This is the common restrictions for all of PCF
 * organization 1..
 * source[x] 1..1
 * policy.uri 1..1
+* policy.authority 0..0
 * policyRule 0..0
 * verification 0..0
 * provision.type 1..1
+* provision.period MS
+* provision.purpose MS
+* provision.actor MS
+* provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
 * provision.action 0..0
 * provision.class 0..0
 * provision.code 0..0
@@ -62,9 +79,12 @@ Basic Consent
 - provision.type 1..1 - permit - given there is no way to deny, this would be fixed at permit.
 - provision.agent 0..* - would indicate the those being authorized resource, if empty then all in the community
 - provision.agent.role - would indicate this agent is delegated authority
-- provision.purpose - would indicate some set of authorized purposeOfUse
 - provision.period MS - would indicate a sunset for the consent if applicable, empty means no expiration
-- provision.provision are NOT allowed
+- provision.purpose - would indicate some set of authorized purposeOfUse only Treatment, Payment, Operations, or Break-Glass, see Intermediate
+- provision.securityLabel is not allowed, see Intermediate
+- provision.dataPeriod is not allowed, see Intermediate
+- provision.data is nto allowed, see Intermediate
+- provision.provision are NOT allowed, see Intermediate
 """
 * provision.securityLabel 0..0
 * provision.purpose from BasicPurposeVS (required)
@@ -97,6 +117,7 @@ Intermediate Consent
 - data with relationship to an object are indicated in a `.data` element with `.meaning` of `#related`
 - data authored by a given actor is indicated in the `.data` element with `.meaning` of `#authoredby`
 - purposes of use activities are indicated in the `.purpose` element
+- `securityLabel` is not allowed, see Advanced
 """
 * provision.securityLabel 0..0
 * provision.dataPeriod MS
@@ -108,18 +129,51 @@ Intermediate Consent
 * provision.provision.purpose MS
 
 
+Profile:        AdvancedConsent
+Parent:         FoundationConsent
+Id:             IHE.PCF.consentAdvanced
+Title:          "IHE PCF Advanced Consent"
+Description:    """
+Advanced Consent 
+
+- all elements allowed by Basic and Intermediate are allowed here, plus the following
+- `securityLabel` indicates sensitivity or confidentiality tags on data
+  - Only codes from [Avanced Security Tag ValueSet](ValueSet-AdvancedSecurityTagVS.html)
+"""
+* provision.securityLabel  from AdvancedSecurityTagVS (required)
+
+ValueSet: AdvancedSecurityTagVS
+Title: "Advanced Security Tag ValueSet"
+Description: """
+ValueSet of the security tags allowed in Advanced Consent Option
+
+At a minimum the following stigmatizing [Sensitivity](https://terminology.hl7.org/ValueSet-v3-InformationSensitivityPolicy.html) classifications shall be implemented as parameters:
+
+- `ETH` -- Substance Abuse including Alcohol
+  - `ETHUD` -- Alcohol substance abuse
+  - `OPIOIDUD` -- Opioid drug abuse
+- `PSY` -- Psychiatry Disorder / Mental Health
+- `SEX` -- Sexual Assault, Abuse, or Domestic Violence
+- `HIV` -- HIV/AIDS
+
+At a minimum the following [ConfidentialityCodes](https://terminology.hl7.org/ValueSet-v3-Confidentiality.html) shall be implemented as parameters:
+
+- `N` Normal and
+- `R` Restricted
+"""
+* ^experimental = false
+* http://terminology.hl7.org/CodeSystem/v3-Confidentiality#R
+* http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
+* http://terminology.hl7.org/CodeSystem/v3-ActCode#ETH
+* http://terminology.hl7.org/CodeSystem/v3-ActCode#ETHUD
+* http://terminology.hl7.org/CodeSystem/v3-ActCode#OPIOIDUD
+* http://terminology.hl7.org/CodeSystem/v3-ActCode#PSY
+* http://terminology.hl7.org/CodeSystem/v3-ActCode#SEX
+* http://terminology.hl7.org/CodeSystem/v3-ActCode#HIV
+ 
 
 
 
-
-Instance: ex-organization
-InstanceOf: Organization
-Title: "Example Organization holding the data"
-Description: "The Organization that holds the data, and enforcing any Consents"
-Usage: #example
-* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
-* active = true
-* name = "somewhere org"
 
 Instance: ex-documentreference
 InstanceOf: DocumentReference
@@ -314,19 +368,95 @@ Description: "Example of a binary ink signed document."
 
 
 
-Instance: ex-practitioner
-InstanceOf: Practitioner
-Title: "Dummy Practitioner example"
-Description: "Dummy Practitioner example for completeness sake. No actual use of this resource other than an example target"
+
+Instance: ex-consent-intermediate-timeframe
+InstanceOf: IntermediateConsent
+Title: "Consent allowing data authored within a timeframe"
+Description: """
+Consent allowing data authored within a timeframe
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Intermediate part:
+- access only data authored within 2022
+"""
 Usage: #example
 * meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
-* telecom.system = #email
-* telecom.value = "JohnMoehrke@gmail.com"
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.dataPeriod.start = 2022-01
+* provision.dataPeriod.end = 2022-12
+
+
+Instance: ex-consent-intermediate-not-timeframe
+InstanceOf: IntermediateConsent
+Title: "Consent allowing most sharing but NOT data authored within a timeframe"
+Description: """
+Consent allowing most sharing of data but NOT data authored within a timeframe
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Intermediate part:
+- permit form most uses
+- a sub-provision denying access to data authored within 2022
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.provision.type = #deny
+* provision.provision.dataPeriod.start = 2022-01
+* provision.provision.dataPeriod.end = 2022-12
+
 
 
 Instance: ex-consent-intermediate-authoredby
 InstanceOf: IntermediateConsent
-Title: "Consent allowing data authored by example"
+Title: "Consent allowing data authored by a practitioner"
 Description: """
 Consent allowing data authored by
 
@@ -345,6 +475,7 @@ This is a BasicConsent example:
 
 This is the Intermediate part:
 - authored by ex-practitioner
+  - [practitioner 1](Practitioner-ex-practitioner.html)
 """
 Usage: #example
 * meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
@@ -364,5 +495,551 @@ Usage: #example
 * provision.data.meaning = #authoredby
 * provision.data.reference = Reference(Practitioner/ex-practitioner)
 
+
+Instance: ex-consent-intermediate-not-authoredby
+InstanceOf: IntermediateConsent
+Title: "Consent allowing most sharing but NOT data authored by a practitioner"
+Description: """
+Consent allowing most sharing of data but NOT data authored by a practitioner
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Intermediate part:
+- a sub-provision denying access to data authored by ex-practitioner
+  - [practitioner 1](Practitioner-ex-practitioner.html)
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.provision.type = #deny
+* provision.provision.data.meaning = #authoredby
+* provision.provision.data.reference = Reference(Practitioner/ex-practitioner)
+
+
+Instance: ex-consent-intermediate-encounter
+InstanceOf: IntermediateConsent
+Title: "Consent allowing data authored related to a encounter"
+Description: """
+Consent allowing data authored related to a encounter
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Intermediate part:
+- authored within an encounter
+  - [encounter 1](Encounter-ex-encounter.html)
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.data.meaning = #related
+* provision.data.reference = Reference(Encounter/ex-encounter)
+
+
+Instance: ex-consent-intermediate-not-encounter
+InstanceOf: IntermediateConsent
+Title: "Consent allowing most sharing but NOT data authored by a practitioner"
+Description: """
+Consent allowing most sharing of data but NOT data authored by a practitioner
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Intermediate part:
+- a sub-provision denying access to data authored within an encounter
+  - [encounter 1](Encounter-ex-encounter.html)
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.provision.type = #deny
+* provision.provision.data.meaning = #related
+* provision.provision.data.reference = Reference(Encounter/ex-encounter)
+
+
+
+
+Instance: ex-consent-intermediate-data
+InstanceOf: IntermediateConsent
+Title: "Consent allowing specific data"
+Description: """
+Consent allowing specific data
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Intermediate part:
+- with specific data itemized.
+  - [alcohol use 1](Observation-ex-alcoholUse.html)
+  - [blood sugar 1](Observation-ex-bloodSugar.html)
+  - [blood pressure 1](Observation-ex-bloodPressure.html)
+  - [weight 1](Observation-ex-weight.html)
+  - [weight 2](Observation-ex-weight-stone.html)
+  - [encounter 1](Encounter-ex-encounter.html)
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.data[+].meaning = #instance
+* provision.data[=].reference = Reference(Encounter/ex-encounter)
+* provision.data[+].meaning = #instance
+* provision.data[=].reference = Reference(Observation/ex-weight-stone)
+* provision.data[+].meaning = #instance
+* provision.data[=].reference = Reference(Observation/ex-weight)
+* provision.data[+].meaning = #instance
+* provision.data[=].reference = Reference(Observation/ex-bloodPressure)
+* provision.data[+].meaning = #instance
+* provision.data[=].reference = Reference(Observation/ex-bloodSugar)
+* provision.data[+].meaning = #instance
+* provision.data[=].reference = Reference(Observation/ex-alcoholUse)
+
+
+Instance: ex-consent-intermediate-not-data
+InstanceOf: IntermediateConsent
+Title: "Consent allowing most sharing but NOT data authored by a practitioner"
+Description: """
+Consent allowing most sharing of data but NOT data authored by a practitioner
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Intermediate part:
+- a sub-provision denying access to a specific data instance
+  - [alcohol use 1](Observation-ex-alcoholUse.html)
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.provision.type = #deny
+* provision.provision.data[+].meaning = #instance
+* provision.provision.data[=].reference = Reference(Observation/ex-alcoholUse)
+
+
+
+Instance: ex-org-researcher
+InstanceOf: Organization
+Title: "Example Organization doing the FooBar Research"
+Description: "The Organization that is allowed access for FooBar research project"
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* active = true
+* name = "research house org"
+
+
+Instance: ex-consent-intermediate-purpose
+InstanceOf: IntermediateConsent
+Title: "Consent allowing data access for a given intermediate purpose"
+Description: """
+Consent allowing data access for a given intermediate purpose
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- base provision is #permit -- accepting the policy
+
+This is the Intermediate part:
+- Intermediate PurposeOfUse are those that fall outside the basic purposeOfUse valueset
+- In this case the PurposeOfUse will be for a Clinical Research Project -- FooBar
+- given that the intermediate purpose is a Clinical Research project, then the policy URI will also be different
+- allowing a given purpose beyond the basic purpose valueSet
+- Given this is a research project, also have included the research organization as actor
+  - [research org](Organization-ex-org-researcher.html)
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/researchFooBar.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://example.org/policies/purposeOfUse#FooBar
+* provision.actor.reference = Reference(Organization/ex-org-researcher)
+* provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
+
+
+Instance: ex-consent-advanced-normal
+InstanceOf: AdvancedConsent
+Title: "Consent allowing NORMAL data access"
+Description: """
+Consent allowing NORMAL data access 
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Advanced part:
+- Normal data only
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
+
+
+Instance: ex-consent-advanced-normal-restricted
+InstanceOf: AdvancedConsent
+Title: "Consent allowing NORMAL and RESTRICTED data access"
+Description: """
+Consent allowing NORMAL and RESTRICTED data access 
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Advanced part:
+- Normal and Restricted data only
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
+* provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#R
+
+
+Instance: ex-consent-advanced-normal-not-restricted
+InstanceOf: AdvancedConsent
+Title: "Consent allowing NORMAL and RESTRICTED data access"
+Description: """
+Consent allowing NORMAL data access but NOT RESTRICTED. The exclusion of RESTRICTED should not be needed, given permit is only Normal
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Advanced part:
+- Normal data only
+- Not Restricted data only
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
+* provision.provision.type = #deny
+* provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#R
+
+
+
+Instance: ex-consent-advanced-normal-focused-restricted
+InstanceOf: AdvancedConsent
+Title: "Consent allowing NORMAL and focused RESTRICTED data access"
+Description: """
+Consent allowing NORMAL data access but only focused RESTRICTED.
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Advanced part:
+- Normal data only
+- only Practitioner gets Restricted data only
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
+* provision.provision.type = #permit
+* provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#R
+* provision.actor.reference = Reference(Practitioner/ex-practitioner)
+* provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
+
+
+
+Instance: ex-consent-advanced-normal-focused-psy
+InstanceOf: AdvancedConsent
+Title: "Consent allowing NORMAL and focused Mental Health data access"
+Description: """
+Consent allowing NORMAL data access but only focused Mental Health Abuse.
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Advanced part:
+- Normal data only
+- only Practitioner gets Mental Health data only
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
+* provision.provision.type = #permit
+* provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#PSY
+* provision.actor.reference = Reference(Practitioner/ex-practitioner)
+* provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
+
+
+
+
+Instance: ex-consent-advanced-normal-focused-psy-or-sex
+InstanceOf: AdvancedConsent
+Title: "Consent allowing NORMAL and focused access to Mental Health or Sexual Health data"
+Description: """
+Consent allowing NORMAL and focused access to Mental Health or Sexual Health data.
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Advanced part:
+- Normal data only
+- only Practitioner gets Mental Health or Sexual Health data
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
+* provision.provision.type = #permit
+* provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#PSY
+* provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#SEX
+* provision.actor.reference = Reference(Practitioner/ex-practitioner)
+* provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
 
 

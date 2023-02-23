@@ -569,7 +569,7 @@ The controlling Organization has identified various roles and the kinds of purpo
 
 **Content:**
 
-The **Advanced Consent** content utilizes sensitivity codes and confidentiality codes. The Consent would include parameters that would indicate for a given sensitivity/confidentiality code the conditions on Permit or Deny. 
+The **Advanced Consent** content utilizes sensitivity codes and confidentiality codes. The Consent would include parameters that would indicate for a given sensitivity/confidentiality code the conditions on Permit or Deny.
 
 The typical use-case would be where the patient will allow normal confidentiality data to be used for some purpose such as Treatment, but indicates that data that is tagged as restricted confidentiality not be used.
 
