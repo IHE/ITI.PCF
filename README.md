@@ -22,9 +22,9 @@ questions to the ITI committee to aid with the development of the IG.
 
 ### In development
 
-- adding examples to Volume 3
-- defining the profiles for those examples
-- 
+- added Intermediate and Advanced examples to Volume 3
+- defined the profiles for those examples
+
 ### Decided
 
 1. Is Explicit Basic too advanced? If so, what should be moved to Intermediate?  I think that timeframe and resource by id should be in an option that is between basic and intermediate. They are more powerful than one would expect basic, but they are easy to implement without deep inspection (using fundamental Base Resource elements of .id and .meta.lastUpdated). Intermediate requires that the authorization enforcement do deeper (aka Resource type specific) inspection. Do we have four levels rather than the current three (basic, intermediate, advanced, expert)?

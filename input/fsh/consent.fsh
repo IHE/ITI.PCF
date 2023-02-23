@@ -122,9 +122,32 @@ Intermediate Consent
 * provision.securityLabel 0..0
 * provision.dataPeriod MS
 * provision.provision.dataPeriod MS
-// TODO define slices for the various uses of the .data element
 * provision.data MS
+* provision.data ^slicing.discriminator.type = #value
+* provision.data ^slicing.discriminator.path = "meaning"
+* provision.data ^slicing.rules = #closed
+* provision.data contains 
+  iData 0..* and
+  rData 0..* and 
+  aData 0..*
+* provision.data[iData].meaning = #instance
+* provision.data[rData].meaning = #related
+* provision.data[rData].reference only Reference(Encounter or CarePlan or EpisodeOfCare)
+* provision.data[aData].meaning = #authoredby
+* provision.data[aData].reference only Reference(Practitioner or PractitionerRole or Organization or Device or Group or CareTeam or Patient or RelatedPerson)
 * provision.provision.data MS
+* provision.provision.data ^slicing.discriminator.type = #value
+* provision.provision.data ^slicing.discriminator.path = "meaning"
+* provision.provision.data ^slicing.rules = #closed
+* provision.provision.data contains 
+  iDataP 0..1 and
+  rDataP 0..1 and 
+  aDataP 0..1
+* provision.provision.data[iDataP].meaning = #instance
+* provision.provision.data[rDataP].meaning = #related
+* provision.provision.data[rDataP].reference only Reference(Encounter or CarePlan or EpisodeOfCare)
+* provision.provision.data[aDataP].meaning = #authoredby
+* provision.provision.data[aDataP].reference only Reference(Practitioner or PractitionerRole or Organization or Device or Group or CareTeam or Patient or RelatedPerson)
 * provision.purpose MS 
 * provision.provision.purpose MS
 
@@ -141,6 +164,7 @@ Advanced Consent
   - Only codes from [Avanced Security Tag ValueSet](ValueSet-AdvancedSecurityTagVS.html)
 """
 * provision.securityLabel  from AdvancedSecurityTagVS (required)
+* provision.provision.securityLabel  from AdvancedSecurityTagVS (required)
 
 ValueSet: AdvancedSecurityTagVS
 Title: "Advanced Security Tag ValueSet"
@@ -492,8 +516,8 @@ Usage: #example
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
-* provision.data.meaning = #authoredby
-* provision.data.reference = Reference(Practitioner/ex-practitioner)
+* provision.data[aData].meaning = #authoredby
+* provision.data[aData].reference = Reference(Practitioner/ex-practitioner)
 
 
 Instance: ex-consent-intermediate-not-authoredby
@@ -535,8 +559,8 @@ Usage: #example
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
 * provision.provision.type = #deny
-* provision.provision.data.meaning = #authoredby
-* provision.provision.data.reference = Reference(Practitioner/ex-practitioner)
+* provision.provision.data[aDataP].meaning = #authoredby
+* provision.provision.data[aDataP].reference = Reference(Practitioner/ex-practitioner)
 
 
 Instance: ex-consent-intermediate-encounter
@@ -577,8 +601,8 @@ Usage: #example
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
-* provision.data.meaning = #related
-* provision.data.reference = Reference(Encounter/ex-encounter)
+* provision.data[rData].meaning = #related
+* provision.data[rData].reference = Reference(Encounter/ex-encounter)
 
 
 Instance: ex-consent-intermediate-not-encounter
@@ -620,8 +644,8 @@ Usage: #example
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
 * provision.provision.type = #deny
-* provision.provision.data.meaning = #related
-* provision.provision.data.reference = Reference(Encounter/ex-encounter)
+* provision.provision.data[rDataP].meaning = #related
+* provision.provision.data[rDataP].reference = Reference(Encounter/ex-encounter)
 
 
 
@@ -669,18 +693,18 @@ Usage: #example
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
-* provision.data[+].meaning = #instance
-* provision.data[=].reference = Reference(Encounter/ex-encounter)
-* provision.data[+].meaning = #instance
-* provision.data[=].reference = Reference(Observation/ex-weight-stone)
-* provision.data[+].meaning = #instance
-* provision.data[=].reference = Reference(Observation/ex-weight)
-* provision.data[+].meaning = #instance
-* provision.data[=].reference = Reference(Observation/ex-bloodPressure)
-* provision.data[+].meaning = #instance
-* provision.data[=].reference = Reference(Observation/ex-bloodSugar)
-* provision.data[+].meaning = #instance
-* provision.data[=].reference = Reference(Observation/ex-alcoholUse)
+* provision.data[iData][+].meaning = #instance
+* provision.data[iData][=].reference = Reference(Encounter/ex-encounter)
+* provision.data[iData][+].meaning = #instance
+* provision.data[iData][=].reference = Reference(Observation/ex-weight-stone)
+* provision.data[iData][+].meaning = #instance
+* provision.data[iData][=].reference = Reference(Observation/ex-weight)
+* provision.data[iData][+].meaning = #instance
+* provision.data[iData][=].reference = Reference(Observation/ex-bloodPressure)
+* provision.data[iData][+].meaning = #instance
+* provision.data[iData][=].reference = Reference(Observation/ex-bloodSugar)
+* provision.data[iData][+].meaning = #instance
+* provision.data[iData][=].reference = Reference(Observation/ex-alcoholUse)
 
 
 Instance: ex-consent-intermediate-not-data
@@ -722,8 +746,8 @@ Usage: #example
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
 * provision.provision.type = #deny
-* provision.provision.data[+].meaning = #instance
-* provision.provision.data[=].reference = Reference(Observation/ex-alcoholUse)
+* provision.provision.data[iDataP][+].meaning = #instance
+* provision.provision.data[iDataP][=].reference = Reference(Observation/ex-alcoholUse)
 
 
 
