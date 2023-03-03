@@ -24,6 +24,7 @@ questions to the ITI committee to aid with the development of the IG.
 
 - added Intermediate and Advanced examples to Volume 3
 - defined the profiles for those examples
+- added an explainer to Appendix P -- QUESTION, should this kind of detail be in Volume 3 around some or all profiled examples?
 
 ### Decided
 

@@ -1,4 +1,4 @@
-The following are the FHIR Consent profiling for the PCF profile.
+The following are the FHIR Consent profiling for the PCF profile. The FHIR Consent fundamentals are [explained in Appendix P](ch-P.html#FHIR-Explainer).
 
 ### 3:5.8.1 Foundation Policies
 
@@ -17,7 +17,6 @@ Examples for this Resource Profile:
 - [Basic Consent that Rejects the base policy given](Consent-ex-consent-basic-reject.html)
   - This could also be a representation of a situation when the patient has changed to rejection of a prior agreement
 - [Consent that has expired](Consent-ex-consent-expired-treat.html)
-
 
 <a name="intermediate"> </a>
 

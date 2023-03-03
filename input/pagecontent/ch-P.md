@@ -135,7 +135,7 @@ The following list of references is provided as good references to understand th
 
 The following are some steps that a domain implementing privacy should consider.
 
-### General (before anything else)
+### P.2.1 General (before anything else)
 
 - Granularity of classification of data:
   - Granularity of document: all documents, document by type, each document.
@@ -156,7 +156,7 @@ The following are some steps that a domain implementing privacy should consider.
 - Remediation and Investigation
   - Define the policy for addressing privacy breaches
 
-### While implementing Consent Management
+### P.2.2 While implementing Consent Management
 
 - Definition of codes to be used. Depending on site / hardware, document type, author, patient.
 - Implementing options:
@@ -165,7 +165,7 @@ The following are some steps that a domain implementing privacy should consider.
   - possibility to use different format depending on the confidentiality policy (only non-downloadable image, pdf, word...)
 - Later modification of policy (possible directly when requesting a document or have to be validated before)
 
-### Prior to publication
+### P.2.3 Prior to publication
 
 - What elements should be checked before publication:
   - existence of a policy
@@ -173,7 +173,7 @@ The following are some steps that a domain implementing privacy should consider.
   - existence of a consent for that policy
   - What additional information should be given (general consent policy, patient's specific consent policy...?)
 
-### Prior to allowing access to a document
+### P.2.4 Prior to allowing access to a document
 
 - What elements should be checked before publication:
   - accessing user role
@@ -183,7 +183,7 @@ The following are some steps that a domain implementing privacy should consider.
   - break glass
 - What additional information should be given (general consent policy, patient' specific consent policy...)
 
-### Continued Management
+### P.2.5 Continued Management
 
 - Review of Access Denied to be sure that they are appropriate
 - Review of Break-Glass instances to be sure that they are appropriate
@@ -205,10 +205,10 @@ Obligations may also be expressed in oAuth scopes such as those defined in [SMAR
 
 ## P.4 Explainer of FHIR Consent Model
 
-This section includes explanation of some example scenarios and points at example 
-Consent resources for them. 
-These example scenarios are provided for educational use only, they are not an 
-endorsement of these scenarios. 
+This section includes explanation of some example scenarios and points at example
+Consent resources for them.
+These example scenarios are provided for educational use only, they are not an
+endorsement of these scenarios.
 
 ### P.4.1 Notice of Privacy Policy
 
@@ -236,9 +236,9 @@ Given:
 
 - Patient: Peter James Chalmers
 - dateTime: March 11, 2022 at 12:22 pm
-- grantee: is the patient 
+- grantee: is the patient
 - grantor: Registration Desk Clerk - John Moehrke
-- controler: Burgers MC
+- controller: Burgers MC
 - policyText: policy at https://example.org/privacy-policy-v1.html
 
 sushi:
@@ -395,9 +395,9 @@ Title: "Corporate Lawyer example"
 
 #### Security Considerations
 
-That organizations that never allow a patient to be in a `deny` mode never need to look at Consent for access control reasons as there is no difference if the Patient has been given notice, or signed anything. 
-In these cases the Consent is there for record keeping only. 
-With the support for Change to opt-out, there is now a need for access-control to always look for Consent status. 
+That organizations that never allow a patient to be in a `deny` mode never need to look at Consent for access control reasons as there is no difference if the Patient has been given notice, or signed anything.
+In these cases the Consent is there for record keeping only.
+With the support for Change to opt-out, there is now a need for access-control to always look for Consent status.
 The most simple access-control will simply look for the existence of a Consent, check that it is `.status = active`, and that it is `.provision.type = deny`; if it is anything else then the access-control rule is that which is represented by the privacy policy.
 
 ### P.4.4 Some patient specific provisions
@@ -432,6 +432,7 @@ Thus to say that Dr. Bob is not to get access to the data, except for patient di
 * provision.provision[0].securityLabel = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N "normal"
 
 ```
+
 #### OR relationship within an element
 
 Repetitions within an element are in an OR relationship. Thus to say that Dr. Bob is allowed this access, not just patient requested, but also family requested, and power of attorney; one would just put them all as alternatives on the purpose element.
