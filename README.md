@@ -6,6 +6,16 @@ Note where decisions are made and a concept is put into the IG, it is generally 
 
 http://build.fhir.org/ig/IHE/ITI.PCF/branches/master/index.html
 
+## ITI bi-weekly development call
+
+ITI meets for one hour everyother week to develop this work toward Public-Comment, toward Trial-Implementation publication. Target for Public-Comment is spring/summer 2023, thus first Trial-Implementation publication in Fall 2023. 
+
+- bi-weekly - Fridays @ 10amCT/11amET/1700CET
+- Starting March 3, 2023
+- [teams meeting](https://teams.microsoft.com/l/meetup-join/19%3ameeting_YTI4NWQ5MjItNzQ0Ny00ZDJmLTg3MzAtMTliZDYxNzFlMjNm%40thread.v2/0?context=%7b%22Tid%22%3a%2202a9376b-a4f9-4a63-a240-52c43ebf9a89%22%2c%22Oid%22%3a%226459fea4-110a-4d17-85f0-00587211a0c0%22%7d)
+
+Best to [join the ITI-Technical committee](https://www.ihe.net/ihe_domains/it_infrastructure/), but I am interested in diverse perspectives from anyone.
+
 ## Questions
 
 questions to the ITI committee to aid with the development of the IG.
