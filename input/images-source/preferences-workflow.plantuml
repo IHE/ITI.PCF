@@ -1,5 +1,6 @@
 
 @startuml
+skinparam svgDimensionStyle false
 title Preferences to Enforcement
 
 :Patient: --> (Pref)

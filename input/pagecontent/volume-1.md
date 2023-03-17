@@ -102,7 +102,7 @@ For more details see the detailed [Access Consent](ITI-110.html)
 
 #### 53.1.2.2 ITI-108 Get Consent Access Token transaction
 
-This transaction is used to request an authorization decision based on Consents. This transaction is a refinement of the [IUA Get Consent Access Token \[ITI-71\]](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71).
+This transaction is used to request an authorization decision based on Consents. This transaction is a refinement of the [IUA Get Access Token \[ITI-71\]](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71).
 
 For more details see the detailed [Get Consent Access Token](ITI-108.html)
 

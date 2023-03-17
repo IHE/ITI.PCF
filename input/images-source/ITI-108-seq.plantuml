@@ -1,0 +1,17 @@
+@startuml 
+hide footbox
+
+participant "Authorization Client" as Client
+participant "Authorization Server" as AuthzServer
+
+autonumber 0 1 "<b>[00]</b>"
+
+group Get Consent Access Token (ITI-108) [Client Credentials Grant]
+Client -> AuthzServer: Get Consent Access Token Request
+AuthzServer -> AuthzServer: Determine authorization \nallowed based on user, client, \npatient, consent, and \nother policies
+AuthzServer --> Client: Get Consent Access Token Response
+end
+
+autonumber stop
+
+@enduml

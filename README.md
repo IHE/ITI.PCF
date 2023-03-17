@@ -18,13 +18,14 @@ questions to the ITI committee to aid with the development of the IG.
 1. The NOT likely in scope is open for discussion. I put some things here because of maturity of that concept, maturity of that element in the FHIR Consent, complexity, or unclear priority. Thus any feedback is welcome.
 1. I expect that we could define some explicitly coded policies for MHDS environments that would have defined behavior. These would be definable in behaviors, but not in human language that would be used with the patient. Given that the Consent Recorder is defined as not including the patient engagement on the consent terms, this may not be a problem that we can't provide human language. we could provide boilerplate human language, but we should be careful to not express legal terms.
 1. I defined a subset of ConfidentialityCodes (N, R), and Sensitivity codes (ETH, ETHUD, OPIOIDUD, PSY, SEX, and HIV). Is this enough? Is this too many?
-2. Added a base policy that forbids redisclosure. This is the only policy that places restrictions upon the recipient.
+1. Added a base policy that forbids redisclosure. This is the only policy that places restrictions upon the recipient.
+1. The draft ietf specification we point at is 01, yet the latest is 08
+https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-08 -- opened an [issue 88 on IUA](https://github.com/IHE/ITI.IUA/issues/88)
+1. The draft for JWT Access TOken is old - https://datatracker.ietf.org/doc/html/draft-ietf-oauth-access-token-jwt-10. opened [issue 89 on IUA](https://github.com/IHE/ITI.IUA/issues/89)
 
 ### In development
 
-- added Intermediate and Advanced examples to Volume 3
-- defined the profiles for those examples
-- added an explainer to Appendix P -- QUESTION, should this kind of detail be in Volume 3 around some or all profiled examples?
+- prototyped ITI-108. Tried to not replicate any of ITI-71, but rather reference it and indicate the deviations. Have many TODO questions in the transaction narrative to discuss.
 
 ### Decided
 

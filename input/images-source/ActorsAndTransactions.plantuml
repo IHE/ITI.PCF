@@ -1,4 +1,5 @@
 @startuml
+skinparam svgDimensionStyle false
 agent "[[#consentRecorder Consent Recorder]]" as capture
 agent "[[#consentRegistry Consent Registry]]" as registry
 capture -down--> registry : "Access Consent (CRUDS) [[ITI-110.html ITI-110]]"
