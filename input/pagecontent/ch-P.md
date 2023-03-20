@@ -477,6 +477,17 @@ Data may be "Normal" medical data or "Restricted" medical data. The distinction 
 
 The various clinical Resources in FHIR are very complex and highly variable. Although [Observation](http://hl7.org/fhir/observation.html) is the most often used Resource, sensitive data may exist in ANY other FHIR resource including [Allergies](http://hl7.org/fhir/allergyintolerance.html), [Procedures](http://hl7.org/fhir/servicerequest.html), [CarePlan](http://hl7.org/fhir/careplan.html), [Medication](http://hl7.org/fhir/medicationstatement.html), [Problems](http://hl7.org/fhir/condition.html), [DiagnosticReport](http://hl7.org/fhir/diagnosticreport.html), [ImagingStudy](http://hl7.org/fhir/imagingstudy.html), [Genetics](https://www.hl7.org/fhir/molecularsequence.html), etc... By assessing the [sensitivity classification](https://www.hl7.org/fhir/security-labels.html) and placing that assessment into a [well-known location found in all FHIR Resources](https://www.hl7.org/fhir/security-labels.html#rsl) - `.meta.security`, the Access Control does not need to be aware of the kind of FHIR Resource, it can just process the data as a DomainResource and simply look at the `.meta.security` element.
 
+The following example fragment shows data tagged with both alcohol use sensitive data and thus that the confidentality evaluation is Restricted. The complete [Observation of Alcohol Use](Observation-ex-alcoholUse.html) example.
+
+```fs
+...
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#ETHUD
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#R
+* code = http://loinc.org#74013-4
+* valueQuantity = 5 '{wine glasses}/d' 
+...
+```
+
 The classification of the data may be a manual process, but that is not a very scalable solution. The [HL7 Security Workgroup](http://www.hl7.org/Special/committees/secure/index.cfm) proposes a tht the classification of data into sensitive topics is the role of the [Security Labeling Service (SLS)](https://www.hl7.org/implement/standards/product_brief.cfm?product_id=360). The SLS inspects the data, and may use the context of the data to identify the sensitivity classification. It is expected that most data will not be considered sensitive, aka "Normal".
 
 ### P.5.1 Data tagging Considerations

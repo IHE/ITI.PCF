@@ -36,6 +36,9 @@ https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-08 -- opened an [iss
 ### In development
 
 - prototyped ITI-108. Tried to not replicate any of ITI-71, but rather reference it and indicate the deviations. Have many TODO questions in the transaction narrative to discuss.
+- prototype ITI-109
+- prototype ITI-110
+- add an inline example of data tagged in the SLS section
 
 ### Decided
 
