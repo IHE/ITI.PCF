@@ -36,16 +36,20 @@ The actors participate in the following Transactions.
 
 **Table 53.1-1: PCF Profile - Actors and Transactions**
 
-| Actors                       | Transactions     | Direction | Optionality | Reference      |
-|------------------------------|------------------|-----------|-------------|----------------|
-| Consent Recorder             | Access Consent   | Initiator | R           | ITI TF-2: 3.110 |
-| Consent Registry             | Access Consent   | Responder | R           | ITI TF-2: 3.110 |
-| Consent Authorization Client | Access Consent   | Responder | R           | ITI TF-2: 3.110 |
-| Consent Authorization Server | Access Consent   | Initiator | R           | ITI TF-2: 3.110 |
-|                              | Authorize Access | Responder | R           | ITI TF-2: 3.108 |
-|                              | Introspect Consent Token | Responder | R           | ITI TF-2: 3.109 |
-| Consent Enforcement Point    | Authorize Access | Responder | R           | ITI TF-2: 3.108 |
-|                              | Introspect Consent Token | Initiator | R           | ITI TF-2: 3.109 |
+| Actors                       | Transactions                      | Direction | Optionality | Reference      |
+|------------------------------|-----------------------------------|-----------|-------------|----------------|
+| Consent Recorder             | Access Consent                    | Initiator | R           | ITI TF-2: 3.110 |
+| Consent Registry             | Access Consent                    | Responder | R           | ITI TF-2: 3.110 |
+| Consent Authorization Client | Get Consent Access Token          | Initiator | R           | ITI TF-2: 3.108 |
+|                              | Get Authorization Server metadata | Initiator | R           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
+|                              | Incorporate Access Token          | Initiator | R           | [ITI TF-2: 3.72](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72) |
+| Consent Authorization Server | Access Consent                    | Initiator | R           | ITI TF-2: 3.110 |
+|                              | Get Consent Access Token          | Responder | R           | ITI TF-2: 3.108 |
+|                              | Introspect Consent Token          | Responder | R           | ITI TF-2: 3.109 |
+|                              | Get Authorization Server metadata | Initiator | R           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
+| Consent Enforcement Point    | Get Consent Access Token          | Responder | R           | ITI TF-2: 3.108 |
+|                              | Introspect Consent Token          | Initiator | R           | ITI TF-2: 3.109 |
+|                              | Incorporate Access Token          | Initiator | R           | [ITI TF-2: 3.72](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72) |
 {: .grid}
 
 ### 53.1.1 Actors

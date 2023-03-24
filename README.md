@@ -32,6 +32,7 @@ questions to the ITI committee to aid with the development of the IG.
 1. The draft ietf specification we point at is 01, yet the latest is 08
 https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-08 -- opened an [issue 88 on IUA](https://github.com/IHE/ITI.IUA/issues/88)
 1. The draft for JWT Access TOken is old - https://datatracker.ietf.org/doc/html/draft-ietf-oauth-access-token-jwt-10. opened [issue 89 on IUA](https://github.com/IHE/ITI.IUA/issues/89)
+2. Should the ITI-110 include requirements to record Provenance on Create, Update, and Delete in addition to AuditEvent?
 
 ### In development
 

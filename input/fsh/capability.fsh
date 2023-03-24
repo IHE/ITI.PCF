@@ -43,7 +43,7 @@ PCF transaction [Access Consent \[ITI-110\]](ITI-110.html)
       * type = #token
       * documentation = "Logical id of this artifact"
     * searchParam[+]
-      * name = "active"
+      * name = "status"
       * type = #token
       * documentation = "Whether the Consent record is active"
     * searchParam[+]
@@ -98,7 +98,58 @@ PCF transaction [Access Consent \[ITI-110\]](ITI-110.html)
       * type = #token
       * documentation = "Logical id of this artifact"
     * searchParam[+]
-      * name = "active"
+      * name = "status"
+      * type = #token
+      * documentation = "Whether the Consent record is active"
+    * searchParam[+]
+      * name = "patient"
+      * type = #reference
+      * documentation = "The Patient"
+  * interaction.code = #search-system
+
+Instance: IHE.PCF.consentAuthorizationServer
+InstanceOf: CapabilityStatement
+Title: "PCF Consent Authorization Server Actor"
+Usage: #definition
+* description = """
+CapabilityStatement for the Consent Authorization Server Actor 
+
+Explain
+- is a Client that uses [Access Consent \[ITI-110\]](ITI-110.html)
+- blah
+"""
+* url = "https://profiles.ihe.net/ITI/PCF/CapabilityStatement/IHE.PCF.consentAuthorizationServer"
+* name = "IHE_PCF_consentAuthorizationServer"
+* title = "IHE PCF Consent Authorization Server"
+* status = #active
+* experimental = false
+* date = "2023-02-14"
+* kind = #requirements
+* fhirVersion = #4.0.1
+* format[+] = #application/fhir+xml
+* format[+] = #application/fhir+json
+* rest
+  * mode = #client
+  * documentation = "PCF Consent Authorization Server makes authorization decisions based on the existing Privacy Consent."
+  * security
+    * description = "Recommend [ATNA](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html), encouraged [IHE-IUA](https://profiles.ihe.net/ITI/IUA/index.html) or [SMART-app-launch](http://www.hl7.org/fhir/smart-app-launch/)"
+  * resource[+]
+    * type = #Consent
+    * documentation = """
+PCF transaction [Access Consent \[ITI-110\]](ITI-110.html)
+"""
+    * interaction[+].code = #read
+    * interaction[+].code = #search-type
+    * searchParam[+]
+      * name = "_lastUpdated"
+      * type = #date
+      * documentation = "When the resource version last changed"
+    * searchParam[+]
+      * name = "_id"
+      * type = #token
+      * documentation = "Logical id of this artifact"
+    * searchParam[+]
+      * name = "status"
       * type = #token
       * documentation = "Whether the Consent record is active"
     * searchParam[+]
