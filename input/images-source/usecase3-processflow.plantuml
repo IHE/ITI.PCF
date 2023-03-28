@@ -3,44 +3,55 @@ skinparam svgDimensionStyle false
 hide footbox
 autonumber
 title "Consent Access Control"
-participant "[[#consentAuthorizationClient Consent Authorization Client]]" as client
-participant "[[#consentAuthorizationServer Consent Authorization Server]]" as decision
-box "Other Authorization Services"
-participant "Open-ID-Connect" as oidc
-participant "IUA Authorization Server" as IUA
+participant "[[https://profiles.ihe.net/ITI/IUA/index.html#34111-authorization-client IUA: Authorization Client]]" as client
+box "Grouped Decider"
+participant "[[#consentAuthorizationServer Consent Authorization Server]]" as cdecider
+participant "[[https://profiles.ihe.net/ITI/IUA/index.html#34112-authorization-server IUA: Authorization Server]]" as decider
 end box
-box "Server"
-participant "[[#consentEnforcementPoint Consent Enforcement Point]]" as server
+box "Grouped Server"
+participant "IUA: Resource Server" as server
+participant "[[#consentEnforcementPoint Consent Enforcement Point]]" as enforcer
 participant "FHIR Server" as fhir
 end box
 participant "[[#consentRegistry Consent Registry]]" as registry
+participant "Open-ID-Connect" as oidc
+
 activate client
-client ->o decision : Get Consent Access Token [[ITI-108.html ITI-108]]
-activate decision
-decision --> oidc : Get authorized user using Open-ID-Connect
-decision --> IUA : Get Consent Access Token [ITI-71]
+client ->o decider : IUA Get Access Token [[https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71 ITI-71]]
+activate decider
+decider --> oidc : Get authorized user using Open-ID-Connect
+
+activate cdecider
+decider --> cdecider : Include Consents 
 activate registry
-decision ->o registry : [[ITI-110.html ITI-110]] - Query for existing Consent
-registry --> decision : Return the Consents found
+cdecider ->o registry : [[ITI-110.html ITI-110]] - Query for existing Consent
+registry --> cdecider : Return the Consents found
 note over registry : Record AuditEvent
 deactivate registry
 
-decision -> decision : Match provisions to request context
-decision -> decision : Make Consent focused Access Control Decision
-decision -> decision : Combine Access Control decisions (2+3+7)
-decision -> decision : Encode combined decision in oAuth token
-note over decision : Record AuditEvent
+cdecider -> cdecider : Match provisions to request context
+cdecider -> cdecider : Make Consent focused Access Control Decision
+decider <-- cdecider : Include consent decisions
+decider -> decider : Combine Access Control decisions
+decider -> decider : Encode combined decision in oAuth token
+note over decider : Record AuditEvent
 
-decision --> client:  Decision to be Enforced
+decider --> client:  Decision to be Enforced
 client ->o server : "IUA: Incorporate Access Token [[https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72 ITI-72]]"
 activate server
-server -->o decision : "Introspect Consent Token [[ITI-109.html ITI-109]]"
-server -> server: Enforce authorization decision
-server --> fhir : execute request
-server -> server: Enforce authorization decision
+server -->o decider : "IUA: Introspect Token [[https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102 ITI-102]]"
+decider --> cdecider: Include Consent details 
+server <-- decider: Return token details
+activate enforcer
+server --> enforcer: Enforce authorization decision
+
+enforcer --> fhir : execute request
+server <-- enforcer: Enforce authorization decision
+deactivate enforcer
 client <- server : Returned authoried results
 deactivate server
-deactivate decision 
+deactivate cdecider
+deactivate decider 
 
 note over server : Record AuditEvent
 deactivate server

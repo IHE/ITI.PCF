@@ -74,12 +74,6 @@ pages:
   ch-P.md:
     title: "1:P. Privacy Access Policies (Informative)"
     generation: markdown
-  ITI-108.md:
-    title: "2:3.108 Get Consent Access Token [ITI-108]"
-    generation: markdown
-  ITI-109.md:
-    title: "2:3.109 Introspect Consent Token [ITI-109]"
-    generation: markdown
   ITI-110.md:
     title: "2:3.110 Access Consent [ITI-110]"
     generation: markdown
@@ -111,8 +105,6 @@ menu:
     "Cross-Profile Considerations" : volume-1.html#other-grouping
     "Appendix P. Privacy Access Policies" : ch-P.html
   Volume 2:
-    "Request Consent Authorization Decision [ITI-108]" : ITI-108.html
-    "Introspect Consent Token [ITI-109]" : ITI-109.html
     "Access Consent [ITI-110]" : ITI-110.html
   Volume 3:
     "Consent Patterns" : content.html

@@ -24,15 +24,17 @@ This guide is organized into the following sections:
    1. [53.6 Cross Profile Considerations](volume-1.html#other-grouping)
    1. [Appendix P: Privacy Access Policies](ch-P.html)
 2. Volume 2: Transaction Detail
-   1. [3.108 Get Consent Access Token \[ITI-108\]](ITI-108.html)
-   1. [3.109 Introspect Consent Token \[ITI-109\]](ITI-109.html)
+   1. [3.71 Get Access Token \[ITI-71\]](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71)
+   1. [3.72 Incorporate Access Token \[ITI-71\]](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72)
+   1. [3.102 Introspect Token \[ITI-102\]](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102)
+   1. [3.103 Get Authorization Server Metadata \[ITI-103\]](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103)
    1. [3.110 Access Consent \[ITI-110\]](ITI-110.html)
 3. Volume 3: Metadata and Content
    1. [5.8 Privacy Consent Patterns](content.html)
 4. Other
    1. [Changes to Other Profiles](other.html)
-   1. [Download and analysis](download.html)
-   1. [Test Plan](testplan.html)
+   2. [Download and analysis](download.html)
+   3. [Test Plan](testplan.html)
 
 See also the [Table of Contents](toc.html) and
 the index of [Artifacts](artifacts.html) defined as part of this implementation guide.

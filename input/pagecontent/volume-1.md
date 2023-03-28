@@ -1,7 +1,7 @@
 
-Supports patient privacy consents on FHIR in a Health Information Exchange scope.
+Supports patient privacy consents on FHIR in a Health Information Exchange scope using the FHIR Consent Resource.
 
-The **Privacy Consent on FHIR (PCF)** builds upon a basic Identity and Authorization model such as [Internet User Authorization (IUA)](https://profiles.ihe.net/ITI/IUA/index.html) or [HL7 SMART-on-FHIR](https://hl7.org/fhir/smart-app-launch/) to provide basic access control. The Privacy Consent on FHIR is thus focused only on Access Control decisions regarding the parameters of the data subject (patient) privacy consent. The Privacy Consent on FHIR leverages these basic Identity and Authorization decisions as context setting for the authorization decision and enforcement. For example a user that would never be allowed access, would have been denied access at the IUA or SMART-on-FHIR level, but the identity properties provided by the IUA or SMART-on-FHIR level are input to the Privacy authorization decision that is the focus of PCF.
+The **Privacy Consent on FHIR (PCF)** builds upon a basic Identity and Authorization model of [Internet User Authorization (IUA)](https://profiles.ihe.net/ITI/IUA/index.html) to provide consent based access control. The Privacy Consent on FHIR is thus focused only on Access Control decisions regarding the parameters of the data subject (patient) privacy consent. The Privacy Consent on FHIR leverages these basic Identity and Authorization decisions as context setting for the authorization decision and enforcement. For example a user that would never be allowed access, would have been denied access at the IUA level, but the identity properties provided by the IUA are input to the privacy authorization decision that is the focus of PCF.
 
 This is to say that PCF does not define:
 
@@ -9,7 +9,7 @@ This is to say that PCF does not define:
 - how the patient experiences the ceremony of the consent act, this is systems design, user interface design, and policy language;
 - how one asks for data or communicates data, this is the role of other Implementation Guides like MHD, QEDm, MHDS, etc;
 - how one tags data with security/privacy sensitivity labels, this is the role of a systems design that might utilize a [Security labeling Service](ch-P.html#SLS); and
-- how users or applications are identified and foundationally authorized, this is the role of other Implementation Guides like IUA, and SMART.
+- how users or applications are identified and foundationally authorized, this is the role of other Implementation Guides like IUA, and OpenID-Connect.
 
 But PCF enhances and relies upon these other Implementation Guides.
 
@@ -24,6 +24,7 @@ This section defines the actors and transactions in this implementation guide.
 Figure below shows the actors directly
 involved in the PCF
 Profile and the relevant transactions between them.
+Internet User Authorization ([IUA](https://profiles.ihe.net/ITI/IUA/index.html)) is shown as the PCF specific actors are reliant on IUA actors.
 
 <div>
 {%include ActorsAndTransactions.svg%}
@@ -38,18 +39,27 @@ The actors participate in the following Transactions.
 
 | Actors                       | Transactions                      | Direction | Optionality | Reference      |
 |------------------------------|-----------------------------------|-----------|-------------|----------------|
-| Consent Recorder             | Access Consent                    | Initiator | R           | ITI TF-2: 3.110 |
-| Consent Registry             | Access Consent                    | Responder | R           | ITI TF-2: 3.110 |
-| Consent Authorization Client | Get Consent Access Token          | Initiator | R           | ITI TF-2: 3.108 |
-|                              | Get Authorization Server metadata | Initiator | R           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
+| [Consent Recorder](#consentRecorder)  | Access Consent                    | Initiator | R           | [ITI TF-2: 3.110](ITI-110.html) |
+| [Consent Registry](#consentRegistry)  | Access Consent                    | Responder | R           | [ITI TF-2: 3.110](ITI-110.html) |
+| [Consent Authorization Server](#consentAuthorizationServer) | Access Consent                    | Initiator | R           | [ITI TF-2: 3.110](ITI-110.html) |
+| [Consent Enforcement Point](#consentEnforcementPoint) | none |  |  |  |
+{: .grid}
+
+The following is a repeat of the IUA Actors and Transactions for clarity. The PCF Implementation Guide places grouping requirements and behavior upon the IUA Actors relative to the grouped PCF Actors.
+
+**Table 53.1-2: IUA Profile - Actors and Transactions**
+
+| Actors                       | Transactions                      | Direction | Optionality | Reference      |
+|------------------------------|-----------------------------------|-----------|-------------|----------------|
+| [IUA: Authorization Client](https://profiles.ihe.net/ITI/IUA/index.html#34111-authorization-client)         | Get Access Token                  | Initiator | R           | [ITI TF-2: 3.71](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71) |
 |                              | Incorporate Access Token          | Initiator | R           | [ITI TF-2: 3.72](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72) |
-| Consent Authorization Server | Access Consent                    | Initiator | R           | ITI TF-2: 3.110 |
-|                              | Get Consent Access Token          | Responder | R           | ITI TF-2: 3.108 |
-|                              | Introspect Consent Token          | Responder | R           | ITI TF-2: 3.109 |
 |                              | Get Authorization Server metadata | Initiator | R           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
-| Consent Enforcement Point    | Get Consent Access Token          | Responder | R           | ITI TF-2: 3.108 |
-|                              | Introspect Consent Token          | Initiator | R           | ITI TF-2: 3.109 |
-|                              | Incorporate Access Token          | Initiator | R           | [ITI TF-2: 3.72](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72) |
+| [IUA: Authorization Server](https://profiles.ihe.net/ITI/IUA/index.html#34112-authorization-server)  | Get Access Token                  | Responder | R           | [ITI TF-2: 3.71](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71) |
+|                              | Introspect Token                  | Responder | R           | [ITI TF-2: 3.102](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102) |
+|                              | Get Authorization Server metadata | Responder | R           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
+| [IUA: Resource Server](https://profiles.ihe.net/ITI/IUA/index.html#34113-resource-server)    | Introspect Token                  | Initiator | R           | [ITI TF-2: 3.102](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102) |
+|                              | Incorporate Access Token          | Responder | R           | [ITI TF-2: 3.72](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72) |
+|                              | Get Authorization Server metadata | Initiator | R           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
 {: .grid}
 
 ### 53.1.1 Actors
@@ -74,25 +84,17 @@ The **Consent Registry** actor holds Consent resources. This includes active, in
 
 FHIR Capability Statement for [Consent Registry](CapabilityStatement-IHE.PCF.consentRegistry.html)
 
-<a name="consentAuthorizationClient"> </a>
-
-#### 53.1.1.3 Consent Authorization Client
-
-The **Consent Authorization Client** actor is a client that makes use of the **Consent Authorization Server** actor to get authorization token to use with various FHIR REST and Operation requests made to a Resource Server by way of the **Consent Enforcement Point** actor.
-
-TODO: The expectation is that the interaction is indistinguishable from an IUA or SMART interaction from the perspective of the Consent Authorization Client.
-
 <a name="consentAuthorizationServer"> </a>
 
-#### 53.1.1.4 Consent Authorization Server
+#### 53.1.1.3 Consent Authorization Server
 
 The **Consent Authorization Server** actor makes authorization decisions based on a given access requested context (e.g. oAuth, query/operation parameters), organizational policies, and current active `Consent` resources. The **Consent Authorization Server** is often implemented utilizing other authorization services, taking input from the user identity (e.g. Open-ID-Connect), and application identity and authorization (e.g. IUA). These predicate authorizations provide the security context upon which the Privacy `Consent` constraints are applied. The result is an authorization token used to request access resources, and is used by the **Consent Enforcement Point** actor.
 
 <a name="consentEnforcementPoint"> </a>
 
-#### 53.1.1.5 Consent Enforcement Point
+#### 53.1.1.4 Consent Enforcement Point
 
-The **Consent Enforcement Point** actor enforces consent decisions made by the **Consent Authorization Server** actor. This includes deny, permit, and permit with filtering of results.
+The **Consent Enforcement Point** actor enforces consent decisions made by the **Consent Authorization Server** actor. This includes deny, permit, and permit with filtering of results. The **Consent Enforcement Point** must be grouped with an **IUA Resource Server** and is invoked when the authorization token includes consent based rules to be enforced.
 
 ### 53.1.2 Transaction Descriptions
 
@@ -104,17 +106,9 @@ This transaction is used to Create, Read, Update, Delete, and Search on Consent 
 
 For more details see the detailed [Access Consent](ITI-110.html)
 
-#### 53.1.2.2 ITI-108 Get Consent Access Token transaction
+#### 53.1.2.2 implied enforcement
 
-This transaction is used to request an authorization decision based on Consents. This transaction is a refinement of the [IUA Get Access Token \[ITI-71\]](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71).
-
-For more details see the detailed [Get Consent Access Token](ITI-108.html)
-
-#### 53.1.2.3 ITI-109 Introspect Consent Token transaction
-
-This transaction is used to query the **Consent Authorization Server** to determine the set of claims for a given token. This transaction is a refinement of the [IUA Introspect Consent Token \[ITI-102\]](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102).
-
-For more details see the detailed [Introspect Consent Token](ITI-109.html)
+The **Consent Enforcement Point** is invoked by the **IUA Resource Server** when there is consent rules to be enforced. There is no externally defined transaction, however the **Consent Enforcement Point** indirectly gets the consent rules to be enforced from the **IUA Resource Server** implicitly learning the details of the token. How this is done, and how the enforcement is achieved is a Systems Design concern outside the scope of an Interoperability specification such as PCF.
 
 <a name="actor-options"> </a>
 
@@ -134,7 +128,6 @@ between options when applicable are specified in notes.
 | Consent Recorder    | Explicit Intermediate Additional PurposeOfUse |
 | Consent Recorder    | Explicit Advanced |
 | Consent Registry   | none |
-| Consent Authorization Client | none |
 | Consent Authorization Server    | Implicit  |
 | Consent Authorization Server    | Explicit Basic |
 | Consent Authorization Server    | Explicit Intermediate Data Timeframe |
@@ -225,11 +218,27 @@ See [Advanced Consent](content.html#advanced) Content Profile
 
 ## 53.3 PCF Required Actor Groupings
 
-**TODO Describe any requirements for actors in this profile to be grouped
-with other actors. Possibilities**
+PCF leverages other IHE Profiles for critical functionality they provide. This includes [Basic Audit Log Patterns (BALP)](https://profiles.ihe.net/ITI/BALP/index.html) to provide audit logging of these privacy and security sensitive access control activities, and [Internet User Authorization (IUA)](https://profiles.ihe.net/ITI/IUA/index.html) to provide the oAuth interaction pattern between clients that want to access protected resources and the needs to protect those resources.
 
-- ATNA because Audit Logging is so critical to Privacy
-- IUA or SMART? or is this not mandatory, so would be later in 53.6?
+### 53.3.1 Consent Recorder
+
+The **Consent Recorder** shall be grouped with a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [BALP RESTful activities](https://profiles.ihe.net/ITI/BALP/content.html#3573-restful-activities). Note that the BALP Audit Creator has details on required grouping with ATNA.
+
+### 53.3.1 Consent Registry
+
+The **Consent Registry** shall be grouped with a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [Consent Authorization Decision Audit Message](https://profiles.ihe.net/ITI/BALP/content.html#3576-consent-authorized-decision-audit-message).  Note that the BALP Audit Creator has details on required grouping with ATNA.
+
+### 53.3.1 Consent Authorization Server
+
+The **Consent Authorization Server** shall be grouped with an IUA: **Authorization Server**. The IUA **Authorization Server** takes care of the IUA transactions and invokes the **Consent Authorization Server** when a request for a token, that would be impacted by a Patient Privacy Consent, is requested.
+
+The **Consent Authorization Server** shall be grouped with a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [BALP RESTful activities](https://profiles.ihe.net/ITI/BALP/content.html#3573-restful-activities). Note that the BALP Audit Creator has details on required grouping with ATNA.
+
+### 53.3.2 Consent Enforcement Point
+
+The **Consent Enforcement Point** shall be grouped with an IUA: **Resource Server**.  The IUA **Resource Server** takes care of the IUA transactions and invokes the **Consent Enforcement Point** when a token includes enforcement rules informed by Patient Privacy Consent. 
+
+The **Consent Enforcement Point** shall be grouped with a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [BALP RESTful activities](https://profiles.ihe.net/ITI/BALP/content.html#3573-restful-activities). Note that the BALP Audit Creator has details on required grouping with ATNA. Only one BALP RESTful activity AuditEvent needs to be recorded within the Grouped Server.
 
 <a name="overview"> </a>
 
@@ -348,22 +357,25 @@ The following flow shows the activities involved in the Consent Access Control f
 
 The diagrammed steps:
 
-1. a **Consent Authorization Client** actor, an abstraction of an app and possibly a user, requests an Access Token of the **Consent Authorization Server** actor with some defined patient, user, app, and data parameters. This is the access request context that the **Consent Authorization Server** will make Consent Access Control Decisions upon.
-2. The **Consent Authorization Server** gets user identity information, if available. Such using one or more Open-ID Connect authority. Adding any details to the access request context --> Note that failure to identify a user may be a failure-mode.
-3. The **Consent Authorization Server** gets access token, if available. Such as using IUA or SMART. Adding any details to the access request context --> Note that failure to get an authorization token may be a failure-mode.
+1. a **IUA Authorization Client** actor, an abstraction of an app and possibly a user, requests an Access Token of the **IUA Authorization Server** actor with some defined patient, user, app, and data parameters. This is the access request context that the **Consent Authorization Server** will make Consent Access Control Decisions upon.
+2. The **IUA Authorization Server** gets user identity information, if available. Such using one or more Open-ID Connect authority. Adding any details to the access request context --> Note that failure to identify a user may be a failure-mode.
+3. The **IUA Authorization Server** invokes the **Consent Authorization Server** passing any predicate access token, if available. Adding any details to the access request context --> Note that failure to get an authorization token may be a failure-mode.
 4. The **Consent Authorization Server** looks for Patient Consents at the **Consent Registry** actor(s). The access request context may be used to limit the Consent resources returned.
-5. The **Consent Authorization Server** receives the available consents. --> Note that failure to get a consent means that the default Implicit policy that is active is enforced. 
+5. The **Consent Authorization Server** receives the available consents. --> Note that failure to get a consent means that the default Implicit policy that is active is enforced.
 6. The **Consent Authorization Server** determines the best match or matches of Consents returned to the access control request context (patient, user, app, purposeOfUse, data parameters, etc).
 7. The **Consent Authorization Server** makes the Access Control Decision based on the Consents
-8. The **Consent Authorization Server** combines the Consent Access Control Decision with the decisions returned in step 2 and 3
-9. The **Consent Authorization Server** encodes the combined Access Control Decision into an oAuth token. This is typically just associating the conditions of the Access Control Decision with the opaque oAuth token returned such that later in step 12 the ITI-109 transaction can be used to get the details. This combined Access Control decision indicates what is permitted, denied and any obligations or refrains that must be applied.
-10. The **Consent Authorization Server** returns this combined token to the **Consent Authorization Client**. --> Note that failure-modes will not return a success token but rather an access denied.
-11. The **Consent Authorization Client** encapsulates the given oAuth token, using ITI-72, to indicate the authorization given where the grouped transaction is as defined by the data access implementation guide that is grouped. Meaning the transaction is otherwise as defined elsewhere. The **Consent Enforcement Point** receives the ITI-72 and extracts the oAuth token.
-12. The **Consent Enforcement Point** request introspection using [ITI-109]. ITI-109 is based on ITI-102, but communicates the Consent Access Control decision details.
-13. The **Consent Enforcement Point** may be able to enforce some of the Consent Access Control prior to retrieving the data requested. Such as where the Consent Access Control decision would forbid a kind of FHIR Resource.
-14. The **Consent Enforcement Point** would use undefined means to retrieve the requested data from the FHIR Server. This may be by executing the grouped transaction with privileged access.
-15. The **Consent Enforcement Point** would inspect the results and further enforce the Consent Access Control decision. This might be to filter out specific resources that could not have been filtered out other ways.
-16. The **Consent Enforcement Point** returns the authorized data to the **Consent Authorization Client** actor. 
+8. The **Consent Authorization Server** provides the consent decisions to the **IUA Authorization Server**
+9. The **IUA Authorization Server** combines the Consent Access Control Decision with the decisions returned in step 2 and 3
+10. The **IUA Authorization Server** encodes the combined Access Control Decision into an oAuth token. This is typically just associating the conditions of the Access Control Decision with the opaque oAuth token returned such that later in step 13 the ITI-102 transaction can be used to get the details. This combined Access Control decision indicates what is permitted, denied and any obligations or refrains that must be applied.
+11. The **IUA Authorization Server** returns this combined token to the **IUA Authorization Client**. --> Note that failure-modes will not return a success token but rather an access denied.
+12. The **IUA Authorization Client** encapsulates the given oAuth token, using ITI-72, to indicate the authorization given where the grouped transaction is as defined by the data access implementation guide that is grouped. Meaning the transaction is otherwise as defined elsewhere. The **IUA Resource Server** receives the ITI-72 and extracts the oAuth token.
+13. The **IUA Resource Server** may request introspection using [ITI-102].
+14. The **IUA Authorization Server** includes details from the **Consent Authorization Server** decision.
+15. The **IUA Authorization Server** returns the token details. ITI-102 is augmented here to communicates the Consent Access Control decision details.
+16. The **IUA Resource Server** calls upon the **Consent Enforcement Point** to enforce the token. The **Consent Enforcement Point** may be able to enforce some of the Consent Access Control prior to retrieving the data requested. Such as where the Consent Access Control decision would forbid a kind of FHIR Resource.
+17. The **Consent Enforcement Point** would use undefined means to retrieve the requested data from the FHIR Server. This may be by executing the grouped transaction with privileged access.
+18. The **Consent Enforcement Point** would inspect the results and further enforce the Consent Access Control decision. This might be to filter out specific resources that could not have been filtered out other ways.
+19. The **IUA Resource Server** returns the authorized data to the **IUA Authorization Client** actor.
 
 #### 53.4.2.4 Implicit Content
 
@@ -614,5 +626,5 @@ Security office should monitor audit log for access denied, and follow up to con
 **TODO Possibilities**
 
 * MHDS - would explain how this is used vs the Consent method in MHDS
-* QEDm / IPA 
-  
+* QEDm / IPA
+* ATNA / BALP  

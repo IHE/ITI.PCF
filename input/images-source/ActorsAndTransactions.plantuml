@@ -2,23 +2,40 @@
 skinparam svgDimensionStyle false
 agent "[[#consentRecorder Consent Recorder]]" as capture
 agent "[[#consentRegistry Consent Registry]]" as registry
-capture -down--> registry : "Access Consent (CRUDS) [[ITI-110.html ITI-110]]"
+capture -down-> registry : "Access Consent (CRUDS) [[ITI-110.html ITI-110]]"
+
+frame "Grouped Decider" {
+agent decider [
+[[https://profiles.ihe.net/ITI/IUA/index.html#34112-authorization-server IUA: Authorization Server]]
+] 
+agent cdecider [
+[[#consentAuthorizationServer Consent Authorization Server]]
+] 
+decider -down-* cdecider
+}
+cdecider -left-> registry: "Access Consent (SR) [[ITI-110.html ITI-110]]"
+
 
 frame "Grouped Client" {
 agent "Other FHIR client" as otherClient
-agent "[[#consentAuthorizationClient Consent Authorization Client]]" as client 
+agent "[[https://profiles.ihe.net/ITI/IUA/index.html#34111-authorization-client IUA: Authorization Client]]" as client 
 }
-agent "[[#consentAuthorizationServer Consent Authorization Server]]" as decider
 frame "Grouped Server" {
-agent "[[#consentEnforcementPoint Consent Enforcement Point]]" as enforcer
+agent enforcer [
+[[https://profiles.ihe.net/ITI/IUA/index.html#34113-resource-server IUA: Resource Server]]
+]
+agent cenforcer [
+[[#consentEnforcementPoint Consent Enforcement Point]]
+]
 agent "Other FHIR server" as otherServer
+enforcer -down-* cenforcer
+cenforcer -down-* otherServer
 }
 
-otherClient -down-> client: "other"
-client -down-> decider : "Get Consent Access Token [[ITI-108.html ITI-108]]\nIUA: Get Authorization Server Metadata [[https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103 ITI-103]]"
+otherClient -down-* client: "other"
+client -down-> decider : "IUA Get Access Token [[https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71 ITI-71]]\nIUA: Get Authorization Server Metadata [[https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103 ITI-103]]"
 
-decider -left-> registry: "Access Consent (SR) [[ITI-110.html ITI-110]]"
 client -down-> enforcer : "IUA: Incorporate Access Token [[https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72 ITI-72]]"
-decider <-right- enforcer : "Introspect Consent Token [[ITI-109.html ITI-109]]\nIUA: Get Authorization Server Metadata [[https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103 ITI-103]]"
-enforcer -down-> otherServer : "other"
+decider <-right- enforcer : "IUA: Introspect Token [[https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102 ITI-102]]\nIUA: Get Authorization Server Metadata [[https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103 ITI-103]]"
+cdecider <.left. cenforcer : implied
 @enduml

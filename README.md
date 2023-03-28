@@ -32,14 +32,14 @@ questions to the ITI committee to aid with the development of the IG.
 1. The draft ietf specification we point at is 01, yet the latest is 08
 https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-08 -- opened an [issue 88 on IUA](https://github.com/IHE/ITI.IUA/issues/88)
 1. The draft for JWT Access TOken is old - https://datatracker.ietf.org/doc/html/draft-ietf-oauth-access-token-jwt-10. opened [issue 89 on IUA](https://github.com/IHE/ITI.IUA/issues/89)
-2. Should the ITI-110 include requirements to record Provenance on Create, Update, and Delete in addition to AuditEvent?
 
 ### In development
 
-- prototyped ITI-108. Tried to not replicate any of ITI-71, but rather reference it and indicate the deviations. Have many TODO questions in the transaction narrative to discuss.
-- prototype ITI-109
-- prototype ITI-110
+- prototype ITI-110. It includes messages for all of http CRUDS, starting with search as that is the only thing we profile. Do we need to be so expressive fo the CRUD, or can we just refer to the http section in more general terms?
+  - Should the ITI-110 include requirements to record Provenance on Create, Update, and Delete in addition to AuditEvent? (this would justify full CRUDS in 110 transaction)
 - add an inline example of data tagged in the SLS section
+- The enforcement side of the PCF has simplified and become more reliant on IUA than before. As I worked on the 108 and 109 transactions it became very clear that replicating these transactions was not helpful. The needed part in PCF was clear language about the manditory grouping, and functional invocations. 
+  - The IUA transactions will carry additional oAuth extensions based on the PCF decision. This oAuth extension is the work of the PCF text. I have not determined where this would go. It is somewhat an IUA content profile, but that seems harder for the reader. It could be edits to the IUA transactions. Or it could be requirements in Volume 1 on the actor.
 
 ### Decided
 
