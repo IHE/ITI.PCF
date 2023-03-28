@@ -35,11 +35,12 @@ https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-08 -- opened an [iss
 
 ### In development
 
-- prototype ITI-110. It includes messages for all of http CRUDS, starting with search as that is the only thing we profile. Do we need to be so expressive fo the CRUD, or can we just refer to the http section in more general terms?
+- prototype ITI-110. It includes messages for all of http CRUDS, starting with search as that is the only thing we profile. Do we need to be so expressive of the CRUD, or can we just refer to the http section in more general terms?
   - Should the ITI-110 include requirements to record Provenance on Create, Update, and Delete in addition to AuditEvent? (this would justify full CRUDS in 110 transaction)
 - add an inline example of data tagged in the SLS section
 - The enforcement side of the PCF has simplified and become more reliant on IUA than before. Gone are the 108 and 109 transactions as when I worked on them it became very clear that replicating these transactions was not helpful. The needed part in PCF was clear language about the mandatory grouping, and functional invocations.
   - The IUA transactions will carry additional oAuth extensions based on the PCF decision. This oAuth extension is the work of the PCF project. I have modeled this as a modification to the IUA ITI-71 transaction in the other.html file.
+  - I do expect much more to happen in this extension, I just prototyped it based on BPPC use-case already in IUA.
 
 ### Decided
 
