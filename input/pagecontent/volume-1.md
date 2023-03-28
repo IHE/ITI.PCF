@@ -232,11 +232,19 @@ The **Consent Registry** shall be grouped with a BALP [Audit Creator](https://pr
 
 The **Consent Authorization Server** shall be grouped with an IUA: **Authorization Server**. The IUA **Authorization Server** takes care of the IUA transactions and invokes the **Consent Authorization Server** when a request for a token, that would be impacted by a Patient Privacy Consent, is requested.
 
+The IUA Authorization Server shall implement the **JWT Token**, **Token Introspection** and **Authorization Server Metadata** options. There is no use of the IUA Authorization Server **SAML Token** option.
+
+Note that PCF [adds requirements to the ITI-71](other.html#updates-to-iti-71) transaction to carry in the token extensions informed from the consents. These oAuth extensions affect JWT encoding and response from use of the Introspect Token Transaction.
+
 The **Consent Authorization Server** shall be grouped with a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [BALP RESTful activities](https://profiles.ihe.net/ITI/BALP/content.html#3573-restful-activities). Note that the BALP Audit Creator has details on required grouping with ATNA.
 
 ### 53.3.2 Consent Enforcement Point
 
 The **Consent Enforcement Point** shall be grouped with an IUA: **Resource Server**.  The IUA **Resource Server** takes care of the IUA transactions and invokes the **Consent Enforcement Point** when a token includes enforcement rules informed by Patient Privacy Consent. 
+
+The IUA Resouce Server shall implement the **JWT Token**, **Token Introspection** and **Authorization Server Metadata** options. There is no use of the IUA Authorization Server **SAML Token** option.
+
+Note that PCF [adds requirements to the ITI-71](other.html#updates-to-iti-71) transaction to carry in the token extensions informed from the consents. These oAuth extensions affect JWT encoding and response from use of the Introspect Token Transaction.
 
 The **Consent Enforcement Point** shall be grouped with a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [BALP RESTful activities](https://profiles.ihe.net/ITI/BALP/content.html#3573-restful-activities). Note that the BALP Audit Creator has details on required grouping with ATNA. Only one BALP RESTful activity AuditEvent needs to be recorded within the Grouped Server.
 
