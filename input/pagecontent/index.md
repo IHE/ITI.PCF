@@ -33,8 +33,9 @@ This guide is organized into the following sections:
    1. [5.8 Privacy Consent Patterns](content.html)
 4. Other
    1. [Changes to Other Profiles](other.html)
-   2. [Download and analysis](download.html)
-   3. [Test Plan](testplan.html)
+   1. [Updates to ITI-71](other.html#updates-to-iti-71)
+   1. [Download and analysis](download.html)
+   1. [Test Plan](testplan.html)
 
 See also the [Table of Contents](toc.html) and
 the index of [Artifacts](artifacts.html) defined as part of this implementation guide.

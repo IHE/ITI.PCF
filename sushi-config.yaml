@@ -111,6 +111,7 @@ menu:
   Artifacts: artifacts.html
   Other: 
     "Changes to Other IHE specifications" : other.html
+    "Updates to ITI-71" : other.html#updates-to-iti-71
     "Download" : download.html
     "Test Plan" : testplan.html
 
