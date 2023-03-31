@@ -20,27 +20,15 @@ Best to [join the ITI-Technical committee](https://www.ihe.net/ihe_domains/it_in
 
 questions to the ITI committee to aid with the development of the IG.
 
-1. Should we explain in Appendix P about overall policies that Privacy Policies fit within, such as hiring policy, code of conduct, internet usage policy, health and safety policy, travel policies, etc?
-1. is Volume 1 getting too long? Could split on H2 (actors, options, grouping, overview, security, xProfile) like what is done in MHD.
-1. the 53.4.2 section seems awkward given the pattern IHE has for content profiling. The detail is there, but it seems not as useful as it could be. would cucumber be more understandable? have I written this wrong? I have written these more from the access control logic, but possibly they should only be from the perspective of the content definition. The access control logic is in the option text above?
-1. Are we going to support just one level of sub-provisions? 2 levels of sub-provisions? not limited? Seems one level of exceptions should be sufficient for most cases. Unclear what realistic use-cases need 2 levels. Recommend only one level of sub-provisions (This enables Permit with exceptions, and Deny with exceptions; but does not support exceptions to the exceptions). Given no combining rules, and concern to make implementable. I have written this as exhaustive search through sub-provisions. is this right?
-1. How to approach the overall solution which will be very complex? The thinking is that there will be both options within the IG of increasing complexity and building on the previous; but also that the initial version may be scope limited to make it achievable and measurable. One specific extension beyond what I have defined would be refinement on use of security tags, security labeling service, and other ABAC concepts. Initial proposal is focused on some high value sensitive topics.
-1. The NOT likely in scope is open for discussion. I put some things here because of maturity of that concept, maturity of that element in the FHIR Consent, complexity, or unclear priority. Thus any feedback is welcome.
 1. I expect that we could define some explicitly coded policies for MHDS environments that would have defined behavior. These would be definable in behaviors, but not in human language that would be used with the patient. Given that the Consent Recorder is defined as not including the patient engagement on the consent terms, this may not be a problem that we can't provide human language. we could provide boilerplate human language, but we should be careful to not express legal terms.
 1. I defined a subset of ConfidentialityCodes (N, R), and Sensitivity codes (ETH, ETHUD, OPIOIDUD, PSY, SEX, and HIV). Is this enough? Is this too many?
 1. Added a base policy that forbids redisclosure. This is the only policy that places restrictions upon the recipient.
-1. The draft ietf specification we point at is 01, yet the latest is 08
-https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-08 -- opened an [issue 88 on IUA](https://github.com/IHE/ITI.IUA/issues/88)
-1. The draft for JWT Access TOken is old - https://datatracker.ietf.org/doc/html/draft-ietf-oauth-access-token-jwt-10. opened [issue 89 on IUA](https://github.com/IHE/ITI.IUA/issues/89)
+1. Should the ITI-110 include requirements to record Provenance on Create, Update, and Delete in addition to AuditEvent? (this would justify full CRUDS in 110 transaction)
 
 ### In development
 
-- prototype ITI-110. It includes messages for all of http CRUDS, starting with search as that is the only thing we profile. Do we need to be so expressive of the CRUD, or can we just refer to the http section in more general terms?
-  - Should the ITI-110 include requirements to record Provenance on Create, Update, and Delete in addition to AuditEvent? (this would justify full CRUDS in 110 transaction)
-- add an inline example of data tagged in the SLS section
-- The enforcement side of the PCF has simplified and become more reliant on IUA than before. Gone are the 108 and 109 transactions as when I worked on them it became very clear that replicating these transactions was not helpful. The needed part in PCF was clear language about the mandatory grouping, and functional invocations.
-  - The IUA transactions will carry additional oAuth extensions based on the PCF decision. This oAuth extension is the work of the PCF project. I have modeled this as a modification to the IUA ITI-71 transaction in the other.html file.
-  - I do expect much more to happen in this extension, I just prototyped it based on BPPC use-case already in IUA.
+- Work on how policy fragments are communicated in the oAuth token. Likely base this on some sample oAuth policy fragment examples received from some existing FHIR implementations.
+- Updated Appendix P about overall policies that Privacy Policies fit within, such as hiring policy, code of conduct, internet usage policy, health and safety policy, travel policies, etc.
 
 ### Decided
 
@@ -57,6 +45,7 @@ https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1-08 -- opened an [iss
 8. We are not going to profile how the Patient Privacy Policy could be retrieved other than the mention about use of MHD.
 9. Discussed the possibility of needing to do continued maintenance, including proving that historic access would have enforced the consent at that time, and thus the need for Consent versions, Provenance, and/or AuditEvent. -- Possible Open-Issue
 10. PCF is not addressing the use-case where a Consent (dissent) would forbid the data capture or recording. This was available in BPPC, but was not found to be used.
+11. Consent.provision and .provision.provision is all that we should need for our use-cases.
 
 ## Multi-Generation Plan?
 

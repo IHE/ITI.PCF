@@ -3,9 +3,17 @@
 | Editor replace existing Volume 1 Appendix P with the following<br/>This Appendix exists in the Final Text Technical Framework but only covers BPPC. This version expands on the scope, and updates the details. |
 {:.grid .bg-info}
 
-[TODO]: # Should we explain overall policies that Privacy Policies fit within, such as hiring policy, code of conduct, internet usage policy, health and safety policy, etc?
+Privacy policies are an important part of an organization's overall risk management strategy. They help to protect the organization from potential legal liability, as well as from reputational damage. Privacy policies should be aligned with other policies within the organization, such as data security policies, employee training policies, and incident response plans.
 
-This Appendix provides information about when consent could be automated and consequently when the BPPC, APPC, or PCF Profiles could be used. Privacy consent can be summarized as: "I agree on my personal data being disclosed to someone under specific conditions".
+Privacy policies should be reviewed and updated regularly to ensure that they reflect the latest legal and regulatory requirements. They should also be communicated to employees and customers in a clear and concise way.
+
+Here are some of the other policies within an organization that privacy policies relate to:
+
+- Data security policies: Data security policies outline the steps that an organization will take to protect its data from unauthorized access, use, disclosure, disruption, modification, or destruction. Privacy policies should be aligned with data security policies to ensure that the organization is taking all necessary steps to protect the privacy of its customers' data.
+- Employee training policies: Employee training policies outline the training that employees will receive on topics such as data privacy, security, and compliance. Privacy policies should be included in employee training programs to ensure that employees are aware of the organization's privacy practices and how to comply with them.
+- Incident response plans: Incident response plans outline the steps that an organization will take in the event of a data breach or other security incident. Privacy policies should be included in incident response plans to ensure that the organization is prepared to respond to a privacy incident in a timely and effective manner.
+
+This Appendix provides information about Privacy Policies and when consent could be automated and consequently when the BPPC, APPC, or PCF Profiles could be used. 
 
 Concepts (This set of concepts is a non-exhaustive subset of terms relevant to Privacy Consent, and the definitions given here have been simplified for that scope. ):
 
@@ -30,16 +38,21 @@ Concepts (This set of concepts is a non-exhaustive subset of terms relevant to P
 - **Restricted Health Data** - Some Patient Identifiable Data are considered more sensitive and is classified as Restricted Health Data. Data may be considered Restricted by regulation or laws, or may be deemed by the patient to be more sensitive. Some examples of restricted health data are data that describes a stigmatizing sensitive health topic such as mental health, drug abuse, sexual health, or other.
 - **Users** - are an identifiable agent, usually human, that has some defined role within the Organization within which they operate. A User may be the Patient herself, a patient related party, clinician, researcher, billing clerk, etc. These different functional roles will have different needs to access data. For example registration clerks may need to be able to access patient demographics, billing, and contacts; but would not need access to clinical content.
 
-Policy includes appropriate access rules that define conditions on various factor(s) for example:
+The Privacy Policy includes appropriate access rules that define conditions on various factor(s) for example:
 
+- the kinds of data being managed;
+- the kinds of use of these data that could be allowed;
+- the kinds of users for which privacy policies and consent rules would apply;
+- the safety risk to privacy risk management;
 - the subject of the data;
-- role of person the data is disclosed to;
+- role of users or organizations for which the data may be disclosed to;
 - type of data disclosed;
 - security level in which the disclosure takes place (weak authentication vs. strong authentication);
 - type of purpose for which the data is disclosed;
 - timeframe of use (period of validity of the consent, window of disclosure...);
+- etc.
 
-Some Privay Consent needs require a more basic record, where as other Consents require intermediate or advanced needs. The more advanced need must support both the recording of the patient specific parameters, and the ability to distinguish the accesses that would be impacted by those specific parameters.
+Some Privacy Consent needs require a more basic record, where as other Consents require intermediate or advanced needs. The more advanced need must support both the recording of the patient specific parameters, and the ability to distinguish the accesses that would be impacted by those specific parameters.
 
 The Privacy Consent Ceremony and the development of the Privacy Policies is not constrained or described by IHE. The Privacy Preferences is a potential way to improve the Patient Experience, by allowing the Patient to express their desired privacy conditions and parameters. These Privacy Preferences would not be enforceable as they are as statement of desire, and not agreed to by a Data Holder. The Consent ceremony could take these preferences as input, and thus present the terms that the Data Holder is willing to enforce. Thus at the end of the Consent Ceremony there would be a Patient Privacy Consent Resource that expresses the terms that the Data Holder and Patient have agreed to.
 
