@@ -1,9 +1,7 @@
-Profile:        FoundationConsent
-Parent:         Consent
-Id:             IHE.PCF.consentFoundation
-Title:          "IHE PCF Foundational Consent"
-Description:    """
-Foundation Consent - This is the common restrictions for all of PCF
+
+RuleSet:        FoundationConsent
+/*
+Using a RuleSet so that the foundational constraints are consistent and show up in the profiles
 
 - status 1..1 - would indicate active
 - scope 1..1 - #patient-privacy
@@ -33,7 +31,7 @@ Not allowed in PCF
 
 Not constrained here as constrained by derived profiles (basic, intermediate, advanced)
 - securityLabel
-"""
+*/
 * status 1..1
 * scope 1..1
 * scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
@@ -61,31 +59,46 @@ Not constrained here as constrained by derived profiles (basic, intermediate, ad
 
 
 Profile:        BasicConsent
-Parent:         FoundationConsent
+Parent:         Consent
 Id:             IHE.PCF.consentBasic
-Title:          "IHE PCF Basic Consent"
+Title:          "IHE PCF Explicit Basic Consent"
 Description:    """
-Basic Consent 
+Explicit Basic Consent 
 
 - status 1..1 - would indicate active
 - scope 1..1 - #patient-privacy
 - category 1..1 - would indicate patient consent, specifically a delegation of authority
+- identifier 0..1 - no defined use in PCF. This could carry business identifiers assigned to the consent instance
 - patient 1..1 - would indicate the Patient resource reference for the given patient
 - dateTime 1..1 - would indicate when the privacy policy was presented
-- performer 1..1 - would indicate the Patient resource if the patient was presented, a RelatedPerson for parent or guardian
-- organization 1..1 - would indicate the Organization that presented the privacy policy, and that is going to enforce that privacy policy
+- performer 1.. - would indicate the Patient resource if the patient was presented, a RelatedPerson for parent or guardian
+- organization 1.. - would indicate the Organization that presented the privacy policy, and that is going to enforce that privacy policy
 - source 1..1 - would point at the specific signed consent by the patient
 - policy.uri 1..1 - would indicate the privacy policy that was presented. Usually, the url to the version-specific policy
-- provision.type 1..1 - permit - given there is no way to deny, this would be fixed at permit.
-- provision.agent 0..* - would indicate the those being authorized resource, if empty then all in the community
-- provision.agent.role - would indicate this agent is delegated authority
+- provision.type 1..1 - permit indicates agreement with the policy, deny would indicate rejection.
+- provision.actor 0..* - would indicate those being granted permit / denied access, if empty then all in the community
+- provision.actor.role - fixed value IRCP to indicate information recipient.
+- provision.purpose - would indicate some set of authorized purposeOfUse
 - provision.period MS - would indicate a sunset for the consent if applicable, empty means no expiration
+- provision.provisions are allowed
+
+Not allowed in PCF
+- provision.provision.provisions - **NOT allowed**, no clear use-case need and would add complexity
+- policy.authority - **not used** in PCF, unclear the use-case need
+- policyRule - **not used** in PCF, unclear the use-case need
+- verification - **not used** in PCF, unclear the use-case need
+- provision.action - **not used** in PCF. The purpose is sufficient.
+- provision.class - **not used** in PCF, unclear the use-case need
+- provision.code - **not used** in PCF, unclear the use-case need
+
+Specifics of Basic:
 - provision.purpose - would indicate some set of authorized purposeOfUse only Treatment, Payment, Operations, or Break-Glass, see Intermediate
 - provision.securityLabel is not allowed, see Intermediate
 - provision.dataPeriod is not allowed, see Intermediate
 - provision.data is nto allowed, see Intermediate
 - provision.provision are NOT allowed, see Intermediate
 """
+* insert FoundationConsent
 * provision.securityLabel 0..0
 * provision.purpose from BasicPurposeVS (required)
 * provision.dataPeriod 0..0
@@ -102,11 +115,11 @@ Description: "ValueSet of the PurposeOfUse minimally required by Basic Option"
 * http://terminology.hl7.org/CodeSystem/v3-ActReason#BTG
 
 Profile:        IntermediateConsent
-Parent:         FoundationConsent
+Parent:         Consent
 Id:             IHE.PCF.consentIntermediate
-Title:          "IHE PCF Intermediate Consent"
+Title:          "IHE PCF Explicit Intermediate Consent"
 Description:    """
-Intermediate Consent 
+Explicit Intermediate Consent 
 
 - all elements allowed by Basic are allowed here, plus the following
 - restriction at the root `.provision` apply to the whole Consent
@@ -119,6 +132,8 @@ Intermediate Consent
 - purposes of use activities are indicated in the `.purpose` element
 - `securityLabel` is not allowed, see Advanced
 """
+* insert FoundationConsent
+* provision.provision MS
 * provision.securityLabel 0..0
 * provision.dataPeriod MS
 * provision.provision.dataPeriod MS
@@ -153,16 +168,18 @@ Intermediate Consent
 
 
 Profile:        AdvancedConsent
-Parent:         FoundationConsent
+Parent:         Consent
 Id:             IHE.PCF.consentAdvanced
-Title:          "IHE PCF Advanced Consent"
+Title:          "IHE PCF Explicit Advanced Consent"
 Description:    """
-Advanced Consent 
+Explicit Advanced Consent 
 
 - all elements allowed by Basic and Intermediate are allowed here, plus the following
 - `securityLabel` indicates sensitivity or confidentiality tags on data
   - Only codes from [Avanced Security Tag ValueSet](ValueSet-AdvancedSecurityTagVS.html)
 """
+* insert FoundationConsent
+* provision.provision MS
 * provision.securityLabel  from AdvancedSecurityTagVS (required)
 * provision.provision.securityLabel  from AdvancedSecurityTagVS (required)
 

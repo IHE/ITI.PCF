@@ -63,6 +63,71 @@ resources:
 # You may delay filling out this section until you approach publication as it is merely a nice to have and eliminates build warnings -- If you do this then you will need above the autoload-resources true
 
 
+groups:
+  BasicConsent:
+    name: Explicit Basic Consent
+    description: Artifacts related to [Explicit Basic option](volume-1.html#5322-explicit-basic-option)
+    resources:
+#      - StructureDefinition/IHE.PCF.consentFoundation
+      - StructureDefinition/IHE.PCF.consentBasic
+      - ValueSet/BasicPurposeVS
+      - Consent/ex-consent-basic-ink
+      - Consent/ex-consent-basic-treat
+      - Consent/ex-consent-expired-treat
+      - Consent/ex-consent-basic-reject
+      - DocumentReference/ex-documentreference
+      - DocumentReference/ex-consent-ink
+      - Binary/B-ink
+      - Organization/ex-organization
+      - Patient/ex-patient
+  IntermediateConsent:
+    name: Explicit Intermediate Consent
+    description: Artifacts related to [Explicit Intermediate](volume-1.html#5323-explicit-intermediate-options) option
+    resources:
+      - StructureDefinition/IHE.PCF.consentIntermediate
+      - Consent/ex-consent-intermediate-timeframe
+      - Consent/ex-consent-intermediate-not-timeframe
+      - Consent/ex-consent-intermediate-authoredby
+      - Consent/ex-consent-intermediate-not-authoredby
+      - Consent/ex-consent-intermediate-encounter
+      - Consent/ex-consent-intermediate-not-encounter
+      - Consent/ex-consent-intermediate-data
+      - Consent/ex-consent-intermediate-not-data
+      - Consent/ex-consent-intermediate-purpose
+      - Encounter/ex-encounter
+      - Practitioner/ex-practitioner
+      - Organization/ex-org-researcher
+  AdvancedConsent:
+    name: Explicit Advanced Consent
+    description: Artifacts related to [Explicit Advanced](volume-1.html#5324-explicit-advanced-option) option
+    resources:
+      - StructureDefinition/IHE.PCF.consentAdvanced
+      - ValueSet/AdvancedSecurityTagVS
+      - Consent/ex-consent-advanced-normal
+      - Consent/ex-consent-advanced-normal-restricted
+      - Consent/ex-consent-advanced-normal-not-restricted
+      - Consent/ex-consent-advanced-normal-focused-restricted
+      - Consent/ex-consent-advanced-normal-focused-psy
+      - Consent/ex-consent-advanced-normal-focused-psy-or-sex
+  SLS:
+    name: Security Labeling Service resources
+    description: Artifacts to support a [Security Labeling Service (SLS)](ch-P.html#SLS)
+    resources:
+      - ValueSet/SlsSensitivePSY
+      - ValueSet/SlsSensitiveETH
+      - ValueSet/SlsSensitiveETHUD
+      - ValueSet/SlsSensitiveOPIOIDUD
+      - ValueSet/SlsSensitiveSEX
+      - ValueSet/SlsSensitiveHIV
+      - Observation/ex-alcoholUse
+      - Observation/ex-bloodSugar
+      - Observation/ex-bloodPressure
+      - Observation/ex-weight
+      - Observation/ex-weight-stone
+
+
+
+
 pages:
 # itemize here each narrative page. Include assigned section numbers when appropriate
   index.md:
