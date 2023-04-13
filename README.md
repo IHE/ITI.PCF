@@ -8,7 +8,7 @@ http://build.fhir.org/ig/IHE/ITI.PCF/branches/master/index.html
 
 ## ITI bi-weekly development call
 
-ITI meets for one hour everyother week to develop this work toward Public-Comment, toward Trial-Implementation publication. Target for Public-Comment is spring/summer 2023, thus first Trial-Implementation publication in Fall 2023. 
+ITI meets for one hour every other week to develop this work toward Public-Comment, toward Trial-Implementation publication. Target for Public-Comment is spring/summer 2023, thus first Trial-Implementation publication in Fall 2023. 
 
 - bi-weekly - Fridays @ 10amCT/11amET/1700CET
 - Starting March 3, 2023
@@ -27,8 +27,39 @@ questions to the ITI committee to aid with the development of the IG.
 
 ### In development
 
-- Work on how policy fragments are communicated in the oAuth token. Likely base this on some sample oAuth policy fragment examples received from some existing FHIR implementations.
 - Updated Appendix P about overall policies that Privacy Policies fit within, such as hiring policy, code of conduct, internet usage policy, health and safety policy, travel policies, etc.
+- Work on how policy fragments are communicated in the oAuth token. Likely base this on some sample oAuth policy fragment examples received from some existing FHIR implementations.
+  - Given the policies supported, what kind of policy-fragments would need to be passed to the enforcement point?
+    - does Basic leave anything? -- I think all parameters in basic result in the kind of thing already supported in IUA (actor, purpose). Meaning there is residual, but it is normal IUA use of purpose.
+  - And that we are focused on FHIR REST
+    - When full deny then token will not be issued
+    - so, fragments would be where permit is allowed
+    - obligations and refrains -- these would go into the Bundle.meta.security
+      - so some method of carrying residual obligation and refrain codes is needed
+    - so, then does fragment only need to express filters?
+      - remove blah from results?
+      - optimization - add this additional search parameter to any search terms given
+  - Intermediate / Advanced
+    - data timeframe (permit / deny)
+    - data id(s) (permit / deny)
+    - data author (permit / deny)
+    - data relationship (permit / deny)
+    - purpose -> no residual beyond IUA support for purpose
+    - tags (permit / deny)
+    - combining rule
+  - alternatives
+    - could we just define a JSON object ourselves, inspired by FHIR R4 Consent.provision
+      - agent
+        - purpose
+      - data
+        - timeframe
+        - id
+        - author
+        - relationship
+    - Cedar policy language
+    - SMART scope
+      - has a mechanism to carry security tags
+  
 
 ### Decided
 
@@ -77,7 +108,9 @@ Privacy Consent:
   - [Specialty Rx Consent](https://build.fhir.org/ig/HL7/fhir-specialty-rx/StructureDefinition-specialty-rx-consent.html)
 - [UK INTEROPen Care Connect FHIR Profiles](https://fhir.hl7.org.uk/)
   - [CareConnect Consent 1](https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Consent-1)
-
+- [Switzerland Core](http://fhir.ch/ig/ch-core/index.html)
+  - [CH Core EPR-Consent](http://fhir.ch/ig/ch-core/StructureDefinition-ch-core-epr-consent.html)
+- []
 ### Other research to note
 
 - HL7 FHIR DS4P
@@ -89,10 +122,10 @@ Privacy Consent:
   - [Security Labeling Service](https://healthcaresecprivacy.blogspot.com/2022/09/security-labeling-service.html)
   - [Consent with Segmented Data](http://build.fhir.org/ig/JohnMoehrke/ConsentWithSegmentation/branches/main/index.html)
 - [Mohammad Jafari blog](https://jafarim.net/blog/)
+  - [A Developer's Guide to Security labeling in FHIR](https://jafarim.net/labeling-developer-guide/)
   - [Consents Revocation and Redisclosure](https://jafarim.net/revocation-and-redisclosure/)
   - [Consent Overarching Policy](https://jafarim.net/consent-overarching-policy)
 - ONC LEAP Computable Consent Project
   - [High-Level Architecture](https://sdhealthconnect.github.io/leap/blog/2021/09/30/architecture.html)
   - [Scalability in Consent Management](https://sdhealthconnect.github.io/leap/blog/2021/12/23/scalability.html)
   - [Future Directions for the LEAP Consent Project](https://sdhealthconnect.github.io/leap/blog/2021/10/04/leap-future.html)
-

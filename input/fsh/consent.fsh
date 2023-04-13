@@ -46,6 +46,7 @@ Not constrained here as constrained by derived profiles (basic, intermediate, ad
 * policy.authority 0..0
 * policyRule 0..0
 * verification 0..0
+* provision 1..1 MS
 * provision.type 1..1
 * provision.period MS
 * provision.purpose MS
@@ -134,6 +135,7 @@ Explicit Intermediate Consent
 """
 * insert FoundationConsent
 * provision.provision MS
+* provision.provision.provision 0..0
 * provision.securityLabel 0..0
 * provision.dataPeriod MS
 * provision.provision.dataPeriod MS
@@ -180,6 +182,7 @@ Explicit Advanced Consent
 """
 * insert FoundationConsent
 * provision.provision MS
+* provision.provision.provision 0..0
 * provision.securityLabel  from AdvancedSecurityTagVS (required)
 * provision.provision.securityLabel  from AdvancedSecurityTagVS (required)
 
@@ -447,8 +450,8 @@ Usage: #example
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
-* provision.dataPeriod.start = 2022-01
-* provision.dataPeriod.end = 2022-12
+* provision.dataPeriod.start = 2022-01-01
+* provision.dataPeriod.end = 2022-12-31
 
 
 Instance: ex-consent-intermediate-not-timeframe
@@ -490,8 +493,8 @@ Usage: #example
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
 * provision.provision.type = #deny
-* provision.provision.dataPeriod.start = 2022-01
-* provision.provision.dataPeriod.end = 2022-12
+* provision.provision.dataPeriod.start = 2022-01-01
+* provision.provision.dataPeriod.end = 2022-12-31
 
 
 
