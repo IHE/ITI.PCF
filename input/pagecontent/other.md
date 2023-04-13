@@ -85,21 +85,21 @@ Example: Given [Consent allowing data authored within a timeframe](Consent-ex-co
 ```json
 "extensions" : {
   "ihe_pcf" : {
-      "patient_id" : "Patient/ex-patient",
-      "doc_id" : "Consent/ex-consent-intermediate-not-timeframe",
-      "ihe_residual" : [
-        {
+    "patient_id" : "Patient/ex-patient",
+    "doc_id" : "Consent/ex-consent-intermediate-not-timeframe",
+    "ihe_residual" : [
+      {
         "type" : "deny",
         "dataPeriod" : {
           "start" : "2023-01-01"
-        },
-        {
+        }
+      },
+      {
         "type" : "deny",
         "dataPeriod" : {
           "end" : "2021-12-31",
-        }
-      ]
-    }
+      }
+    }]
   }
 }
 ```
