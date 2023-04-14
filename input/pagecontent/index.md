@@ -24,7 +24,7 @@ This guide is organized into the following sections:
    1. [53.6 Cross Profile Considerations](volume-1.html#other-grouping)
    1. [Appendix P: Privacy Access Policies](ch-P.html)
 2. Volume 2: Transaction Detail
-   1. [3.71 Get Access Token \[ITI-71\]](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71)
+   1. _[3.71 Get Access Token \[ITI-71\]](other.html#updates-to-iti-71)_
    1. [3.72 Incorporate Access Token \[ITI-71\]](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72)
    1. [3.102 Introspect Token \[ITI-102\]](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102)
    1. [3.103 Get Authorization Server Metadata \[ITI-103\]](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103)

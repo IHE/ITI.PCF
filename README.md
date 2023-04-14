@@ -58,7 +58,9 @@ questions to the ITI committee to aid with the development of the IG.
       - has a mechanism to carry security tags
       - but can't cover the Intermediate policy needs
     - Is there other languages that could be used?
-    - Is there propritary implementations that we could learn from?
+    - Is there proprietary implementations that we could learn from?
+- work on all examples
+  - each example could have notes that show how that example is expressed in the oAuth extension
 
 ### Decided
 

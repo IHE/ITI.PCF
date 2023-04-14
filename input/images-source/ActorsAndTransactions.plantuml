@@ -33,7 +33,7 @@ cenforcer -down-* otherServer
 }
 
 otherClient -down-* client: "other"
-client -down-> decider : "IUA Get Access Token [[https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71 ITI-71]]\nIUA: Get Authorization Server Metadata [[https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103 ITI-103]]"
+client -down-> decider : "IUA Get Access Token [[other.html#updates-to-iti-71 _ITI-71_]]\nIUA: Get Authorization Server Metadata [[https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103 ITI-103]]"
 
 client -down-> enforcer : "IUA: Incorporate Access Token [[https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72 ITI-72]]"
 decider <-right- enforcer : "IUA: Introspect Token [[https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102 ITI-102]]\nIUA: Get Authorization Server Metadata [[https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103 ITI-103]]"

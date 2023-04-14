@@ -51,10 +51,10 @@ The following is a repeat of the IUA Actors and Transactions for clarity. The PC
 
 | Actors                       | Transactions                      | Direction | Optionality | Reference      |
 |------------------------------|-----------------------------------|-----------|-------------|----------------|
-| [IUA: Authorization Client](https://profiles.ihe.net/ITI/IUA/index.html#34111-authorization-client)         | Get Access Token                  | Initiator | R           | [ITI TF-2: 3.71](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71) |
+| [IUA: Authorization Client](https://profiles.ihe.net/ITI/IUA/index.html#34111-authorization-client)         | Get Access Token                  | Initiator | R           | [ITI TF-2: 3.71](other.html#updates-to-iti-71) |
 |                              | Incorporate Access Token          | Initiator | R           | [ITI TF-2: 3.72](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72) |
 |                              | Get Authorization Server metadata | Initiator | R           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
-| [IUA: Authorization Server](https://profiles.ihe.net/ITI/IUA/index.html#34112-authorization-server)  | Get Access Token                  | Responder | R           | [ITI TF-2: 3.71](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71) |
+| [IUA: Authorization Server](https://profiles.ihe.net/ITI/IUA/index.html#34112-authorization-server)  | Get Access Token                  | Responder | R           | [ITI TF-2: 3.71](other.html#updates-to-iti-71) |
 |                              | Introspect Token                  | Responder | R           | [ITI TF-2: 3.102](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102) |
 |                              | Get Authorization Server metadata | Responder | R           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
 | [IUA: Resource Server](https://profiles.ihe.net/ITI/IUA/index.html#34113-resource-server)    | Introspect Token                  | Initiator | R           | [ITI TF-2: 3.102](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102) |

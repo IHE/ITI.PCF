@@ -57,7 +57,7 @@ The Authorization Server and Resource Server shall support the following `extens
 
 If present, the claims shall be wrapped in an `extensions` object with key `ihe_pcf` and a JSON value object containing the claims. Shown as a JSON Template:
 
-```json
+```
 "extensions" : {  
   "ihe_pcf" : {  
     "patient_id": { Reference(Patient)}, // who the consent subject is

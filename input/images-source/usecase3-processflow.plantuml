@@ -17,7 +17,7 @@ participant "[[#consentRegistry Consent Registry]]" as registry
 participant "Open-ID-Connect" as oidc
 
 activate client
-client ->o decider : IUA Get Access Token [[https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71 ITI-71]]
+client ->o decider : IUA Get Access Token [[other.html#updates-to-iti-71 _ITI-71_]]
 activate decider
 decider --> oidc : Get authorized user using Open-ID-Connect
 
