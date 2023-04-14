@@ -64,7 +64,7 @@ If present, the claims shall be wrapped in an "extensions" object with key 'ihe_
     "doc_id": "http://example.org/fhir/Consent/1",
     "acp": "http://example.org/policies/privacyPolicy1",
     "ihe_residual" : [{
-      "type" : "<code>", // deny | permit
+      "type" : "<code>", // forbid | permit
       "securityLabel" : [{ Coding }], // Security Labels that define affected resources
       "dataPeriod" : { Period }, // Timeframe for data controlled by this rule
       "data" : [{ // Data controlled by this rule
@@ -76,11 +76,13 @@ If present, the claims shall be wrapped in an "extensions" object with key 'ihe_
 }
 ```
 
-Given that the token is authorizing access to the defined Scope, then the ihe_residual is focused on deny (forbid):
-- Explict ihe_residual Permit overrides an explicit ihe_residual Deny
-- If no Deny applies, then the data is allowed to flow back to the requester
+Given that the token is authorizing access to the defined Scope, then the ihe_residual is focused on results that would be forbidden to be returned (forbid). Note that `forbid` is not identical to Consent.provision.type of `deny` but is related:
+- the oAuth scope indicates the gross data that is permitted
+- ihe_residual `forbid` indicates data that is forbidden to be returned
+- ihe_residual `permit` overrides an explicit ihe_residual `forbid`
+- If no `forbid` applies, then the data is allowed to flow back to the requester
 
-Example: Given [Consent allowing data authored within a timeframe](Consent-ex-consent-intermediate-timeframe.html), which limits access to only data authored within 2022. Given that the token will express the permit portion, the ihe_residual would need to express the inverse, and thus the deny before and deny after. Note that the dataPeriod.end needed to be extended to the next day as the value was `2022-12-31` which would be `2023-01-01`; the dataPeriod.start needs to be extended to the previous day as the value was `2022-01-01` which would be `2021-12-31`.  The token would need to include an ihe_residual as followed:
+Example: Given [Consent allowing data authored within a timeframe](Consent-ex-consent-intermediate-timeframe.html), which limits access to only data authored within 2022. Given that the token will express the permit portion, the ihe_residual would need to express the inverse, and thus the `forbid` before and `forbid` after. Note that the dataPeriod.end needed to be extended to the next day as the value was `2022-12-31` which would be `2023-01-01`; the dataPeriod.start needs to be extended to the previous day as the value was `2022-01-01` which would be `2021-12-31`.  The token would need to include an ihe_residual as followed:
 
 ```json
 "extensions" : {
@@ -89,13 +91,13 @@ Example: Given [Consent allowing data authored within a timeframe](Consent-ex-co
     "doc_id" : "Consent/ex-consent-intermediate-not-timeframe",
     "ihe_residual" : [
       {
-        "type" : "deny",
+        "type" : "forbid",
         "dataPeriod" : {
           "start" : "2023-01-01"
         }
       },
       {
-        "type" : "deny",
+        "type" : "forbid",
         "dataPeriod" : {
           "end" : "2021-12-31",
       }
@@ -103,3 +105,5 @@ Example: Given [Consent allowing data authored within a timeframe](Consent-ex-co
   }
 }
 ```
+
+TODO: Work thru the other examples...
