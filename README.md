@@ -27,7 +27,6 @@ questions to the ITI committee to aid with the development of the IG.
 
 ### In development
 
-- Updated Appendix P about overall policies that Privacy Policies fit within, such as hiring policy, code of conduct, internet usage policy, health and safety policy, travel policies, etc.
 - Work on how policy fragments are communicated in the oAuth token. Likely base this on some sample oAuth policy fragment examples received from some existing FHIR implementations.
   - Given the policies supported, what kind of policy-fragments would need to be passed to the enforcement point?
     - does Basic leave anything? -- I think all parameters in basic result in the kind of thing already supported in IUA (actor, purpose). Meaning there is residual, but it is normal IUA use of purpose.
@@ -49,17 +48,17 @@ questions to the ITI committee to aid with the development of the IG.
     - combining rule
   - alternatives
     - could we just define a JSON object ourselves, inspired by FHIR R4 Consent.provision
-      - agent
-        - purpose
-      - data
-        - timeframe
-        - id
-        - author
-        - relationship
+      - purpose is already handled in the oAuth
+      - scope already covers the gross authorizations
+      - so, we just need a way to show limitations
+      - I use some concepts from Cedar policy language (forbid, and combining rule)
     - Cedar policy language
+      - still looking at this
     - SMART scope
       - has a mechanism to carry security tags
-  
+      - but can't cover the Intermediate policy needs
+    - Is there other languages that could be used?
+    - Is there propritary implementations that we could learn from?
 
 ### Decided
 
