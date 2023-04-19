@@ -26,12 +26,11 @@ involved in the PCF
 Profile and the relevant transactions between them.
 Internet User Authorization ([IUA](https://profiles.ihe.net/ITI/IUA/index.html)) is shown as the PCF specific actors are reliant on IUA actors.
 
-<div>
+<figure>
 {%include ActorsAndTransactions.svg%}
-</div>
+<figcaption><b>Figure 53.1-1: PCF Actor Diagram</b></figcaption>
+</figure>
 <br clear="all">
-
-**Figure: PCF Actor Diagram**
 
 The actors participate in the following Transactions.
 
@@ -285,12 +284,11 @@ The Consent details are specific to the Patient Privacy Policy, the parameters a
 
 The following flow shows the activities involved in the Capture new Consent flow.
 
-<div>
+<figure>
 {%include usecase1-processflow.svg%}
-</div>
+<figcaption><b>Figure 53.4.2.1-1: Capture new Consent</b></figcaption>
+</figure>
 <br clear="all">
-
-**Figure 53.4.2.1-1: Capture new Consent**
 
 The diagrammed steps:
 
@@ -321,12 +319,11 @@ The Consent details are specific to the Patient Privacy Policy, the parameters a
 
 The following flow shows the activities involved in the Update Existing Consent flow.
 
-<div>
+<figure>
 {%include usecase2-processflow.svg%}
-</div>
+<figcaption><b>Figure 53.4.2.2-1: Update Existing Consent Flow</b></figcaption>
+</figure>
 <br clear="all">
-
-**Figure 53.4.2.2-1: Update Existing Consent Flow**
 
 The diagrammed steps:
 
@@ -356,12 +353,11 @@ The Consent details are specific to the Patient Privacy Policy, the parameters a
 
 The following flow shows the activities involved in the Consent Access Control flow.
 
-<div>
+<figure>
 {%include usecase3-processflow.svg%}
-</div>
+<figcaption><b>Figure 53.4.2.3-1: Consent Access Control Flow</b></figcaption>
+</figure>
 <br clear="all">
-
-**Figure 53.4.2.3-1: Consent Access Control Flow**
 
 The diagrammed steps:
 

@@ -56,12 +56,11 @@ Some Privacy Consent needs require a more basic record, where as other Consents 
 
 The Privacy Consent Ceremony and the development of the Privacy Policies is not constrained or described by IHE. The Privacy Preferences is a potential way to improve the Patient Experience, by allowing the Patient to express their desired privacy conditions and parameters. These Privacy Preferences would not be enforceable as they are as statement of desire, and not agreed to by a Data Holder. The Consent ceremony could take these preferences as input, and thus present the terms that the Data Holder is willing to enforce. Thus at the end of the Consent Ceremony there would be a Patient Privacy Consent Resource that expresses the terms that the Data Holder and Patient have agreed to.
 
-<div>
+<figure>
 {%include preferences-workflow.svg%}
-</div>
+<figcaption><b>Figure: Preferences to Enforcement possible workflow</b></figcaption>
+</figure>
 <br clear="all">
-
-**Figure: Preferences to Enforcement possible workflow**
 
 A domain's Privacy Consent Policies could result in various actions, for example:
 

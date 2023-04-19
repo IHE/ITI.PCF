@@ -115,6 +115,7 @@ Privacy Consent:
 ### Other research to note
 
 - HL7 FHIR DS4P
+  - [STU Publication of HL7 FHIR® Implementation Guide: Data Segmentation for Privacy (DS4P), Release 1](http://hl7.org/fhir/uv/security-label-ds4p/STU1)
   - [FHIR Data Segmentation for Privacy - CI build](http://build.fhir.org/ig/HL7/fhir-security-label-ds4p/branches/master/index.html)
 - [John Moehrke blog](https://healthcaresecprivacy.blogspot.com)
   - [RelatedPerson Consent](https://healthcaresecprivacy.blogspot.com/2022/06/relatedperson-consent-how-to-record.html)
