@@ -44,7 +44,7 @@ This section modifies other IHE profiles or the General Introduction appendices 
 | Editor, Update the IUA [Transaction ITI-71](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71) as follows, adding section 3.71.4.2.2.1.4 |
 {:.grid .bg-info}
 
-####### 3.71.4.2.2.1.4 Privacy Consent on FHIR grouping
+###### 3.71.4.2.2.1.4 Privacy Consent on FHIR grouping
 
 When grouped with the PCF Consent Authorization Server, and where the Access Decision includes consideration of Privacy Consent, the following oAuth extension shall be included.
 
@@ -95,43 +95,36 @@ Example: Given [Consent allowing data authored within a timeframe](Consent-ex-co
   }
 ```
 
- Given that the token will express the permit portion, the `residual` would need to express the inverse, and thus the `forbid` before and `forbid` after. Note that the `dataPeriod.end` needed to be extended to the next day as the value was `2022-12-31` which would be `2023-01-01`; the `dataPeriod.start` needs to be extended to the previous day as the value was `2022-01-01` which would be `2021-12-31`.  The token would need to include an `residual` as followed:
+- The restriction to the given purpose (Treatment, Payment, and Operations) would be expressed in the `ihe_iua` extension
+  - The other `ihe_iua` extension parameters are not shown below.
+- The restriction to data timeframe would need to be expressed:
+  - first `forbid` all data
+  - second `permit` data authored in the given timeframe
 
 ```json
 "extensions" : {
-  "ihe_pcf" : {
-    "patient_id" : "Patient/ex-patient",
-    "doc_id" : "Consent/ex-consent-intermediate-not-timeframe",
-    "ihe_residual" : [
-      {
-        "type" : "forbid",
-        "dataPeriod" : {
-          "start" : "2023-01-01"
-        }
-      },
-      {
-        "type" : "forbid",
-        "dataPeriod" : {
-          "end" : "2021-12-31",
-        }
-      }
-    ]
+  "ihe_iua" : {
+    ...
+    "purpose_of_use" : [{
+        "system" : "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+        "code" : "TREAT"
+      },{
+        "system" : "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+        "code" : "HPAYMT"
+      },{
+        "system" : "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+        "code" : "HOPERAT"
+    }]
   }
-}
-```
-
-alternative encoding: forbid everything, and permit can then be expressed exactly as in the Consent.
-
-```json
-"extensions" : {
   "ihe_pcf" : {
     "patient_id" : "Patient/ex-patient",
-    "doc_id" : "Consent/ex-consent-intermediate-not-timeframe",
-    "ihe_residual" : [
+    "doc_id" : "Consent/ex-consent-intermediate-timeframe",
+    "residual" : [
       {
         "type" : "forbid",
       },
       {
+        "type" : "permit",
         "dataPeriod" : {
           "start" : "2022-01-01",
           "end" : "2022-12-31"
@@ -141,5 +134,3 @@ alternative encoding: forbid everything, and permit can then be expressed exactl
   }
 }
 ```
-
-TODO: Work thru the other examples...

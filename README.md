@@ -27,40 +27,8 @@ questions to the ITI committee to aid with the development of the IG.
 
 ### In development
 
-- Work on how policy fragments are communicated in the oAuth token. Likely base this on some sample oAuth policy fragment examples received from some existing FHIR implementations.
-  - Given the policies supported, what kind of policy-fragments would need to be passed to the enforcement point?
-    - does Basic leave anything? -- I think all parameters in basic result in the kind of thing already supported in IUA (actor, purpose). Meaning there is residual, but it is normal IUA use of purpose.
-  - And that we are focused on FHIR REST
-    - When full deny then token will not be issued
-    - so, fragments would be where permit is allowed
-    - obligations and refrains -- these would go into the Bundle.meta.security
-      - so some method of carrying residual obligation and refrain codes is needed
-    - so, then does fragment only need to express filters?
-      - remove blah from results?
-      - optimization - add this additional search parameter to any search terms given
-  - Intermediate / Advanced
-    - data timeframe (permit / deny)
-    - data id(s) (permit / deny)
-    - data author (permit / deny)
-    - data relationship (permit / deny)
-    - purpose -> no residual beyond IUA support for purpose
-    - tags (permit / deny)
-    - combining rule
-  - alternatives
-    - could we just define a JSON object ourselves, inspired by FHIR R4 Consent.provision
-      - purpose is already handled in the oAuth
-      - scope already covers the gross authorizations
-      - so, we just need a way to show limitations
-      - I use some concepts from Cedar policy language (forbid, and combining rule)
-    - Cedar policy language
-      - still looking at this
-    - SMART scope
-      - has a mechanism to carry security tags
-      - but can't cover the Intermediate policy needs
-    - Is there other languages that could be used?
-    - Is there proprietary implementations that we could learn from?
-- work on all examples
-  - each example could have notes that show how that example is expressed in the oAuth extension
+- added a section to be added to ITI-71 explaining additional oAuth extension covering PCF
+- added a notes section to ALL Consent examples showing how the oAuth extension would be impacted by a decision(s) authorizing access with residual rules. See the Volume 3 where I point at these along with the pointers to all the examples.
 
 ### Decided
 

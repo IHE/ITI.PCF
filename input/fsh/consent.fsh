@@ -518,8 +518,7 @@ This is a BasicConsent example:
 - base provision includes TPO so as to be clear this is a consent about TPO
 
 This is the Intermediate part:
-- authored by ex-practitioner
-  - [practitioner 1](Practitioner-ex-practitioner.html)
+- Permits access to data authored by [practitioner 1](Practitioner-ex-practitioner.html)
 """
 Usage: #example
 * meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
@@ -585,9 +584,9 @@ Usage: #example
 
 Instance: ex-consent-intermediate-encounter
 InstanceOf: IntermediateConsent
-Title: "Consent allowing data authored related to a encounter"
+Title: "Consent allowing data authored related to an encounter"
 Description: """
-Consent allowing data authored related to a encounter
+Consent allowing data authored related to an encounter
 
 This is a BasicConsent example:
 - status is active - so it should be enforced
@@ -627,9 +626,9 @@ Usage: #example
 
 Instance: ex-consent-intermediate-not-encounter
 InstanceOf: IntermediateConsent
-Title: "Consent allowing most sharing but NOT data authored by a practitioner"
+Title: "Consent allowing most sharing but NOT data related to an encounter"
 Description: """
-Consent allowing most sharing of data but NOT data authored by a practitioner
+Consent allowing most sharing of data but NOT data related to an encounter
 
 This is a BasicConsent example:
 - status is active - so it should be enforced
@@ -729,9 +728,9 @@ Usage: #example
 
 Instance: ex-consent-intermediate-not-data
 InstanceOf: IntermediateConsent
-Title: "Consent allowing most sharing but NOT data authored by a practitioner"
+Title: "Consent allowing most sharing but NOT specific data"
 Description: """
-Consent allowing most sharing of data but NOT data authored by a practitioner
+Consent allowing most sharing of data but NOT specific data
 
 This is a BasicConsent example:
 - status is active - so it should be enforced
@@ -969,7 +968,7 @@ This is a BasicConsent example:
 
 This is the Advanced part:
 - Normal data only
-- only Practitioner gets Restricted data only
+- only [Practitioner](Practitioner-ex-practitioner.html) gets Restricted data only
 """
 Usage: #example
 * meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
@@ -989,8 +988,8 @@ Usage: #example
 * provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * provision.provision.type = #permit
 * provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#R
-* provision.actor.reference = Reference(Practitioner/ex-practitioner)
-* provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
+* provision.provision.actor.reference = Reference(Practitioner/ex-practitioner)
+* provision.provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
 
 
 
@@ -1015,7 +1014,7 @@ This is a BasicConsent example:
 
 This is the Advanced part:
 - Normal data only
-- only Practitioner gets Mental Health data only
+- only [Practitioner](Practitioner-ex-practitioner.html) gets Mental Health data only
 """
 Usage: #example
 * meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
@@ -1035,8 +1034,8 @@ Usage: #example
 * provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * provision.provision.type = #permit
 * provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#PSY
-* provision.actor.reference = Reference(Practitioner/ex-practitioner)
-* provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
+* provision.provision.actor.reference = Reference(Practitioner/ex-practitioner)
+* provision.provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
 
 
 
@@ -1062,7 +1061,7 @@ This is a BasicConsent example:
 
 This is the Advanced part:
 - Normal data only
-- only Practitioner gets Mental Health or Sexual Health data
+- only [Practitioner](Practitioner-ex-practitioner.html) gets Mental Health or Sexual Health data
 """
 Usage: #example
 * meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
@@ -1083,7 +1082,7 @@ Usage: #example
 * provision.provision.type = #permit
 * provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#PSY
 * provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#SEX
-* provision.actor.reference = Reference(Practitioner/ex-practitioner)
-* provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
+* provision.provision.actor.reference = Reference(Practitioner/ex-practitioner)
+* provision.provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
 
 
