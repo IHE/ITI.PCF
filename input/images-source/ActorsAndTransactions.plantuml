@@ -2,7 +2,7 @@
 skinparam svgDimensionStyle false
 agent "[[#consentRecorder Consent Recorder]]" as capture
 agent "[[#consentRegistry Consent Registry]]" as registry
-capture -down-> registry : "Access Consent (CRUDS) [[ITI-110.html ITI-110]]"
+capture -down-> registry : "Access Consent (CRUDS) [[ITI-108.html ITI-108]]"
 
 frame "Grouped Decider" {
 agent decider [
@@ -13,7 +13,7 @@ agent cdecider [
 ] 
 decider -down-* cdecider
 }
-cdecider -left-> registry: "Access Consent (SR) [[ITI-110.html ITI-110]]"
+cdecider -left-> registry: "Access Consent (SR) [[ITI-108.html ITI-108]]"
 
 
 frame "Grouped Client" {

@@ -1,17 +1,38 @@
 @startuml 
 hide footbox
 
-participant "Authorization Client" as Client
-participant "Authorization Server" as AuthzServer
+participant "[[volume-1.html#consentRecorder Consent Recorder]]" as capture
+participant "[[volume-1.html#consentRegistry Consent Registry]]" as registry
+participant "[[volume-1.html#consentAuthorizationServer Consent Authorization Server]]" as decider
 
-autonumber 0 1 "<b>[00]</b>"
 
-group Get Consent Access Token (ITI-108) [Client Credentials Grant]
-Client -> AuthzServer: Get Consent Access Token Request
-AuthzServer -> AuthzServer: Determine authorization \nallowed based on user, client, \npatient, consent, and \nother policies
-AuthzServer --> Client: Get Consent Access Token Response
+group Access Consent - Search (ITI-108) 
+capture -> registry: 3.108.4.1 Access Consent - Search - Request
+capture <-- registry: 3.108.4.2 Access Consent - Search - Response
+decider -> registry: 3.108.4.1 Access Consent - Search - Request
+decider <-- registry: 3.108.4.2 Access Consent - Search - Response
 end
 
-autonumber stop
+group Access Consent - Create (ITI-108) 
+capture -> registry: 3.108.4.3 Access Consent - Create - Request
+capture <-- registry: 3.108.4.4 Access Consent - Create - Response
+end
+
+group Access Consent - Read (ITI-108) 
+capture -> registry: 3.108.4.5 Access Consent - Read - Request
+capture <-- registry: 3.108.4.6 Access Consent - Read - Response
+decider -> registry: 3.108.4.5 Access Consent - Read - Request
+decider <-- registry: 3.108.4.6 Access Consent - Read - Response
+end
+
+group Access Consent - Update (ITI-108) 
+capture -> registry: 3.108.4.7 Access Consent - Update - Request
+capture <-- registry: 3.108.4.8 Access Consent - Update - Response
+end
+
+group Access Consent - Delete (ITI-108) 
+capture -> registry: 3.108.4.9 Access Consent - Delete - Request
+capture <-- registry: 3.108.4.10 Access Consent - Delete - Response
+end
 
 @enduml

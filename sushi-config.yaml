@@ -139,8 +139,8 @@ pages:
   ch-P.md:
     title: "1:P. Privacy Access Policies (Informative)"
     generation: markdown
-  ITI-110.md:
-    title: "2:3.110 Access Consent [ITI-110]"
+  ITI-108.md:
+    title: "2:3.108 Access Consent [ITI-108]"
     generation: markdown
   content.md:
     title: "3:5.8 Privacy Consent Patterns"
@@ -170,7 +170,7 @@ menu:
     "Cross-Profile Considerations" : volume-1.html#other-grouping
     "Appendix P. Privacy Access Policies" : ch-P.html
   Volume 2:
-    "Access Consent [ITI-110]" : ITI-110.html
+    "Access Consent [ITI-108]" : ITI-108.html
   Volume 3:
     "Consent Patterns" : content.html
   Artifacts: artifacts.html

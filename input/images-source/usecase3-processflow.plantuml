@@ -24,7 +24,7 @@ decider --> oidc : Get authorized user using Open-ID-Connect
 activate cdecider
 decider --> cdecider : Include Consents 
 activate registry
-cdecider ->o registry : [[ITI-110.html ITI-110]] - Query for existing Consent
+cdecider ->o registry : [[ITI-108.html ITI-108]] - Query for existing Consent
 registry --> cdecider : Return the Consents found
 note over registry : Record AuditEvent
 deactivate registry

@@ -25,10 +25,10 @@ This guide is organized into the following sections:
    1. [Appendix P: Privacy Access Policies](ch-P.html)
 2. Volume 2: Transaction Detail
    1. _[3.71 Get Access Token \[ITI-71\]](other.html#updates-to-iti-71)_
-   1. [3.72 Incorporate Access Token \[ITI-71\]](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72)
+   1. [3.72 Incorporate Access Token \[ITI-72\]](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72)
    1. [3.102 Introspect Token \[ITI-102\]](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102)
    1. [3.103 Get Authorization Server Metadata \[ITI-103\]](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103)
-   1. [3.110 Access Consent \[ITI-110\]](ITI-110.html)
+   1. [3.108 Access Consent \[ITI-108\]](ITI-108.html)
 3. Volume 3: Metadata and Content
    1. [5.8 Privacy Consent Patterns](content.html)
 4. Other

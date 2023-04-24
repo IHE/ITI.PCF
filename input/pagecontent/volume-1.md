@@ -38,9 +38,9 @@ The actors participate in the following Transactions.
 
 | Actors                       | Transactions                      | Direction | Optionality | Reference      |
 |------------------------------|-----------------------------------|-----------|-------------|----------------|
-| [Consent Recorder](#consentRecorder)  | Access Consent                    | Initiator | R           | [ITI TF-2: 3.110](ITI-110.html) |
-| [Consent Registry](#consentRegistry)  | Access Consent                    | Responder | R           | [ITI TF-2: 3.110](ITI-110.html) |
-| [Consent Authorization Server](#consentAuthorizationServer) | Access Consent                    | Initiator | R           | [ITI TF-2: 3.110](ITI-110.html) |
+| [Consent Recorder](#consentRecorder)  | Access Consent                    | Initiator | R           | [ITI TF-2: 3.108](ITI-108.html) |
+| [Consent Registry](#consentRegistry)  | Access Consent                    | Responder | R           | [ITI TF-2: 3.108](ITI-108.html) |
+| [Consent Authorization Server](#consentAuthorizationServer) | Access Consent                    | Initiator | R           | [ITI TF-2: 3.108](ITI-108.html) |
 | [Consent Enforcement Point](#consentEnforcementPoint) | none |  |  |  |
 {: .grid}
 
@@ -99,11 +99,11 @@ The **Consent Enforcement Point** actor enforces consent decisions made by the *
 
 The transactions in this profile are summarized in the sections below.
 
-#### 53.1.2.1 ITI-110 Access Consent transaction
+#### 53.1.2.1 ITI-108 Access Consent transaction
 
 This transaction is used to Create, Read, Update, Delete, and Search on Consent resources.
 
-For more details see the detailed [Access Consent](ITI-110.html)
+For more details see the detailed [Access Consent](ITI-108.html)
 
 #### 53.1.2.2 implied enforcement
 
@@ -296,7 +296,7 @@ The diagrammed steps:
 2. None is found. Given that no existing Consent exists, there are no preconditions, just default expectations for the workflow.
 3. Consult with the Patient. There is some interaction with the Patient. Within this interaction the patient needs to be appropriately informed of the details of the Patient Privacy Policy and the parameters the patient can control. This user Interface might use a FHIR Questionnaire resulting in a QuestionnaireResult as documentation of the ceremony. This User Interface might use some other technical means, or might be a paper process.  This User Interface is not constrained by the PCF.
 4. The results of the ceremony are captured to the satisfaction of the controlling Organization.  This might be a QuestionnaireResponse, or a scanned image of the signed paperwork recorded using a DocumentReference (See [MHD](https://profiles.ihe.net/ITI/MHD/index.html))
-5. The Consent resource constrained by the Consent constraints defined in Volume 3 is then saved to the **Consent Registry** actor using Transaction [ITI-110].
+5. The Consent resource constrained by the Consent constraints defined in Volume 3 is then saved to the **Consent Registry** actor using Transaction [ITI-108].
 6. An AuditEvent is recorded by both **Consent Recorder** and **Consent Registry** actors.
 
 #### 53.4.2.2 Use Case \#2: Update Existing Consent
@@ -331,7 +331,7 @@ The diagrammed steps:
 2. A Consent is found. More than one Consent may be found, for which the PCF does not address how to address this case. The overarching policy would need to be consulted.
 3. Consult with the Patient. There is some interaction with the Patient. Within this interaction the patient needs to be appropriately informed of the details of the Patient Privacy Policy and the parameters the patient can control. This user Interface might use a FHIR Questionnaire resulting in a QuestionnaireResult as documentation of the ceremony. This User Interface might use some other technical means, or might be a paper process.  This User Interface is not constrained by the PCF.
 4. The results of the ceremony are captured to the satisfaction of the controlling Organization.  This might be a QuestionnaireResponse, or a scanned image of the signed paperwork recorded using a DocumentReference (See [MHD](https://profiles.ihe.net/ITI/MHD/index.html))
-5. The Consent resource constrained by the Consent constraints defined in Volume 3 is then saved to the **Consent Registry** actor using Transaction [ITI-110]. This is typically a FHIR Update action so as to replace the previous Consent. It is also possible to delete the previous and save the Consent as a new instance.
+5. The Consent resource constrained by the Consent constraints defined in Volume 3 is then saved to the **Consent Registry** actor using Transaction [ITI-108]. This is typically a FHIR Update action so as to replace the previous Consent. It is also possible to delete the previous and save the Consent as a new instance.
 6. An AuditEvent is recorded by both **Consent Recorder** and **Consent Registry** actors.
 
 #### 53.4.2.3 Use Case \#3: Consent Access Control

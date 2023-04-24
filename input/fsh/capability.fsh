@@ -6,7 +6,7 @@ Usage: #definition
 CapabilityStatement for the Consent Recorder Actor 
 
 Explain
-- uses [Access Consent \[ITI-110\]](ITI-110.html) to record new or updated Consent Resources
+- uses [Access Consent \[ITI-108\]](ITI-108.html) to record new or updated Consent Resources
 """
 * url = "https://profiles.ihe.net/ITI/PCF/CapabilityStatement/IHE.PCF.consentRecorder"
 * name = "IHE_PCF_consentRecorder"
@@ -26,7 +26,7 @@ Explain
   * resource[+]
     * type = #Consent
     * documentation = """
-PCF transaction [Access Consent \[ITI-110\]](ITI-110.html)
+PCF transaction [Access Consent \[ITI-108\]](ITI-108.html)
 """
     * interaction[+].code = #create
     * interaction[+].code = #read
@@ -60,7 +60,7 @@ Usage: #definition
 CapabilityStatement for Consent Registry Actor.
 
 Explain
-- provides [Access Consent \[ITI-110\]](ITI-110.html) to store and support access to Privacy Consent Resources
+- provides [Access Consent \[ITI-108\]](ITI-108.html) to store and support access to Privacy Consent Resources
 """
 * url = "https://profiles.ihe.net/ITI/PCF/CapabilityStatement/IHE.PCF.consentRegistry"
 * name = "IHE_PCF_consentRegistry"
@@ -80,7 +80,7 @@ Explain
   * resource[+]
     * type = #Consent
     * documentation = """
-PCF transaction [Access Consent \[ITI-110\]](ITI-110.html)
+PCF transaction [Access Consent \[ITI-108\]](ITI-108.html)
 """
     * interaction[+].code = #create
     * interaction[+].code = #read
@@ -113,7 +113,7 @@ Usage: #definition
 CapabilityStatement for the Consent Authorization Server Actor 
 
 Explain
-- is a Client that uses [Access Consent \[ITI-110\]](ITI-110.html) to retrieve current Privacy Consent and make access control decisions based upon them
+- is a Client that uses [Access Consent \[ITI-108\]](ITI-108.html) to retrieve current Privacy Consent and make access control decisions based upon them
 """
 * url = "https://profiles.ihe.net/ITI/PCF/CapabilityStatement/IHE.PCF.consentAuthorizationServer"
 * name = "IHE_PCF_consentAuthorizationServer"
@@ -133,7 +133,7 @@ Explain
   * resource[+]
     * type = #Consent
     * documentation = """
-PCF transaction [Access Consent \[ITI-110\]](ITI-110.html)
+PCF transaction [Access Consent \[ITI-108\]](ITI-108.html)
 """
     * interaction[+].code = #read
     * interaction[+].code = #search-type

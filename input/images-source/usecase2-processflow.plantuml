@@ -6,14 +6,14 @@ title "Update Existing Consent"
 participant "Consent Recorder" as capture
 participant "Consent Registry" as registry
 activate capture
-capture ->o registry : [[ITI-110.html ITI-110]] - Query for existing Consent
+capture ->o registry : [[ITI-108.html ITI-108]] - Query for existing Consent
 activate registry
 registry --> capture : Some Found
 capture -> capture : Consult with Patient, using existing details
 note left of capture: May use FHIR Questionnaire\nor any kind of User Experience
 capture -> capture : Capture Patient conditions and acceptance
 note left of capture: Preserve documentation:\n- QuestionnaireResponse\n- DocumentReference (MHD)\n- other
-capture ->o registry : [[ITI-110.html ITI-110]] - Update Consent pointing at documentation
+capture ->o registry : [[ITI-108.html ITI-108]] - Update Consent pointing at documentation
 note over capture, registry : Record AuditEvent
 deactivate registry
 deactivate capture 
