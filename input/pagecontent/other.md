@@ -10,7 +10,10 @@ This section modifies other IHE profiles or the General Introduction appendices 
 
 | Actor                         | Definition                                                                                |
 | ----------------------------- | ------------------------------------------------------------------------------------------|
-| none |  |
+| Consent Recorder | responsible for the capturing of consent from the Patient given policies available |
+| Consent Registry | holds Consent resources |
+| Consent Authorization Server | makes authorization decisions based on a given access requested context |
+| Consent Enforcement Point | enforces consent decisions made by the **Consent Authorization Server** actor |
 {:.grid .table-striped}
 
 
@@ -24,7 +27,7 @@ This section modifies other IHE profiles or the General Introduction appendices 
 
 | Transaction                    | Definition                                                                              |
 | ------------------------------ | --------------------------------------------------------------------------------------- |
-| none |  |
+| [Access Consent](ITI-108.html) |  used to Create, Read, Update, Delete, and Search on Consent resources |
 {:.grid .table-striped}
 
 ## IHE Technical Frameworks General Introduction Appendix D: Glossary
@@ -35,7 +38,26 @@ This section modifies other IHE profiles or the General Introduction appendices 
 
 | Term                         | Definition                                                    | Acronyms/Abbreviations | Synonyms    |
 | ---------------------------- | --------------------------------------------------------------| -----------------------| ------------|
-| none |  |
+**Trust Domain** | Systems and entities that are trusted due to membership in a domain, where this membership includes agreement with the policies of the trust domain. A Trust Domain often spans multiple domains, such as a Health Information Exchange or a Federation of Health Information Domains. An example is the [XDS Affinity Domain](https://profiles.ihe.net/ITI/TF/Volume1/ch-10.html), or the [XCA Community](https://profiles.ihe.net/ITI/TF/Volume1/ch-18.html).
+**Patient Privacy Policy Domain** | The domain (Trust Domain) for which a Patient Privacy Policy applies. The Patient Privacy Policy Domain may cover an Organization, Health Information Exchange, or a defined set of Communities. The Patient Privacy Policy Domain is a Trust Domain.
+**Domain Privacy Policy** / **Overarching Policy** | Defines acceptable use of private data within the domain. The overarching policy are defined and enforced in the broader context of a law, regulation, or organizational policy that defines the scope, authority, and limitations. Within the Domain Privacy Policy will be a set of Patient Privacy Policies, that are used at the Privacy Consent level. The Domain Privacy Policy is responsible for defining users, roles, classifications, and the possible parameters the patient will be offered during the Privacy Consent Ceremony. The Domain Privacy Policy must address the appropriate use of data when no Consent has been captured, how conflicting policies are to be resolved, and when a restriction may cause a patient or operator safety concern (e.g. Break-Glass).
+**Patient Privacy Policy** | A Patient Privacy Policy explains appropriate use of data/documents in a way that provides choices to the patient. The Patient Privacy Policy sits within the Domain Privacy Policy. A Patient Privacy Policy will identify who has access to information, and what information is governed by the policy (e.g., under what conditions will **data** be marked as containing that type of information). The Patient Privacy Policy may be a consent policy, dissent policy, authorization policy, etc.
+**Patient Privacy Consent Resource** | (a.k.a., Privacy Consent) A record resource that follows the BPPC profile or the PCF profile and captures the act of the consent ceremony and the details. The Consent references the basis Patient Privacy Policy. The Consent may be agreement with the policy, dissent with the policy, or may contain further constraints and authorizations based on the Patient Privacy Policy.
+**Patient Privacy Policy Identifier** | A Patient Privacy Policy Domain-assigned globally unique identifier that identifies the Patient Privacy Policy.
+**Patient Identified Data** |  Are data about an identified Patient. This may be health information, but for the purposes of this Appendix it is any personally identifiable information (PII).
+**Data Holder** / **Custodian** | A controlling entity of some set of Patient Identifiable Data.
+**Patient** / **Subject of data** / **Consumer** | the patient is the human-subject of health-related data. The use of the term patient is not to imply only subjects under current treatment.
+**Privacy Consent** | (a.k.a., Consent) Binding agreement between the Patient / Subject of the data and the Data Holder as to the appropriate use of data. The consent may include constraints and obligations. The agreement may be executed by delegates, and the agreement may include other parties that are held to the terms. Consent term is used here in broad definition not limited by the definition of consent in regulation or laws.
+**Privacy Consent Ceremony** | All the steps leading up to and including the acceptance by the Patient and Custodian of the terms of a Privacy Consent. The ceremony is responsible for assuring the patient is well informed and understands the terms. The ceremony may include many people and tools.
+**Privacy Parameters** | rules that are allowed to be specified by the patient as deviations from the Patient Privacy Policy. Such as limiting access to data published in a date range, data published by a given author, or data with a specific kind of restricted health sensitivity.
+**Privacy Preferences** | Published by the Patient as desired privacy conditions. These preferences may be used during a Consent ceremony to inform the privacy conditions.
+**Data Access Requests** | defined interactions in which data are shared within a Trust Domain in keeping with the Patient Privacy Consent terms. Requests for data to leave the control of the Data Holder. Most requests will be from within a broader Trust Domain, but some requests may be to parties outside a Trust Domain.
+**Authentic Requests** | requests that can be proven to be from within the trust domain. Authentic Requests carry well-defined parameters of the request including identity of data recipient, purpose of use the data will be used, and the data characteristics scope.
+**Data Classification** |  Patient identifiable data is considered health information and is subject to a set of constraints as given to normal health information.
+**Security Labeling Service** | a service that classifies data into a defined set of sensitivity classifications.
+**Normal Health Data** | The majority of Patient Identified Data are health information and is considered more sensitive than non-health information, this data would be classified as Normal Health Data. Normal Health Data is sensitive.
+**Restricted Health Data** | Some Patient Identifiable Data are considered more sensitive and is classified as Restricted Health Data. Data may be considered Restricted by regulation or laws, or may be deemed by the patient to be more sensitive. Some examples of restricted health data are data that describes a stigmatizing sensitive health topic such as mental health, drug abuse, sexual health, or other.
+**Users** | are an identifiable agent, usually human, that has some defined role within the Organization within which they operate. A User may be the Patient herself, a patient related party, clinician, researcher, billing clerk, etc. These different functional roles will have different needs to access data. For example registration clerks may need to be able to access patient demographics, billing, and contacts; but would not need access to clinical content.
 {:.grid .table-striped}
 
 ## Updates to ITI-71
