@@ -154,11 +154,13 @@ Support for these Basic, Intermediate, and Advanced policies is support for the 
 
 The Implicit Policy Option indicates that there is a default policy that is used when there is no Consent found on file for a given patient. This Implicit Policy shall support the following "overarching" policies:
 
-1. Permit for clinicians that have authorization for Treatment use, but does not authorize other access. This presumes that basic user access control can differentiate legitimate clinical users.
-2. Permit for clinicians that have authorization for Treatment use, but does not authorize other access. This presumes that basic user access control can differentiate legitimate clinical users, But forbid recipient from redisclosing the data further.
-3. Permit for all authorized users. This presumes that basic user access control will only allow authorized users and purpose of use.
-4. Deny for all authorized users, except when the user is a clinician with authorization to declare a medical patient-safety override (aka Break-Glass).
-5. Deny all.
+| canonical URI | Definition |
+|---------------|----------- |
+`https://profiles.ihe.net/ITI/PCF/Policy-basic-normal` | Permit for clinicians that have authorization for Treatment use, but does not authorize other access. This presumes that basic user access control can differentiate legitimate clinical users.
+`https://profiles.ihe.net/ITI/PCF/Policy-all-normal` | Permit for all authorized users. This presumes that basic user access control will only allow authorized users and purpose of use.
+`https://profiles.ihe.net/ITI/PCF/Policy-break-glass-only` | Deny for all authorized users, except when the user is a clinician with authorization to declare a medical patient-safety override (aka Break-Glass).
+`https://profiles.ihe.net/ITI/PCF/Policy-deny` |  Deny all.
+{: .grid}
 
 Other overarching policies may also be implemented, but their behavior is not defined in PCF.
 

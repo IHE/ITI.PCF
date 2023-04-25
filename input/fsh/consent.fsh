@@ -257,7 +257,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 """
@@ -320,7 +320,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference -- Ink signature on paper
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 """
@@ -356,7 +356,7 @@ This is a BasicConsent, that has expired, example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 - **provision period end was at December 31, 2022 -- thus this Consent has expired.**
@@ -393,7 +393,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - **base provision is #deny -- rejecting the indicated policy**
 - base provision includes TPO so as to be clear this is a consent about TPO
 """
@@ -455,7 +455,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -496,7 +496,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -540,7 +540,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -581,7 +581,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -624,7 +624,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -666,7 +666,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -711,7 +711,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -768,7 +768,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -842,7 +842,7 @@ Usage: #example
 * performer = Reference(Patient/ex-patient)
 * organization = Reference(Organization/ex-organization)
 * sourceReference = Reference(DocumentReference/ex-documentreference)
-* policy.uri = "http://example.org/policies/researchFooBar.txt"
+* policy.uri = "https://profiles.ihe.net/ITI/PCF/Policy-basic-normal"
 * provision.type = #permit
 * provision.purpose[+] = http://example.org/policies/purposeOfUse#FooBar
 * provision.actor.reference = Reference(Organization/ex-org-researcher)
@@ -880,7 +880,7 @@ Usage: #example
 * performer = Reference(Patient/ex-patient)
 * organization = Reference(Organization/ex-organization)
 * sourceReference = Reference(DocumentReference/ex-documentreference)
-* policy.uri = "http://example.org/policies/researchFooBar.txt"
+* policy.uri = "https://profiles.ihe.net/ITI/PCF/Policy-basic-normal"
 * provision.type = #deny
 * provision.provision.type = #permit
 * provision.provision.purpose = http://terminology.hl7.org/CodeSystem/v3-ActReason#BTG
@@ -917,7 +917,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -957,7 +957,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -998,7 +998,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -1042,7 +1042,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -1088,7 +1088,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -1135,7 +1135,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
@@ -1181,7 +1181,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
-- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- policy url is to a base policy
 - base provision is #permit -- accepting the policy
 - base provision includes TPO so as to be clear this is a consent about TPO
 
