@@ -93,7 +93,7 @@ Not allowed in PCF
 - provision.code - **not used** in PCF, unclear the use-case need
 
 Specifics of Basic:
-- provision.purpose - would indicate some set of authorized purposeOfUse only Treatment, Payment, Operations, or Break-Glass, see Intermediate
+- provision.purpose - would indicate some set of authorized purposeOfUse only Treatment, Payment, or Operations, see Intermediate
 - provision.securityLabel is not allowed, see Intermediate
 - provision.dataPeriod is not allowed, see Intermediate
 - provision.data is nto allowed, see Intermediate
@@ -113,7 +113,7 @@ Description: "ValueSet of the PurposeOfUse minimally required by Basic Option"
 * http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
 * http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
 * http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
-* http://terminology.hl7.org/CodeSystem/v3-ActReason#BTG
+
 
 Profile:        IntermediateConsent
 Parent:         Consent
@@ -278,6 +278,33 @@ Usage: #example
 * provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
 
 
+Instance: ex-provenance-consent-basic-treat
+InstanceOf: Provenance
+Title: "Provenance of Create of a basic consent"
+Description: "Given a Consent is created, and AuditEvent is not seen as sufficient, This example provides an example of Provenance that would be equivilant."
+Usage: #example
+* target = Reference(Consent/ex-consent-basic-treat)
+* occurredDateTime = "2022-06-13"
+* recorded = "2022-06-13T01:02:03-05:00"
+* activity = http://terminology.hl7.org/CodeSystem/v3-DataOperation#CREATE
+* agent.type = http://terminology.hl7.org/CodeSystem/provenance-participant-type#performer
+* agent.who = Reference(Practitioner/ex-clerk)
+
+Instance: ex-provenance2-consent-basic-treat
+InstanceOf: Provenance
+Title: "Provenance of Update of a basic consent"
+Description: "Given a Consent is updated, and AuditEvent is not seen as sufficient, This example provides an example of Provenance that would be equivilant."
+Usage: #example
+* target = Reference(Consent/ex-consent-basic-treat)
+* occurredDateTime = "2022-06-13"
+* recorded = "2022-06-13T01:02:04-05:00"
+* activity = http://terminology.hl7.org/CodeSystem/v3-DataOperation#CREATE
+* agent.type = http://terminology.hl7.org/CodeSystem/provenance-participant-type#performer
+* agent.who = Reference(Practitioner/ex-clerk)
+* entity.role = #revision
+* entity.what = Reference(Consent/ex-consent-basic-treat)
+
+
 Instance: ex-consent-basic-ink
 InstanceOf: BasicConsent
 Title: "Consent for treatment example with ink signature"
@@ -408,7 +435,7 @@ Description: "Example of a binary ink signed document."
 * data = "ig-loader-ink.png"
 
 
-// TODO -- might bring in a BPPC DocumentReference and possibly show a derived Consent off of that. Might this be a grouping behavior when PCF+MHD+BPPC?
+
 
 
 
@@ -822,6 +849,59 @@ Usage: #example
 * provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
 
 
+Instance: ex-dissent-intermediate-break-glass
+InstanceOf: IntermediateConsent
+Title: "Consent forbid data access except for Break-Glass"
+Description: """
+Consent forbid data access except for Break-Glass
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- base provision is #deny access given the overriding policy
+
+This is the Intermediate part:
+- sub-provision permits users on the managed group of authorized to break-glass
+  - Note that the consent would not need to point at the group as it would be understood. But I point at a group for illustrative purposes.
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/researchFooBar.txt"
+* provision.type = #deny
+* provision.provision.type = #permit
+* provision.provision.purpose = http://terminology.hl7.org/CodeSystem/v3-ActReason#BTG
+* provision.provision.actor.reference = Reference(Group/ex-privilegedUsers)
+* provision.provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
+
+
+Instance: ex-privilegedUsers
+InstanceOf: Group
+Title: "Those users that the organization authorizes to use Break-Glass"
+Description: "This is a managed list of users that are authorzed to Break-Glass. The list is managed by the treatment Organization."
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* active = true
+* type = #practitioner
+* actual = true
+* name = "Those users that the organization authorizes to use Break-Glass"
+* managingEntity = Reference(Organization/ex-organization)
+* member.entity = Reference(Practitioner/ex-practitioner)
+
+
 Instance: ex-consent-advanced-normal
 InstanceOf: AdvancedConsent
 Title: "Consent allowing NORMAL data access"
@@ -1083,6 +1163,52 @@ Usage: #example
 * provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#PSY
 * provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#SEX
 * provision.provision.actor.reference = Reference(Practitioner/ex-practitioner)
+* provision.provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
+
+
+Instance: ex-consent-advanced-normal-break-glass-restricted
+InstanceOf: AdvancedConsent
+Title: "Consent allowing NORMAL and break-glass access to RESTRICTED data"
+Description: """
+Consent allowing NORMAL and break-glass access to RESTRICTED (e.g., Mental Health or Sexual Health) data.
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy -- TODO likely should define some canonical URI for the base policies in PCF?
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+
+This is the Advanced part:
+- Normal data only
+- only break-glass gets RESTRICTED data
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
+* provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
+* provision.provision.type = #permit
+* provision.provision.purpose = http://terminology.hl7.org/CodeSystem/v3-ActReason#BTG
+* provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#R
+* provision.provision.actor.reference = Reference(Group/ex-privilegedUsers)
 * provision.provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
 
 

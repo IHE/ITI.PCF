@@ -21,6 +21,7 @@ Examples for this Resource Profile:
 - [Consent that has expired](Consent-ex-consent-expired-treat.html)
   - ITI-71 [access token](Consent-ex-consent-expired-treat.html#notes)
 
+
 <a name="intermediate"> </a>
 
 ### 3:5.8.3 Intermediate
@@ -47,6 +48,8 @@ Examples for this Resource Profile:
   - ITI-71 [access token](Consent-ex-consent-intermediate-not-encounter.html#notes)
 - restricted consent to specific [intermediate purpose of use](Consent-ex-consent-intermediate-purpose.html)
   - ITI-71 [access token](Consent-ex-consent-intermediate-purpose.html#notes)
+- [Dissent except for Break-Glass](Consent-ex-dissent-intermediate-break-glass.html).
+  - ITI-71 [access token](Consent-ex-dissent-intermediate-break-glass.html#notes)
 
 <a name="advanced"> </a>
 
@@ -68,3 +71,5 @@ Examples for this Resource Profile:
   - ITI-71 [access token](Consent-ex-consent-advanced-normal-focused-psy.html#notes)
 - Consent to [allow NORMAL data access, and some access to Mental Health and Sexual Health](Consent-ex-consent-advanced-normal-focused-psy-or-sex.html)
   - ITI-71 [access token](Consent-ex-consent-advanced-normal-focused-psy-or-sex.html#notes)
+- Consent to [allow NORMAL data access, and break-glass access to RESTRICTED](Consent-ex-consent-advanced-normal-break-glass-restricted.html)
+  - ITI-71 [access token](Consent-ex-consent-advanced-normal-break-glass-restricted.html#notes)

@@ -143,6 +143,15 @@ Usage: #example
 * telecom.value = "JohnMoehrke@gmail.com"
 
 
+Instance: ex-clerk
+InstanceOf: Practitioner
+Title: "Clerk Practitioner example"
+Description: "Clerk Practitioner example used as an example Clerk managing Consents"
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* telecom.system = #email
+* telecom.value = "Clerk@example.org"
+
 
 
 

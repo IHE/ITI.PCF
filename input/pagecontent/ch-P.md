@@ -363,8 +363,8 @@ Thus one must look for both the existence of a Consent for the given Patient, an
 Alternatives are shown:
 
 1. One possibly is that the existing Consent instance is revised to change the `.status` to `inactive`. When this is done the `.lastUpdated` will automatically indicate the date and time this change happened.
-2. If more details are needed, this change to the Consent instance could be tracked with a Provenance resource to indicate who made the change, what change was made, why the change was made, and other details as necessary.
-3. Advanced alternative possibility is to record a new Consent with the details of the change in `Consent.status`, the existing Consent would be marked as `inactive` same as above, and the Provenance would further indicate the new Consent replaces the old Consent.
+2. If more details are needed, this change to the Consent instance could be tracked with an AuditEvent and/or a Provenance resource to indicate who made the change, what change was made, why the change was made, and other details as necessary.
+3. Advanced alternative possibility is to record a new Consent with the details of the change in `Consent.status`, the existing Consent would be marked as `inactive` same as above, and the AuditEvent and/or Provenance would further indicate the new Consent replaces the old Consent. Shown below using Provenance.
 
 Note that at some point after this, the consent may go back to `active`. This transition would follow the same process with the .status changes in the other direction.
 

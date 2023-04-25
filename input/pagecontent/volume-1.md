@@ -177,7 +177,7 @@ The Explicit Basic Option indicates that there is support for a basic set of pat
 1. The overarching policy that the patient and organization have agreed upon. Where there are a defined set of behavior defined overarching policies as defined in the Implicit Option.
 2. The timeframe for which the consent applies. Enabling consents that have a time limit.
 3. Who is permitted/denied: This may be a device, relatedPerson, Practitioner, or Organization. This parameter enables the naming of agents that should be allowed access or denied access. This presumes that the identified agent is appropriately identified (provisioned) and authorized to make the request; typically through some application authorization and role-based-access-control. The user identity is mapped to a FHIR agent type Resource using the agent type Resource `.identifier` element (e.g. Practitioner.identifier would hold the user id).
-4. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explicably identified as an authorized purposeOfUse or denied purposeOfuse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Authorization Server is not determining if the user/client is authorized to make the purposeOfUse declaration, this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, Operations, and Break-Glass.
+4. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explicably identified as an authorized purposeOfUse or denied purposeOfUse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Authorization Server is not determining if the user/client is authorized to make the purposeOfUse declaration, this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, or Operations.
 
 See [Basic Consent](content.html#basic) Content Profile
 
@@ -206,6 +206,8 @@ This data scoping option provides for the Consent to have one or more permit/den
 #### 53.2.3.5 Explicit Intermediate Additional PurposeOfUse Option
 
 This option provides for the Consent to have one or more permit/deny parameter that indicates a purposeOfUse that is not listed in the **Explicit Basic Option** vocabulary. This would tend to be used with Clinical Research projects, where the purposeOfUse is a code assigned to a specific Clinical Research Project. This may be used for other purposeOfUse codes. Where **Explicit Basic Option** has some well-known purposeOfUse codes, this option is used for other codes.
+
+One specific use of this Option is to enable Break-Glass. Where the Consent can have a permission explicitly allowing the PurposeOfUse of Break-Glass (#BTG). In this case the Consent would have restrictions, that can be overridden by an authorized Break-Glass. The logic that determines that the given user is authorized, and has declared Break-Glass is out-of-scope of this implementation guide as it is very user-interface and policy specific. The encoding in the Consent, and the encoding in the Access Token is defined here.
 
 ### 53.2.4 Explicit Advanced Option
 
@@ -297,7 +299,7 @@ The diagrammed steps:
 3. Consult with the Patient. There is some interaction with the Patient. Within this interaction the patient needs to be appropriately informed of the details of the Patient Privacy Policy and the parameters the patient can control. This user Interface might use a FHIR Questionnaire resulting in a QuestionnaireResult as documentation of the ceremony. This User Interface might use some other technical means, or might be a paper process.  This User Interface is not constrained by the PCF.
 4. The results of the ceremony are captured to the satisfaction of the controlling Organization.  This might be a QuestionnaireResponse, or a scanned image of the signed paperwork recorded using a DocumentReference (See [MHD](https://profiles.ihe.net/ITI/MHD/index.html))
 5. The Consent resource constrained by the Consent constraints defined in Volume 3 is then saved to the **Consent Registry** actor using Transaction [ITI-108].
-6. An AuditEvent is recorded by both **Consent Recorder** and **Consent Registry** actors.
+6. An [AuditEvent is recorded](https://profiles.ihe.net/ITI/BALP/index.html) by both **Consent Recorder** and **Consent Registry** actors to support [Security and Privacy audit analysis use-cases](https://profiles.ihe.net/ITI/BALP/volume-1.html#1524-basicaudit-overview).
 
 #### 53.4.2.2 Use Case \#2: Update Existing Consent
 
@@ -332,7 +334,7 @@ The diagrammed steps:
 3. Consult with the Patient. There is some interaction with the Patient. Within this interaction the patient needs to be appropriately informed of the details of the Patient Privacy Policy and the parameters the patient can control. This user Interface might use a FHIR Questionnaire resulting in a QuestionnaireResult as documentation of the ceremony. This User Interface might use some other technical means, or might be a paper process.  This User Interface is not constrained by the PCF.
 4. The results of the ceremony are captured to the satisfaction of the controlling Organization.  This might be a QuestionnaireResponse, or a scanned image of the signed paperwork recorded using a DocumentReference (See [MHD](https://profiles.ihe.net/ITI/MHD/index.html))
 5. The Consent resource constrained by the Consent constraints defined in Volume 3 is then saved to the **Consent Registry** actor using Transaction [ITI-108]. This is typically a FHIR Update action so as to replace the previous Consent. It is also possible to delete the previous and save the Consent as a new instance.
-6. An AuditEvent is recorded by both **Consent Recorder** and **Consent Registry** actors.
+6. An [AuditEvent is recorded](https://profiles.ihe.net/ITI/BALP/index.html) by both **Consent Recorder** and **Consent Registry** actors to support [Security and Privacy audit analysis use-cases](https://profiles.ihe.net/ITI/BALP/volume-1.html#1524-basicaudit-overview).
 
 #### 53.4.2.3 Use Case \#3: Consent Access Control
 
@@ -380,6 +382,8 @@ The diagrammed steps:
 17. The **Consent Enforcement Point** would use undefined means to retrieve the requested data from the FHIR Server. This may be by executing the grouped transaction with privileged access.
 18. The **Consent Enforcement Point** would inspect the results and further enforce the Consent Access Control decision. This might be to filter out specific resources that could not have been filtered out other ways.
 19. The **IUA Resource Server** returns the authorized data to the **IUA Authorization Client** actor.
+
+Not shown, for simplicity of the diagram, is the recording [AuditEvent](https://profiles.ihe.net/ITI/BALP/index.html) by all actors to support [Security and Privacy audit analysis use-cases](https://profiles.ihe.net/ITI/BALP/volume-1.html#1524-basicaudit-overview).
 
 #### 53.4.2.4 Implicit Content
 
@@ -436,28 +440,7 @@ The controlling Organization has identified various roles that would have access
 
 Business Access Controls control appropriate access.
 
-##### 53.4.2.4.3 Deny except for Break-Glass
-
-Deny for all uses except when explicit override reason is given by user that is authorized to use explicit override (aka Break-Glass).
-
-**Pre-conditions**:
-
-The controlling Organization has identified various roles that would have the ability to declare an access override (aka Break-Glass), and has mechanisms in place to prevent any inappropriate use. There is no expectation that the Break-Glass is only for treatment, although the controlling Organization policy may be specific to treatment. In this way this option can be used for any purposeOfUse and override rational that the controlling Organization deems appropriate.
-
-**Main Flow**:
-
-- Business Access Control prevents inappropriate users, applications, purposes, and activities.
-  - The access denial will be indicated as either absolute, or potential to invoke break-glass
-- User that is authorized to declare an explicit override provides reason for override
-- There is no Access Control use of the Consent resource
-
-**Post-conditions**:
-
-Business Access Controls control appropriate access.
-
-An explicit record of the declared break-glass reason is made for each allowed access.
-
-##### 53.4.2.4.4 Deny All
+##### 53.4.2.4.3 Deny All
 
 Deny for all uses without exceptions. This is an unusual setting for a purely Implicit consent environment, but is intended to be paired with an Explicit consent. When paired with an Explicit consent, the **Deny All** functions as the default policy when no explicit consent is on record. This might also be used on a system that is designed simply to record data with no access to that data (e.g., an Audit log repository).
 
@@ -505,7 +488,7 @@ The following set of patient specific parameters may be used to permit or deny:
 1. The overarching policy that the patient and organization have agreed upon. Where there are a defined set of behavior defined overarching policies as defined in the Implicit Option.
 2. The timeframe for which the consent applies. Enabling consents that have a time limit.
 3. Who is permitted/denied: This may be a device, relatedPerson, Practitioner, or Organization. This parameter enables the naming of agents that should be allowed access or denied access. This presumes that the identified agent is appropriately identified (provisioned) and authorized to make the request; typically through some application authorization and role-based-access-control. The user identity is mapped to a FHIR agent type Resource using the agent type Resource `.identifier` element (e.g. Practitioner.identifier would hold the user id).
-4. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explicably identified as an authorized purposeOfUse or denied purposeOfuse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Authorization Server is not determining if the user/client is authorized to make the purposeOfUse declaration, this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, Operations, and Break-Glass.
+4. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explicably identified as an authorized purposeOfUse or denied purposeOfuse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Authorization Server is not determining if the user/client is authorized to make the purposeOfUse declaration, this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, and Operations.
 
 #### 53.4.2.6 Intermediate Consent Contents
 
@@ -561,6 +544,8 @@ This option provides for the Consent to have one or more permit/deny parameter t
 
 The use-case would be where a patient is authorizing purposeOfUse beyond those defined in the **Basic Consent**. An example would be a Privacy Consent to allow an identified clinical research project to have access to the patient data.
 
+This would also be used to indicate that the Consent has provisions enabling Break-Glass using the PurposeOfUse for Break-Glass (BTG). The Consent and Access Token encodings are defined, but the rules of who is authorized and how they declare Break-Glass are not defined as they are dependent on User-Interface, User-Experience, and Policy.
+
 #### 53.4.2.7 Advanced Consent Content
 
 The **Advanced Consent** contents shall be used in conjunction with **Basic Consent** content, and may be used with **Intermediate Consent** content.  Where as the **Basic Consent** is used to record the fundamental aspects of the Consent ceremony. The **Advanced Consent** Content provides for parameters in a Consent that provide rules around data that are classified by sensitivity and confidentiality.
@@ -613,11 +598,11 @@ The ConfidentialityCode may be assigned to data by various ways. Where data have
 
 ## 53.5 PCF Security Considerations
 
-**TODO** usually filled out after whole profile is written
-
 See ITI TF-2x: [Appendix Z.8 “Mobile Security Considerations”](https://profiles.ihe.net/ITI/TF/Volume2/ch-Z.html#z.8-mobile-security-considerations)
 
-A change to Overarching policy need to be carefully managed. A change to Overarching policy may have no impact on the Consent, or may foundationally invalidate all Consents. The Overarching Policy identification is a foundational element of a Consent, and thus when the Overarching policy terms change, one can identify all Consents that were based on the prior Patient Privacy Policy Identifier. In some cases, such as jurisdictional rules backed by laws, the overarching policy may change, effectively changing the effect of the rules of a Consent based on that Overarching policy.
+A change to [any policy](ch-P.html) need to be carefully managed, especially the [Domain Privacy Policy / Overarching Policy](ch-P.html). A change to Overarching Policy may have no impact on the Consent, or may invalidate all Consents. The Overarching Policy identification is a foundational element of a Consent, and thus when the Overarching policy terms change, one can identify all Consents that were based on the prior **Patient Privacy Policy Identifier**. In some cases, such as jurisdictional rules backed by laws, the Overarching Policy may change, effectively changing the effect of the rules of a Consent based on that Overarching Policy.
+
+Security and Privacy office should use the [BALP profiled AuditEvent](https://profiles.ihe.net/ITI/BALP/index.html) to track changes and uses of the Consent resources. The AuditEvent is required of [PCF when grouped with ATNA](ITI-108.html#2310851-security-audit-considerations). The Provenance resource recording is not required of PCF as the use-case need would be satisfied by the AuditEvent record. However an implementation may choose to use Provenance on Create/Update/Delete in addition to AuditEvent. Examples of [a Provenance of create](Provenance-ex-provenance-consent-basic-treat.html) and [a Provenance of update](Provenance-ex-provenance2-consent-basic-treat.html) are provided. The use of Provenance is discussed in [Appendix P.4.3](ch-P.html#p43-change-to-deny-sharing)
 
 Security office should monitor the audit log for uses of break-glass, and follow up to confirm it was a legitimate use of break-glass per policy.
 
@@ -627,8 +612,4 @@ Security office should monitor audit log for access denied, and follow up to con
 
 ## 53.6 PCF Cross-Profile Considerations
 
-**TODO Possibilities**
-
-* MHDS - would explain how this is used vs the Consent method in MHDS
-* QEDm / IPA
-* ATNA / BALP  
+This implementation guide is expected to be used in conjunction with other implementation guide (Profiles) that provide access to Patient specific data such as [Mobile Health Document Sharing (MHDS)](https://profiles.ihe.net/ITI/MHDS/index.html) or the [PCC](https://profiles.ihe.net/PCC/index.html) Query for Existing Data for Mobile (QEDm). These other implementation guides would have their [appropriate Actors grouped such as is shown in Figure 53.1-1](volume-1.html#531-pcf-actors-transactions-and-content-modules) as "Grouped Client" and "Grouped Server".
