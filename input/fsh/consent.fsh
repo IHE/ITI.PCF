@@ -864,6 +864,7 @@ This is a BasicConsent example:
 - performer is the patient
 - organization is identified
 - source indicate a DocumentReference (with included text of the policy)
+- base policy is Policy-break-glass-only
 - base provision is #deny access given the overriding policy
 
 This is the Intermediate part:
@@ -880,7 +881,7 @@ Usage: #example
 * performer = Reference(Patient/ex-patient)
 * organization = Reference(Organization/ex-organization)
 * sourceReference = Reference(DocumentReference/ex-documentreference)
-* policy.uri = "https://profiles.ihe.net/ITI/PCF/Policy-basic-normal"
+* policy.uri = "https://profiles.ihe.net/ITI/PCF/Policy-break-glass-only"
 * provision.type = #deny
 * provision.provision.type = #permit
 * provision.provision.purpose = http://terminology.hl7.org/CodeSystem/v3-ActReason#BTG

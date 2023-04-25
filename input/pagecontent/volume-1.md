@@ -157,14 +157,16 @@ The Implicit Policy Option indicates that there is a default policy that is used
 | canonical URI | Definition |
 |---------------|----------- |
 `https://profiles.ihe.net/ITI/PCF/Policy-basic-normal` | Permit for clinicians that have authorization for Treatment use, but does not authorize other access. This presumes that basic user access control can differentiate legitimate clinical users.
-`https://profiles.ihe.net/ITI/PCF/Policy-all-normal` | Permit for all authorized users. This presumes that basic user access control will only allow authorized users and purpose of use.
-`https://profiles.ihe.net/ITI/PCF/Policy-break-glass-only` | Deny for all authorized users, except when the user is a clinician with authorization to declare a medical patient-safety override (aka Break-Glass).
+`https://profiles.ihe.net/ITI/PCF/Policy-all-normal` | Permit for all authorized uses. This presumes that basic user access control will only allow authorized users and purpose of use.
+`https://profiles.ihe.net/ITI/PCF/Policy-break-glass-only` | Deny for all use, except when the user is a clinician with authorization to declare a medical patient-safety override (aka Break-Glass).
 `https://profiles.ihe.net/ITI/PCF/Policy-deny` |  Deny all.
 {: .grid}
 
 Other overarching policies may also be implemented, but their behavior is not defined in PCF.
 
-The operational environment chooses which of these policies they will use, so in operational use only one of these is in effect.
+The operational environment chooses which of these policies they will use, so in operational use only one of these is in effect as the "implicit policy".
+
+The definition of permitted use nor how break-glass is declared is defined here, but is a policy expectation of the environment and is expected to be configured into the IUA authorization decisions and enforcement.
 
 Implicit Option has no ability to have Patient specific parameters. When Patient specific parameters are needed, then Explicit options are required.
 
@@ -172,11 +174,13 @@ When the Implicit Option is not declared to be implemented, then PCF expects "De
 
 ### 53.2.2 Explicit Basic Option
 
-The Explicit Basic Option allows for patient specific consent to be recorded, and changed. This option sets the foundation for consents that expire, and consents that change based on organization and patient agreements. The lack of a consent for a given patient would be covered by the Implicit Option.
+The Explicit Basic Option allows for patient specific consent to be recorded, and changed. This option sets the foundation for consents that expire, and consents that change based on organization and patient agreements. The lack of a consent for a given patient would be covered by the Implicit Option in place. 
+
+Typically the Implicit Option is either a Deny All or a Permit all authorized uses. The Deny All sets the groundwork for an environment where Consent is required for any activity to happen (often called OPT-IN). The permit all authorized uses sets the groundwork for an environment where Consent can be used to refine or dissent (often called OPT-OUT). In all cases, once a Consent is recorded then the terms of the Consent override any Implicit policy.
 
 The Explicit Basic Option indicates that there is support for a basic set of patient specific parameters. The following set of patient specific parameters may be used to permit or deny:
 
-1. The overarching policy that the patient and organization have agreed upon. Where there are a defined set of behavior defined overarching policies as defined in the Implicit Option.
+1. The overarching policy that the patient and organization have agreed upon. An environment can use the overarching policies defined above, or define policies specific to your local needs. For example in an Implicit Deny All, the Explicit Consents might be based on the permit all authorized users policy.
 2. The timeframe for which the consent applies. Enabling consents that have a time limit.
 3. Who is permitted/denied: This may be a device, relatedPerson, Practitioner, or Organization. This parameter enables the naming of agents that should be allowed access or denied access. This presumes that the identified agent is appropriately identified (provisioned) and authorized to make the request; typically through some application authorization and role-based-access-control. The user identity is mapped to a FHIR agent type Resource using the agent type Resource `.identifier` element (e.g. Practitioner.identifier would hold the user id).
 4. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explicably identified as an authorized purposeOfUse or denied purposeOfUse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Authorization Server is not determining if the user/client is authorized to make the purposeOfUse declaration, this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, or Operations.
