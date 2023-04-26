@@ -1,7 +1,5 @@
 
-Supports patient privacy consents on FHIR in a Health Information Exchange scope using the FHIR Consent Resource.
-
-The **Privacy Consent on FHIR (PCF)** builds upon a basic Identity and Authorization model of [Internet User Authorization (IUA)](https://profiles.ihe.net/ITI/IUA/index.html) to provide consent based access control. The Privacy Consent on FHIR is thus focused only on Access Control decisions regarding the parameters of the data subject (patient) privacy consent. The Privacy Consent on FHIR leverages these basic Identity and Authorization decisions as context setting for the authorization decision and enforcement. For example a user that would never be allowed access, would have been denied access at the IUA level, but the identity properties provided by the IUA are input to the privacy authorization decision that is the focus of PCF.
+The **Privacy Consent on FHIR (PCF)** builds upon a basic Identity and Authorization model of [Internet User Authorization (IUA)](https://profiles.ihe.net/ITI/IUA/index.html) to provide consent based access control. The Privacy Consent on FHIR is thus focused only on Access Control decisions regarding the parameters of the data subject (patient) privacy consent. The Privacy Consent on FHIR leverages these basic Identity and Authorization decisions as context setting for the authorization decision and enforcement. For example a user that would never be allowed access would be been denied access at the IUA level without invoking PCF, where as an authorized request then must be mediated by the PCF authorization server.
 
 This is to say that PCF does not define:
 
@@ -259,10 +257,6 @@ The **Consent Enforcement Point** shall be grouped with a BALP [Audit Creator](h
 
 ## 53.4 PCF Overview
 
-Use cases are informative, not normative, and “SHALL” language is
-not allowed in use cases.
-The Use cases define the set of needs addressed by the Transactions and Content profiling.
-
 The PCF Profile enables authorized access to data according to terms agreed by the Patient and the Organization protecting the data. These terms represent Privacy controls on the use of the data. The Privacy controls augment an overarching policy upon which these Privacy controls build. The writing of overarching policies, and the act of informing the patient and capturing their agreement is a predicate to the use-cases of the PCF.
 
 ### 53.4.1 Concepts
@@ -271,11 +265,11 @@ Consent is is a patient specific set of parameters that work within an overarchi
 
 ### 53.4.2 Use Cases
 
-PCF defines some transactions and some content. The content specifications define the variations on Consent that are used to enable consent parameters. The transactions utalize these content and carry out the privacy protection defined within a patient specific consent.
+PCF defines some transactions and some content. The content specifications define the variations on Consent that are used to enable consent parameters. The transactions utilize these content and carry out the privacy protection defined within a patient specific consent.
 
 #### 53.4.2.1 Use Case \#1: Capture new consent
 
-When a patient does not have a consent on file, and there is a need to capture consent. The Capture New Consent usecase is used to record the details of the Consent ceremony.
+When a patient does not have a consent on file, and there is a need to capture consent, the Capture New Consent usecase is used to record the details of the Consent ceremony.
 
 ##### 53.4.2.1.1 Capture New Consent Use Case Description
 

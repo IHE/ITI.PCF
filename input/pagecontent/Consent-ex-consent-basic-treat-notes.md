@@ -1,3 +1,5 @@
+#### IUA Access Token
+
 Provided an [ITI-71](other.html#updates-to-iti-71) results in a PERMIT access token issued. That token would have the following PCF specific element to inform the **Consent Enforcement Point**. 
 
  In this case there is no residual, as the Consent expresses that authorization be given for a given purpose of use. Possibly with scope restrictions based on other business rules, such as a subset of actions (CRUDE) and resources. No token would be issued by ITI-71 for users not authorized, or requests beyond the set of purpose of use.

@@ -1,3 +1,5 @@
+#### IUA Access Token
+
 Provided an [ITI-71](other.html#updates-to-iti-71) results in a PERMIT access token issued. That token would have the following residual element to inform the **Consent Enforcement Point** that it needs to restrict the results.
 
  Given that the token will express the permit portion, the `residual` would need to express the refinement. In this case the oAuth token and scope will address a general permit, and thus the `residual` need only express the forbid to information authored in a given timeframe.

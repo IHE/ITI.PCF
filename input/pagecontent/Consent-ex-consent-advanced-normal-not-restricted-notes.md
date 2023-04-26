@@ -1,3 +1,5 @@
+#### IUA Access Token
+
 Provided an [ITI-71](other.html#updates-to-iti-71) results in a PERMIT access token issued. That token would have the following residual element to inform the **Consent Enforcement Point** that it needs to restrict the results.
 
  Given that the token will express the permit portion, the `residual` would need to express the refinement. In this case, given that the restriction to normal data is at the root, it means that nothing BUT normal data is allowed. This case also has explicit deny on restricted data. This restriction would be implied, but here it is explicit, so we will show how to make it explicit in the oAuth token. The oAuth token would be expressing a general permit for the given user to the given patient data. Possibly with scope restrictions based on other business rules, such as a subset of actions (CRUDE) and resources.

@@ -298,7 +298,7 @@ Usage: #example
 * target = Reference(Consent/ex-consent-basic-treat)
 * occurredDateTime = "2022-06-13"
 * recorded = "2022-06-13T01:02:04-05:00"
-* activity = http://terminology.hl7.org/CodeSystem/v3-DataOperation#CREATE
+* activity = http://terminology.hl7.org/CodeSystem/v3-DataOperation#UPDATE
 * agent.type = http://terminology.hl7.org/CodeSystem/provenance-participant-type#performer
 * agent.who = Reference(Practitioner/ex-clerk)
 * entity.role = #revision

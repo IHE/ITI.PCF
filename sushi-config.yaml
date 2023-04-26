@@ -1,7 +1,5 @@
 # sushi-config.yaml is documented https://fshschool.org/docs/sushi/configuration/
 # ───────────────────────────────────────────────────
-# the id should be lowercase made up of "ihe." + {domain acronym} + "." + {profile acronym/short-name}
-# e.g. ihe.iti.mhds, or ihe.iti.basicaudit
 id: ihe.iti.pcf
 canonical: https://profiles.ihe.net/ITI/PCF
 version: 0.0.1-current
@@ -43,9 +41,6 @@ parameters:  # see https://confluence.hl7.org/display/FHIR/Implementation+Guide+
     - input/resources
     - fsh-generated/resources
     - input/examples
-#  path-pages:
-#    - input/pagecontent
-#    - fsh-generated/includes
   show-inherited-invariants: 'false'
   usage-stats-opt-out: 'false'
   logging: progress
@@ -80,6 +75,9 @@ groups:
       - Binary/B-ink
       - Organization/ex-organization
       - Patient/ex-patient
+      - Practitioner/ex-clerk
+      - Provenance/ex-provenance-consent-basic-treat
+      - Provenance/ex-provenance2-consent-basic-treat
   IntermediateConsent:
     name: Explicit Intermediate Consent
     description: Artifacts related to [Explicit Intermediate](volume-1.html#5323-explicit-intermediate-options) option
@@ -94,8 +92,10 @@ groups:
       - Consent/ex-consent-intermediate-data
       - Consent/ex-consent-intermediate-not-data
       - Consent/ex-consent-intermediate-purpose
+      - Consent/ex-dissent-intermediate-break-glass
       - Encounter/ex-encounter
       - Practitioner/ex-practitioner
+      - Group/ex-privilegedUsers
       - Organization/ex-org-researcher
   AdvancedConsent:
     name: Explicit Advanced Consent
@@ -109,6 +109,7 @@ groups:
       - Consent/ex-consent-advanced-normal-focused-restricted
       - Consent/ex-consent-advanced-normal-focused-psy
       - Consent/ex-consent-advanced-normal-focused-psy-or-sex
+      - Consent/ex-consent-advanced-normal-break-glass-restricted
   SLS:
     name: Security Labeling Service resources
     description: Artifacts to support a [Security Labeling Service (SLS)](ch-P.html#SLS)

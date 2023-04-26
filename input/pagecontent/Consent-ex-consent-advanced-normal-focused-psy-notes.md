@@ -1,3 +1,5 @@
+#### IUA Access Token
+
 Provided an [ITI-71](other.html#updates-to-iti-71) results in a PERMIT access token issued. That token would have the following residual element to inform the **Consent Enforcement Point** that it needs to restrict the results.
 
  Given that the token will express the permit portion, the `residual` would need to express the refinement. This case allows treatment access to normal data, and carves out mental health data as accessible only to [Practitioner](Practitioner-ex-practitioner.html). The oAuth token would be expressing a general permit for most users to the given patient data. Possibly with scope restrictions based on other business rules, such as a subset of actions (CRUDE) and resources.
