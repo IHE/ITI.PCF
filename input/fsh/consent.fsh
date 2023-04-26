@@ -101,14 +101,14 @@ Specifics of Basic:
 """
 * insert FoundationConsent
 * provision.securityLabel 0..0
-* provision.purpose from BasicPurposeVS (required)
+* provision.purpose from BasicPurposeVS (extensible)
 * provision.dataPeriod 0..0
 * provision.data 0..0
 * provision.provision 0..0
 
 ValueSet: BasicPurposeVS
 Title: "Basic Purpose ValueSet"
-Description: "ValueSet of the PurposeOfUse minimally required by Basic Option"
+Description: "ValueSet of the PurposeOfUse minimally extensible by Basic Option"
 * ^experimental = false
 * http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
 * http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
@@ -183,8 +183,8 @@ Explicit Advanced Consent
 * insert FoundationConsent
 * provision.provision MS
 * provision.provision.provision 0..0
-* provision.securityLabel  from AdvancedSecurityTagVS (required)
-* provision.provision.securityLabel  from AdvancedSecurityTagVS (required)
+* provision.securityLabel  from AdvancedSecurityTagVS (extensible)
+* provision.provision.securityLabel  from AdvancedSecurityTagVS (extensible)
 
 ValueSet: AdvancedSecurityTagVS
 Title: "Advanced Security Tag ValueSet"
