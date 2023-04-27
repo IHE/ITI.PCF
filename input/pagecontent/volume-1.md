@@ -273,12 +273,17 @@ When a patient does not have a consent on file, and there is a need to capture c
 
 ##### 53.4.2.1.1 Capture New Consent Use Case Description
 
-Given an Organization controlling some Patient identifiable Data 
-And they have written and published Patient Privacy Policies
-And there is no consent on file for a given Patient
-When they present their Patient Privacy Policies to a given Patient
-And the Patient either agrees, disagrees, or adds acceptable parameters
-Then a Consent is captured by the **Consent Recorder** actor and stored in the **Consent Registry**
+```Gherkin
+Scenario Outline: Capture New Consent Use Case
+  Given an Organization controlling some Patient identifiable Data 
+  And they have written and published Patient Privacy Policies
+  And there is no consent on file for a given Patient
+  When they present their Patient Privacy Policies to a given Patient
+  And the Patient either agrees, disagrees, or adds acceptable parameters
+  Then a Consent is captured by the **Consent Recorder** actor and stored in the **Consent Registry**
+```
+
+Note: the above use-case is written in [Gherkin](https://cucumber.io/docs/gherkin/), a use-case language optimized for automated testing.
 
 The Consent details are specific to the Patient Privacy Policy, the parameters agreed to in the ceremony, and the Consent profile (Basic, Intermediate, Advance) that was used.
 
@@ -307,13 +312,16 @@ When a patient has an existing consent on file, and there is a need to capture a
 
 ##### 53.4.2.2.1 Update Existing Consent Use Case Description
 
-Given an Organization controlling some Patient identifiable Data 
-And they have written and published Patient Privacy Policies
-And there is a consent on file for a given Patient
-When they present their Patient Privacy Policies to a given Patient
-And the Patient either agrees, disagrees, or adds acceptable parameters
-Then a Consent is captured by the **Consent Recorder** actor and stored in the **Consent Registry**
-And the new Consent overwrites or invalidates the previous Consent
+```Gherkin
+Scenario Outline: Update Existing Consent use Case
+  Given an Organization controlling some Patient identifiable Data 
+  And they have written and published Patient Privacy Policies
+  And there is a consent on file for a given Patient
+  When they present their Patient Privacy Policies to a given Patient
+  And the Patient either agrees, disagrees, or adds acceptable parameters
+  Then a Consent is captured by the **Consent Recorder** actor and stored in the **Consent Registry**
+  And the new Consent overwrites or invalidates the previous Consent
+```
 
 The Consent details are specific to the Patient Privacy Policy, the parameters agreed to in the ceremony, and the Consent profile (Basic, Intermediate, Advance) that was used.
 
@@ -342,12 +350,15 @@ Given that an application needs access to resources, the following use-case assu
 
 ##### 53.4.2.3.1 Consent Access Control Use Case Description
 
-Given an Organization controlling some Patient identifiable Data 
-And they have written and published Patient Privacy Policies
-And there is a consent on file for a given Patient
-When a request for patient identifiable data is made
-Then the Consents are used by the **Consent Authorization Server** actor as stored in the **Consent Registry** to make Access Control Decisions
-And the **Consent Enforcement Point** assures that only data authorized by the Consent Access Control Decision are allowed to be exposed.
+```Gherkin
+Scenario Outline: Consent Access Control Use Case
+  Given an Organization controlling some Patient identifiable Data 
+  And they have written and published Patient Privacy Policies
+  And there is a consent on file for a given Patient
+  When a request for patient identifiable data is made
+  Then the Consents are used by the **Consent Authorization Server** actor as stored in the **Consent Registry** to make Access Control Decisions
+  And the **Consent Enforcement Point** assures that only data authorized by the Consent Access Control Decision are allowed to be exposed.
+```
 
 The Consent details are specific to the Patient Privacy Policy, the parameters agreed to in the ceremony, and the Consent profile (Basic, Intermediate, Advance) that was used.
 
