@@ -20,15 +20,7 @@ Best to [join the ITI-Technical committee](https://www.ihe.net/ihe_domains/it_in
 
 questions to the ITI committee to aid with the development of the IG.
 
-1. I expect that we could define some explicitly coded policies for MHDS environments that would have defined behavior. These would be definable in behaviors, but not in human language that would be used with the patient. Given that the Consent Recorder is defined as not including the patient engagement on the consent terms, this may not be a problem that we can't provide human language. we could provide boilerplate human language, but we should be careful to not express legal terms.
-1. I defined a subset of ConfidentialityCodes (N, R), and Sensitivity codes (ETH, ETHUD, OPIOIDUD, PSY, SEX, and HIV). Is this enough? Is this too many?
-1. Added a base policy that forbids redisclosure. This is the only policy that places restrictions upon the recipient.
-1. Should the ITI-108 include requirements to record Provenance on Create, Update, and Delete in addition to AuditEvent? (this would justify full CRUDS in 108 transaction) Currently the use-case is handled by the BALP AuditEvent. 
-
-### In development
-
-- added a section to be added to ITI-71 explaining additional oAuth extension covering PCF
-- added a notes section to ALL Consent examples showing how the oAuth extension would be impacted by a decision(s) authorizing access with residual rules. See the Volume 3 where I point at these along with the pointers to all the examples.
+- none
 
 ### Decided
 
