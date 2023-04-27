@@ -68,14 +68,20 @@ This section modifies other IHE profiles or the General Introduction appendices 
 
 ###### 3.71.4.2.2.1.4 Privacy Consent on FHIR grouping
 
-When grouped with the PCF Consent Authorization Server, and where the Access Decision includes consideration of Privacy Consent, the following oAuth extension shall be included.
+When grouped with the PCF Consent Authorization Server, and where the Access Decision includes consideration of Privacy Consent, the following `ihe_pcf` oAuth extension shall be included.
 
 The Authorization Server and Resource Server shall support the following `extensions` parameter:
 
-- `patient_id`: Patient identifier related to the Patient Privacy Policy Identifier. Its value should be the patient identifier in CX syntax or as a FHIR full URL.
-- `doc_id`: Patient Privacy Policy Acknowledgment Document. Its value should  be an URN or as a FHIR full URL.
-- `acp`: Patient Privacy Policy Identifier. This is usually a URL to either a coded form and/or a human readable form. The URL would follow http negotiate to return the appropriate format given the mime-type negotiation.
-- `residual`: Carries data that would be forbidden from being returned. Given that scope identifies what is overall allowed.
+- `patient_id`: 1..1 Patient identifier related to the Patient Privacy Policy Identifier. Its value should be the patient identifier in CX syntax or as a FHIR full URL.
+- `doc_id`: 1..* Patient Privacy Policy Acknowledgment Document. Its value should  be an URN or as a FHIR full URL.
+- `acp`: 0..* Patient Privacy Policy Identifier. This is usually the URL from the `Consent.policy.uri` which is either a coded form and/or a human readable form. The URL would follow http negotiate to return the appropriate format given the mime-type negotiation.
+- `residual`: 0..* Given that the oAuth token and scope identifies what is overall allowed, the `residual` carries residual rules from the PCF Consent Authorization Server to be enforced by the PCF Consent Enforcement Point.
+  - `type` : 1..1 type of this rule, either forbid or permit
+  - `securityLabel` : 0..* Security Labels that define affected resources
+  - `dataPeriod` : 0..* Timeframe for data controlled by this rule
+  - `data` : 0..* Data controlled by this rule
+    - `meaning` : 1..1 Data controlled by this rule relationship to reference
+    - `reference` : 1..1 Referenced data
 
 If present, the claims shall be wrapped in an `extensions` object with key `ihe_pcf` and a JSON value object containing the claims. Shown as a JSON Template:
 
@@ -83,8 +89,8 @@ If present, the claims shall be wrapped in an `extensions` object with key `ihe_
 "extensions" : {  
   "ihe_pcf" : {  
     "patient_id": { Reference(Patient)}, // who the consent subject is
-    "doc_id": { Reference(Consent)}, // what the consent is
-    "acp": "<uri>", // basis policy this is built upon
+    "doc_id": [{ Reference(Consent)}], // what the consent(s) were used
+    "acp": ["<uri>"], // basis policy the consent(s) are built upon
     "residual" : [{
       "type" : "<code>", // forbid | permit
       "securityLabel" : [{ Coding }], // Security Labels that define affected resources
@@ -101,7 +107,7 @@ If present, the claims shall be wrapped in an `extensions` object with key `ihe_
 Given that the token is authorizing access to the defined Scope, then the `residual` is focused on results that would be forbidden to be returned (forbid). Note that `forbid` is not identical to `Consent.provision.type` of `deny` but is related:
 
 - the oAuth scope indicates the gross data that is permitted
-- residual `forbid` indicates data that is forbidden to be returned
+- residual `forbid` indicates data that is forbidden, and shall not be returned
 - residual `permit` overrides an explicit residual `forbid`
 - If no `forbid` applies, then the data is allowed to flow back to the requester
 
@@ -140,12 +146,10 @@ Example: Given [Consent allowing data authored within a timeframe](Consent-ex-co
   }
   "ihe_pcf" : {
     "patient_id" : "Patient/ex-patient",
-    "doc_id" : "Consent/ex-consent-intermediate-timeframe",
-    "residual" : [
-      {
+    "doc_id" : ["Consent/ex-consent-intermediate-timeframe"],
+    "residual" : [{
         "type" : "forbid",
-      },
-      {
+      },{
         "type" : "permit",
         "dataPeriod" : {
           "start" : "2022-01-01",

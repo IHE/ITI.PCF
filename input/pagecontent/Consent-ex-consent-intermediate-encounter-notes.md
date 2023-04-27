@@ -29,7 +29,7 @@ The token would need to include an `ihe_pcf` extension to point at this consent,
   }
   "ihe_pcf" : {
     "patient_id" : "http://example.org/fhir/Patient/ex-patient",
-    "doc_id" : "http://example.org/fhir/Consent/ex-consent-intermediate-encounter",
+    "doc_id" : ["http://example.org/fhir/Consent/ex-consent-intermediate-encounter"],
     "residual" : [
       {
         "type" : "forbid",

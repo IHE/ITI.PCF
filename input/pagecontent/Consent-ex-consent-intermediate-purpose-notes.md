@@ -20,7 +20,7 @@ Provided an [ITI-71](other.html#updates-to-iti-71) results in a PERMIT access to
   }
   "ihe_pcf" : {
     "patient_id" : "http://example.org/fhir/Patient/ex-patient",
-    "doc_id" : "http://example.org/fhir/Consent/ex-consent-intermediate-purpose",
+    "doc_id" : ["http://example.org/fhir/Consent/ex-consent-intermediate-purpose"]
   }
 }
 ```

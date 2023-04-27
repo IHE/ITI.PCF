@@ -20,7 +20,7 @@ Provided an [ITI-71](other.html#updates-to-iti-71) is requested by an authorized
   }
   "ihe_pcf" : {
     "patient_id" : "http://example.org/fhir/Patient/ex-patient",
-    "doc_id" : "http://example.org/fhir/Consent/ex-consent-intermediate-dissent-break-glass",
+    "doc_id" : ["http://example.org/fhir/Consent/ex-consent-intermediate-dissent-break-glass"]
   }
 }
 ```

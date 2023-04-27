@@ -35,7 +35,7 @@ For the User [Practitioner](Practitioner-ex-practitioner.html), the token **resu
   }
   "ihe_pcf" : {
     "patient_id" : "http://example.org/fhir/Patient/ex-patient",
-    "doc_id" : "http://example.org/fhir/Consent/ex-consent-intermediate-authoredby",
+    "doc_id" : ["http://example.org/fhir/Consent/ex-consent-intermediate-authoredby"],
     "residual" : [
       {
         "type" : "forbid",
