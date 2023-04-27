@@ -1,5 +1,5 @@
 
-The **Privacy Consent on FHIR (PCF)** builds upon a basic Identity and Authorization model of [Internet User Authorization (IUA)](https://profiles.ihe.net/ITI/IUA/index.html) to provide consent based access control. The Privacy Consent on FHIR is thus focused only on Access Control decisions regarding the parameters of the data subject (patient) privacy consent. The Privacy Consent on FHIR leverages these basic Identity and Authorization decisions as context setting for the authorization decision and enforcement. For example a user that would never be allowed access would be been denied access at the IUA level without invoking PCF, where as an authorized request then must be mediated by the PCF authorization server.
+The **Privacy Consent on FHIR (PCF)** builds upon a basic Identity and Authorization model of [Internet User Authorization (IUA)](https://profiles.ihe.net/ITI/IUA/index.html) to provide consent based access control. The Privacy Consent on FHIR is thus focused only on Access Control decisions regarding the parameters of the data subject (patient) privacy consent. The Privacy Consent on FHIR leverages these basic Identity and Authorization decisions as context setting for the authorization decision and enforcement. For example a user that would never be allowed access would be been denied access at the IUA level without invoking PCF, and where PCF will further evaluate authorization based on Privacy Consents.
 
 This is to say that PCF does not define:
 
@@ -9,7 +9,7 @@ This is to say that PCF does not define:
 - how one tags data with security/privacy sensitivity labels, this is the role of a systems design that might utilize a [Security labeling Service](ch-P.html#SLS); and
 - how users or applications are identified and foundationally authorized, this is the role of other Implementation Guides like IUA, and OpenID-Connect.
 
-But PCF enhances and relies upon these other Implementation Guides.
+But PCF enhances and relies upon these other Implementation Guides to protect sensitive resources according to Patient specific Consents.
 
 TODO: Likely need a diagram that is more human workflow focused?
 
