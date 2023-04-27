@@ -38,9 +38,11 @@ The actors participate in the following Transactions.
 |------------------------------|-----------------------------------|-----------|-------------|----------------|
 | [Consent Recorder](#consentRecorder)  | Access Consent                    | Initiator | R           | [ITI TF-2: 3.108](ITI-108.html) |
 | [Consent Registry](#consentRegistry)  | Access Consent                    | Responder | R           | [ITI TF-2: 3.108](ITI-108.html) |
-| [Consent Authorization Server](#consentAuthorizationServer) | Access Consent                    | Initiator | R           | [ITI TF-2: 3.108](ITI-108.html) |
+| [Consent Authorization Server](#consentAuthorizationServer) | Access Consent                    | Initiator | R (Note 1)           | [ITI TF-2: 3.108](ITI-108.html) |
 | [Consent Enforcement Point](#consentEnforcementPoint) | none |  |  |  |
 {: .grid}
+
+Note 1: Consent Authorization Server, when operating only in an Implicit environment, does not need to demonstrate use of ITI-108.
 
 The following is a repeat of the IUA Actors and Transactions for clarity. The PCF Implementation Guide places grouping requirements and behavior upon the IUA Actors relative to the grouped PCF Actors.
 
@@ -116,7 +118,6 @@ between options when applicable are specified in notes.
 
 | Actor              | Option Name |
 |--------------------|-------------|
-| Consent Recorder    | Implicit  |
 | Consent Recorder    | Explicit Basic |
 | Consent Recorder    | Explicit Intermediate Data Timeframe |
 | Consent Recorder    | Explicit Intermediate Data by id |
