@@ -223,25 +223,25 @@ See [Advanced Consent](content.html#advanced) Content Profile
 
 ## 53.3 PCF Required Actor Groupings
 
-PCF leverages other IHE Profiles for critical functionality they provide. This includes [Basic Audit Log Patterns (BALP)](https://profiles.ihe.net/ITI/BALP/index.html) to provide audit logging of these privacy and security sensitive access control activities, and [Internet User Authorization (IUA)](https://profiles.ihe.net/ITI/IUA/index.html) to provide the oAuth interaction pattern between clients that want to access protected resources and the needs to protect those resources.
+PCF leverages other IHE Profiles for critical functionality they provide. This includes [Audit Trails and Node Authentication (ATNA)](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html) to provide system security and audit infrastructure, [Basic Audit Log Patterns (BALP)](https://profiles.ihe.net/ITI/BALP/index.html) to provide audit log patterns for privacy and security sensitive access control activities, and [Internet User Authorization (IUA)](https://profiles.ihe.net/ITI/IUA/index.html) to provide the oAuth interaction pattern between clients that want to access protected resources and the needs to protect those resources.
 
 ### 53.3.1 Consent Recorder
 
-The **Consent Recorder** shall be grouped with a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [BALP RESTful activities](https://profiles.ihe.net/ITI/BALP/content.html#3573-restful-activities). Note that the BALP Audit Creator has details on required grouping with ATNA.
+The **Consent Recorder** shall be grouped with an ATNA [Secure Application](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.1.1.2), a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [BALP RESTful activities](https://profiles.ihe.net/ITI/BALP/content.html#3573-restful-activities).
 
 ### 53.3.1 Consent Registry
 
-The **Consent Registry** shall be grouped with a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [Consent Authorization Decision Audit Message](https://profiles.ihe.net/ITI/BALP/content.html#3576-consent-authorized-decision-audit-message).  Note that the BALP Audit Creator has details on required grouping with ATNA.
+The **Consent Registry** shall be grouped with an ATNA [Secure Application](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.1.1.2), a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [Consent Authorization Decision Audit Message](https://profiles.ihe.net/ITI/BALP/content.html#3576-consent-authorized-decision-audit-message).
 
 ### 53.3.1 Consent Authorization Server
 
 The **Consent Authorization Server** shall be grouped with an IUA: **Authorization Server**. The IUA **Authorization Server** takes care of the IUA transactions and invokes the **Consent Authorization Server** when a request for a token, that would be impacted by a Patient Privacy Consent, is requested.
 
-The IUA Authorization Server shall implement the **JWT Token**, **Token Introspection** and **Authorization Server Metadata** options. There is no use of the IUA Authorization Server **SAML Token** option.
+The IUA Authorization Server shall implement the **JWT Token**, or **Token Introspection** options, and should implement the and **Authorization Server Metadata** option. There is no use of the IUA Authorization Server **SAML Token** option.
 
 Note that PCF [adds requirements to the ITI-71](other.html#updates-to-iti-71) transaction to carry in the token extensions informed from the consents. These oAuth extensions affect JWT encoding and response from use of the Introspect Token Transaction.
 
-The **Consent Authorization Server** shall be grouped with a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [BALP RESTful activities](https://profiles.ihe.net/ITI/BALP/content.html#3573-restful-activities). Note that the BALP Audit Creator has details on required grouping with ATNA.
+The **Consent Authorization Server** shall be grouped with an ATNA [Secure Application](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.1.1.2), a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [BALP RESTful activities](https://profiles.ihe.net/ITI/BALP/content.html#3573-restful-activities).
 
 ### 53.3.2 Consent Enforcement Point
 
@@ -251,7 +251,7 @@ The IUA Resouce Server shall implement the **JWT Token**, **Token Introspection*
 
 Note that PCF [adds requirements to the ITI-71](other.html#updates-to-iti-71) transaction to carry in the token extensions informed from the consents. These oAuth extensions affect JWT encoding and response from use of the Introspect Token Transaction.
 
-The **Consent Enforcement Point** shall be grouped with a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [BALP RESTful activities](https://profiles.ihe.net/ITI/BALP/content.html#3573-restful-activities). Note that the BALP Audit Creator has details on required grouping with ATNA. Only one BALP RESTful activity AuditEvent needs to be recorded within the Grouped Server.
+The **Consent Enforcement Point** shall be grouped with an ATNA [Secure Application](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.1.1.2), a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [BALP RESTful activities](https://profiles.ihe.net/ITI/BALP/content.html#3573-restful-activities). Only one BALP RESTful activity AuditEvent needs to be recorded within the Grouped Server.
 
 <a name="overview"> </a>
 
@@ -612,6 +612,8 @@ The ConfidentialityCode may be assigned to data by various ways. Where data have
 See ITI TF-2x: [Appendix Z.8 “Mobile Security Considerations”](https://profiles.ihe.net/ITI/TF/Volume2/ch-Z.html#z.8-mobile-security-considerations)
 
 A change to [any policy](ch-P.html) need to be carefully managed, especially the [Domain Privacy Policy / Overarching Policy](ch-P.html). A change to Overarching Policy may have no impact on the Consent, or may invalidate all Consents. The Overarching Policy identification is a foundational element of a Consent, and thus when the Overarching policy terms change, one can identify all Consents that were based on the prior **Patient Privacy Policy Identifier**. In some cases, such as jurisdictional rules backed by laws, the Overarching Policy may change, effectively changing the effect of the rules of a Consent based on that Overarching Policy.
+
+The [Basic Audit Log Patterns](https://profiles.ihe.net/ITI/BALP/index.html) defines the audit log patterns, these audit log patterns can be recorded using the [ATNA](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html) [ATX:TLS Syslog](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.2.7.2), [ATX: UDP Syslog](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.2.7.3), or  [ATX: FHIR Feed](https://www.ihe.net/uploadedFiles/Documents/ITI/IHE_ITI_Suppl_RESTful-ATNA.pdf).
 
 Security and Privacy office should use the [BALP profiled AuditEvent](https://profiles.ihe.net/ITI/BALP/index.html) to track changes and uses of the Consent resources. The AuditEvent is required of [PCF when grouped with ATNA](ITI-108.html#2310851-security-audit-considerations). The Provenance resource recording is not required of PCF as the use-case need would be satisfied by the AuditEvent record. However an implementation may choose to use Provenance on Create/Update/Delete in addition to AuditEvent. Examples of [a Provenance of create](Provenance-ex-provenance-consent-basic-treat.html) and [a Provenance of update](Provenance-ex-provenance2-consent-basic-treat.html) are provided. The use of Provenance is discussed in [Appendix P.4.3](ch-P.html#p43-change-to-deny-sharing)
 
