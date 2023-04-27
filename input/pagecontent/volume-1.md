@@ -149,6 +149,8 @@ Note 1: Explicit Intermediate options and Explicit Advanced option require that 
 There are three levels of maturity, in incrementally more difficult to implement steps, defined:
 Support for these Basic, Intermediate, and Advanced policies is support for the ability to provide these capabilities. The actual policy provided to the Patient would be some subset of this support that the data custodian is willing to enforce.
 
+When the Implicit Option is not declared to be implemented, then PCF expects "Deny all" or "Permit all authorized uses" for the overarching policy.
+
 ### 53.2.1 Implicit Option
 
 The Implicit Policy Option indicates that there is a default policy that is used when there is no Consent found on file for a given patient. This Implicit Policy shall support the following "overarching" policies:
@@ -169,7 +171,6 @@ The definition of permitted use nor how break-glass is declared is defined here,
 
 Implicit Option has no ability to have Patient specific parameters. When Patient specific parameters are needed, then Explicit options are required.
 
-When the Implicit Option is not declared to be implemented, then PCF expects "Deny all" overarching policy.
 
 ### 53.2.2 Explicit Basic Option
 
