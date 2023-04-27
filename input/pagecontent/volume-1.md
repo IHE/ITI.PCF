@@ -378,7 +378,7 @@ The diagrammed steps:
 2. The **IUA Authorization Server** gets user identity information, if available. Such using one or more Open-ID Connect authority. Adding any details to the access request context --> Note that failure to identify a user may be a failure-mode.
 3. The **IUA Authorization Server** invokes the **Consent Authorization Server** passing any predicate access token, if available. Adding any details to the access request context --> Note that failure to get an authorization token may be a failure-mode.
 4. The **Consent Authorization Server** looks for Patient Consents at the **Consent Registry** actor(s). The access request context may be used to limit the Consent resources returned.
-5. The **Consent Authorization Server** receives the available consents. --> Note that failure to get a consent means that the default Implicit policy that is active is enforced.
+5. The **Consent Authorization Server** receives the available consents. --> Note that no consent found means that the default Implicit policy that is active is enforced.
 6. The **Consent Authorization Server** determines the best match or matches of Consents returned to the access control request context (patient, user, app, purposeOfUse, data parameters, etc).
 7. The **Consent Authorization Server** makes the Access Control Decision based on the Consents
 8. The **Consent Authorization Server** provides the consent decisions to the **IUA Authorization Server**
@@ -618,6 +618,8 @@ Security and Privacy office should use the [BALP profiled AuditEvent](https://pr
 Security office should monitor the audit log for uses of break-glass, and follow up to confirm it was a legitimate use of break-glass per policy.
 
 Security office should monitor audit log for access denied, and follow up to confirm that it was a legitimate denial of an access request. Possibly further investigating why the request was initiated.
+
+Technical failures (failure-modes) where some technical or infrastructure is not performing nominally should be handled carefully. There are healthcare treatment cases where these failure-modes should result in allowing access to prefer patient and operator safety over privacy, where other less life critical use-cases should prefer preserving privacy and denying access.
 
 <a name="other-grouping"> </a>
 
