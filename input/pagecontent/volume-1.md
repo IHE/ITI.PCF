@@ -52,14 +52,16 @@ The following is a repeat of the IUA Actors and Transactions for clarity. The PC
 |------------------------------|-----------------------------------|-----------|-------------|----------------|
 | [IUA: Authorization Client](https://profiles.ihe.net/ITI/IUA/index.html#34111-authorization-client)         | Get Access Token                  | Initiator | R           | [ITI TF-2: 3.71](other.html#updates-to-iti-71) |
 |                              | Incorporate Access Token          | Initiator | R           | [ITI TF-2: 3.72](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72) |
-|                              | Get Authorization Server metadata | Initiator | R           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
+|                              | Get Authorization Server metadata | Initiator | O           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
 | [IUA: Authorization Server](https://profiles.ihe.net/ITI/IUA/index.html#34112-authorization-server)  | Get Access Token                  | Responder | R           | [ITI TF-2: 3.71](other.html#updates-to-iti-71) |
-|                              | Introspect Token                  | Responder | R           | [ITI TF-2: 3.102](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102) |
-|                              | Get Authorization Server metadata | Responder | R           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
-| [IUA: Resource Server](https://profiles.ihe.net/ITI/IUA/index.html#34113-resource-server)    | Introspect Token                  | Initiator | R           | [ITI TF-2: 3.102](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102) |
+|                              | Introspect Token                  | Responder | O (Note 1)  | [ITI TF-2: 3.102](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102) |
+|                              | Get Authorization Server metadata | Responder | O           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
+| [IUA: Resource Server](https://profiles.ihe.net/ITI/IUA/index.html#34113-resource-server)    | Introspect Token                  | Initiator | O (Note 1)     | [ITI TF-2: 3.102](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102) |
 |                              | Incorporate Access Token          | Responder | R           | [ITI TF-2: 3.72](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72) |
-|                              | Get Authorization Server metadata | Initiator | R           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
+|                              | Get Authorization Server metadata | Initiator | O           | [ITI TF-2: 3.103](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103) |
 {: .grid}
+
+Note 1: Authorization Server or Resource Server Actors shall support at least one of the following options: JWT Token, or Token Introspection.
 
 ### 53.1.1 Actors
 
@@ -239,7 +241,7 @@ The **Consent Registry** shall be grouped with an ATNA [Secure Application](http
 
 The **Consent Authorization Server** shall be grouped with an IUA: **Authorization Server**. The IUA **Authorization Server** takes care of the IUA transactions and invokes the **Consent Authorization Server** when a request for a token, that would be impacted by a Patient Privacy Consent, is requested.
 
-The IUA Authorization Server shall implement the **JWT Token**, or **Token Introspection** options, and should implement the and **Authorization Server Metadata** option. There is no use of the IUA Authorization Server **SAML Token** option.
+The IUA Authorization Server shall implement the **JWT Token**, or **Token Introspection** options, and should implement the **Authorization Server Metadata** option. There is no use of the IUA Authorization Server **SAML Token** option.
 
 Note that PCF [adds requirements to the ITI-71](other.html#updates-to-iti-71) transaction to carry in the token extensions informed from the consents. These oAuth extensions affect JWT encoding and response from use of the Introspect Token Transaction.
 
@@ -249,7 +251,7 @@ The **Consent Authorization Server** shall be grouped with an ATNA [Secure Appli
 
 The **Consent Enforcement Point** shall be grouped with an IUA: **Resource Server**.  The IUA **Resource Server** takes care of the IUA transactions and invokes the **Consent Enforcement Point** when a token includes enforcement rules informed by Patient Privacy Consent. 
 
-The IUA Resouce Server shall implement the **JWT Token**, **Token Introspection** and **Authorization Server Metadata** options. There is no use of the IUA Authorization Server **SAML Token** option.
+The IUA Resource Server shall implement the **JWT Token**, or **Token Introspection** options, and should implement the **Authorization Server Metadata** option. There is no use of the IUA Authorization Server **SAML Token** option.
 
 Note that PCF [adds requirements to the ITI-71](other.html#updates-to-iti-71) transaction to carry in the token extensions informed from the consents. These oAuth extensions affect JWT encoding and response from use of the Introspect Token Transaction.
 
