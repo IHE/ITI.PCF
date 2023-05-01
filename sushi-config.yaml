@@ -147,16 +147,16 @@ pages:
     title: "3:5.8 Privacy Consent Patterns"
     generation: markdown
   other.md:
-    title: "Changes to Other Profiles"
+    title: "Changes to Other IHE Specifications"
     generation: markdown
   download.md:
-    title: "Download and analysis"
+    title: "Download and Analysis"
     generation: markdown
   testplan.md:
     title: "Test Plan"
     generation: markdown
   issues.md:
-    title: "Open and Closed issues"
+    title: "Significant Changes & Issues"
     generation: markdown
     
 menu:
@@ -176,7 +176,7 @@ menu:
     "Consent Patterns" : content.html
   Artifacts: artifacts.html
   Other: 
-    "Changes to Other IHE specifications" : other.html
+    "Changes to Other IHE Specifications" : other.html
     "Updates to ITI-71" : other.html#updates-to-iti-71
     "Download" : download.html
     "Test Plan" : testplan.html
