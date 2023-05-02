@@ -1,5 +1,5 @@
 
-This Implementation Guide, Privacy Consent on FHIR (PCF), provides support for patient privacy consents for Health Information Exchanges using FHIR.
+This Implementation Guide, Privacy Consent on FHIR (PCF), provides support for patient privacy consents and access control where a FHIR API is used to access Document Sharing Health Information Exchanges.
 
 This includes refinement of the consent handling defined in [MHDS](https://profiles.ihe.net/ITI/MHDS). The scope does not intend to cover all consent use cases, such as the consent use cases for within an organization, or more advanced consents that may be addressed in future versions of PCF.
 

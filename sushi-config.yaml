@@ -2,14 +2,14 @@
 # ───────────────────────────────────────────────────
 id: ihe.iti.pcf
 canonical: https://profiles.ihe.net/ITI/PCF
-version: 0.0.1-current
+version: 1.0.0-comment
 name: IHE_ITI_PCF
 title: "Privacy Consent on FHIR"
 description: Supports Patient Privacy Consents in HIE scope
-releaseLabel: ci-build
-#releaseLabel: Trial-Implementation
-#date: 2022-01-02
-status: draft
+#releaseLabel: ci-build
+releaseLabel: ballot
+date: 2023-05-04
+status: active
 publisher:
   - name: IHE IT Infrastructure Technical Committee
   - url: https://www.ihe.net/ihe_domains/it_infrastructure/
@@ -61,7 +61,7 @@ resources:
 groups:
   BasicConsent:
     name: Explicit Basic Consent
-    description: Artifacts related to [Explicit Basic option](volume-1.html#5322-explicit-basic-option)
+    description: Artifacts related to [Explicit Basic option](volume-1.html#15322-explicit-basic-option)
     resources:
 #      - StructureDefinition/IHE.PCF.consentFoundation
       - StructureDefinition/IHE.PCF.consentBasic
@@ -80,7 +80,7 @@ groups:
       - Provenance/ex-provenance2-consent-basic-treat
   IntermediateConsent:
     name: Explicit Intermediate Consent
-    description: Artifacts related to [Explicit Intermediate](volume-1.html#5323-explicit-intermediate-options) option
+    description: Artifacts related to [Explicit Intermediate](volume-1.html#15323-explicit-intermediate-options) option
     resources:
       - StructureDefinition/IHE.PCF.consentIntermediate
       - Consent/ex-consent-intermediate-timeframe
@@ -99,7 +99,7 @@ groups:
       - Organization/ex-org-researcher
   AdvancedConsent:
     name: Explicit Advanced Consent
-    description: Artifacts related to [Explicit Advanced](volume-1.html#5324-explicit-advanced-option) option
+    description: Artifacts related to [Explicit Advanced](volume-1.html#15324-explicit-advanced-option) option
     resources:
       - StructureDefinition/IHE.PCF.consentAdvanced
       - ValueSet/AdvancedSecurityTagVS
