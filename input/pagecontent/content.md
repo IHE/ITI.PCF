@@ -16,7 +16,7 @@ Examples for this Resource Profile:
   - ITI-71 [access token](Consent-ex-consent-basic-treat.html#notes)
 - [Basic Consent with an Ink signature](Consent-ex-consent-basic-ink.html)
   - ITI-71 [access token](Consent-ex-consent-basic-ink.html#notes)
-- [Basic Consent that Rejects the base policy given](Consent-ex-consent-basic-reject.html). This could also be a representation of a situation when the patient has changed to rejection of a prior agreement
+- [Basic Consent that Rejects the base policy given](Consent-ex-consent-basic-reject.html) -- This could also be a representation of a situation when the patient has changed to rejection of a prior agreement
   - ITI-71 [access token](Consent-ex-consent-basic-reject.html#notes)
 - [Consent that has expired](Consent-ex-consent-expired-treat.html)
   - ITI-71 [access token](Consent-ex-consent-expired-treat.html#notes)
@@ -63,7 +63,7 @@ Examples for this Resource Profile:
   - ITI-71 [access token](Consent-ex-consent-advanced-normal.html#notes)
 - Consent to [allow NORMAL and RESTRICTED data access](Consent-ex-consent-advanced-normal-restricted.html)
   - ITI-71 [access token](Consent-ex-consent-advanced-normal-restricted.html#notes)
-- Consent to [allow NORMAL data access but not RESTRICTED](Consent-ex-consent-advanced-normal-not-restricted.html) -- This adds the not restricted which should not be needed as the root only authorizes NORMAL.
+- Consent to [allow NORMAL data access but not RESTRICTED](Consent-ex-consent-advanced-normal-not-restricted.html) -- This adds the not restricted which should not be needed as the root only authorizes NORMAL
   - ITI-71 [access token](Consent-ex-consent-advanced-normal-not-restricted.html#notes)
 - Consent to [allow NORMAL data access, and some access to RESTRICTED](Consent-ex-consent-advanced-normal-focused-restricted.html)
   - ITI-71 [access token](Consent-ex-consent-advanced-normal-focused-restricted.html#notes)
