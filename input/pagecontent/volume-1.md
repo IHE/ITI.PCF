@@ -113,8 +113,10 @@ The **Consent Enforcement Point** is invoked by the **IUA Resource Server** when
 
 ## 1:53.2 PCF Actor Options
 
-Options that may be selected for each actor in this implementation guide, are listed in Table 3.2-1 below. Dependencies
+Options that may be selected for each actor in this implementation guide, are listed in Table 1:53.2-1 below. Dependencies
 between options when applicable are specified in notes.
+
+**Table 1:53.2-1**
 
 | Actor              | Option Name |
 |--------------------|-------------|
@@ -144,7 +146,7 @@ between options when applicable are specified in notes.
 | Consent Enforcement Point   | Explicit Advanced |
 {: .grid}
 
-Note 1: Explicit Intermediate options and Explicit Advanced option require that Explicit Basic Option is selected
+Note 1: Explicit Intermediate Options and Explicit Advanced Option require that Explicit Basic Option is selected.
 
 There are three levels of maturity, in incrementally more difficult to implement steps, defined:
 Support for these Basic, Intermediate, and Advanced policies is support for the ability to provide these capabilities. The actual policy provided to the Patient would be some subset of this support that the data custodian is willing to enforce.
