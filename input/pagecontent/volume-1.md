@@ -261,7 +261,7 @@ The **Consent Enforcement Point** shall be grouped with an ATNA [Secure Applicat
 
 ## 1:53.4 PCF Overview
 
-The PCF Profile enables authorized access to data according to terms agreed by the Patient and the Organization protecting the data. These terms represent Privacy controls on the use of the data. The Privacy controls augment an overarching policy upon which these Privacy controls build. The writing of overarching policies, and the act of informing the patient and capturing their agreement is a predicate to the use-cases of the PCF.
+The PCF Profile enables authorized access to data according to terms agreed by the Patient and the Organization protecting the data. These terms represent Privacy controls on the use of the data. The Privacy controls augment an overarching policy upon which these Privacy controls build. The writing of overarching policies, and the act of informing the patient and capturing their agreement is a predicate to the use cases of the PCF.
 
 ### 1:53.4.1 Concepts
 
@@ -287,7 +287,7 @@ Scenario Outline: Capture New Consent Use Case
   Then a Consent is captured by the **Consent Recorder** and stored in the **Consent Registry**
 ```
 
-Note: the above use-case is written in [Gherkin](https://cucumber.io/docs/gherkin/), a use-case language optimized for automated testing.
+Note: the above use case is written in [Gherkin](https://cucumber.io/docs/gherkin/), a use case language optimized for automated testing.
 
 The Consent details are specific to the Patient Privacy Policy, the parameters agreed to in the ceremony, and the Consent profile (Basic, Intermediate, Advance) that was used.
 
@@ -303,7 +303,7 @@ The following flow shows the activities involved in the Capture new Consent flow
 
 The diagrammed steps:
 
-1. Query for existing Consent. This step may not be necessary but is important to establish the Capture New Consent use-case from the Update Existing Consent use-case.
+1. Query for existing Consent. This step may not be necessary but is important to establish the Capture New Consent use case from the Update Existing Consent use case.
 2. None is found. Given that no existing Consent exists, there are no preconditions, just default expectations for the workflow.
 3. Consult with the Patient. There is some interaction with the Patient. Within this interaction the patient needs to be appropriately informed of the details of the Patient Privacy Policy and the parameters the patient can control. This user Interface might use a FHIR Questionnaire resulting in a QuestionnaireResult as documentation of the ceremony. This User Interface might use some other technical means, or might be a paper process.  This User Interface is not constrained by the PCF.
 4. The results of the ceremony are captured to the satisfaction of the controlling Organization.  This might be a QuestionnaireResponse, or a scanned image of the signed paperwork recorded using a DocumentReference (See [MHD](https://profiles.ihe.net/ITI/MHD/index.html))
@@ -341,7 +341,7 @@ The following flow shows the activities involved in the Update Existing Consent 
 
 The diagrammed steps:
 
-1. Query for existing Consent. This step may not be necessary but is important to establish the Capture New Consent use-case from the Update Existing Consent use-case. This step is also useful to retrieve the current Consent parameters so that the User Interface can start with appropriate settings informed by the past.
+1. Query for existing Consent. This step may not be necessary but is important to establish the Capture New Consent use case from the Update Existing Consent use case. This step is also useful to retrieve the current Consent parameters so that the User Interface can start with appropriate settings informed by the past.
 2. A Consent is found. More than one Consent may be found, for which the PCF does not address how to address this case. The overarching policy would need to be consulted.
 3. Consult with the Patient. There is some interaction with the Patient. Within this interaction the patient needs to be appropriately informed of the details of the Patient Privacy Policy and the parameters the patient can control. This user Interface might use a FHIR Questionnaire resulting in a QuestionnaireResult as documentation of the ceremony. This User Interface might use some other technical means, or might be a paper process.  This User Interface is not constrained by the PCF.
 4. The results of the ceremony are captured to the satisfaction of the controlling Organization.  This might be a QuestionnaireResponse, or a scanned image of the signed paperwork recorded using a DocumentReference (See [MHD](https://profiles.ihe.net/ITI/MHD/index.html))
@@ -350,7 +350,7 @@ The diagrammed steps:
 
 #### 1:53.4.2.3 Use Case \#3: Consent Access Control
 
-Given that an application needs access to resources, the following use-case assures that any data made available is authorized by the Consent. Note that this use-case presumes that business rules and security access control are incorporated into either the foundational oAuth flow, or some other process outside of this flow.
+Given that an application needs access to resources, the following use case assures that any data made available is authorized by the Consent. Note that this use case presumes that business rules and security access control are incorporated into either the foundational oAuth flow, or some other process outside of this flow.
 
 ##### 1:53.4.2.3.1 Consent Access Control Use Case Description
 
@@ -402,7 +402,7 @@ Not shown, for simplicity of the diagram, is the recording [AuditEvent](https://
 
 #### 1:53.4.2.4 Implicit Content
 
-These use-cases will outline the justification for the alternatives within the **Implicit Option**
+These use cases will outline the justification for the alternatives within the **Implicit Option**
 
 **Pre-conditions**:
 
@@ -444,7 +444,7 @@ Permit for all authorized users. This presumes that basic user access control wi
 
 **Pre-conditions**:
 
-The controlling Organization has identified various roles that would have access for given purpose, and has mechanisms in place to prevent any in appropriate use. This is distinct from the previous use-case in that the roles and purpose are not limited to Clinical and Treatment.
+The controlling Organization has identified various roles that would have access for given purpose, and has mechanisms in place to prevent any in appropriate use. This is distinct from the previous use case in that the roles and purpose are not limited to Clinical and Treatment.
 
 **Main Flow**:
 
@@ -533,31 +533,31 @@ The controlling Organization has identified various roles and the kinds of purpo
 
 This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates a timeframe within which data authored or last updated.
 
-The use-case would be where a patient knows that there was a period of time where they received care, and for which the patient indicates they want to segment out that data for permit or deny. The user interface is not defined here or constrained.
+The use case would be where a patient knows that there was a period of time where they received care, and for which the patient indicates they want to segment out that data for permit or deny. The user interface is not defined here or constrained.
 
 ##### 1:53.4.2.6.2 Intermediate Data by id Content
 
 This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates a FHIR Resources by `.id` value.
 
-The use-case would be where a patient knows specific data artifacts for which the patient indicates they want to segment those data for permit or deny. The user interface is not defined here or constrained.
+The use case would be where a patient knows specific data artifacts for which the patient indicates they want to segment those data for permit or deny. The user interface is not defined here or constrained.
 
 ##### 1:53.4.2.6.3 Intermediate Data Author Content
 
 This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates data subject to the rule by way of an indicated author. This option is useful when the consent provision is limiting access to data that was authorized by a given doctor.
 
-The use-case would be where a patient knows that there is an author (organization or practitioner), and for which the patient indicates they want to segment out that data for permit or deny. Note that this capability is dependent on the data be properly attributed to the author. The user interface is not defined here or constrained.
+The use case would be where a patient knows that there is an author (organization or practitioner), and for which the patient indicates they want to segment out that data for permit or deny. Note that this capability is dependent on the data be properly attributed to the author. The user interface is not defined here or constrained.
 
 ##### 1:53.4.2.6.4 Intermediate Data Relationship Content
 
 This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates data subject to the rule by way of that data being related in a given way to a given identified data object. This option is useful for indicating a consent provision that is limiting/authorizing access to data that was created as part of an encounter, care plan, or episode of care.
 
-The use-case would be where a patient knows that there is an encounter, care plan, or episode of care that can be used to identify data for which the patient indicates they want to segment out that data for permit or deny. Note that this capability is dependent on the data be properly attributed to the encounter, care plan, or episode of care. The user interface is not defined here or constrained.
+The use case would be where a patient knows that there is an encounter, care plan, or episode of care that can be used to identify data for which the patient indicates they want to segment out that data for permit or deny. Note that this capability is dependent on the data be properly attributed to the encounter, care plan, or episode of care. The user interface is not defined here or constrained.
 
 ##### 1:53.4.2.6.5 Intermediate Additional PurposeOfUse Content
 
 This option provides for the Consent to have one or more permit/deny parameter that indicates a purposeOfUse that is not listed in the **Basic Consent** vocabulary. This would tend to be used with Clinical Research projects, where the purposeOfUse is a code assigned to a specific Clinical Research Project. This may be used for other purposeOfUse codes. Where **Basic Consent** has some well-known purposeOfUse codes, this option is used for other codes.
 
-The use-case would be where a patient is authorizing purposeOfUse beyond those defined in the **Basic Consent**. An example would be a Privacy Consent to allow an identified clinical research project to have access to the patient data.
+The use case would be where a patient is authorizing purposeOfUse beyond those defined in the **Basic Consent**. An example would be a Privacy Consent to allow an identified clinical research project to have access to the patient data.
 
 This would also be used to indicate that the Consent has provisions enabling Break-Glass using the PurposeOfUse for Break-Glass (BTG). The Consent and Access Token encodings are defined, but the rules of who is authorized and how they declare Break-Glass are not defined as they are dependent on User-Interface, User-Experience, and Policy.
 
@@ -591,7 +591,7 @@ The controlling Organization has identified various roles and the kinds of purpo
 
 The **Advanced Consent** content utilizes sensitivity codes and confidentiality codes. The Consent would include parameters that would indicate for a given sensitivity/confidentiality code the conditions on Permit or Deny.
 
-The typical use-case would be where the patient will allow normal confidentiality data to be used for some purpose such as Treatment, but indicates that data that is tagged as restricted confidentiality not be used.
+The typical use case would be where the patient will allow normal confidentiality data to be used for some purpose such as Treatment, but indicates that data that is tagged as restricted confidentiality not be used.
 
 At a minimum the following stigmatizing [Sensitivity](https://terminology.hl7.org/ValueSet-v3-InformationSensitivityPolicy.html) classifications shall be implemented as parameters:
 
@@ -619,13 +619,13 @@ A change to [any policy](ch-P.html) needs to be carefully managed, especially th
 
 The [Basic Audit Log Patterns](https://profiles.ihe.net/ITI/BALP/index.html) defines the audit log patterns, these audit log patterns can be recorded using the [ATNA](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html) [ATX:TLS Syslog](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.2.7.2), [ATX: UDP Syslog](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.2.7.3), or  [ATX: FHIR Feed](https://www.ihe.net/uploadedFiles/Documents/ITI/IHE_ITI_Suppl_RESTful-ATNA.pdf).
 
-Security and Privacy office should use the [BALP profiled AuditEvent](https://profiles.ihe.net/ITI/BALP/index.html) to track changes and uses of the Consent resources. The AuditEvent is required of [PCF when grouped with ATNA](ITI-108.html#2310851-security-audit-considerations). The Provenance resource recording is not required of PCF as the use-case need would be satisfied by the AuditEvent record. However an implementation may choose to use Provenance on Create/Update/Delete in addition to AuditEvent. Examples of [a Provenance of create](Provenance-ex-provenance-consent-basic-treat.html) and [a Provenance of update](Provenance-ex-provenance2-consent-basic-treat.html) are provided. The use of Provenance is discussed in [Appendix P.4.3](ch-P.html#p43-change-to-deny-sharing)
+Security and Privacy office should use the [BALP profiled AuditEvent](https://profiles.ihe.net/ITI/BALP/index.html) to track changes and uses of the Consent resources. The AuditEvent is required of [PCF when grouped with ATNA](ITI-108.html#2310851-security-audit-considerations). The Provenance resource recording is not required of PCF as the use case need would be satisfied by the AuditEvent record. However an implementation may choose to use Provenance on Create/Update/Delete in addition to AuditEvent. Examples of [a Provenance of create](Provenance-ex-provenance-consent-basic-treat.html) and [a Provenance of update](Provenance-ex-provenance2-consent-basic-treat.html) are provided. The use of Provenance is discussed in [Appendix P.4.3](ch-P.html#p43-change-to-deny-sharing)
 
 Security office should monitor the audit log for uses of break-glass, and follow up to confirm it was a legitimate use of break-glass per policy.
 
 Security office should monitor audit log for access denied, and follow up to confirm that it was a legitimate denial of an access request. Possibly further investigating why the request was initiated.
 
-Technical failures (failure-modes) where some technical or infrastructure is not performing nominally should be handled carefully. There are healthcare treatment cases where these failure-modes should result in allowing access to prefer patient and operator safety over privacy, where other less life critical use-cases should prefer preserving privacy and denying access.
+Technical failures (failure-modes) where some technical or infrastructure is not performing nominally should be handled carefully. There are healthcare treatment cases where these failure-modes should result in allowing access to prefer patient and operator safety over privacy, where other less life critical use cases should prefer preserving privacy and denying access.
 
 <a name="other-grouping"> </a>
 
