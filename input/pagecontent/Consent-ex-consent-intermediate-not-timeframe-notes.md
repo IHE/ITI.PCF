@@ -2,12 +2,12 @@
 
 Provided an [ITI-71](other.html#updates-to-iti-71) results in a PERMIT access token issued. That token would have the following residual element to inform the **Consent Enforcement Point** that it needs to restrict the results.
 
- Given that the token will express the permit portion, the `residual` would need to express the refinement. In this case the oAuth token and scope will address a general permit, and thus the `residual` need only express the forbid to information authored in a given timeframe.
+Given that the token will express the permit portion, the `residual` would need to express the refinement. In this case the oAuth token and scope will address a general permit, and thus the `residual` need only express the forbid to information authored in a given timeframe.
 
 The token would need to include an `ihe_pcf` extension to point at this consent, and that would include a `residual` to express the refinement. Shown as followed:
 
 - The restriction to the given purpose (Treatment, Payment, and Operations) would be expressed in the `ihe_iua` extension
-  - The other `ihe_iua` extension parameters are not shown below.
+  - The other `ihe_iua` extension parameters are not shown below
 - The restriction to forbid data authored in the given timeframe
 
 ```json

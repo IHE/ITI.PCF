@@ -5,9 +5,9 @@ This Consent denies all access except for break-glass; thus any access request t
 Provided an [ITI-71](other.html#updates-to-iti-71) is requested by an authorized user with PurposeOfUse indicating break-glass, then this would result in a PERMIT access token issued. That token would have the following residual element to inform the **Consent Enforcement Point** that it needs to restrict the results.
 
 - The restriction to the given purpose (FooBar) would be expressed in the `ihe_iua` extension
-  - The other `ihe_iua` extension parameters are not shown below.
-- The consent is indicated in the `ihe_pcf`.
-  - no `residual` element is provided, indicating that no residual rules need be enforced.
+  - The other `ihe_iua` extension parameters are not shown below
+- The consent is indicated in the `ihe_pcf`
+  - no `residual` element is provided, indicating that no residual rules need be enforced
 
 ```json
 "extensions" : {

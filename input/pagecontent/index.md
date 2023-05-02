@@ -1,11 +1,11 @@
 
 This Implementation Guide, Privacy Consent on FHIR (PCF), provides support for patient privacy consents for Health Information Exchanges using FHIR.
 
-This includes refinement of the consent handling defined in [MHDS](https://profiles.ihe.net/ITI/MHDS). The scope does not intend to cover all consent use-cases, such as the consent use-cases for within an organization, or more advanced consents that may be addressed in future versions of PCF.
+This includes refinement of the consent handling defined in [MHDS](https://profiles.ihe.net/ITI/MHDS). The scope does not intend to cover all consent use cases, such as the consent use cases for within an organization, or more advanced consents that may be addressed in future versions of PCF.
 
 <div markdown="1" class="stu-note">
 
-| [Significant Changes, Open, and Closed Issues](issues.html) |
+| [Significant Changes, Open and Closed Issues](issues.html) |
 {: .grid}
 
 </div>
@@ -14,7 +14,7 @@ This includes refinement of the consent handling defined in [MHDS](https://profi
 
 This guide is organized into the following sections:
 
-1. Volume 1:
+1. Volume 1: Profiles
    1. [53 Introduction](volume-1.html)
    1. [53.1 Actors, Transactions, and Content](volume-1.html#actors-and-transactions)
    1. [53.2 Actor Options](volume-1.html#actor-options)
@@ -24,7 +24,7 @@ This guide is organized into the following sections:
    1. [53.6 Cross Profile Considerations](volume-1.html#other-grouping)
    1. [Appendix P: Privacy Access Policies](ch-P.html)
 2. Volume 2: Transaction Detail
-   1. _[3.71 Get Access Token \[ITI-71\]](other.html#updates-to-iti-71)_
+   1. [3.71 Get Access Token \[ITI-71\]](other.html#updates-to-iti-71)
    1. [3.72 Incorporate Access Token \[ITI-72\]](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72)
    1. [3.102 Introspect Token \[ITI-102\]](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102)
    1. [3.103 Get Authorization Server Metadata \[ITI-103\]](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103)
@@ -32,9 +32,9 @@ This guide is organized into the following sections:
 3. Volume 3: Metadata and Content
    1. [5.8 Privacy Consent Patterns](content.html)
 4. Other
-   1. [Changes to Other Profiles](other.html)
+   1. [Changes to Other IHE Specification](other.html)
    1. [Updates to ITI-71](other.html#updates-to-iti-71)
-   1. [Download and analysis](download.html)
+   1. [Download and Analysis](download.html)
    1. [Test Plan](testplan.html)
 
 See also the [Table of Contents](toc.html) and
