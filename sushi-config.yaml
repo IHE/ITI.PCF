@@ -4,8 +4,8 @@ id: ihe.iti.pcf
 canonical: https://profiles.ihe.net/ITI/PCF
 version: 1.0.0-comment
 name: IHE_ITI_PCF
-title: "Privacy Consent on FHIR"
-description: Supports Patient Privacy Consents in HIE scope
+title: "Privacy Consent on FHIR (PCF)"
+description: The Privacy Consent on FHIR (PCF) Profile provides support for patient privacy consents and access control where a FHIR API is used to access Document Sharing Health Information Exchanges.
 #releaseLabel: ci-build
 releaseLabel: ballot
 date: 2023-05-04

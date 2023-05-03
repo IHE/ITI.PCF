@@ -1,8 +1,10 @@
 
 ## Significant Changes
+
 NA, this is the initial public comment release.
 
 ## Issues
+
 During development, the [readme in the github repo carries development and questions](https://github.com/IHE/ITI.PCF/blob/master/README.md)
 
 ### Submit an Issue
@@ -40,4 +42,4 @@ it is approved, even if it will not be integrated until several months later).
 
 ### Closed Issues
 
-None 
+None
