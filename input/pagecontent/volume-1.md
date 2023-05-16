@@ -622,7 +622,7 @@ At a minimum the following stigmatizing [Sensitivity](https://terminology.hl7.or
   - `ETHUD` -- Alcohol substance abuse
   - `OPIOIDUD` -- Opioid drug abuse
 - `PSY` -- Psychiatry Disorder
-- `SEX` -- Sexual Assault, Abuse, or Domestic Violence 
+- `SDV` -- Sexual Assault, Abuse, or Domestic Violence 
 - `HIV` -- HIV/AIDS
 
 At a minimum the following [ConfidentialityCodes](https://terminology.hl7.org/ValueSet-v3-Confidentiality.html) shall be implemented as parameters:
