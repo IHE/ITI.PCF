@@ -14,11 +14,11 @@
 
 Instance:   SlsSensitive-initial-history
 InstanceOf: Provenance
-Title: "Initial creation of ValueSets PSY, ETH, SEX, and HIV"
+Title: "Initial creation of ValueSets PSY, ETH, SDV, and HIV"
 Usage: #definition
 * target[+] = Reference(ValueSet/SlsSensitivePSY)
 * target[+] = Reference(ValueSet/SlsSensitiveETH)
-* target[+] = Reference(ValueSet/SlsSensitiveSEX)
+* target[+] = Reference(ValueSet/SlsSensitiveSDV)
 * target[+] = Reference(ValueSet/SlsSensitiveHIV)
 * recorded = "2023-01-30T13:00:00.0000Z"
 * occurredDateTime = "2022-07-27"
@@ -33,11 +33,11 @@ Usage: #definition
 
 Instance:   SlsSensitive-update-history
 InstanceOf: Provenance
-Title: "touchup of ValueSets PSY, ETH, SEX, and HIV"
+Title: "touchup of ValueSets PSY, ETH, SDV, and HIV"
 Usage: #definition
 * target[+] = Reference(ValueSet/SlsSensitivePSY)
 * target[+] = Reference(ValueSet/SlsSensitiveETH)
-* target[+] = Reference(ValueSet/SlsSensitiveSEX)
+* target[+] = Reference(ValueSet/SlsSensitiveSDV)
 * target[+] = Reference(ValueSet/SlsSensitiveHIV)
 * recorded = "2023-01-31T13:00:00.0000Z"
 * occurredDateTime = "2023-01-31"
@@ -345,12 +345,12 @@ OPIOIDUD - Opioid substance abuse information sensitivity (drug-abuse informatio
 
 
 
-ValueSet: SlsSensitiveSEX
-Title: "clinical codes that indicate SEX"
+ValueSet: SlsSensitiveSDV
+Title: "clinical codes that indicate SDV"
 Description: """
-SEX - sexuality and reproductive health information
+SDV - Sexual assault, abuse or domestic violence
 
-??should this also include SDV (Sexual assault, abuse or domestic violence), PREGNANT (pregnancy), STD (sexually transmitted disease)??
+??should this also include SEX (sexuality and reproductive health information sensitivity), PREGNANT (pregnancy), STD (sexually transmitted disease)? The SAMSHA valuesets seem to be labeled as if they are only about sexuality and reproductive health, but do include sexual abuse and sexually transmitted disease.
 
 * **SAMSHA C2S Sexuality and reproductive health information sensitivity**
   * ValueSet 2.16.840.1.113762.1.4.1142.49 // ICD9CM

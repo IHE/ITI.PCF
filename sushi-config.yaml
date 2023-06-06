@@ -108,7 +108,7 @@ groups:
       - Consent/ex-consent-advanced-normal-not-restricted
       - Consent/ex-consent-advanced-normal-focused-restricted
       - Consent/ex-consent-advanced-normal-focused-psy
-      - Consent/ex-consent-advanced-normal-focused-psy-or-sex
+      - Consent/ex-consent-advanced-normal-focused-psy-or-sdv
       - Consent/ex-consent-advanced-normal-break-glass-restricted
   SLS:
     name: Security Labeling Service resources
@@ -118,7 +118,7 @@ groups:
       - ValueSet/SlsSensitiveETH
       - ValueSet/SlsSensitiveETHUD
       - ValueSet/SlsSensitiveOPIOIDUD
-      - ValueSet/SlsSensitiveSEX
+      - ValueSet/SlsSensitiveSDV
       - ValueSet/SlsSensitiveHIV
       - Observation/ex-alcoholUse
       - Observation/ex-bloodSugar

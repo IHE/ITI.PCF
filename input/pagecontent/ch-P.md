@@ -550,7 +550,7 @@ One way to understand a very basic SLS is that it looks for clinical codes in th
   - [Set of codes that indicate ETHUD (alcohol)](ValueSet-SlsSensitiveETHUD.html)
   - [Set of codes that indicate OPIOIDUD (drugs)](ValueSet-SlsSensitiveOPIOIDUD.html)
 - [Set of codes that indicate PSY](ValueSet-SlsSensitivePSY.html)
-- [Set of codes that indicate SEX](ValueSet-SlsSensitiveSEX.html)
+- [Set of codes that indicate SDV](ValueSet-SlsSensitiveSDV.html)
 - [Set of codes that indicate HIV](ValueSet-SlsSensitiveHIV.html)
 
 Note these ValueSets are also focused on directly identifying codes. These ValueSets do not address when different objects may be normal sensitive alone, but when they appear in a patient record the combination is sensitive. These ValueSets also do not address narrative text that might indicate sensitivity.
