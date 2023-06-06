@@ -52,7 +52,7 @@ For the User [Practitioner](Practitioner-ex-practitioner.html), the token **resu
             "code" : "PSY"
           },{
             "system" : "http://terminology.hl7.org/CodeSystem/v3-ActCode",
-            "code" : "SEX"
+            "code" : "SDV"
         }]
       }
     ]

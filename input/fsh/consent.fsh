@@ -197,7 +197,7 @@ At a minimum the following stigmatizing [Sensitivity](https://terminology.hl7.or
   - `ETHUD` -- Alcohol substance abuse
   - `OPIOIDUD` -- Opioid drug abuse
 - `PSY` -- Psychiatry Disorder / Mental Health
-- `SEX` -- Sexual Assault, Abuse, or Domestic Violence
+- `SDV` -- Sexual Assault, Abuse, or Domestic Violence
 - `HIV` -- HIV/AIDS
 
 At a minimum the following [ConfidentialityCodes](https://terminology.hl7.org/ValueSet-v3-Confidentiality.html) shall be implemented as parameters:
@@ -212,7 +212,7 @@ At a minimum the following [ConfidentialityCodes](https://terminology.hl7.org/Va
 * http://terminology.hl7.org/CodeSystem/v3-ActCode#ETHUD
 * http://terminology.hl7.org/CodeSystem/v3-ActCode#OPIOIDUD
 * http://terminology.hl7.org/CodeSystem/v3-ActCode#PSY
-* http://terminology.hl7.org/CodeSystem/v3-ActCode#SEX
+* http://terminology.hl7.org/CodeSystem/v3-ActCode#SDV
 * http://terminology.hl7.org/CodeSystem/v3-ActCode#HIV
  
 
@@ -1121,7 +1121,7 @@ Usage: #example
 
 
 
-Instance: ex-consent-advanced-normal-focused-psy-or-sex
+Instance: ex-consent-advanced-normal-focused-psy-or-sdv
 InstanceOf: AdvancedConsent
 Title: "Consent allowing NORMAL and focused access to Mental Health or Sexual Health data"
 Description: """
@@ -1162,7 +1162,7 @@ Usage: #example
 * provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * provision.provision.type = #permit
 * provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#PSY
-* provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#SEX
+* provision.provision.securityLabel[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#SDV
 * provision.provision.actor.reference = Reference(Practitioner/ex-practitioner)
 * provision.provision.actor.role = http://terminology.hl7.org/CodeSystem/v3-ParticipationType#IRCP
 
