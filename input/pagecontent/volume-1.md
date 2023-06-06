@@ -1,4 +1,3 @@
-
 The **Privacy Consent on FHIR (PCF)** builds upon a basic Identity and Authorization model of [Internet User Authorization (IUA)](https://profiles.ihe.net/ITI/IUA/index.html) to provide consent-based access control. The Privacy Consent on FHIR is thus focused only on Access Control decisions regarding the parameters of the data subject (patient) privacy consent. The Privacy Consent on FHIR leverages these basic Identity and Authorization decisions as context setting for the authorization decision and enforcement. For example, a user that would never be allowed access would be denied access at the IUA level without invoking PCF, and where PCF will further evaluate authorization based on Privacy Consents.
 
 This is to say that PCF does not define:
@@ -243,7 +242,7 @@ The **Consent Registry** shall be grouped with an ATNA [Secure Application](http
 
 The **Consent Authorization Server** shall be grouped with an IUA: **Authorization Server**. The IUA **Authorization Server** takes care of the IUA transactions and invokes the **Consent Authorization Server** when a request for a token, that would be impacted by a Patient Privacy Consent, is invoked.
 
-The IUA Authorization Server shall implement the **JWT Token**, or **Token Introspection** options, and should implement the **Authorization Server Metadata** option. There is no use of the IUA Authorization Server **SAML Token** option.
+The IUA Authorization Server shall implement the **JWT Token**, or **Token Introspection** options, and should implement the **Get Authorization Server Metadata** option. There is no use of the IUA Authorization Server **SAML Token** option.
 
 Note that PCF [adds requirements to the ITI-71](other.html#updates-to-iti-71) transaction to carry in the token extensions informed from the consents. These oAuth extensions affect JWT encoding and response from use of the Introspect Token Transaction.
 
@@ -253,7 +252,7 @@ The **Consent Authorization Server** shall be grouped with an ATNA [Secure Appli
 
 The **Consent Enforcement Point** shall be grouped with an IUA: **Resource Server**.  The IUA **Resource Server** takes care of the IUA transactions and invokes the **Consent Enforcement Point** when a token includes enforcement rules informed by Patient Privacy Consent. 
 
-The IUA Resource Server shall implement the **JWT Token**, or **Token Introspection** options, and should implement the **Authorization Server Metadata** option. There is no use of the IUA Authorization Server **SAML Token** option.
+The IUA Resource Server shall implement the **JWT Token**, or **Token Introspection** options, and should implement the **Get Authorization Server Metadata** option. There is no use of the IUA Authorization Server **SAML Token** option.
 
 Note that PCF [adds requirements to the ITI-71](other.html#updates-to-iti-71) transaction to carry in the token extensions informed from the consents. These oAuth extensions affect JWT encoding and response from use of the Introspect Token Transaction.
 
