@@ -22,6 +22,46 @@ questions to the ITI committee to aid with the development of the IG.
 
 - none
 
+### Public Comments
+
+#### Discussion
+
+- [More Guidance Update Consent](https://github.com/IHE/ITI.PCF/issues/32)
+- [Consent Resource Profiles Overly Restrictive](https://github.com/IHE/ITI.PCF/issues/28)
+
+Open Issues
+
+- [PCF_18: Advanced required sensitivity codes](https://github.com/IHE/ITI.PCF/issues/18)
+  - In the Advanced is a required subset of ConfidentialityCodes (N, R), and Sensitivity codes (ETH, ETHUD, OPIOIDUD, PSY, SDV, and HIV). Is this enough? Is this too many? What should be required of the PCF? Note that required in the PCF does not mean that a deployment implementation must use all of these codes.
+  - There is likely no minimal set that is universally globally required. After public comment the current list of Sensitivity Codes that are mandatory is likely to be trimmed.  Should the sensitivity classifications that are moved out of the mandatory requirement still listed as a useful mention?
+- [PCF_19: Should Basic include agent authored by the Consent](https://github.com/IHE/ITI.PCF/issues/19)
+  - The Basic Explicit Option includes the ability for the Consent to identify a list of agents (device, relatedPerson, Practitioner, or Organization) that would be authorized by the Consent. This was supported by BPPC, so was considered Basic. However this has been identified as an unusual need today and thus would be more appropriate to be in the Intermediate group. Please comment on if you find this needed and agree that it should be in Basic, or if this support should be in Intermediate.
+- [PCF_20: Should PCF include break-glass when there is no clear way to declare break-glass](https://github.com/IHE/ITI.PCF/issues/20)
+  - There is support in a Consent for provisions when break-glass is declared, and there are support for conveying break-glass between the decision and enforcement. However, there is no clear way to declare break-glass, or to inform a client that the user is authorized to declare break-glass and would get access to more data.
+  - There are many ways envisioned to declare break-glass:
+    - oAuth access token request (ITI-71) includes the purposeOfUse of BTG, in addition to normal purposeOfUse (e.g., Treatment, Payment, Operations).
+    - oAuth access token request (ITI-71) has a user-interface that would ask the user to declare break-glass. Unclear when this user-interface would engage, as it clearly can't engage every request.
+    - some non-security method such as the http Category, as outlined in a [dragon note on the FHIR specification](http://hl7.org/fhir/R4B/security-labels.html#break-the-glass).
+    - Indication given in FHIR OperationOutcome that some data was filtered that would not need to be filtered if break-glass was declared.
+    - Other non standard method.
+- [PCF_21: Should Provenance be recommended or required?](https://github.com/IHE/ITI.PCF/issues/21)
+  - ITI-108 includes requirements to record AuditEvents, using BALP pattern. This is considered sufficient to track inappropriate changes, and is referenced in the Security Considerations. Should there also be requirements to record Provenance on Create, Update, and Delete in addition to AuditEvent?
+
+#### Will fix
+
+- [Multiple Examples With Same Name](https://github.com/IHE/ITI.PCF/issues/29)
+- [Consent Registry does not make audit decisions and so cannot record the Consent Authorication Decision Audit Message](https://github.com/IHE/ITI.PCF/issues/27)
+- [add example of a patient indicating their overall acceptance of all clinical trials](https://github.com/IHE/ITI.PCF/issues/26)
+- [consent by a delegate](https://github.com/IHE/ITI.PCF/issues/25)
+- [Need example of SearchSet bundles](https://github.com/IHE/ITI.PCF/issues/23)
+
+#### Approved and applied
+
+- [SEX is used with SDV definition](https://github.com/IHE/ITI.PCF/issues/33) Mohammad & John
+- PR [fix header levels](https://github.com/IHE/ITI.PCF/pull/31) Spencer
+- PR [IUA option called Get Authorization Server Metadata](https://github.com/IHE/ITI.PCF/pull/30) Spencer
+- PR [Task/misc typos and editoral suggestions](https://github.com/IHE/ITI.PCF/pull/24) Mohammad
+
 ### Decided
 
 1. Is Explicit Basic too advanced? If so, what should be moved to Intermediate?  I think that timeframe and resource by id should be in an option that is between basic and intermediate. They are more powerful than one would expect basic, but they are easy to implement without deep inspection (using fundamental Base Resource elements of .id and .meta.lastUpdated). Intermediate requires that the authorization enforcement do deeper (aka Resource type specific) inspection. Do we have four levels rather than the current three (basic, intermediate, advanced, expert)?
