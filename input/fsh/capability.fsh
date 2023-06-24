@@ -103,6 +103,12 @@ PCF transaction [Access Consent \[ITI-108\]](ITI-108.html)
       * name = "patient"
       * type = #reference
       * documentation = "The Patient"
+    * searchParam[+]
+      * name = "patient.identifier"
+      * type = #token
+    * searchParam[+]
+      * name = "actor"
+      * type = #token      
   * interaction.code = #search-system
 
 Instance: IHE.PCF.consentAuthorizationServer
@@ -153,5 +159,11 @@ PCF transaction [Access Consent \[ITI-108\]](ITI-108.html)
       * name = "patient"
       * type = #reference
       * documentation = "The Patient"
+    * searchParam[+]
+      * name = "patient.identifier"
+      * type = #token
+    * searchParam[+]
+      * name = "actor"
+      * type = #token      
   * interaction.code = #search-system
 
