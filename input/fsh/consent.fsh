@@ -248,7 +248,7 @@ Usage: #example
 
 Instance: ex-consent-basic-treat
 InstanceOf: BasicConsent
-Title: "Consent for treatment example"
+Title: "Consent for purpose of treatment example"
 Description: """
 Consent for purposes of use involved in treatment: Treatment/Payment/Operations
 
@@ -307,6 +307,43 @@ Usage: #example
 * agent.who = Reference(Practitioner/ex-clerk)
 * entity.role = #revision
 * entity.what = Reference(Consent/ex-consent-basic-treat)
+
+
+Instance: ex-consent-basic-treat-infant
+InstanceOf: BasicConsent
+Title: "Consent for access for treatment example given by mother to infants data"
+Description: """
+Consent for purposes of use involved in Treatment/Payment/Operations, to an infants data, given by the mother
+
+This is a BasicConsent example:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the mother
+  - same pattern is used when the performer is an adult child giving consent onbehalf of elderly mother, or a power-of-attorney giving access to a disabled patient's data.
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy
+- base provision is #permit -- accepting the policy
+- base provision includes TPO so as to be clear this is a consent about TPO
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2022-06-13"
+* performer = Reference(Patient/ex-mother)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/basePrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#TREAT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HPAYMT
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HOPERAT
 
 
 Instance: ex-consent-basic-ink

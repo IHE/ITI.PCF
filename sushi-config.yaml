@@ -71,6 +71,7 @@ groups:
       - Consent/ex-consent-expired-treat
       - Consent/ex-consent-basic-reject
       - Consent/ex-consent-basic-research
+      - Consent/ex-consent-basic-treat-infant
       - DocumentReference/ex-documentreference
       - DocumentReference/ex-consent-ink
       - Binary/B-ink
