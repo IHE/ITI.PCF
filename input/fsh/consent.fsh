@@ -20,10 +20,12 @@ Using a RuleSet so that the foundational constraints are consistent and show up 
 - provision.period MS - would indicate a sunset for the consent if applicable, empty means no expiration
 - provision.provisions are allowed
 
+Not defined in PCF, but allowed
+- policy.authority - **not used** in PCF
+- policyRule - **not used** in PCF
+
 Not allowed in PCF
 - provision.provision.provisions - **NOT allowed**, no clear use-case need and would add complexity
-- policy.authority - **not used** in PCF, unclear the use-case need
-- policyRule - **not used** in PCF, unclear the use-case need
 - verification - **not used** in PCF, unclear the use-case need
 - provision.action - **not used** in PCF. The purpose is sufficient.
 - provision.class - **not used** in PCF, unclear the use-case need
@@ -43,8 +45,8 @@ Not constrained here as constrained by derived profiles (basic, intermediate, ad
 * organization 1..
 * source[x] 1..1
 * policy.uri 1..1
-* policy.authority 0..0
-* policyRule 0..0
+//* policy.authority
+//* policyRule
 * verification 0..0
 * provision 1..1 MS
 * provision.type 1..1
@@ -83,10 +85,12 @@ Explicit Basic Consent
 - provision.period MS - would indicate a sunset for the consent if applicable, empty means no expiration
 - provision.provisions are allowed
 
+Not defined in PCF, but allowed
+- policy.authority - **not used** in PCF
+- policyRule - **not used** in PCF
+
 Not allowed in PCF
 - provision.provision.provisions - **NOT allowed**, no clear use-case need and would add complexity
-- policy.authority - **not used** in PCF, unclear the use-case need
-- policyRule - **not used** in PCF, unclear the use-case need
 - verification - **not used** in PCF, unclear the use-case need
 - provision.action - **not used** in PCF. The purpose is sufficient.
 - provision.class - **not used** in PCF, unclear the use-case need
