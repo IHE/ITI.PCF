@@ -236,7 +236,7 @@ The **Consent Recorder** shall be grouped with an ATNA [Secure Application](http
 
 ### 1:53.3.1 Consent Registry
 
-The **Consent Registry** shall be grouped with an ATNA [Secure Application](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.1.1.2), a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [Consent Authorization Decision Audit Message](https://profiles.ihe.net/ITI/BALP/content.html#3576-consent-authorized-decision-audit-message).
+The **Consent Registry** shall be grouped with an ATNA [Secure Application](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.1.1.2), a BALP [Audit Creator](https://profiles.ihe.net/ITI/BALP/volume-1.html#152111-audit-creator), and shall record the [BALP RESTful activities](https://profiles.ihe.net/ITI/BALP/content.html#3573-restful-activities).
 
 ### 1:53.3.1 Consent Authorization Server
 
