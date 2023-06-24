@@ -419,6 +419,42 @@ Usage: #example
 
 
 
+Instance: ex-consent-basic-research
+InstanceOf: BasicConsent
+Title: "Consent for any Healthcare Research example"
+Description: """
+Consent for any healthcare research purpose
+
+This is a BasicConsent:
+- status is active - so it should be enforced
+- scope is privacy 
+- category is LOINC 59284-0 Consent
+- date indicated when the consent is recorded
+- patient is identified
+- performer is the patient
+- organization is identified
+- source indicate a DocumentReference (with included text of the policy)
+- policy url is to a base policy
+- base provision is #permit -- accepting the policy
+- base provision includes HRESCH to indicate all Healthcare Research
+
+Note that in this case the HRESCH is not part of the extensible ValueSet for BasicConsent, but because it is not within that ValueSet then it is allowed as extensible. Also note that HRESCH is a top level (ontological) code covering all possible forms of healthcare research. Thus the Permit on this top level concept is a Permit on all sub concepts including specific projects that the organization defines within this top level concept.
+"""
+Usage: #example
+* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* status = #active
+* scope = http://terminology.hl7.org/CodeSystem/consentscope#patient-privacy
+* category[+] = http://loinc.org#59284-0 "Consent"
+* patient = Reference(Patient/ex-patient)
+* dateTime = "2023-06-24"
+* performer = Reference(Patient/ex-patient)
+* organization = Reference(Organization/ex-organization)
+* sourceReference = Reference(DocumentReference/ex-documentreference)
+* policy.uri = "http://example.org/policies/researchPrivacyConsentPolicy.txt"
+* provision.type = #permit
+* provision.purpose[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HRESCH
+
+
 
 Instance: ex-consent-ink
 InstanceOf: DocumentReference
@@ -450,7 +486,7 @@ Title: "Consent allowing data authored within a timeframe"
 Description: """
 Consent allowing data authored within a timeframe
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -491,7 +527,7 @@ Title: "Consent allowing most sharing but NOT data authored within a timeframe"
 Description: """
 Consent allowing most sharing of data but NOT data authored within a timeframe
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -535,7 +571,7 @@ Title: "Consent allowing data authored by a practitioner"
 Description: """
 Consent allowing data authored by
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -576,7 +612,7 @@ Title: "Consent allowing most sharing but NOT data authored by a practitioner"
 Description: """
 Consent allowing most sharing of data but NOT data authored by a practitioner
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -619,7 +655,7 @@ Title: "Consent allowing data authored related to an encounter"
 Description: """
 Consent allowing data authored related to an encounter
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -661,7 +697,7 @@ Title: "Consent allowing most sharing but NOT data related to an encounter"
 Description: """
 Consent allowing most sharing of data but NOT data related to an encounter
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -706,7 +742,7 @@ Title: "Consent allowing specific data"
 Description: """
 Consent allowing specific data
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -763,7 +799,7 @@ Title: "Consent allowing most sharing but NOT specific data"
 Description: """
 Consent allowing most sharing of data but NOT specific data
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -817,7 +853,7 @@ Title: "Consent allowing data access for a given intermediate purpose"
 Description: """
 Consent allowing data access for a given intermediate purpose
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -859,7 +895,7 @@ Title: "Consent forbid data access except for Break-Glass"
 Description: """
 Consent forbid data access except for Break-Glass
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -913,7 +949,7 @@ Title: "Consent allowing NORMAL data access"
 Description: """
 Consent allowing NORMAL data access 
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -953,7 +989,7 @@ Title: "Consent allowing NORMAL and RESTRICTED data access"
 Description: """
 Consent allowing NORMAL and RESTRICTED data access 
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -994,7 +1030,7 @@ Title: "Consent allowing NORMAL but not RESTRICTED data access"
 Description: """
 Consent allowing NORMAL data access but NOT RESTRICTED. The exclusion of RESTRICTED should not be needed, given permit is only Normal
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -1038,7 +1074,7 @@ Title: "Consent allowing NORMAL and focused RESTRICTED data access"
 Description: """
 Consent allowing NORMAL data access but only focused RESTRICTED.
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -1084,7 +1120,7 @@ Title: "Consent allowing NORMAL and focused Mental Health data access"
 Description: """
 Consent allowing NORMAL data access but only focused Mental Health Abuse.
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -1131,7 +1167,7 @@ Title: "Consent allowing NORMAL and focused access to Mental Health or Sexual He
 Description: """
 Consent allowing NORMAL and focused access to Mental Health or Sexual Health data.
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
@@ -1177,7 +1213,7 @@ Title: "Consent allowing NORMAL and break-glass access to RESTRICTED data"
 Description: """
 Consent allowing NORMAL and break-glass access to RESTRICTED (e.g., Mental Health or Sexual Health) data.
 
-This is a BasicConsent example:
+This is the Basic part:
 - status is active - so it should be enforced
 - scope is privacy 
 - category is LOINC 59284-0 Consent
