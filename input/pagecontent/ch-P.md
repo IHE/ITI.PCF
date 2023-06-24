@@ -563,3 +563,29 @@ The following examples show where the sensitivity tag is maintained.
 
 - [Observation of Alcohol Use](Observation-ex-alcoholUse.html) marked with `ETHUD`
 - [Observation of a Blood Sugar](Observation-ex-bloodSugar.html) not marked sensitive
+
+### P.5.5 Example of Search Set Bundle Processing
+
+Given the using the model of "Query/Use enforcement" discussed above. The raw output from a FHIR search would include all observations, and they would not have security tags. That would look like:
+
+<figure>
+{%include pre-sls-searchset.svg%}
+<figcaption><b>P.5.5-1 Figure: Search Set Bundle before SLS tagging</b></figcaption>
+</figure>
+<br clear="all">
+
+This Bundle would then be processed by the SLS and sensitivity and confidentiality tags would be added:
+
+<figure>
+{%include post-sls-searchset.svg%}
+<figcaption><b>P.5.5-2 Figure: Search Set Bundle after SLS tagging</b></figcaption>
+</figure>
+<br clear="all">
+
+The tagged Bundle would then be processed by the policy enforcement point. In the following example the policy enforcement point is instructed to remove any Alcohol use Disorder information. Thus the first entry would be removed and the total decremented. The result would look like:
+
+<figure>
+{%include post-sls-enforcement-searchset.svg%}
+<figcaption><b>P.5.5-3 Figure: Search Set Bundle post enforcement to remove Alchol Use Disorder</b></figcaption>
+</figure>
+<br clear="all">

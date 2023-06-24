@@ -10,6 +10,7 @@ This example Observation resource to represent alcohol use assessment in a patie
 - SLS assessed this as ETHUD
 - SLS added Restricted due to the ETHUD assessment
 """
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
 * meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActCode#ETHUD
 * meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#R
 * status = #final
@@ -30,7 +31,7 @@ holding typical health values
 - SLS assessed this as not sensitvie
 - SLS added Normal due to not sensitive
 """
-//* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
 * meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * status = #final
 * category = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
@@ -48,7 +49,8 @@ Instance:   ex-bloodPressure
 InstanceOf: Observation
 Title: "Example of a blood pressure R4 observation, minimal"
 Description:      "holding typical values"
-* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * status = #final
 * category = http://terminology.hl7.org/CodeSystem/observation-category#vital-signs "Vital Signs"
 * code.coding[+] = LOINC#55284-4 "Blood pressure systolic and diastolic"
@@ -79,7 +81,8 @@ Sample for demonstration purposes of a common weight Observation
 - weight 185 pounds
 - note: a bit heavy
 """
-* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * status = #final
 * category = http://terminology.hl7.org/CodeSystem/observation-category#vital-signs
 * code = http://loinc.org#29463-7
@@ -108,7 +111,8 @@ Sample for demonstration purposes of a common weight Observation.
 - weight 20 stone
 - note: a bit heavy, about 280 lbs
 """
-* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * status = #final
 * category = http://terminology.hl7.org/CodeSystem/observation-category#vital-signs
 * code.text = "body weight"
@@ -128,7 +132,8 @@ Instance:   ex-encounter
 InstanceOf: Encounter
 Title: "Example Encounter"
 Description:      "holding typical values"
-* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * subject = Reference(Patient/ex-patient)
 * status = #finished
 * class = http://terminology.hl7.org/CodeSystem/v3-ActCode#HH
@@ -138,7 +143,8 @@ InstanceOf: Practitioner
 Title: "Dummy Practitioner example"
 Description: "Dummy Practitioner example for completeness sake. No actual use of this resource other than an example target"
 Usage: #example
-* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * telecom.system = #email
 * telecom.value = "JohnMoehrke@gmail.com"
 
@@ -148,7 +154,8 @@ InstanceOf: Practitioner
 Title: "Clerk Practitioner example"
 Description: "Clerk Practitioner example used as an example Clerk managing Consents"
 Usage: #example
-* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * telecom.system = #email
 * telecom.value = "Clerk@example.org"
 
@@ -160,7 +167,8 @@ InstanceOf: Organization
 Title: "Example Organization holding the data"
 Description: "The Organization that holds the data, and enforcing any Consents"
 Usage: #example
-* meta.security = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * active = true
 * name = "somewhere org"
 

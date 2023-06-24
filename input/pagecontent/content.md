@@ -51,6 +51,24 @@ Examples for this Resource Profile:
 - [Dissent except for Break-Glass](Consent-ex-dissent-intermediate-break-glass.html).
   - ITI-71 [access token](Consent-ex-dissent-intermediate-break-glass.html#notes)
 
+#### 3:5.8.3.1 Example of Intermediate by ID Search Set Bundle Processing
+
+Given using Intermediate consent that identifies one Observation with id=1 not be shared. Like [named set of data](Consent-ex-consent-intermediate-not-data.html). The [Consent Authorization Server](volume-1.html#consentAuthorizationServer) would provide ITI-71 [access token](Consent-ex-consent-intermediate-not-data.html#notes) which is communicated to the [Consent Enforcement Point](volume-1.html#consentEnforcementPoint). The [Consent Enforcement Point](volume-1.html#consentEnforcementPoint) would first allow the Search to happen, and the raw output from a FHIR search would include all observations including the forbidden Observation.  That would look like:
+
+<figure>
+{%include pre-sls-searchset.svg%}
+<figcaption><b>3:5.8.3.1-1 Figure: Search Set Bundle before enforcement</b></figcaption>
+</figure>
+<br clear="all">
+
+The Bundle would then be processed by the [Consent Enforcement Point](volume-1.html#consentEnforcementPoint), which will remove any Observations with id=1. Thus the first entry would be removed and the total decremented. The result would look like the following and be what is returned by the Grouped Server:
+
+<figure>
+{%include post-id-enforcement-searchset.svg%}
+<figcaption><b>3:5.8.4.1-3 Figure: Search Set Bundle post enforcement to remove Alcohol Use Disorder</b></figcaption>
+</figure>
+<br clear="all">
+
 <a name="advanced"> </a>
 
 ### 3:5.8.4 Advanced
@@ -73,3 +91,31 @@ Examples for this Resource Profile:
   - ITI-71 [access token](Consent-ex-consent-advanced-normal-focused-psy-or-sdv.html#notes)
 - Consent to [allow NORMAL data access, and break-glass access to RESTRICTED](Consent-ex-consent-advanced-normal-break-glass-restricted.html)
   - ITI-71 [access token](Consent-ex-consent-advanced-normal-break-glass-restricted.html#notes)
+
+#### 3:5.8.4.1 Example of Advanced Search Set Bundle Processing
+
+Given using Advanced consent that identifies that no Alcohol Use Disorder information shall be shared, and using the SLS model of "Query/Use enforcement" discussed in [Appendix P: Security Labeling Service Models](ch-P.html#p5-security-labeling-service-models). Note that there are other SLS architecture models, the "Query/Use enforcement" is being used only for illustrative purposes. The [Consent Authorization Server](volume-1.html#consentAuthorizationServer) would provide ITI-71 an Access Token indicating no Alcohol Use Disorder information is allowed is communicated to the [Consent Enforcement Point](volume-1.html#consentEnforcementPoint). The [Consent Enforcement Point](volume-1.html#consentEnforcementPoint) would first allow the Search to happen, and the raw output from a FHIR search would include all observations including the forbidden Observation.  That would look like:
+
+<figure>
+{%include pre-sls-searchset.svg%}
+<figcaption><b>3:5.8.4.1-1 Figure: Search Set Bundle before SLS tagging</b></figcaption>
+</figure>
+<br clear="all">
+
+In the "Query/Use enforcement" the Bundle would then be processed by the SLS and sensitivity and confidentiality tags would be added:
+
+<figure>
+{%include post-sls-searchset.svg%}
+<figcaption><b>3:5.8.4.1-2 Figure: Search Set Bundle after SLS tagging</b></figcaption>
+</figure>
+<br clear="all">
+
+The tagged Bundle would then be processed by the [Consent Enforcement Point](volume-1.html#consentEnforcementPoint), which will remove any Alcohol use Disorder information. Thus the first entry would be removed and the total decremented. The result would look like the following and be what is returned by the Grouped Server:
+
+<figure>
+{%include post-sls-enforcement-searchset.svg%}
+<figcaption><b>3:5.8.4.1-3 Figure: Search Set Bundle post enforcement to remove Alcohol Use Disorder</b></figcaption>
+</figure>
+<br clear="all">
+
+Note that the data returned may have the resulting security tags that the SLS applied, or those tags may be removed prior to the Grouped Server returning the results to the Grouped Client. This exposure of the tags is a policy decision that the PCF does not mandate.

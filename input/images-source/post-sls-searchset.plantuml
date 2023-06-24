@@ -1,0 +1,43 @@
+@startuml
+title Search Set Bundle after SLS tagging
+
+package "Search Set Bundle"  {
+  class Bundle
+  Bundle o-down- Observation1
+  Bundle o-down- Observation2
+  Bundle o-down- Observation3
+  Bundle o-down- Observation4
+  Bundle o-down- Observation5
+}
+
+class Bundle {
+    {method} Searched for all Observations for given Patient
+    {method} total 5
+}
+class Observation1 {
+    {field} Alchol Use Disorder
+    {field} Restricted Confidentiality
+    {field} id=1
+    {method} Alcohol per day 5
+}
+class Observation2 {
+    {field} Normal Confidentiality
+    {field} id=2
+    {method} Blood sugar 99
+}
+class Observation3 {
+    {field} Normal Confidentiality
+    {field} id=3
+    {method} Blood Pressure 140/90
+}
+class Observation4 {
+    {field} Normal Confidentiality
+    {field} id=4
+    {method} Weight 185 pounds
+}
+class Observation5 {
+    {field} Normal Confidentiality
+    {field} id=5
+    {method} Weight 20 stone
+}
+@enduml
