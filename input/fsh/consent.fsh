@@ -343,9 +343,9 @@ Usage: #example
 
 Instance: ex-consent-expired-treat
 InstanceOf: BasicConsent
-Title: "Consent for treatment example"
+Title: "Consent for treatment example with expiration"
 Description: """
-Consent for purposes of use involved in treatment: Treatment/Payment/Operations
+Consent that includes an expiration.
 
 This is a BasicConsent, that has expired, example:
 - status is active - so it should be enforced
@@ -986,7 +986,7 @@ Usage: #example
 
 Instance: ex-consent-advanced-normal-not-restricted
 InstanceOf: AdvancedConsent
-Title: "Consent allowing NORMAL and RESTRICTED data access"
+Title: "Consent allowing NORMAL but not RESTRICTED data access"
 Description: """
 Consent allowing NORMAL data access but NOT RESTRICTED. The exclusion of RESTRICTED should not be needed, given permit is only Normal
 
