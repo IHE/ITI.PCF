@@ -20,64 +20,13 @@ Best to [join the ITI-Technical committee](https://www.ihe.net/ihe_domains/it_in
 
 questions to the ITI committee to aid with the development of the IG.
 
-- none
-
-### Public Comments
-
-#### Discussion
-
-- [More Guidance Update Consent](https://github.com/IHE/ITI.PCF/issues/32)
-- [Consent Resource Profiles Overly Restrictive](https://github.com/IHE/ITI.PCF/issues/28)
-
-Open Issues
-
-- [PCF_18: Advanced required sensitivity codes](https://github.com/IHE/ITI.PCF/issues/18)
-  - In the Advanced is a required subset of ConfidentialityCodes (N, R), and Sensitivity codes (ETH, ETHUD, OPIOIDUD, PSY, SDV, and HIV). Is this enough? Is this too many? What should be required of the PCF? Note that required in the PCF does not mean that a deployment implementation must use all of these codes.
-  - There is likely no minimal set that is universally globally required. After public comment the current list of Sensitivity Codes that are mandatory is likely to be trimmed.  Should the sensitivity classifications that are moved out of the mandatory requirement still listed as a useful mention?
-- [PCF_19: Should Basic include agent authored by the Consent](https://github.com/IHE/ITI.PCF/issues/19)
-  - The Basic Explicit Option includes the ability for the Consent to identify a list of agents (device, relatedPerson, Practitioner, or Organization) that would be authorized by the Consent. This was supported by BPPC, so was considered Basic. However this has been identified as an unusual need today and thus would be more appropriate to be in the Intermediate group. Please comment on if you find this needed and agree that it should be in Basic, or if this support should be in Intermediate.
-- [PCF_20: Should PCF include break-glass when there is no clear way to declare break-glass](https://github.com/IHE/ITI.PCF/issues/20)
-  - There is support in a Consent for provisions when break-glass is declared, and there are support for conveying break-glass between the decision and enforcement. However, there is no clear way to declare break-glass, or to inform a client that the user is authorized to declare break-glass and would get access to more data.
-  - There are many ways envisioned to declare break-glass:
-    - oAuth access token request (ITI-71) includes the purposeOfUse of BTG, in addition to normal purposeOfUse (e.g., Treatment, Payment, Operations).
-    - oAuth access token request (ITI-71) has a user-interface that would ask the user to declare break-glass. Unclear when this user-interface would engage, as it clearly can't engage every request.
-    - some non-security method such as the http Category, as outlined in a [dragon note on the FHIR specification](http://hl7.org/fhir/R4B/security-labels.html#break-the-glass).
-    - Indication given in FHIR OperationOutcome that some data was filtered that would not need to be filtered if break-glass was declared.
-    - Other non standard method.
-- [PCF_21: Should Provenance be recommended or required?](https://github.com/IHE/ITI.PCF/issues/21)
-  - ITI-108 includes requirements to record AuditEvents, using BALP pattern. This is considered sufficient to track inappropriate changes, and is referenced in the Security Considerations. Should there also be requirements to record Provenance on Create, Update, and Delete in addition to AuditEvent?
-
-#### Will fix
-
-- [Multiple Examples With Same Name](https://github.com/IHE/ITI.PCF/issues/29)
-- [Consent Registry does not make audit decisions and so cannot record the Consent Authorication Decision Audit Message](https://github.com/IHE/ITI.PCF/issues/27)
-- [add example of a patient indicating their overall acceptance of all clinical trials](https://github.com/IHE/ITI.PCF/issues/26)
-- [consent by a delegate](https://github.com/IHE/ITI.PCF/issues/25)
-- [Need example of SearchSet bundles](https://github.com/IHE/ITI.PCF/issues/23)
-
-#### Approved and applied
-
-- [SEX is used with SDV definition](https://github.com/IHE/ITI.PCF/issues/33) Mohammad & John
-- PR [fix header levels](https://github.com/IHE/ITI.PCF/pull/31) Spencer
-- PR [IUA option called Get Authorization Server Metadata](https://github.com/IHE/ITI.PCF/pull/30) Spencer
-- PR [Task/misc typos and editoral suggestions](https://github.com/IHE/ITI.PCF/pull/24) Mohammad
-
-### Decided
-
-1. Is Explicit Basic too advanced? If so, what should be moved to Intermediate?  I think that timeframe and resource by id should be in an option that is between basic and intermediate. They are more powerful than one would expect basic, but they are easy to implement without deep inspection (using fundamental Base Resource elements of .id and .meta.lastUpdated). Intermediate requires that the authorization enforcement do deeper (aka Resource type specific) inspection. Do we have four levels rather than the current three (basic, intermediate, advanced, expert)?
-   1. Each incremental parameter should be its own option. So we end up with Implicit, Explicit, and Advanced; mostly as they were. The following are incrementally built upon Basic: Data Timeframe, Data by id, Named research project, data author, and data relationship.
-   2. I simply made the intermediate a set of options with these 5. So there is still use of 'intermediate'. The volume three profiling of Consent would then include the profiling for these 5 in one chapter.
-1. I did bring in SLS to Appendix P
-2. HIV is still important internationally
-3. Female Health may be a sensitive topic (menstruation cycle) - possible Open-Issue
-4. SLS valueset management, Explained ICD11 as some modern terms as exemplars of the continual maintenance.
-5. break-glass -- could support Deny All with break-glass. Thus all requests for treatment get Deny, but the deny is indicated as break-glass qualifying. Thus purposeOfUse break-glass is used.   harder to support that some data is returned, but not all. -- Open-Issue, request solutions
-6. Include Privacy Preference flow in Appendix P, but not within the normative text.
-7. We are not going to provide details on Questionnaire / QuestionnaireResponse use. There are mentions of the possibility, but no more is to be said. A future revision of this or a new IG could address this.
-8. We are not going to profile how the Patient Privacy Policy could be retrieved other than the mention about use of MHD.
-9. Discussed the possibility of needing to do continued maintenance, including proving that historic access would have enforced the consent at that time, and thus the need for Consent versions, Provenance, and/or AuditEvent. -- Possible Open-Issue
-10. PCF is not addressing the use-case where a Consent (dissent) would forbid the data capture or recording. This was available in BPPC, but was not found to be used.
-11. Consent.provision and .provision.provision is all that we should need for our use-cases.
+- given that all comments have been addressed, the current version (ci-build) is ready for approval for publication.
+  - Once published, we should have the discussion on when we start on next generation of the multi-generation plan.
+- still interested in resolving any of the open-issues.
+  - [PCF_18](https://github.com/IHE/ITI.PCF/issues/18) What sensitivity categories should be mandatory? There is a list of them today, but is this too many? Why is too many a problem? Should we define our own fake sensitivity that is required purely for connectathon purposes? Could we do the same with one of the current categories?
+  - [PCF_19](https://github.com/IHE/ITI.PCF/issues/19) Seems identifying an agent in a consent is more of an Intermediate than Basic. It is listed as Basic today as it was in BPPC.
+  - [PCF_20](https://github.com/IHE/ITI.PCF/issues/20) Break-glass without a specific way to declare break-glass? Could we leave in what we have defined, just move it to Intermediate? Must we remove all break-glass until the full flow can be addressed?
+  - [PCF_21](https://github.com/IHE/ITI.PCF/issues/21) No compelling use to drive mandate for Provenance, so it likely will stay just examples, and this open-issue gets closed.
 
 ## Multi-Generation Plan?
 
@@ -88,8 +37,9 @@ I suspect that everyone sees a different scope to this general problem. Consent 
 3. MHDS + XCA -- given that XCA is used to connect a MHDS community to broader network of community; then this use-case would add Consent terms for requests coming in from the outside.
 4. QEDm standalone -- this is later in the generation plan as there is no pre-defined community or terms of connection defined. However this likely is not unlike the previous, just needing the previous to be worked out fully before this is added.  This use-case bring switch it FHIR Resource based object control (prior the object to be controlled is a document)
 5. Residual Obligations/Refrains - same as above but there would be 'permit' provisions that require some refrain or obligation
-6. other things beyond scope
-7. use of FHIR R5 Consent
+6. support for tagging at an element level, rather than just Resource. An example is within the Patient resource there are various addresses and phone numbers that might need to be tagged with specific sensitivities that might have release rules indicated in either overall policy or Consent instance. Other examples are needed to fully justify this added overhead.
+7. Defined full workflow for break-glass
+8. use of FHIR R5 Consent
   
 ## Research
 
@@ -111,7 +61,7 @@ Privacy Consent:
   - [CareConnect Consent 1](https://fhir.hl7.org.uk/STU3/StructureDefinition/CareConnect-Consent-1)
 - [Switzerland Core](http://fhir.ch/ig/ch-core/index.html)
   - [CH Core EPR-Consent](http://fhir.ch/ig/ch-core/StructureDefinition-ch-core-epr-consent.html)
-- []
+
 ### Other research to note
 
 - HL7 FHIR DS4P
