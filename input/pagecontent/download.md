@@ -1,5 +1,5 @@
 
-You can also download:
+You can download:
 
 - [this entire guide](full-ig.zip),
 - the definition resources in [json](definitions.json.zip), [xml](definitions.xml.zip), [ttl](definitions.ttl.zip), or [csv](csvs.zip) format, or
