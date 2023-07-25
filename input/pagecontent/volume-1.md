@@ -2,15 +2,13 @@ The **Privacy Consent on FHIR (PCF)** builds upon a basic Identity and Authoriza
 
 This is to say that PCF does not define:
 
-- how one identifies the patient, this is the role of other Implementation Guides like PDQm, PIXm, PIMR, etc;
-- how the patient experiences the ceremony of the consent act, this is systems design, user interface design, and policy language;
-- how one asks for data or communicates data, this is the role of other Implementation Guides like MHD, QEDm, MHDS, etc;
+- how one identifies the patient, this is the role of other Implementation Guides like [PDQm](https://profiles.ihe.net/ITI/PDQm/index.html), [PIXm](https://profiles.ihe.net/ITI/PIXm/index.html), [PIMR](https://profiles.ihe.net/ITI/PMIR/index.html), [etc](https://profiles.ihe.net/ITI/HIE-Whitepaper/index.html#5-patient-identity-management);
+- how the patient experiences the ceremony of the consent act, this is systems design, user interface design, and [policy language](ch-P.html);
+- how one asks for data or communicates data, this is the role of other Implementation Guides like [MHD](https://profiles.ihe.net/ITI/MHD/index.html), [MHDS](https://profiles.ihe.net/ITI/MHDS/index.html), [QEDm/mXDE](https://profiles.ihe.net/ITI/HIE-Whitepaper/index.html#4-consuming-data-as-fhir-resources), etc;
 - how one tags data with security/privacy sensitivity labels, this is the role of a systems design that might utilize a [Security labeling Service](ch-P.html#SLS); and
-- how users or applications are identified and foundationally authorized, this is the role of other Implementation Guides like IUA, and OpenID-Connect.
+- how users or applications are identified and foundationally authorized, this is the role of other Implementation Guides like [IUA](https://profiles.ihe.net/ITI/IUA/index.html), and OpenID-Connect.
 
 But PCF enhances and relies upon these other Implementation Guides to protect sensitive resources according to Patient-specific Consents.
-
-TODO: Likely need a diagram that is more human workflow focused?
 
 <a name="actors-and-transactions"> </a>
 
@@ -107,7 +105,7 @@ This transaction is used to Create, Read, Update, Delete, and Search on Consent 
 
 For more details see the detailed [Access Consent](ITI-108.html).
 
-#### 1:53.1.2.2 implied enforcement
+#### 1:53.1.2.2 Implied Enforcement
 
 The **Consent Enforcement Point** is invoked by the **IUA Resource Server** when there is consent rules to be enforced. There is no externally defined transaction but the **Consent Enforcement Point** indirectly gets the consent rules to be enforced from the **IUA Resource Server**, thereby implicitly learning the details of the token. How this is done, and how the enforcement is achieved is a Systems Design concern outside the scope of an Interoperability specification such as PCF.
 
@@ -122,7 +120,7 @@ between options when applicable are specified in notes.
 
 | Actor              | Option Name |
 |--------------------|-------------|
-| Consent Recorder    | Explicit Basic |
+| Consent Recorder    | Explicit Basic  |
 | Consent Recorder    | Explicit Intermediate Data Timeframe |
 | Consent Recorder    | Explicit Intermediate Data by id |
 | Consent Recorder    | Explicit Intermediate Data Author |
@@ -130,8 +128,8 @@ between options when applicable are specified in notes.
 | Consent Recorder    | Explicit Intermediate Additional PurposeOfUse |
 | Consent Recorder    | Explicit Advanced |
 | Consent Registry   | none |
-| Consent Authorization Server    | Implicit  |
-| Consent Authorization Server    | Explicit Basic |
+| Consent Authorization Server    | Implicit   |
+| Consent Authorization Server    | Explicit Basic  |
 | Consent Authorization Server    | Explicit Intermediate Data Timeframe |
 | Consent Authorization Server    | Explicit Intermediate Data by id |
 | Consent Authorization Server    | Explicit Intermediate Data Author |
@@ -139,7 +137,7 @@ between options when applicable are specified in notes.
 | Consent Authorization Server    | Explicit Intermediate Additional PurposeOfUse |
 | Consent Authorization Server    | Explicit Advanced |
 | Consent Enforcement Point   | Implicit  |
-| Consent Enforcement Point   | Explicit Basic |
+| Consent Enforcement Point   | Explicit Basic  |
 | Consent Enforcement Point   | Explicit Intermediate Data Timeframe |
 | Consent Enforcement Point   | Explicit Intermediate Data by id |
 | Consent Enforcement Point   | Explicit Intermediate Data Author |
@@ -152,9 +150,9 @@ Note 1: Explicit Intermediate Options and Explicit Advanced Option require that 
 
 Three levels of maturity are defined which are incrementally more difficult to implement: Support for these Basic, Intermediate, and Advanced policies is support for the ability to provide these capabilities. The actual policy provided to the Patient would be some subset of this support that the data custodian is willing to enforce.
 
-When the Implicit Option is not declared to be implemented, then PCF expects "Deny all" or "Permit all authorized uses" for the overarching policy.
+When the Implicit Consent Option is not declared to be implemented, then PCF expects "Deny all" or "Permit all authorized uses" for the overarching policy.
 
-### 1:53.2.1 Implicit Option
+### 1:53.2.1 Implicit Consent Option
 
 The Implicit Policy Option indicates that there is a default policy that is used when there is no Consent found on file for a given patient. This Implicit Policy shall support the following "overarching" policies:
 
@@ -172,14 +170,14 @@ The operational environment chooses which of these policies they will use, so in
 
 Neither the definition of permitted use, nor how break-glass is declared is defined here. These are  policy expectations of the environment and are expected to be configured into the IUA authorization decisions and enforcement.
 
-Implicit Option has no ability to have Patient-specific parameters. When Patient-specific parameters are needed, Explicit options are required.
+Implicit Consent Option has no ability to have Patient-specific parameters. When Patient-specific parameters are needed, Explicit options are required.
 
 
 ### 1:53.2.2 Explicit Basic Option
 
-The Explicit Basic Option allows for patient-specific consent to be recorded and changed. This option sets the foundation for consents that expire, and consents that change based on agreements between the organization and the patient. The lack of a consent for a given patient would be covered by the Implicit Option in place. 
+The Explicit Basic Option allows for patient-specific consent to be recorded and changed. This option sets the foundation for consents that expire, and consents that change based on agreements between the organization and the patient. The lack of a consent for a given patient would be covered by the Implicit Consent Option in place. 
 
-Typically the Implicit Option is either a Deny-All or a Permit-All-Authorized-Uses. The Deny-All sets the groundwork for an environment where Consent is required for any activity to happen (often called OPT-IN). The Permit-All-Authorized-Uses sets the groundwork for an environment where Consent can be used to refine or dissent (often called OPT-OUT). In all cases, once a Consent is recorded then the terms of the Consent override any Implicit policy.
+Typically the Implicit Consent Option is either a Deny-All or a Permit-All-Authorized-Uses. The Deny-All sets the groundwork for an environment where Consent is required for any activity to happen (often called OPT-IN). The Permit-All-Authorized-Uses sets the groundwork for an environment where Consent can be used to refine or dissent (often called OPT-OUT). In all cases, once a Consent is recorded then the terms of the Consent override any Implicit policy.
 
 The Explicit Basic Option indicates that there is support for a basic set of patient-specific parameters. The following set of patient-specific parameters may be used to permit or deny:
 
@@ -192,7 +190,7 @@ See [Basic Consent](content.html#basic) Content Profile
 
 ### 1:53.2.3 Explicit Intermediate options
 
-The following Options shall be used in conjunction with **Explicit Basic Option**, and may be used with **Explicit Advanced Option**. The Intermediate Options can be implemented and/or used individually or combined. When combined within one parameter, the logic provided by each option is combined. The data scoping intermediate options are not expected to be found combined on one parameter, but may be combined within a Consent providing different data scoping capability. For example, a consent that indicates that a data timeframe is used to deny insurance access, with a different parameter indicting that a data relationship is allowed access to a research project.
+The following Options shall be used in conjunction with **Explicit Basic Option**, and may be used with **Explicit Advanced Option**. The Explicit Intermediate Options can be implemented and/or used individually or combined. When combined within one parameter, the logic provided by each option is combined. The data scoping Explicit Intermediate options are not expected to be found combined on one parameter, but may be combined within a Consent providing different data scoping capability. For example, a consent that indicates that a data timeframe is used to deny insurance access, with a different parameter indicting that a data relationship is allowed access to a research project.
 
 See [Intermediate Consent](content.html#intermediate) Content Profile.
 
@@ -402,9 +400,9 @@ The diagrammed steps:
 
 Not shown, for simplicity of the diagram, is the recording [AuditEvent](https://profiles.ihe.net/ITI/BALP/index.html) by all actors to support [Security and Privacy audit analysis use-cases](https://profiles.ihe.net/ITI/BALP/volume-1.html#1524-basicaudit-overview).
 
-#### 1:53.4.2.4 Implicit Content
+#### 1:53.4.2.4 Implicit Consent Content
 
-These use cases will outline the justification for the alternatives within the **Implicit Option**
+These use cases will outline the justification for the alternatives within the **Implicit Consent Option**
 
 **Pre-conditions**:
 
@@ -440,7 +438,7 @@ The controlling Organization has identified Clinical roles that would have acces
 
 Business Access Controls control appropriate access, thus clinical users get access for clinical treatment need.
 
-##### 1:53.4.2.4.2 Permit all Authorized
+##### 1:53.4.2.4.2 Permit All Authorized
 
 Permits access by all authorized users. This presumes that basic user access control will only allow authorized users and for authorized purpose of use.
 
@@ -476,15 +474,15 @@ Business Access Controls control appropriate access.
 
 #### 1:53.4.2.5 Basic Consent Content
 
-The **Basic Consent** content provides for recording that a Consent has been given and this option is the basis of all explicit consent options. The goal of a basic consent content is to express how a Consent is recorded, Updated, Removed, and Expired. The basic consent content also shows how one finds relevant Consent instances, and determines if they are still valid.
+The **Basic Consent** content provides for recording that a Consent has been given and this content is the basis of all explicit consent options. The goal of a basic consent content is to express how a Consent is recorded, Updated, Removed, and Expired. The basic consent content also shows how one finds relevant Consent instances, and determines if they are still valid.
 
 **Pre-conditions**:
 
 - The controlling Organization has identified various roles and the kinds of purpose of use those roles are authorized to participate in. 
 
-- The Controlling Organization defines the default policy to be used when no consent is found, possibly choosing from the **Implicit Options** policies. 
+- The Controlling Organization defines the default policy to be used when no consent is found, possibly choosing from the **Implicit Consent** Options policies. 
 
-- The Controlling Organization defines the policy to be used with the explicit basic consent, the policy that will be enforced when the patient has agreed to a consent.
+- The Controlling Organization defines the policy to be used with the **Explicit Basic** option, the policy that will be enforced when the patient has agreed to a consent.
 
 **Main Flow**:
 
@@ -506,7 +504,7 @@ Appropriate use is allowed, inappropriate use is denied
 
 The following set of patient specific parameters may be used to permit or deny:
 
-1. The overarching policy that the patient and organization have agreed upon. Where there is a defined set of behavior defined by overarching policies as defined in the Implicit Option.
+1. The overarching policy that the patient and organization have agreed upon. Where there is a defined set of behavior defined by overarching policies as defined in the **Implicit Consent Option**.
 2. The timeframe for which the consent applies. Enabling consents that have a time limit.
 3. Who is permitted/denied: This may be a device, relatedPerson, Practitioner, or Organization. This parameter enables the naming of agents that should be allowed access or denied access. This presumes that the identified agent is appropriately identified (provisioned) and authorized to make the request; typically through some application authorization and role-based access control. The user identity is mapped to a FHIR agent type Resource using the agent type Resource `.identifier` element (e.g., Practitioner.identifier would hold the user id).
 4. Purpose of use permitted/denied: There are a number of PurposeOfUse that are available to be explicably identified as an authorized purposeOfUse or denied purposeOfuse. This presumes that the requesting user has the authorization to request for the requested purposeOfUse. That is to say that the Consent Authorization Server does not determine whether the user/client is authorized to make the purposeOfUse declaration; this must be previously decided by the security context (see cascaded oAuth) --  Treatment, Payment, and Operations.
@@ -519,9 +517,9 @@ The **Intermediate Consent** contents shall be used in conjunction with **Basic 
 
 - The controlling Organization has identified various roles and the purpose of use in which those roles are authorized to participate.
 
-- The Controlling Organization defines the default policy to be used when no consent is found, possibly choosing from the **Implicit Options** policies.
+- The Controlling Organization defines the default policy to be used when no consent is found, possibly choosing from the **Implicit Consent** option policies.
 
-- The Controlling Organization defines the policy to be used with the explicit basic consent, the policy that will be enforced when the patient agrees to a consent. 
+- The Controlling Organization defines the policy to be used with the **Explicit Basic** option, the policy that will be enforced when the patient agrees to a consent. 
 
 - The controlling Organization provides for the patient to choose from the intermediate parameters that the controlling organization is willing to enforce, recognizing that some parameters may not be appropriate or allowed. 
 
@@ -545,31 +543,31 @@ The **Intermediate Consent** contents shall be used in conjunction with **Basic 
 
 ##### 1:53.4.2.6.1 Intermediate Data Timeframe Content
 
-This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates a timeframe within which data has been authored or last updated.
+This data scoping content provides for the Consent to have one or more permit/deny parameter that indicates a timeframe within which data has been authored or last updated.
 
 The use case would be where a patient knows that there was a period of time where they received care, and for which the patient indicates they want to segment out that data for permit or deny. The user interface is not defined here or constrained.
 
 ##### 1:53.4.2.6.2 Intermediate Data by id Content
 
-This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates a FHIR Resources by `.id` value.
+This data scoping content provides for the Consent to have one or more permit/deny parameter that indicates a FHIR Resources by `.id` value.
 
 The use case would be where a patient knows specific data artifacts that the patient indicates they want to segment out for permit or deny. The user interface is not defined here or constrained.
 
 ##### 1:53.4.2.6.3 Intermediate Data Author Content
 
-This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates that data is subject to the rule by way of a given author. This option is useful when the consent provision is limiting access to data that was authorized by a given practitioner.
+This data scoping content provides for the Consent to have one or more permit/deny parameter that indicates that data is subject to the rule by way of a given author. This content is useful when the consent provision is limiting access to data that was authorized by a given practitioner.
 
 The use case would be where a patient wants to segment out data authored by an author known to the patient (organization or practitioner) for permit or deny. Note that this capability depends on proper recording and attribution of data to the author. The user interface is not defined here or constrained.
 
 ##### 1:53.4.2.6.4 Intermediate Data Relationship Content
 
-This data scoping option provides for the Consent to have one or more permit/deny parameter that indicates that data is subject to the rule by way of that data being related in a given way to a given identified data object. This option is useful for indicating a consent provision that is limiting/authorizing access to data that was created as part of an encounter, care plan, or episode of care.
+This data scoping content provides for the Consent to have one or more permit/deny parameter that indicates that data is subject to the rule by way of that data being related in a given way to a given identified data object. This content is useful for indicating a consent provision that is limiting/authorizing access to data that was created as part of an encounter, care plan, or episode of care.
 
 The use case would be where a patient knows an encounter, care plan, or episode of care that can identify the data that the patient wants to segment out for permit or deny. Note that this capability depends on proper attribution of the data to the encounter, care plan, or episode of care. The user interface is not defined here or constrained.
 
 ##### 1:53.4.2.6.5 Intermediate Additional PurposeOfUse Content
 
-This option provides for the Consent to have one or more permit/deny parameter that indicates a purposeOfUse not listed in the **Basic Consent** vocabulary. This would tend to be used with Clinical Research projects, where the purposeOfUse is a code assigned to a specific Clinical Research Project. This may also be used for other purposeOfUse codes. Whereas **Basic Consent** has some well-known purposeOfUse codes, this option is used for other codes.
+This content provides for the Consent to have one or more permit/deny parameter that indicates a purposeOfUse not listed in the **Basic Consent** vocabulary. This would tend to be used with Clinical Research projects, where the purposeOfUse is a code assigned to a specific Clinical Research Project. This may also be used for other purposeOfUse codes. Whereas **Basic Consent** has some well-known purposeOfUse codes, this content is used for other codes.
 
 The use case would be where a patient authorizes a purposeOfUse beyond those defined in the **Basic Consent**. An example would be a Privacy Consent allowing an identified clinical research project to have access to the patient data.
 
@@ -585,9 +583,9 @@ Support for the Advanced Consent relies on the data being tagged with sensitivit
 
 - The controlling Organization has identified various roles and purposes of use in which those roles are authorized to participate. 
 
-- The Controlling Organization defines the default policy to be used when no consent is found, possibly choosing from the **Implicit Options** policies. 
+- The Controlling Organization defines the default policy to be used when no consent is found, possibly choosing from the **Implicit Consent** option policies. 
 
-- The Controlling Organization defines the policy to be used with the explicit basic consent, the policy that will be enforced when the patient has agreed to a consent. 
+- The Controlling Organization defines the policy to be used with the **Explicit Basic** option, the policy that will be enforced when the patient has agreed to a consent. 
 
 - The controlling Organization provides for the patient to choose from the intermediate parameters that the controlling organization is willing to enforce, recognizing that some parameters may not be appropriate or allowed. 
 

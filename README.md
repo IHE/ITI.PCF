@@ -2,31 +2,14 @@
 
 Note where decisions are made and a concept is put into the IG, it is generally removed from the README. Thus the readme is not comprehensive, it is focused mostly on open-issues, questions, and parking lot.
 
+Approved for TI: 2023-07-25
+
 ## CI Build
 
 http://build.fhir.org/ig/IHE/ITI.PCF/branches/master/index.html
 
-## ITI bi-weekly development call
 
-ITI meets for one hour every other week to develop this work toward Public-Comment, toward Trial-Implementation publication. Target for Public-Comment is spring/summer 2023, thus first Trial-Implementation publication in Fall 2023. 
-
-- bi-weekly - Fridays @ 10amCT/11amET/1700CET
-- Starting March 3, 2023
-- [teams meeting](https://teams.microsoft.com/l/meetup-join/19%3ameeting_YTI4NWQ5MjItNzQ0Ny00ZDJmLTg3MzAtMTliZDYxNzFlMjNm%40thread.v2/0?context=%7b%22Tid%22%3a%2202a9376b-a4f9-4a63-a240-52c43ebf9a89%22%2c%22Oid%22%3a%226459fea4-110a-4d17-85f0-00587211a0c0%22%7d)
-
-Best to [join the ITI-Technical committee](https://www.ihe.net/ihe_domains/it_infrastructure/), but I am interested in diverse perspectives from anyone.
-
-## Questions
-
-questions to the ITI committee to aid with the development of the IG.
-
-- given that all comments have been addressed, the current version (ci-build) is ready for approval for publication.
-  - Once published, we should have the discussion on when we start on next generation of the multi-generation plan.
-- still interested in resolving any of the open-issues.
-  - [PCF_18](https://github.com/IHE/ITI.PCF/issues/18) What sensitivity categories should be mandatory? There is a list of them today, but is this too many? Why is too many a problem? Should we define our own fake sensitivity that is required purely for connectathon purposes? Could we do the same with one of the current categories?
-  - [PCF_19](https://github.com/IHE/ITI.PCF/issues/19) Seems identifying an agent in a consent is more of an Intermediate than Basic. It is listed as Basic today as it was in BPPC.
-  - [PCF_20](https://github.com/IHE/ITI.PCF/issues/20) Break-glass without a specific way to declare break-glass? Could we leave in what we have defined, just move it to Intermediate? Must we remove all break-glass until the full flow can be addressed?
-  - [PCF_21](https://github.com/IHE/ITI.PCF/issues/21) No compelling use to drive mandate for Provenance, so it likely will stay just examples, and this open-issue gets closed.
+- Update Z.8 to indicate PCF is available for Patient Consent on FHIR.
 
 ## Multi-Generation Plan?
 

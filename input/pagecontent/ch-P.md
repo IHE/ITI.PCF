@@ -54,6 +54,8 @@ The Privacy Policy includes appropriate access rules that define conditions on v
 
 Some Privacy Consent needs require a more basic record, where as other Consents require intermediate or advanced needs. The more advanced need must support both the recording of the patient specific parameters and the ability to distinguish the accesses that would be impacted by those specific parameters.
 
+<a name="privacy-preferences"> </a>
+
 The Privacy Consent Ceremony and the development of the Privacy Policies is not constrained or described by IHE. The Privacy Preferences is a potential way to improve the Patient Experience by allowing the Patient to express their desired privacy conditions and parameters. These Privacy Preferences would not be enforceable as they are as statement of desire and not agreed to by a Data Holder. The Consent ceremony could take these preferences as input, and thus, present the terms that the Data Holder is willing to enforce. Thus, at the end of the Consent Ceremony there would be a Patient Privacy Consent Resource that expresses the terms that the Data Holder and Patient have agreed to.
 
 <figure>

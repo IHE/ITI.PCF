@@ -39,6 +39,8 @@ it is approved, even if it will not be integrated until several months later).
     - Other non standard method.
 - [PCF_21: Should Provenance be recommended or required?](https://github.com/IHE/ITI.PCF/issues/21)
   - ITI-108 includes requirements to record AuditEvents, using BALP pattern. This is considered sufficient to track inappropriate changes, and is referenced in the Security Considerations. Should there also be requirements to record Provenance on Create, Update, and Delete in addition to AuditEvent?
+- [PCF_22: Multi-Generation possibilities](https://github.com/IHE/ITI.PCF/issues/39) 
+  - The first release of PCF has many use-cases and applicability; but there are specific use-cases that are not included. These were excluded due to unclear how realistic they are. They are in theory useful, but not clear how soon they would be implemented in real-world products. So we await market showing interest in these or other use-cases.
 
 ### Closed Issues
 
