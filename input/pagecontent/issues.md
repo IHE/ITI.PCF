@@ -1,7 +1,14 @@
 
 ## Significant Changes
 
-NA, this is the initial public comment release.
+### Release 1.0.0
+
+- Public Comment resolution
+- Change from SEX to SDV
+- Provide guidance on methods of managing changes to a persons Consent
+- Relax some restrictions on Consent elements that were not justified
+- Add example of consent to clinical trial data use
+- Add example of delegate consenting onbehalf of the patient
 
 ## Issues
 
