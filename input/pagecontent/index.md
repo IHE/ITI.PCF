@@ -15,22 +15,22 @@ This includes refinement of the consent handling defined in [MHDS](https://profi
 This guide is organized into the following sections:
 
 - Volume 1: Profiles
-  - [53 Introduction](volume-1.html)
-  - [53.1 Actors, Transactions, and Content](volume-1.html#actors-and-transactions)
-  - [53.2 Actor Options](volume-1.html#actor-options)
-  - [53.3 Actor Required Groupings](volume-1.html#required-groupings)
-  - [53.4 Overview](volume-1.html#overview)
-  - [53.5 Security Considerations](volume-1.html#security-considerations)
-  - [53.6 Cross Profile Considerations](volume-1.html#other-grouping)
+  - [Introduction](volume-1.html)
+  - [Actors, Transactions, and Content](volume-1.html#actors-and-transactions)
+  - [Actor Options](volume-1.html#actor-options)
+  - [Actor Required Groupings](volume-1.html#required-groupings)
+  - [Overview](volume-1.html#overview)
+  - [Security Considerations](volume-1.html#security-considerations)
+  - [Cross Profile Considerations](volume-1.html#other-grouping)
   - [Appendix P: Privacy Access Policies](ch-P.html)
 - Volume 2: Transaction Detail
-  - [3.71 Get Access Token \[ITI-71\]](other.html#updates-to-iti-71)
-  - [3.72 Incorporate Access Token \[ITI-72\]](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72)
-  - [3.102 Introspect Token \[ITI-102\]](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102)
-  - [3.103 Get Authorization Server Metadata \[ITI-103\]](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103)
-  - [3.108 Access Consent \[ITI-108\]](ITI-108.html)
+  - [Get Access Token \[ITI-71\]](other.html#updates-to-iti-71)
+  - [Incorporate Access Token \[ITI-72\]](https://profiles.ihe.net/ITI/IUA/index.html#372-incorporate-access-token-iti-72)
+  - [Introspect Token \[ITI-102\]](https://profiles.ihe.net/ITI/IUA/index.html#3102-introspect-token-iti-102)
+  - [Get Authorization Server Metadata \[ITI-103\]](https://profiles.ihe.net/ITI/IUA/index.html#3103-get-authorization-server-metadata-iti-103)
+  - [Access Consent \[ITI-108\]](ITI-108.html)
 - Volume 3: Metadata and Content
-  - [5.8 Privacy Consent Patterns](content.html)
+  - [Privacy Consent Patterns](content.html)
 - Other
   - [Changes to Other IHE Specification](other.html)
   - [Updates to ITI-71](other.html#updates-to-iti-71)

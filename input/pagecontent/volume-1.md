@@ -2,9 +2,9 @@ The **Privacy Consent on FHIR (PCF)** builds upon a basic Identity and Authoriza
 
 This is to say that PCF does not define:
 
-- how one identifies the patient, this is the role of other Implementation Guides like [PDQm](https://profiles.ihe.net/ITI/PDQm/index.html), [PIXm](https://profiles.ihe.net/ITI/PIXm/index.html), [PIMR](https://profiles.ihe.net/ITI/PMIR/index.html), [etc](https://profiles.ihe.net/ITI/HIE-Whitepaper/index.html#5-patient-identity-management);
+- how one identifies the patient, this is the role of other Implementation Guides like [PDQm](https://profiles.ihe.net/ITI/PDQm/index.html), [PIXm](https://profiles.ihe.net/ITI/PIXm/index.html), [PIMR](https://profiles.ihe.net/ITI/PMIR/index.html), [etc.](https://profiles.ihe.net/ITI/HIE-Whitepaper/index.html#5-patient-identity-management);
 - how the patient experiences the ceremony of the consent act, this is systems design, user interface design, and [policy language](ch-P.html);
-- how one asks for data or communicates data, this is the role of other Implementation Guides like [MHD](https://profiles.ihe.net/ITI/MHD/index.html), [MHDS](https://profiles.ihe.net/ITI/MHDS/index.html), [QEDm/mXDE](https://profiles.ihe.net/ITI/HIE-Whitepaper/index.html#4-consuming-data-as-fhir-resources), etc;
+- how one asks for data or communicates data, this is the role of other Implementation Guides like [MHD](https://profiles.ihe.net/ITI/MHD/index.html), [MHDS](https://profiles.ihe.net/ITI/MHDS/index.html), [QEDm/mXDE](https://profiles.ihe.net/ITI/HIE-Whitepaper/index.html#4-consuming-data-as-fhir-resources), etc.;
 - how one tags data with security/privacy sensitivity labels, this is the role of a systems design that might utilize a [Security labeling Service](ch-P.html#SLS); and
 - how users or applications are identified and foundationally authorized, this is the role of other Implementation Guides like [IUA](https://profiles.ihe.net/ITI/IUA/index.html), and OpenID-Connect.
 
@@ -343,7 +343,7 @@ The diagrammed steps:
 1. Query for existing Consent. This step may not be necessary but is important to establish the Capture New Consent use case from the Update Existing Consent use case. This step is also useful to retrieve the current Consent parameters so that the User Interface can start with appropriate settings informed by the past.
 2. A Consent is found. More than one Consent may be found, for which the PCF does not address how to address this case. The overarching policy would need to be consulted.
 3. Consult with the Patient. There is some interaction with the Patient. Within this interaction the patient needs to be appropriately informed of the details of the Patient Privacy Policy and the parameters the patient can control. This user Interface might use a FHIR Questionnaire resulting in a QuestionnaireResponse as documentation of the ceremony. This User Interface might use some other technical means, or might be a paper process.  This User Interface is not constrained by the PCF.
-4. The results of the ceremony are captured to the satisfaction of the controlling Organization.  This might be a QuestionnaireResponse, or a scanned image of the signed paperwork recorded using a DocumentReference (See [MHD](https://profiles.ihe.net/ITI/MHD/index.html))
+4. The results of the ceremony are captured to the satisfaction of the controlling Organization.  This might be a QuestionnaireResponse, or a scanned image of the signed paperwork recorded using a DocumentReference (See [MHD](https://profiles.ihe.net/ITI/MHD/index.html)).
 5. The Consent resource constrained by the Consent constraints defined in Volume 3 is then saved to the **Consent Registry** using Transaction [ITI-108]. This is typically a FHIR Update action so as to replace the previous Consent. It is also possible to delete the previous and save the Consent as a new instance.
 6. An [AuditEvent is recorded](https://profiles.ihe.net/ITI/BALP/index.html) by both **Consent Recorder** and **Consent Registry** Actors to support [Security and Privacy audit analysis use-cases](https://profiles.ihe.net/ITI/BALP/volume-1.html#1524-basicaudit-overview).
 
@@ -382,10 +382,10 @@ The diagrammed steps:
 3. The **IUA Authorization Server** invokes the **Consent Authorization Server** passing any predicate access token, if available, adding any details to the access request context --> Note that failure to get an authorization token may be a failure-mode.
 4. The **Consent Authorization Server** looks for Patient Consents at the **Consent Registry** Actor(s). The access request context may be used to limit the Consent resources returned.
 5. The **Consent Authorization Server** receives the available consents. --> Note that no consent found means that the active default Implicit policy is enforced.
-6. The **Consent Authorization Server** determines the best match or matches of Consents returned to the access control request context (patient, user, app, purposeOfUse, data parameters, etc).
-7. The **Consent Authorization Server** makes the Access Control Decision based on the Consents
-8. The **Consent Authorization Server** provides the consent decisions to the **IUA Authorization Server**
-9. The **IUA Authorization Server** combines the Consent Access Control Decision with the decisions returned in step 2 and 3
+6. The **Consent Authorization Server** determines the best match or matches of Consents returned to the access control request context (patient, user, app, purposeOfUse, data parameters, etc.).
+7. The **Consent Authorization Server** makes the Access Control Decision based on the Consents.
+8. The **Consent Authorization Server** provides the consent decisions to the **IUA Authorization Server**.
+9. The **IUA Authorization Server** combines the Consent Access Control Decision with the decisions returned in step 2 and 3.
 10. The **IUA Authorization Server** encodes the combined Access Control Decision into an oAuth token. This is typically just associating the conditions of the Access Control Decision with the opaque oAuth token returned, such that, later in step 13, the ITI-102 transaction can be used to get the details. This combined Access Control decision indicates what is permitted or denied and any obligations or refrains that must be applied.
 11. The **IUA Authorization Server** returns this combined token to the **IUA Authorization Client**. --> Note that failure-modes will not return a success token but rather an access-denied response.
 12. The **IUA Authorization Client** encapsulates the given oAuth token, using ITI-72, to indicate the authorization given where the grouped transaction is as defined by the data access implementation guide that is grouped. Meaning the transaction is otherwise as defined elsewhere. The **IUA Resource Server** receives the ITI-72 and extracts the oAuth token.
@@ -402,7 +402,7 @@ Not shown, for simplicity of the diagram, is the recording [AuditEvent](https://
 
 #### 1:53.4.2.4 Implicit Consent Content
 
-These use cases will outline the justification for the alternatives within the **Implicit Consent Option**
+These use cases will outline the justification for the alternatives within the **Implicit Consent Option**.
 
 **Pre-conditions**:
 
@@ -633,13 +633,13 @@ The ConfidentialityCode may be assigned to data by various ways. Where data have
 
 ## 1:53.5 PCF Security Considerations
 
-See ITI TF-2x: [Appendix Z.8 “Mobile Security Considerations”](https://profiles.ihe.net/ITI/TF/Volume2/ch-Z.html#z.8-mobile-security-considerations)
+See ITI TF-2x: [Appendix Z.8 “Mobile Security Considerations”](https://profiles.ihe.net/ITI/TF/Volume2/ch-Z.html#z.8-mobile-security-considerations).
 
 A change to [any policy](ch-P.html) needs to be carefully managed, especially the [Domain Privacy Policy / Overarching Policy](ch-P.html). A change to Overarching Policy may have no impact on the Consent, or may invalidate all Consents. The Overarching Policy identification is a foundational element of a Consent, and thus when the Overarching policy terms change, one can identify all Consents that were based on the prior **Patient Privacy Policy Identifier**. In some cases, such as jurisdictional rules backed by laws, the Overarching Policy may change, effectively changing the effect of the rules of a Consent based on that Overarching Policy.
 
-The [Basic Audit Log Patterns](https://profiles.ihe.net/ITI/BALP/index.html) defines the audit log patterns, these audit log patterns can be recorded using the [ATNA](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html) [ATX:TLS Syslog](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.2.7.2), [ATX: UDP Syslog](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.2.7.3), or  [ATX: FHIR Feed](https://www.ihe.net/uploadedFiles/Documents/ITI/IHE_ITI_Suppl_RESTful-ATNA.pdf).
+The [Basic Audit Log Patterns](https://profiles.ihe.net/ITI/BALP/index.html) defines the audit log patterns, these audit log patterns can be recorded using the [ATNA](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html) [ATX:TLS Syslog](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.2.7.2), [ATX: UDP Syslog](https://profiles.ihe.net/ITI/TF/Volume1/ch-9.html#9.2.7.3), or [ATX: FHIR Feed](https://www.ihe.net/uploadedFiles/Documents/ITI/IHE_ITI_Suppl_RESTful-ATNA.pdf).
 
-Security and Privacy office should use the [BALP profiled AuditEvent](https://profiles.ihe.net/ITI/BALP/index.html) to track changes and uses of the Consent resources. The AuditEvent is required of [PCF when grouped with ATNA](ITI-108.html#2310851-security-audit-considerations). The Provenance resource recording is not required of PCF as the use case need would be satisfied by the AuditEvent record. However an implementation may choose to use Provenance on Create/Update/Delete in addition to AuditEvent. Examples of [a Provenance of create](Provenance-ex-provenance-consent-basic-treat.html) and [a Provenance of update](Provenance-ex-provenance2-consent-basic-treat.html) are provided. The use of Provenance is discussed in [Appendix P.4.3](ch-P.html#p43-change-to-deny-sharing)
+Security and Privacy office should use the [BALP profiled AuditEvent](https://profiles.ihe.net/ITI/BALP/index.html) to track changes and uses of the Consent resources. The AuditEvent is required of [PCF when grouped with ATNA](ITI-108.html#2310851-security-audit-considerations). The Provenance resource recording is not required of PCF as the use case need would be satisfied by the AuditEvent record. However an implementation may choose to use Provenance on Create/Update/Delete in addition to AuditEvent. Examples of [a Provenance of create](Provenance-ex-provenance-consent-basic-treat.html) and [a Provenance of update](Provenance-ex-provenance2-consent-basic-treat.html) are provided. The use of Provenance is discussed in [Appendix P.4.3](ch-P.html#p43-change-to-deny-sharing).
 
 Security office should monitor the audit log for uses of break-glass, and follow up to confirm it was a legitimate use of break-glass per policy.
 

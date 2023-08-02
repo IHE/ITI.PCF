@@ -60,7 +60,7 @@ The Privacy Consent Ceremony and the development of the Privacy Policies is not 
 
 <figure>
 {%include preferences-workflow.svg%}
-<figcaption><b>Figure: Preferences to Enforcement possible workflow</b></figcaption>
+<figcaption><b>Figure P-1: Preferences to Enforcement Possible Workflow</b></figcaption>
 </figure>
 <br clear="all">
 
@@ -208,12 +208,12 @@ The following are some steps that a domain implementing privacy should consider.
   
 ## P.3 Potential obligations and refrains
 
-The full scope of privacy policies is potentially infinite. The following are some considerations of obligations and refrains that a Patient Privacy Policy may require of an Access Control Enforcement Point. Where Obligations are activities that must be done, and Refrains are activities that must not be done. Many of these obligations and refrains have been given codes in the HL7 Security Control ValueSets
+The full scope of privacy policies is potentially infinite. The following are some considerations of obligations and refrains that a Patient Privacy Policy may require of an Access Control Enforcement Point. Where Obligations are activities that must be done, and Refrains are activities that must not be done. Many of these obligations and refrains have been given codes in the HL7 Security Control ValueSets.
 
 [Obligation](https://terminology.hl7.org/ValueSet-v3-ObligationPolicy.html)  - Security label metadata that segments an IT resource by conveying the mandated workflow action that an information custodian, receiver, or user must perform. For Example: Encrypt, mask, comply with policy
-[Refrain](https://terminology.hl7.org/ValueSet-v3-RefrainPolicy.html) - Security label metadata that segments an IT resource by conveying actions which an information custodian, receiver, or user is not permitted to perform unless otherwise authorized or permitted under specified circumstances. For Example: Do not disclose without consent, no reuse
+[Refrain](https://terminology.hl7.org/ValueSet-v3-RefrainPolicy.html) - Security label metadata that segments an IT resource by conveying actions which an information custodian, receiver, or user is not permitted to perform unless otherwise authorized or permitted under specified circumstances. For Example: Do not disclose without consent, no reuse.
 
-Obligations may also be expressed in oAuth scopes such as those defined in [SMART-App-Launch](https://www.hl7.org/fhir/smart-app-launch)
+Obligations may also be expressed in oAuth scopes such as those defined in [SMART-App-Launch](https://www.hl7.org/fhir/smart-app-launch).
 
 <a name="FHIR-Explainer"> </a>
 
@@ -506,7 +506,7 @@ The classification of the data may be a manual process, but that is not a very s
 
 ### P.5.1 Data tagging Considerations
 
-Some data are direct and clearly in a sensitive category. But there can be indirect relationships, such as three medications prescribed together are a clear indication of a sensitive category but are not individually sensitive.  
+Some data are direct and clearly in a sensitive category. But there can be indirect relationships, such as three medications prescribed together are a clear indication of a sensitive category but are not individually sensitive.
 
 Some data may also not be sensitive in the coding, but rather sensitive in the narrative, this would be poor data quality but it is a reality that should be considered. Thus an SLS may need to include some Natural Language Processing to find sensitive human words in narrative.
 
@@ -535,7 +535,7 @@ This solution is likely to be more performant on use of data, but may not have a
 
 #### Use time tagging data
 
-Alternative is that the data are temporarily tagged prior to use, thus the sensitivity is freshly determined and used only for that access enforcement
+Alternative is that the data are temporarily tagged prior to use, thus the sensitivity is freshly determined and used only for that access enforcement.
 
 <div>
 {%include sls-query.svg%}
