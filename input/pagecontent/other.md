@@ -17,7 +17,6 @@ This section modifies other IHE profiles or the General Introduction appendices 
 {:.grid .table-striped}
 
 
-
 ## IHE Technical Frameworks General Introduction Appendix B: Transactions
 
 |------------------------------------------------|
@@ -27,7 +26,7 @@ This section modifies other IHE profiles or the General Introduction appendices 
 
 | Transaction                    | Definition                                                                              |
 | ------------------------------ | --------------------------------------------------------------------------------------- |
-| [Access Consent](ITI-108.html) |  used to Create, Read, Update, Delete, and Search on Consent resources |
+| [Access Consent] (ITI-108.html) \[ITI-71\]] |  used to Create, Read, Update, Delete, and Search on Consent resources |
 {:.grid .table-striped}
 
 ## IHE Technical Frameworks General Introduction Appendix D: Glossary
