@@ -1,5 +1,10 @@
 # Privacy Consent on FHIR (PCF)
 
+formal publication 
+https://profiles.ihe.net/ITI/PCF/index.html
+
+## project proposal 
+
 Note where decisions are made and a concept is put into the IG, it is generally removed from the README. Thus the readme is not comprehensive, it is focused mostly on open-issues, questions, and parking lot.
 
 Approved for TI: 2023-07-25
