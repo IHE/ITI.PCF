@@ -46,7 +46,7 @@ it is approved, even if it will not be integrated until several months later).
   - There are many ways envisioned to declare break-glass:
     - oAuth access token request (ITI-71) includes the purposeOfUse of BTG, in addition to normal purposeOfUse (e.g., Treatment, Payment, Operations).
     - oAuth access token request (ITI-71) has a user-interface that would ask the user to declare break-glass. Unclear when this user-interface would engage, as it clearly can't engage every request.
-    - some non-security method such as the http Category, as outlined in a [dragon note on the FHIR specification](http://hl7.org/fhir/R4/security-labels.html#break-the-glass).
+    - some non-security method such as the http Category, as outlined in a [dragon note on the FHIR specification]({{site.data.fhir.path}}security-labels.html#break-the-glass).
     - Indication given in FHIR OperationOutcome that some data was filtered that would not need to be filtered if break-glass was declared.
     - Other non standard method.
 - [PCF_21: Should Provenance be recommended or required?](https://github.com/IHE/ITI.PCF/issues/21)
