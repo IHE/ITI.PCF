@@ -1,6 +1,11 @@
 
 ## Significant Changes
 
+### Release 1.0.1
+
+- Build for R4 rather than R4B to better support marketplace that is using R4 and not R4B. This also enables PCF to be depended upon by other IGs that further refine the Consent profiling.
+  - Unfortunately this does result in errors in the consent examples caused by a bug in FHIR core R4 (that was fixed in FHIR core R4B)
+
 ### Release 1.0.0
 
 - Public Comment resolution
