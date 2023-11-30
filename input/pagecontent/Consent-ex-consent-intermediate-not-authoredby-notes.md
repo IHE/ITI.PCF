@@ -30,7 +30,7 @@ The token would need to include an `ihe_pcf` extension to point at this consent,
     "doc_id" : ["http://example.org/fhir/Consent/ex-consent-intermediate-not-authoredby"],
     "residual" : [
       {
-        "type" : "permit",
+        "type" : "deny",
         "data" : [{
             "meaning" : "authoredby",
             "reference" : {
