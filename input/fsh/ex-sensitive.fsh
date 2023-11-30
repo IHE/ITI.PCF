@@ -16,8 +16,9 @@ This example Observation resource to represent alcohol use assessment in a patie
 * status = #final
 * code = http://loinc.org#74013-4
 * subject = Reference(Patient/ex-patient)
+* performer = Reference(Practitioner/ex-author)
 * effectiveDateTime = 2022-06-13
-* valueQuantity = 5 '{wine glasses}/d' 
+* valueQuantity = 5 '{wine glasses}/d' "glasses of wine"
 * encounter = Reference(Encounter/ex-encounter)
 
 
@@ -37,8 +38,9 @@ holding typical health values
 * category = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
 * code = http://loinc.org#2339-0 "Glucose [Mass/volume] in Blood"
 * subject = Reference(Patient/ex-patient)
+* performer = Reference(Practitioner/ex-author)
 * effectiveDateTime = 2020-12-04T23:50:50-05:00
-* valueQuantity = 99 'mg/dL' 
+* valueQuantity = 99 'mg/dL' "mg/dL"
 // no comments in this one as comments is only in DSTU2
 * note.text = "a bit low, no indicated method, no indicated eating"
 * encounter = Reference(Encounter/ex-encounter)
@@ -46,28 +48,28 @@ holding typical health values
 
 
 Instance:   ex-bloodPressure
-InstanceOf: Observation
+InstanceOf: http://hl7.org/fhir/StructureDefinition/bp
 Title: "Example of a blood pressure R4 observation, minimal"
 Description:      "holding typical values"
 * meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
 * meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * status = #final
-* category = http://terminology.hl7.org/CodeSystem/observation-category#vital-signs "Vital Signs"
-* code.coding[+] = LOINC#55284-4 "Blood pressure systolic and diastolic"
-* code.coding[+] = LOINC#8716-3 "Vital Signs"
+* category[VSCat] = http://terminology.hl7.org/CodeSystem/observation-category#vital-signs "Vital Signs"
+* code.coding[BPCode] = LOINC#85354-9 
 * subject = Reference(Patient/ex-patient)
+* performer = Reference(Practitioner/ex-author)
 * effectiveDateTime = 2004-12-25T23:50:50-05:00
-* component[+].code = LOINC#8480-6 "Systolic blood pressure"
-* component[=].valueQuantity = 140.0 'mm[Hg]'
-* component[+].code = LOINC#8462-4 "Diastolic blood pressure"
-* component[=].valueQuantity = 90.0 'mm[Hg]'
+* component[SystolicBP].code.coding[SBPCode] = LOINC#8480-6 "Systolic blood pressure"
+* component[SystolicBP].valueQuantity = 140.0 'mm[Hg]' "mm[Hg]"
+* component[DiastolicBP].code.coding[DBPCode] = LOINC#8462-4 "Diastolic blood pressure"
+* component[DiastolicBP].valueQuantity = 90.0 'mm[Hg]' "mm[Hg]"
 * note.text = "a minimal blood pressure"
 * encounter = Reference(Encounter/ex-encounter)
 
 
 
 Instance:   ex-weight
-InstanceOf: Observation
+InstanceOf: http://hl7.org/fhir/StructureDefinition/bodyweight
 Title: "Example of a bodyWeight R4 observation"
 Description: """
 Sample for demonstration purposes of a common weight Observation
@@ -84,18 +86,19 @@ Sample for demonstration purposes of a common weight Observation
 * meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
 * meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * status = #final
-* category = http://terminology.hl7.org/CodeSystem/observation-category#vital-signs
+* category[VSCat] = http://terminology.hl7.org/CodeSystem/observation-category#vital-signs
 * code = http://loinc.org#29463-7
 * subject = Reference(Patient/ex-patient)
+* performer = Reference(Practitioner/ex-author)
 * effectiveDateTime = 2004-12-25T23:50:50-05:00
-* valueQuantity = 185 '[lb_av]' 
+* valueQuantity = 185 '[lb_av]' "pounds"
 * note.text = "a bit heavy"
 * encounter = Reference(Encounter/ex-encounter)
 
 
 
-Instance:   ex-weight-stone
-InstanceOf: Observation
+Instance:   ex-weight-2
+InstanceOf: http://hl7.org/fhir/StructureDefinition/bodyweight
 Title: "Example of an valid FHIR bodyWeight R4 observation, but not compliant with the profile"
 Description: """
 Sample for demonstration purposes of a common weight Observation.
@@ -108,22 +111,20 @@ Sample for demonstration purposes of a common weight Observation.
 - subject of the example patient
 - linked to an encounter
 - effectiveDateTime = March 28, 2016
-- weight 20 stone
+- weight 280 lbs
 - note: a bit heavy, about 280 lbs
 """
 * meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
 * meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * status = #final
-* category = http://terminology.hl7.org/CodeSystem/observation-category#vital-signs
+* category[VSCat] = http://terminology.hl7.org/CodeSystem/observation-category#vital-signs
 * code.text = "body weight"
-* code.coding = LOINC#29463-7
-* code.coding[1] = LOINC#3141-9
-* code.coding[2] = SCT#27113001
-//* code.coding[3] = http://acme.org/devices/clinical-codes#body-weight "Body Weight"
+* code.coding[BodyWeightCode] = LOINC#29463-7
 * subject = Reference(Patient/ex-patient)
+* performer = Reference(Practitioner/ex-author)
 * encounter = Reference(Encounter/example)
 * effectiveDateTime = 2016-03-28
-* valueQuantity = 20 '[stone_av]' 
+* valueQuantity = 280 '[lb_av]' "pounds"
 * note.text = "a bit heavy, about 280 lbs"
 * encounter = Reference(Encounter/ex-encounter)
 
@@ -146,7 +147,17 @@ Usage: #example
 * meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
 * meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
 * telecom.system = #email
-* telecom.value = "JohnMoehrke@gmail.com"
+* telecom.value = "Practitioner@example.com"
+
+Instance: ex-author
+InstanceOf: Practitioner
+Title: "Dummy Authoring Practitioner example"
+Description: "Dummy Practitioner example for completeness sake. No actual use of this resource other than an example target"
+Usage: #example
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-ActReason#HTEST
+* meta.security[+] = http://terminology.hl7.org/CodeSystem/v3-Confidentiality#N
+* telecom.system = #email
+* telecom.value = "Author@example.com"
 
 
 Instance: ex-clerk

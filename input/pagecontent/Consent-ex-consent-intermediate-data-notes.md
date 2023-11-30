@@ -43,7 +43,7 @@ The token would need to include an `ihe_pcf` extension to point at this consent,
         },{
             "meaning" : "instance",
             "reference" : {
-            "reference" : "http://example.org/fhir/Observation/ex-weight-stone"
+            "reference" : "http://example.org/fhir/Observation/ex-weight-2"
             }
         },{
             "meaning" : "instance",
