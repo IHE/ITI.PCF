@@ -127,7 +127,7 @@ groups:
       - Observation/ex-bloodSugar
       - Observation/ex-bloodPressure
       - Observation/ex-weight
-      - Observation/ex-weight-stone
+      - Observation/ex-weight-2
 
 
 

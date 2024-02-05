@@ -2,9 +2,5 @@
 # instructions for ignoreWarnings.txt https://confluence.hl7.org/pages/viewpage.action?pageId=66938614#ImplementationGuideParameters-ManagingWarningsandHints
 
 # warnings, but these are not important to the reason these examples exist.
-WARNING: Observation/ex-alcoholUse: Observation.value.ofType(Quantity): UCUM Codes that contain human readable annotations like {wine glasses} can be misleading (e.g. they are ignored when comparing units). Best Practice is not to depend on annotations in the UCUM code, so this usage should be checked, and the Quantity.unit SHOULD contain the annotation
-WARNING: Observation/ex-alcoholUse: Observation: Best Practice Recommendation: In general, all observations should have a performer
-WARNING: Observation/ex-bloodPressure: Observation: Best Practice Recommendation: In general, all observations should have a performer
-WARNING: Observation/ex-bloodSugar: Observation: Best Practice Recommendation: In general, all observations should have a performer
-WARNING: Observation/ex-weight: Observation: Best Practice Recommendation: In general, all observations should have a performer
-WARNING: Observation/ex-weight-stone: Observation: Best Practice Recommendation: In general, all observations should have a performer
+UCUM Codes that contain human readable annotations like {wine glasses} can be misleading (e.g. they are ignored when comparing units). Best Practice is not to depend on annotations in the UCUM code, so this usage should be checked, and the Quantity.unit 'glasses of wine' SHOULD contain the annotation (it does not)
+

@@ -32,6 +32,6 @@ class Observation4 {
 }
 class Observation5 {
     {field} id=5
-    {method} Weight 20 stone
+    {method} Weight 280 pounds
 }
 @enduml

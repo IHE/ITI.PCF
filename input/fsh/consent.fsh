@@ -798,7 +798,7 @@ This is the Intermediate part:
   - [blood sugar 1](Observation-ex-bloodSugar.html)
   - [blood pressure 1](Observation-ex-bloodPressure.html)
   - [weight 1](Observation-ex-weight.html)
-  - [weight 2](Observation-ex-weight-stone.html)
+  - [weight 2](Observation-ex-weight-2.html)
   - [encounter 1](Encounter-ex-encounter.html)
 """
 Usage: #example
@@ -819,7 +819,7 @@ Usage: #example
 * provision.data[iData][+].meaning = #instance
 * provision.data[iData][=].reference = Reference(Encounter/ex-encounter)
 * provision.data[iData][+].meaning = #instance
-* provision.data[iData][=].reference = Reference(Observation/ex-weight-stone)
+* provision.data[iData][=].reference = Reference(Observation/ex-weight-2)
 * provision.data[iData][+].meaning = #instance
 * provision.data[iData][=].reference = Reference(Observation/ex-weight)
 * provision.data[iData][+].meaning = #instance
