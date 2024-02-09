@@ -1,17 +1,15 @@
 {
     "package-id" : "ihe.iti.pcf",
-    "version" : "1.0.0",
-    "path" : "https://profiles.ihe.net/ITI/PCF/1.0.0",
+    "version" : "1.1.0",
+    "path" : "https://profiles.ihe.net/ITI/PCF/1.1.0",
     "mode" : "milestone",
     "status" : "trial-use",
     "sequence" : "Publication",
-    "desc" : "Trial-Implementation release with resolved public comment",
-    "descmd" : "1.0.0 Trial-Implementation
-- Public Comment resolution
-- Change from SEX to SDV
-- Provide guidance on methods of managing changes to a persons Consent
-- Relax some restrictions on Consent elements that were not justified
-- Add example of consent to clinical trial data use
-- Add example of delegate consenting onbehalf of the patient",
+    "desc" : "Trial-Implementation release built for FHIR R4",
+    "descmd" : "1.1.0
+
+    - Build for FHIR R4 rather than R4B to better support marketplace that is using R4 and not R4B. This also enables PCF to be depended upon by other IGs that further refine the Consent profiling.
+    - fix bug in the oAuth token fragment for not-authoredBy Consent
+    - fixes to new warnings from IG publisher such as requirement for all examples of vital signas to be compliant with vital signs profiles from FHIR core",
     "changes" : "issues.html"
   }
