@@ -9,7 +9,7 @@ description: The Privacy Consent on FHIR (PCF) Profile provides support for pati
 #releaseLabel: ci-build
 #releaseLabel: ballot
 releaseLabel: Trial-Implementation
-date: 2024-02-29
+date: 2024-02-23
 status: active
 publisher:
   - name: IHE IT Infrastructure Technical Committee
