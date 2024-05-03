@@ -12,8 +12,3 @@ INFORMATION: ValueSet.where(id = 'SlsSensitiveETH'): The value set expansion is 
 INFORMATION: ValueSet.where(id = 'SlsSensitiveOPIOIDUD'): The value set expansion is too large, and only a subset has been displayed
 INFORMATION: ValueSet.where(id = 'SlsSensitivePSY'): The value set expansion is too large, and only a subset has been displayed
 
-# These are policy canonical URLs that we define, but there is no FHIR resource that can be used to define these as formal canonical. The Build now complains
-ERROR: C:\Users\johnm\git\ITI.PCF\output\Consent-ex-consent-intermediate-purpose.html#/html/body/div/div/div/div/div/div/table/tr/td/a at Line 267, column 1873: The link 'https://profiles.ihe.net/ITI/PCF/Policy-basic-normal' for "https://profiles.ihe.net/ITI/PCF/Policy-basic-normal" cannot be resolved
-ERROR: C:\Users\johnm\git\ITI.PCF\output\Consent-ex-dissent-intermediate-break-glass.html#/html/body/div/div/div/div/div/div/table/tr/td/a at Line 267, column 1885: The link 'https://profiles.ihe.net/ITI/PCF/Policy-break-glass-only' for "https://profiles.ihe.net/ITI/PCF/Policy-break-glass-only" cannot be resolved
-ERROR: Consent.text.div: Hyperlink 'https://profiles.ihe.net/ITI/PCF/Policy-basic-normal' at 'div/table/tr/td/a' for 'https://profiles.ihe.net/ITI/PCF/Policy-basic-normal' does not resolve
-ERROR: Consent.text.div: Hyperlink 'https://profiles.ihe.net/ITI/PCF/Policy-break-glass-only' at 'div/table/tr/td/a' for 'https://profiles.ihe.net/ITI/PCF/Policy-break-glass-only' does not resolve
