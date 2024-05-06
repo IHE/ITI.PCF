@@ -110,7 +110,7 @@ Given that the token is authorizing access to the defined Scope, then the `resid
 - residual `permit` overrides an explicit residual `forbid`
 - if no `forbid` applies, then the data is allowed to flow back to the requester
 
-Example: Given [Consent allowing data authored within a timeframe](Consent-ex-consent-intermediate-timeframe.html), which limits access to only data authored within 2022. This is a root `.provision` restriction. Note that the purpose restriction is handled in the \[ITI-71\](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71) `purpose_of_use`, so the `residual` need only address the `dataPeriod`.
+Example: Given [Consent allowing data authored within a timeframe](Consent-ex-consent-intermediate-timeframe.html), which limits access to only data authored within 2022. This is a root `.provision` restriction. Note that the purpose restriction is handled in the [\[ITI-71\]](https://profiles.ihe.net/ITI/IUA/index.html#371-get-access-token-iti-71) `purpose_of_use`, so the `residual` need only address the `dataPeriod`.
 
 ```json
   "provision" : {
