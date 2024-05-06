@@ -27,6 +27,39 @@ fhirVersion: 4.0.1
 jurisdiction: 'http://unstats.un.org/unsd/methods/m49/m49.htm#001'
 #copyright: IHE http://www.ihe.net/Governance/#Intellectual_Property
 copyrightYear: 2023+
+extension:
+  - url: http://hl7.org/fhir/tools/StructureDefinition/implementationguide-resource-uri
+    extension:
+      - url: uri
+        valueUrl: https://profiles.ihe.net/ITI/PCF/Policy-basic-normal
+      - url: target
+        valueUrl: volume-1.html
+      - url: use
+        valueString: "Permit for clinicians that have authorization for Treatment use, but does not authorize other access. This presumes that basic user access control can differentiate legitimate clinical users and purposes of use."
+  - url: http://hl7.org/fhir/tools/StructureDefinition/implementationguide-resource-uri
+    extension:
+      - url: uri
+        valueUrl: https://profiles.ihe.net/ITI/PCF/Policy-all-normal
+      - url: target
+        valueUrl: volume-1.html
+      - url: use
+        valueString: "Permit for all authorized uses. This presumes that basic user access control will only allow authorized users and purposes of use."
+  - url: http://hl7.org/fhir/tools/StructureDefinition/implementationguide-resource-uri
+    extension:
+      - url: uri
+        valueUrl: https://profiles.ihe.net/ITI/PCF/Policy-break-glass-only
+      - url: target
+        valueUrl: volume-1.html
+      - url: use
+        valueString: "Deny for all use, except when the user is a clinician with authorization to declare a medical patient-safety override (a.k.a. Break-Glass)."
+  - url: http://hl7.org/fhir/tools/StructureDefinition/implementationguide-resource-uri
+    extension:
+      - url: uri
+        valueUrl: https://profiles.ihe.net/ITI/PCF/Policy-deny
+      - url: target
+        valueUrl: volume-1.html
+      - url: use
+        valueString: "Deny all."
 
 dependencies:
   us.nlm.vsac: 
