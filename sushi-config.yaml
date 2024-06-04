@@ -31,7 +31,7 @@ extension:
   - url: http://hl7.org/fhir/tools/StructureDefinition/implementationguide-resource-uri
     extension:
       - url: uri
-        valueUrl: https://profiles.ihe.net/ITI/PCF/Policy-basic-normal
+        valueUri: https://profiles.ihe.net/ITI/PCF/Policy-basic-normal
       - url: target
         valueUrl: volume-1.html
       - url: use
@@ -39,7 +39,7 @@ extension:
   - url: http://hl7.org/fhir/tools/StructureDefinition/implementationguide-resource-uri
     extension:
       - url: uri
-        valueUrl: https://profiles.ihe.net/ITI/PCF/Policy-all-normal
+        valueUri: https://profiles.ihe.net/ITI/PCF/Policy-all-normal
       - url: target
         valueUrl: volume-1.html
       - url: use
@@ -47,7 +47,7 @@ extension:
   - url: http://hl7.org/fhir/tools/StructureDefinition/implementationguide-resource-uri
     extension:
       - url: uri
-        valueUrl: https://profiles.ihe.net/ITI/PCF/Policy-break-glass-only
+        valueUri: https://profiles.ihe.net/ITI/PCF/Policy-break-glass-only
       - url: target
         valueUrl: volume-1.html
       - url: use
@@ -55,7 +55,7 @@ extension:
   - url: http://hl7.org/fhir/tools/StructureDefinition/implementationguide-resource-uri
     extension:
       - url: uri
-        valueUrl: https://profiles.ihe.net/ITI/PCF/Policy-deny
+        valueUri: https://profiles.ihe.net/ITI/PCF/Policy-deny
       - url: target
         valueUrl: volume-1.html
       - url: use
