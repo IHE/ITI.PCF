@@ -12,3 +12,5 @@ INFORMATION: ValueSet.where(id = 'SlsSensitiveETH'): The value set expansion is 
 INFORMATION: ValueSet.where(id = 'SlsSensitiveOPIOIDUD'): The value set expansion is too large, and only a subset has been displayed
 INFORMATION: ValueSet.where(id = 'SlsSensitivePSY'): The value set expansion is too large, and only a subset has been displayed
 
+# Informative valueSets that don't need OIDS
+WARNING: Resource: This resource should have an OID assigned to cater for possible use with OID based terminology systems e.g. CDA usage (OIDs are easy to assign - see https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html#ig-parameters-auto-oid-root)

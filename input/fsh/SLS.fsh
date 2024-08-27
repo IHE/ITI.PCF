@@ -90,7 +90,8 @@ PSY - psychiatry disorder information sensitivity
 //*  http://loinc.org#74013-4
 
 // SAMSHA C2S Mental Health Disorders
-* ^experimental = false
+* ^experimental = true
+* ^status = #draft
 * codes from valueset http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1142.32 // ICD10CM
 * codes from valueset http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1142.33 // ICD9CM
 * codes from valueset http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1142.34 // LOINC
@@ -159,7 +160,8 @@ ETH - substance abuse information sensitivity (alcohol or drug-abuse information
 * **SAMSHA Test C2S Alcohol Use Disorders**
   * ValueSet 2.16.840.1.113762.1.4.1142.65 // SNOMED-CT
 """
-* ^experimental = false
+* ^experimental = true
+* ^status = #draft
 // SAMSHA  C2S Alcohol Use Disorders
 * codes from valueset http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1142.1 // SNOMEDCD
 * codes from valueset http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1142.2 // ICD9CM
@@ -231,7 +233,8 @@ ETHUD - alcohol abuse information sensitivity (alcohol abuse information)
 * **SAMSHA Test C2S Alcohol Use Disorders**
   * ValueSet 2.16.840.1.113762.1.4.1142.65 // SNOMED-CT
 """
-* ^experimental = false
+* ^experimental = true
+* ^status = #draft
 // SAMSHA  C2S Alcohol Use Disorders
 * codes from valueset http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1142.1 // SNOMEDCD
 * codes from valueset http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1142.2 // ICD9CM
@@ -296,7 +299,8 @@ OPIOIDUD - Opioid substance abuse information sensitivity (drug-abuse informatio
   * ValueSet 2.16.840.1.113762.1.4.1142.56 // LOINC
   * ValueSet 2.16.840.1.113762.1.4.1142.57 // RXNORM
 """
-* ^experimental = false
+* ^experimental = true
+* ^status = #draft
 // SAMSHA C2S Amphetamine Use Disorders
 * codes from valueset http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1142.10 // RXNORM
 * codes from valueset http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1142.11 // SNOMED-CT
@@ -356,7 +360,8 @@ SDV - Sexual assault, abuse or domestic violence
   * ValueSet 2.16.840.1.113762.1.4.1142.49 // ICD9CM
   * ValueSet 2.16.840.1.113762.1.4.1142.50 // RXNORM
 """
-* ^experimental = false
+* ^experimental = true
+* ^status = #draft
 // SAMSHA C2S Sexuality and reproductive health information sensitivity
 * codes from valueset http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1142.49 // ICD9CM
 * codes from valueset http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1142.50 // RXNORM
@@ -378,7 +383,8 @@ HIV/AIDS information
 * **SAMSHA Test C2S HIV/AIDS Information Sensitivity**
   * ValueSet 2.16.840.1.113762.1.4.1142.67 // SNOMEDCD
 """
-* ^experimental = false
+* ^experimental = true
+* ^status = #draft
 // SAMSHA C2S HIV/AIDS Information
 * codes from valueset http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1142.23 // HCPCS
 * codes from valueset http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1142.24 // ICD9CM
