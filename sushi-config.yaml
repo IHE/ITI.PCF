@@ -87,10 +87,20 @@ parameters:  # see https://confluence.hl7.org/display/FHIR/Implementation+Guide+
   path-binary: input/binary
   excludettl: 'true'
 
-# resources:
-# list every example here with a name, description and that exampleBoolean is true; These are used to populate the artifacts page, and are needed to eliminate build warnings 
-# You may delay filling out this section until you approach publication as it is merely a nice to have and eliminates build warnings -- If you do this then you will need above the autoload-resources true
-
+resources:
+  # These SLS valueSets are examples, and should not be part of the normative resources.
+  ValueSet/SlsSensitivePSY:
+    exampleBoolean: true
+  ValueSet/SlsSensitiveETH:
+    exampleBoolean: true
+  ValueSet/SlsSensitiveETHUD:
+    exampleBoolean: true
+  ValueSet/SlsSensitiveOPIOIDUD:
+    exampleBoolean: true
+  ValueSet/SlsSensitiveSDV:
+    exampleBoolean: true
+  ValueSet/SlsSensitiveHIV:
+    exampleBoolean: true
 
 groups:
   BasicConsent:
