@@ -4,13 +4,33 @@
 # warnings, but these are not important to the reason these examples exist.
 UCUM Codes that contain human readable annotations like {wine glasses} can be misleading (e.g. they are ignored when comparing units). Best Practice is not to depend on annotations in the UCUM code, so this usage should be checked, and the Quantity.unit 'glasses of wine' SHOULD contain the annotation (it does not)
 
-# understood that these are draft
-MSG_DRAFT
-
 # understood that these are very big valuesets
 INFORMATION: ValueSet.where(id = 'SlsSensitiveETH'): The value set expansion is too large, and only a subset has been displayed
 INFORMATION: ValueSet.where(id = 'SlsSensitiveOPIOIDUD'): The value set expansion is too large, and only a subset has been displayed
 INFORMATION: ValueSet.where(id = 'SlsSensitivePSY'): The value set expansion is too large, and only a subset has been displayed
 
 # Informative valueSets that don't need OIDS
-WARNING: Resource: This resource should have an OID assigned to cater for possible use with OID based terminology systems e.g. CDA usage (OIDs are easy to assign - see https://build.fhir.org/ig/FHIR/fhir-tools-ig/CodeSystem-ig-parameters.html#ig-parameters-auto-oid-root)
+The resource ValueSet/SlsSensitiveETH should have an OID assigned to cater for possible use with OID based terminology systems%
+The resource ValueSet/SlsSensitiveETHUD should have an OID assigned to cater for possible use with OID based terminology systems%
+The resource ValueSet/SlsSensitiveOPIOIDUD should have an OID assigned to cater for possible use with OID based terminology systems%
+The resource ValueSet/SlsSensitivePSY should have an OID assigned to cater for possible use with OID based terminology systems%
+The resource ValueSet/SlsSensitiveSDV should have an OID assigned to cater for possible use with OID based terminology systems%
+The resource ValueSet/SlsSensitiveHIV should have an OID assigned to cater for possible use with OID based terminology systems%
+
+# These are canonical URI being defined within this IG. fsh-generated\resources\ImplementationGuide-ihe.iti.pcf.json
+WARNING: ImplementationGuide/ihe.iti.pcf: ImplementationGuide.extension[0].extension[1].value.ofType(url): No definition could be found for URL value 'volume-1.html#basic-normal'
+WARNING: ImplementationGuide/ihe.iti.pcf: ImplementationGuide.extension[1].extension[1].value.ofType(url): No definition could be found for URL value 'volume-1.html#all-normal'
+WARNING: ImplementationGuide/ihe.iti.pcf: ImplementationGuide.extension[2].extension[1].value.ofType(url): No definition could be found for URL value 'volume-1.html#break-glass-only'
+WARNING: ImplementationGuide/ihe.iti.pcf: ImplementationGuide.extension[3].extension[1].value.ofType(url): No definition could be found for URL value 'volume-1.html#deny'
+
+# This IG does not use this but inherits from FHIR core
+The extension http://hl7.org/fhir/StructureDefinition/elementdefinition-maxValueSet|5.2.0 is deprecated
+
+# Do not want to pin to a specific version, would like to allow ANY version
+There are multiple different potential matches for the url 'http://terminology.hl7.org/ValueSet/v3-PurposeOfUse'.%
+There are multiple different potential matches for the url 'http://terminology.hl7.org/CodeSystem/v3-Confidentiality'.%
+There are multiple different potential matches for the url 'http://terminology.hl7.org/CodeSystem/v3-ActReason'.%
+There are multiple different potential matches for the url 'http://terminology.hl7.org/CodeSystem/v3-ActCode'.%
+
+# this is an example attachment url that is not understood
+No definition could be found for URL value 'Binary/B-ink'
