@@ -148,9 +148,9 @@ Explicit Intermediate Consent
 * provision.data ^slicing.discriminator.path = "meaning"
 * provision.data ^slicing.rules = #closed
 * provision.data contains 
-  iData 0..* and
-  rData 0..* and 
-  aData 0..*
+  iData 0..* MS and
+  rData 0..* MS and 
+  aData 0..* MS
 * provision.data[iData].meaning = #instance
 * provision.data[rData].meaning = #related
 * provision.data[rData].reference only Reference(Encounter or CarePlan or EpisodeOfCare)
@@ -161,9 +161,9 @@ Explicit Intermediate Consent
 * provision.provision.data ^slicing.discriminator.path = "meaning"
 * provision.provision.data ^slicing.rules = #closed
 * provision.provision.data contains 
-  iDataP 0..1 and
-  rDataP 0..1 and 
-  aDataP 0..1
+  iDataP 0..1 MS and
+  rDataP 0..1 MS and 
+  aDataP 0..1 MS
 * provision.provision.data[iDataP].meaning = #instance
 * provision.provision.data[rDataP].meaning = #related
 * provision.provision.data[rDataP].reference only Reference(Encounter or CarePlan or EpisodeOfCare)

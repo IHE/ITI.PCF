@@ -158,10 +158,10 @@ The Implicit Policy Option indicates that there is a default policy that is used
 
 | canonical URI | Definition |
 |---------------|----------- |
-`https://profiles.ihe.net/ITI/PCF/Policy-basic-normal` | Permit for clinicians that have authorization for Treatment use, but does not authorize other access. This presumes that basic user access control can differentiate legitimate clinical users and purposes of use.
-`https://profiles.ihe.net/ITI/PCF/Policy-all-normal` | Permit for all authorized uses. This presumes that basic user access control will only allow authorized users and purposes of use.
-`https://profiles.ihe.net/ITI/PCF/Policy-break-glass-only` | Deny for all use, except when the user is a clinician with authorization to declare a medical patient-safety override (a.k.a. Break-Glass).
-`https://profiles.ihe.net/ITI/PCF/Policy-deny` |  Deny all.
+| <a name="basic-normal"></a>`https://profiles.ihe.net/ITI/PCF/Policy-basic-normal` | Permit for clinicians that have authorization for Treatment use, but does not authorize other access. This presumes that basic user access control can differentiate legitimate clinical users and purposes of use.
+| <a name="all-normal"></a>`https://profiles.ihe.net/ITI/PCF/Policy-all-normal` | Permit for all authorized uses. This presumes that basic user access control will only allow authorized users and purposes of use.
+| <a name="break-glass-only"></a>`https://profiles.ihe.net/ITI/PCF/Policy-break-glass-only` | Deny for all use, except when the user is a clinician with authorization to declare a medical patient-safety override (a.k.a. Break-Glass).
+| <a name="deny"></a>`https://profiles.ihe.net/ITI/PCF/Policy-deny` |  Deny all.
 {: .grid}
 
 Other overarching policies may also be implemented, but their behavior is not defined in PCF.
